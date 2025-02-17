@@ -16,5 +16,11 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "author": "banch0u",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.26.9",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "babel-loader": "^9.2.1"
+  }
 }
