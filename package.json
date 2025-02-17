@@ -16,10 +16,11 @@
     "build": "npx babel src --out-dir dist --copy-files"
   },
   "dependencies": {
+    "@pdftron/webviewer": "^11.2.0",
+    "antd": "^5.16.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.16.0",
-    "antd": "^5.16.0"
+    "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",
