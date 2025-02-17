@@ -1,0 +1,99 @@
+.menu {
+  padding: 14px !important;
+  box-shadow: 0px 4px 4px 0px #0000001a;
+  background: #fff !important;
+
+  .form {
+    display: grid;
+    gap: 14px; // Space between items
+
+    &.grid5 {
+      grid-template-columns: repeat(5, minmax(170px, 1fr)); // 5 columns
+    }
+
+    &.grid4 {
+      grid-template-columns: repeat(4, minmax(170px, 1fr)); // 4 columns
+    }
+
+    &.grid3 {
+      grid-template-columns: repeat(3, minmax(170px, 1fr)); // 3 columns
+    }
+
+    &.grid2 {
+      grid-template-columns: repeat(2, minmax(170px, 1fr)); // 2 columns
+    }
+
+    &.grid1 {
+      grid-template-columns: repeat(1, minmax(170px, 1fr)); // 1 column
+    }
+
+    .singleGrid {
+      grid-column: span 1; // Single grid item takes one column
+      width: 170px; // Ensure single items are 170px wide
+    }
+
+    .doubleGrid {
+      grid-column: span 2; // Double grid item takes two columns
+      width: 334px; // Ensure double items are 334px wide
+    }
+
+    label {
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16.94px;
+      text-align: left;
+      color: #646464;
+    }
+
+    .input,
+    .select,
+    .modal_date {
+      width: 100%; // Inherit width based on grid column
+      height: 34px;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      text-align: left;
+    }
+
+    .select > div {
+      padding: 5px 16px !important;
+      border-radius: 6px !important;
+      height: 34px;
+    }
+
+    .select {
+      span {
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        line-height: 24px !important;
+        text-align: left !important;
+      }
+    }
+
+    .modal_date {
+      input {
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        line-height: 24px !important;
+        text-align: left !important;
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+    margin-top: 20px;
+  }
+}
+
+.filter_icon {
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+}
