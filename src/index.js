@@ -4,4 +4,6 @@ export { default as Button } from "./components/Button";
 export { default as ColSort } from "./components/ColSort";
 export { default as Filter } from "./components/Filter";
 export { default as Loading } from "./components/Loading";
+export { default as Pagination } from "./components/Pagination";
+
 
