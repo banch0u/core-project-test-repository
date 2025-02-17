@@ -4,7 +4,7 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5"
   },
-  "name": "@banc0u/core-project-test-repository",
+  "name": "@banch0u/core-project-test-repository",
   "version": "1.0.0",
   "description": "Shared core features for all projects",
   "main": "index.js",
