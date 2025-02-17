@@ -4,14 +4,17 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5"
   },
-  "name": "core-project-test-repository",
+  "name": "@banc0u/core-project-test-repository",
   "version": "1.0.0",
+  "description": "Shared core features for all projects",
   "main": "index.js",
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/banch0u/core-project-test-repository.git"
   },
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "author": "banch0u",
+  "license": "MIT"
 }
