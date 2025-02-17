@@ -1,6 +1,6 @@
 {
   "name": "@banch0u/core-project-test-repository",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Shared core features for all projects",
   "main": "dist/index.js",
   "repository": {
@@ -12,9 +12,9 @@
   },
   "author": "banch0u",
   "license": "MIT",
- "scripts": {
-  "build": "npx babel src --out-dir dist --copy-files"
-},
+  "scripts": {
+    "build": "npx babel src --out-dir dist --copy-files"
+  },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
