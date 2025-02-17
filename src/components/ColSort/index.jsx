@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Dropdown, Menu, Checkbox } from "antd";
 import style from "./index.module.scss";
-import { SortIcon } from "assets/icons";
-import Button from "components/Button";
+import { SortIcon } from "./assets/icons";
+import Button from "./components/Button";
 
 const ColSort = ({ columns, selectedColumns, handleColumnToggle }) => {
   const [visible, setVisible] = useState(false);
