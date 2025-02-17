@@ -1,3 +1,3 @@
-import Button from './components/Button';
+// src/index.js
 
-export { Button };
+export { Button } from './components/Button';

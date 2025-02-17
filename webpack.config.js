@@ -1,23 +1,35 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js', // Entry point of your app
+  entry: './src/index.js', // Your entry file where your components are exported
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js', // Output file
+    filename: 'bundle.js', // Your output bundle
+    library: '@banch0u/core-project-test-repository', // Exposes your components as a library
+    libraryTarget: 'umd', // Can be used in various environments like CommonJS, AMD, etc.
+    clean: true, // Cleans the dist folder before each build
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'], // Resolve .js and .jsx files
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,  // Look for .js and .jsx files
+        test: /\.jsx?$/, // Applies to JavaScript/JSX files
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader', // Use babel-loader to transpile JS/JSX files
+          loader: 'babel-loader',
         },
+      },
+      {
+        test: /\.scss$/, // Handles SCSS files
+        use: [
+          'style-loader', // Adds styles to DOM
+          'css-loader', // Translates CSS into CommonJS
+          'sass-loader', // Compiles SCSS to CSS
+        ],
       },
     ],
   },
-  resolve: {
-    extensions: ['.js', '.jsx'], // Automatically resolve .js and .jsx extensions
-  },
+  devtool: 'source-map', // For better error tracking
 };
