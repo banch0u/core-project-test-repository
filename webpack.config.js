@@ -1,5 +1,4 @@
 const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js', // Your entry file where your components are exported
@@ -30,23 +29,7 @@ module.exports = {
           'sass-loader', // Compiles SCSS to CSS
         ],
       },
-      {
-        test: /\.css$/, // Handles CSS files (like fonts.css)
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/, // Handles font files
-        type: 'asset/resource',
-        generator: {
-          filename: 'assets/fonts/[name][ext]', // Output to dist/assets/fonts
-        },
-      },
     ],
   },
-  plugins: [
-    new CopyPlugin({
-      patterns: [{ from: 'src/assets/fonts', to: 'dist/assets/fonts' }],
-    }),
-  ],
   devtool: 'source-map', // For better error tracking
 };
