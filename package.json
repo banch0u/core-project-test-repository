@@ -1,6 +1,6 @@
 {
   "name": "@banch0u/core-project-test-repository",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Shared core features for all projects",
   "main": "dist/index.js",
   "files": [
@@ -14,10 +14,10 @@
   "author": "banch0u",
   "license": "MIT",
   "scripts": {
-  "build": "babel src --out-dir dist --copy-files",
-  "watch": "chokidar \"src\" -i 'dist' -c \"npm run build && yalc push --force\"",
-  "dev": "npm run watch"
-},
+    "build": "babel src --out-dir dist --copy-files",
+    "watch": "chokidar \"src\" -i 'dist' -c \"npm run build && yalc push --force\"",
+    "dev": "npm run watch"
+  },
   "dependencies": {
     "@microsoft/signalr": "^8.0.7",
     "@pdftron/webviewer": "^11.2.0",
