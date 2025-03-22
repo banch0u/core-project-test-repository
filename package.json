@@ -14,15 +14,19 @@
   "author": "banch0u",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --out-dir dist --copy-files"
-  },
+  "build": "babel src --out-dir dist --copy-files",
+  "watch": "chokidar \"src\" -i 'dist' -c \"npm run build && yalc push --force\"",
+  "dev": "npm run watch"
+},
   "dependencies": {
     "@microsoft/signalr": "^8.0.7",
     "@pdftron/webviewer": "^11.2.0",
-    "antd": "^5.16.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.16.0"
+    "antd": "^5.16.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "react-router-dom": "^6.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",
@@ -30,6 +34,8 @@
     "@babel/plugin-transform-runtime": "^7.26.9",
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
-    "babel-loader": "^9.2.1"
+    "babel-loader": "^9.2.1",
+    "chokidar-cli": "^3.0.0",
+    "npm-run-all": "^4.1.5"
   }
 }
