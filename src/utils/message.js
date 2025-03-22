@@ -58,7 +58,7 @@ export const infoMessageBottomRight = (value) => {
     }
   };
   return notification.info({
-    message: projects[parsedValue.Project],
+    message: projects[parsedValue.Project] || "Yeni bildiriş",
     description: parsedValue.Text || "Bildiriş",
     placement: "bottomRight",
     onClick: handleClick,
