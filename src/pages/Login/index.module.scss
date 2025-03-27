@@ -3,7 +3,9 @@
   width: 100%;
   align-items: center;
   flex-direction: column;
-  margin-top: 87px;
+  padding-top: 87px;
+  height: 100vh;
+  background: #f8f8f8;
   .logo {
     svg {
       width: 250px;
