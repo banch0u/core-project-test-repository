@@ -14,9 +14,10 @@
   "author": "banch0u",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --out-dir dist --copy-files",
-    "watch": "chokidar \"src\" -i 'dist' -c \"npm run build && yalc push --force\"",
-    "dev": "npm run watch"
+  "clean": "rm -rf dist",
+  "build": "npm run clean && babel src --out-dir dist --copy-files",
+  "watch": "chokidar \"src\" -i 'dist' -c \"npm run build && yalc push --force\"",
+  "dev": "npm run watch"
   },
   "dependencies": {
     "@microsoft/signalr": "^8.0.7",

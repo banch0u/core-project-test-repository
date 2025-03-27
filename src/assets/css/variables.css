@@ -1,0 +1,9 @@
+:root {
+  --defaultColor: #302e38;
+  --secondaryColor: #9d9d9d;
+  --blueToneColor: #32aaff;
+  --darkBlueColor: #016daf;
+  --defaultFont: Inter;
+  --secondaryFont: Lato;
+  --transition: 250ms;
+}

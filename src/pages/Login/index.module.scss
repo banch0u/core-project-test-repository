@@ -1,0 +1,119 @@
+.login {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 87px;
+  .logo {
+    svg {
+      width: 250px;
+      height: auto;
+      margin-bottom: 165px;
+    }
+    img {
+      width: 250px;
+      height: auto;
+      margin-bottom: 55px;
+    }
+  }
+  .form {
+    width: 448px;
+    background: #fff;
+    padding: 30px 24px;
+    border-radius: 20px;
+    .title {
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 36.31px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .control {
+      width: 100%;
+      .control_input {
+        display: flex;
+        align-items: center;
+        border-radius: 8px;
+        width: 100%;
+        background: #fff;
+        svg {
+          margin-right: 12px;
+          cursor: pointer;
+          width: 20px;
+          height: auto;
+        }
+      }
+    }
+    input::placeholder {
+      color: #6f6f6f;
+      opacity: 1;
+    }
+    .control :where(input, select, textarea) {
+      background-color: transparent;
+      width: 100%;
+      outline: none;
+      padding: 15px 10px !important;
+      font-size: 18px;
+      font-family: Inter;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 21.78px;
+      text-align: left;
+    }
+    a {
+      display: block;
+      text-decoration: none;
+      color: #6f6f6f;
+      margin-bottom: 34px;
+    }
+    .button {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 42px;
+      .border {
+        width: 228px;
+        padding: 2px;
+        border: 1px solid #016daf;
+        border-radius: 14px;
+        button {
+          width: 100%;
+          padding: 13px;
+          border-radius: 14px;
+          border: none;
+          background: var(--darkBlueColor);
+          color: #fff;
+          font-family: Inter;
+          font-size: 22px;
+          font-weight: 500;
+          line-height: 26.63px;
+          text-align: center;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .alternative_login {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 30px;
+    .background {
+      border: 1px solid #b9b9b9;
+      padding: 14px 20px;
+      background: #efefef;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    h3 {
+      font-family: Inter;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 21.78px;
+      text-align: center;
+      color: #535353;
+      margin-top: 10px;
+    }
+  }
+}

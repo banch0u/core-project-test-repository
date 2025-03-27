@@ -11,6 +11,7 @@ const Button = ({
     <>
       {color === "blue" ? (
         <button
+          data-no-invert
           disabled={disabled}
           type={type}
           className={style.button}
@@ -20,6 +21,7 @@ const Button = ({
       ) : null}
       {color === "white" ? (
         <button
+          data-no-invert
           disabled={disabled}
           type={type}
           className={style.button_white}
@@ -29,6 +31,7 @@ const Button = ({
       ) : null}
       {color === "green" ? (
         <button
+          data-no-invert
           disabled={disabled}
           type={type}
           className={style.button_green}
@@ -38,6 +41,7 @@ const Button = ({
       ) : null}
       {color === "green-white" ? (
         <button
+          data-no-invert
           disabled={disabled}
           type={type}
           className={style.button_green_white}
@@ -47,6 +51,7 @@ const Button = ({
       ) : null}
       {color === "red" ? (
         <button
+          data-no-invert
           disabled={disabled}
           type={type}
           className={style.button_red}
