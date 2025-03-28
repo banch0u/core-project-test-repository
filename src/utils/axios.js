@@ -124,13 +124,15 @@ api.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return api(originalRequest); // Retry the failed request with the new token
       } catch (refreshError) {
-        // Handle failed token refresh logic (e.g., logout user)
+        const basePath = window.location.pathname.split("/")[1];
+        const redirectPath = `/${basePath}/login`;
+
         console.error("Token refresh failed:", refreshError);
-        window.location.href = "/docflow/login"; //Comment this to prevent logout
+        window.location.href = redirectPath;
         return Promise.reject(refreshError);
       }
     }
-    return Promise.reject(error); // Reject all other errors
+    return Promise.reject(error);
   }
 );
 
