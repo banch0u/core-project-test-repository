@@ -1,24 +1,20 @@
-// hooks/useNotification.js
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import * as signalR from "@microsoft/signalr";
 import { infoMessageBottomRight } from "../utils/message";
+import { setNotificationsRender } from "../store/slices/global";
+import store from "../store/store"; // ⬅️ Import your Redux store explicitly
 
 const useNotification = () => {
-  const [notifications, setNotifications] = useState(() => {
-    // localStorage'dan bildirimi başlat
-    const savedNotifications = localStorage.getItem("notifications");
-    return savedNotifications ? JSON.parse(savedNotifications) : [];
-  });
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     let baseUrl;
-    if (window.location.hostname === "localhost") {
 
+    if (window.location.hostname === "localhost") {
       baseUrl = process.env.REACT_APP_ROOT;
     } else {
       baseUrl = window.location.origin;
     }
+
     if (!token) {
       console.error("Token tapılmadı!");
       return;
@@ -26,8 +22,7 @@ const useNotification = () => {
 
     const connection = new signalR.HubConnectionBuilder()
       .withUrl(`${baseUrl}/notify?token=${token}`, {
-        transport:
-          signalR.HttpTransportType.WebSockets,
+        transport: signalR.HttpTransportType.WebSockets,
         withCredentials: false,
         skipNegotiation: true,
       })
@@ -40,6 +35,7 @@ const useNotification = () => {
         console.log("SignalR bağlantısı quruldu.");
         connection.on("receive", (message) => {
           console.log("Yeni bildiriş:", message);
+          store.dispatch(setNotificationsRender());
           infoMessageBottomRight(message);
         });
       })
@@ -51,7 +47,6 @@ const useNotification = () => {
     };
   }, []);
 
-  return notifications;
 };
 
 export default useNotification;

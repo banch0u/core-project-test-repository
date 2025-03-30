@@ -12,8 +12,8 @@ export const global = createSlice({
     setLoading: (state, { payload }) => {
       state.loading = payload;
     },
-    setNotificationsRender: (state, { payload }) => {
-      state.notificationsRender = payload;
+    setNotificationsRender(state) {
+      state.notificationsRender = !state.notificationsRender;
     },
   },
 });

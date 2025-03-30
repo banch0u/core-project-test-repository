@@ -8,11 +8,11 @@ class Services {
     return response?.data;
   };
   static readNotification = async (data) => {
-    const response = await api.post(`/NotificationDetails`, data);
+    const response = await api.put(`/NotificationDetails`, data);
     return response?.data;
   };
   static readNotificationAll = async () => {
-    const response = await api.post(`/NotificationDetails/ReadAll`);
+    const response = await api.put(`/NotificationDetails/ReadAll`, { id: "" });
     return response?.data;
   };
   static checkNotification = async () => {
@@ -24,7 +24,7 @@ class Services {
     return response?.data;
   };
   static editNotificationSettings = async (data) => {
-    const response = await api.post(`/notificationusersettings`, data);
+    const response = await api.put(`/notificationusersettings`, data);
     return response?.data;
   };
 }

@@ -1,10 +1,16 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+  useImperativeHandle,
+} from "react";
 import { Form, Switch, Typography, Row, Col, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   editNotificationSettings,
   getNotificationSettings,
 } from "../../store/slices/notification";
+import { useLocation } from "react-router-dom";
 import style from "./index.module.scss";
 import Button from "../Button";
 
@@ -34,13 +40,29 @@ const projectOptions = {
 const NotificationSettingsContent = React.forwardRef((props, ref) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const initialValues = useSelector(
     (state) => state.notification.notificationSettings
   );
 
-  const [selectedProject, setSelectedProject] = useState("docFlowSettings");
+  const getDefaultProjectFromPath = (path) => {
+    if (path.includes("/contract")) return "contractSettings";
+    return "docFlowSettings";
+  };
+
+  const [selectedProject, setSelectedProject] = useState(() =>
+    getDefaultProjectFromPath(location.pathname)
+  );
   const [allValues, setAllValues] = useState({});
+
+  useImperativeHandle(ref, () => ({
+    refresh: () => {
+      const projectFromPath = getDefaultProjectFromPath(location.pathname);
+      setSelectedProject(projectFromPath);
+      dispatch(getNotificationSettings());
+    },
+  }));
 
   useEffect(() => {
     dispatch(getNotificationSettings());
@@ -54,17 +76,79 @@ const NotificationSettingsContent = React.forwardRef((props, ref) => {
   }, [initialValues, form]);
 
   const handleSwitchChange = (namePath, checked) => {
-    const updated = { ...allValues };
+    const updated = structuredClone(allValues);
     let target = updated;
 
     namePath.forEach((key, i) => {
       if (i === namePath.length - 1) {
         target[key] = checked;
       } else {
-        target[key] = { ...target[key] };
         target = target[key];
       }
     });
+
+    // Toggle all child switches if general toggle is used
+    if (
+      namePath[0] === "generalSettings" &&
+      (namePath[1] === "internalIsActive" || namePath[1] === "emailIsActive")
+    ) {
+      const typeToChange =
+        namePath[1] === "internalIsActive"
+          ? "internalSettings"
+          : "emailSettings";
+
+      Object.keys(projectOptions).forEach((projectKey) => {
+        if (!updated[projectKey]) updated[projectKey] = {};
+        if (!updated[projectKey][typeToChange])
+          updated[projectKey][typeToChange] = {};
+
+        projectOptions[projectKey].keys.forEach((key) => {
+          updated[projectKey][typeToChange][key] = checked;
+        });
+      });
+    }
+
+    // If any child switch is turned ON → set general ON
+    if (
+      namePath.length === 3 &&
+      (namePath[1] === "internalSettings" || namePath[1] === "emailSettings") &&
+      checked === true
+    ) {
+      const generalKey =
+        namePath[1] === "internalSettings"
+          ? "internalIsActive"
+          : "emailIsActive";
+
+      if (!updated.generalSettings) updated.generalSettings = {};
+      updated.generalSettings[generalKey] = true;
+    }
+
+    // If child turned OFF → check if all children are OFF → turn OFF general
+    if (
+      namePath.length === 3 &&
+      (namePath[1] === "internalSettings" || namePath[1] === "emailSettings")
+    ) {
+      const type = namePath[1];
+      const generalKey =
+        type === "internalSettings" ? "internalIsActive" : "emailIsActive";
+
+      let anyOn = false;
+
+      Object.keys(projectOptions).forEach((projectKey) => {
+        const settings = updated[projectKey]?.[type] || {};
+        for (const key of projectOptions[projectKey].keys) {
+          if (settings[key]) {
+            anyOn = true;
+            break;
+          }
+        }
+      });
+
+      if (!anyOn) {
+        if (!updated.generalSettings) updated.generalSettings = {};
+        updated.generalSettings[generalKey] = false;
+      }
+    }
 
     setAllValues(updated);
     form.setFieldsValue(updated);
@@ -72,7 +156,7 @@ const NotificationSettingsContent = React.forwardRef((props, ref) => {
 
   const renderSwitches = (type) => {
     return projectOptions[selectedProject].keys.map((key) => (
-      <Col span={12} key={`${selectedProject}-${type}-${key}`}>
+      <Col span={6} key={`${selectedProject}-${type}-${key}`}>
         <Form.Item
           className={style.inlineSwitch}
           label={<span className={style.formLabel}>{labels[key]}</span>}>
@@ -86,16 +170,17 @@ const NotificationSettingsContent = React.forwardRef((props, ref) => {
       </Col>
     ));
   };
+
   const onSubmit = useCallback(
     (data) => {
-      console.log(data, "ew");
       dispatch(editNotificationSettings(data));
+      props?.onClose?.();
     },
     [dispatch]
   );
+
   return (
     <div className={style.settingsWrapper}>
-      {/* General Settings */}
       <Title level={5} className={style.sectionTitle}>
         Ümumi Bildiriş Ayarları
       </Title>
@@ -136,7 +221,6 @@ const NotificationSettingsContent = React.forwardRef((props, ref) => {
         </Col>
       </Row>
 
-      {/* Project Selector */}
       <Form.Item label="">
         <Select
           value={selectedProject}
@@ -151,15 +235,15 @@ const NotificationSettingsContent = React.forwardRef((props, ref) => {
       </Form.Item>
 
       <Text className={style.settingGroupTitle}>Daxili</Text>
-      <Row gutter={[40, 0]}>{renderSwitches("internalSettings")}</Row>
+      <Row gutter={[24, 24]}>{renderSwitches("internalSettings")}</Row>
 
       <Text className={style.settingGroupTitle}>Email</Text>
-      <Row gutter={[40, 0]}>{renderSwitches("emailSettings")}</Row>
+      <Row gutter={[24, 24]}>{renderSwitches("emailSettings")}</Row>
 
       <div className={style.next_buttons_}>
         <Button
           onClick={(e) => {
-            ref?.current?.close?.();
+            props?.onClose?.();
             e.preventDefault();
           }}
           color={"white"}>

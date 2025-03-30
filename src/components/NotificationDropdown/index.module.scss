@@ -50,10 +50,13 @@
     background-color: #deeaf5;
   }
 }
-
+.read {
+  background-color: white;
+  font-weight: 500;
+}
 .unread {
   background-color: #f6f6f6;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .loadMore {

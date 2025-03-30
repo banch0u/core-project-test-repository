@@ -26,7 +26,7 @@ const ProfileOptions = () => {
   const notifications = useSelector(
     (state) => state.notification.notifications
   );
-  console.log(notifications);
+  console.log(notificationsRender);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   const toggleTheme = () => {
@@ -56,7 +56,9 @@ const ProfileOptions = () => {
   useEffect(() => {
     dispatch(getNotifications({ size, page }));
   }, [dispatch, size, page, notificationsRender]);
-
+  useEffect(() => {
+    console.log("notificationsRender:", notificationsRender);
+  }, [notificationsRender]);
   const rootUrl = window.location.origin;
 
   const menu1 = (

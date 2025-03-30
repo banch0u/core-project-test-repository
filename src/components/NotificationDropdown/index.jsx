@@ -1,23 +1,23 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   readNotification,
   readNotificationAll,
 } from "../../store/slices/notification";
-import { Button, Form, List, Typography } from "antd";
+import { Button, List, Tooltip, Typography } from "antd";
 import { CheckOutlined, EyeOutlined, SettingOutlined } from "@ant-design/icons";
-import { Modal } from "antd";
 import style from "./index.module.scss";
 import NotificationSettingsContent from "../NotificationSettingsContent";
 import FormModal from "../FormModal";
 
 const NotificationDropdown = ({ size, page, setSize, setPage }) => {
   const dispatch = useDispatch();
-  const ref = useRef();
+  const modalRef = useRef(); // ⬅️ Modal ref
+  const contentRef = useRef(); // ⬅️ NotificationSettingsContent ref
+
   const notifications = useSelector(
     (state) => state.notification.notifications
   );
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const notReadenCount = notifications?.notReadenCount;
   const totalCount = notifications?.totalCount;
@@ -32,7 +32,6 @@ const NotificationDropdown = ({ size, page, setSize, setPage }) => {
     "Müqavilələr",
     "Şəxsi kabinet",
   ];
-
   const parseNotification = (value) => {
     try {
       return JSON.parse(value);
@@ -42,16 +41,9 @@ const NotificationDropdown = ({ size, page, setSize, setPage }) => {
     }
   };
 
-  const onOpenModal = () => {
-    ref?.current?.open();
-  };
-  const handleRead = (id) => {
-    return dispatch(readNotification({ id }));
-  };
+  const handleRead = (id) => dispatch(readNotification({ id }));
 
-  const handleReadAll = () => {
-    dispatch(readNotificationAll());
-  };
+  const handleReadAll = () => dispatch(readNotificationAll());
 
   const handleNotificationClick = async (value, id) => {
     const parsed = parseNotification(value);
@@ -73,7 +65,15 @@ const NotificationDropdown = ({ size, page, setSize, setPage }) => {
   const handleLoadMore = () => {
     const newSize = size + 20;
     setSize(newSize);
-    setPage(1); // always use page 1 when growing size
+    setPage(1);
+  };
+
+  const onOpenModal = () => {
+    contentRef?.current?.refresh?.(); // ⬅️ Trigger getNotificationSettings()
+    modalRef?.current?.open?.(); // ⬅️ Open modal
+  };
+  const onCloseModal = () => {
+    modalRef?.current?.close?.(); // ⬅️ Open modal
   };
 
   return (
@@ -95,7 +95,7 @@ const NotificationDropdown = ({ size, page, setSize, setPage }) => {
               size="small"
               icon={<SettingOutlined />}
               type="text"
-              onClick={() => onOpenModal()}
+              onClick={onOpenModal}
             />
           </div>
         </div>
@@ -108,27 +108,29 @@ const NotificationDropdown = ({ size, page, setSize, setPage }) => {
             return (
               <List.Item
                 className={`${style.notificationItem} ${
-                  !item.read ? style.unread : ""
+                  item.isReaden ? style.read : style.unread
                 }`}
                 actions={[
-                  !item.read && (
-                    <Button
-                      size="small"
-                      type="link"
-                      icon={<EyeOutlined />}
-                      onClick={() => handleRead(item.id)}
-                    />
+                  !item.isReaden && (
+                    <Tooltip title="Oxu">
+                      <Button
+                        size="small"
+                        type="link"
+                        icon={<EyeOutlined />}
+                        onClick={() => handleRead(item.id)}
+                      />
+                    </Tooltip>
                   ),
                 ]}>
                 <List.Item.Meta
                   title={
-                    <span
+                    <div
                       onClick={() =>
                         handleNotificationClick(item.text, item.id)
                       }
                       style={{ cursor: "pointer" }}>
                       {projects[parsed.Project] || "Bildiriş"}
-                    </span>
+                    </div>
                   }
                   description={
                     <div
@@ -154,8 +156,9 @@ const NotificationDropdown = ({ size, page, setSize, setPage }) => {
           </div>
         )}
       </div>
-      <FormModal ref={ref} width={695} showButtons={false}>
-        <NotificationSettingsContent ref={ref} />
+
+      <FormModal ref={modalRef} width={695} showButtons={false}>
+        <NotificationSettingsContent ref={contentRef} onClose={onCloseModal} />
       </FormModal>
     </>
   );
