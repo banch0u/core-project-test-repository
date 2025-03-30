@@ -1,0 +1,19 @@
+.header {
+  height: 84px;
+  background: #fff;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid #c4c4c4;
+
+  svg {
+    width: 123px;
+    height: auto;
+  }
+  img {
+    width: 95px;
+    height: auto;
+  }
+}

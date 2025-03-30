@@ -1,0 +1,80 @@
+.dropdownWrapper {
+  width: 320px;
+  max-height: 420px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  // padding: 10px;
+  background-color: #ffffff;
+  background-clip: padding-box;
+  border-radius: 8px;
+  outline: none;
+  scrollbar-gutter: stable;
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+
+  ul {
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none;
+    li {
+      padding: 12px 10px !important;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.notificationItem {
+  transition: background 0.3s;
+
+  &:hover {
+    background-color: #deeaf5;
+  }
+}
+
+.unread {
+  background-color: #f6f6f6;
+  font-weight: 600;
+}
+
+.loadMore {
+  text-align: center;
+  margin: 10px 0;
+  button {
+    color: var(--darkBlueColor);
+  }
+}
+.ellipsisText {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; // max 3 lines
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  line-height: 1.5;
+  max-height: calc(1.5em * 3); // 3 lines
+}
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

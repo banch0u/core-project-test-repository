@@ -1,0 +1,14 @@
+.absolute {
+  position: absolute;
+  right: 5px;
+  top: 105px;
+}
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 44px;
+  button {
+    padding: 10px 20px;
+  }
+}

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,
+  notificationsRender: false
 };
 
 export const global = createSlice({
@@ -11,7 +12,10 @@ export const global = createSlice({
     setLoading: (state, { payload }) => {
       state.loading = payload;
     },
+    setNotificationsRender: (state, { payload }) => {
+      state.notificationsRender = payload;
+    },
   },
 });
 
-export const { setLoading } = global.actions;
+export const { setLoading, setNotificationsRender } = global.actions;
