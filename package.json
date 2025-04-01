@@ -17,7 +17,10 @@
     "clean": "rimraf dist",
     "build": "npm run clean && babel src --out-dir dist --copy-files",
     "watch": "chokidar \"src\" -i 'dist' -c \"npm run build && yalc push --force\"",
-    "dev": "npm run watch"
+    "dev": "npm run watch",
+    "publish:patch": "npm run build && npm version patch && npm publish",
+    "publish:minor": "npm run build && npm version minor && npm publish",
+    "publish:major": "npm run build && npm version major && npm publish"
   },
   "dependencies": {
     "@microsoft/signalr": "^8.0.7",
