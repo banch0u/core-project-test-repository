@@ -7,6 +7,8 @@ export { default as Pagination } from "./components/Pagination";
 export { default as FormModal } from "./components/FormModal";
 export { default as useNotification } from "./hooks/useNotification";
 export { default as message } from "./utils/message";
+export { default as Table } from "./components/Table";
+
 
 import LoginPage from "./pages/Login";
 import PlatformPage from "./pages/Platform";
