@@ -13,7 +13,9 @@ export const refreshToken = createAsyncThunk(
   async (token, { dispatch }) => {
     try {
       await AuthServices.refreshToken(token);
-    } catch (error) { }
+    } catch (error) {
+      console.error("Token refresh failed", error);
+    }
   }
 );
 

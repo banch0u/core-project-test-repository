@@ -2,8 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Services from "./service";
 import {
   setNotificationsRender,
-  setLoading,
-  setViewModalVisible,
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
