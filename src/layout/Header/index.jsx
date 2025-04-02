@@ -28,7 +28,6 @@ const Header = () => {
         ) : (
           <DsgLogo />
         )}
-        111
       </Link>
       <ProfileOptions />
     </header>
