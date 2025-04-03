@@ -21,7 +21,7 @@ const Platform = () => {
   useEffect(() => {
     dispatch(scopes());
     dispatch(getProfileInfo());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={style.platform}>

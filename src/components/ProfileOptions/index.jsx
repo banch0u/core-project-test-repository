@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Badge, Dropdown, Menu, Tooltip } from "antd";
 import { SunOutlined, MoonOutlined } from "@ant-design/icons";
 import style from "./index.module.scss";
-import {
-  BellOutlined,
-  BellFilled,
-  NotificationOutlined,
-} from "@ant-design/icons";
+import { BellOutlined } from "@ant-design/icons";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";

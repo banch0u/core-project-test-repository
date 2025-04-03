@@ -94,7 +94,7 @@ const Table = ({
   );
   const draggableColumns = filteredColumns(orderedColumns);
 
-  const DraggableHeader = (props) => (
+  const DraggableHeader = () => (
     <tr>
       {fixedLeftColumns.map((col, index) => (
         <th
@@ -109,7 +109,7 @@ const Table = ({
           {col.title}
         </th>
       ))}
-      {draggableColumns.map((col, index) => (
+      {draggableColumns.map((col) => (
         <th
           key={col.dataIndex}
           className={style.draggableHeader}
@@ -134,7 +134,7 @@ const Table = ({
       ))}
     </tr>
   );
-  const DraggableWrapper = (props) => (
+  const DraggableWrapper = () => (
     <DragDropContext onDragEnd={handleDragEnd}>
       <Droppable droppableId={`droppable_${tableId}`} direction="horizontal">
         {(provided) => (

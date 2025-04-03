@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   readNotification,
@@ -10,7 +10,7 @@ import style from "./index.module.scss";
 import NotificationSettingsContent from "../NotificationSettingsContent";
 import FormModal from "../FormModal";
 
-const NotificationDropdown = ({ size, page, setSize, setPage }) => {
+const NotificationDropdown = ({ size, setSize, setPage }) => {
   const dispatch = useDispatch();
   const modalRef = useRef(); // ⬅️ Modal ref
   const contentRef = useRef(); // ⬅️ NotificationSettingsContent ref

@@ -176,7 +176,7 @@ const NotificationSettingsContent = React.forwardRef((props, ref) => {
       dispatch(editNotificationSettings(data));
       props?.onClose?.();
     },
-    [dispatch]
+    [dispatch, props]
   );
 
   return (

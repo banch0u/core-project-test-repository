@@ -27,8 +27,13 @@ module.exports = {
     'no-unused-vars': 'warn',
     'unused-imports/no-unused-imports': 'error',
     'import/no-unresolved': 'error',
+    'import/no-extraneous-dependencies': ['error', {
+      packageDir: [__dirname], // important in monorepos or nested packages
+    }],
     'react/react-in-jsx-scope': 'off', // not needed with React 17+
-    'no-undef': 'error'
+    'react/prop-types': 'off',
+    'no-undef': 'error',
+    'react/display-name': 'off'
   },
   settings: {
     react: {

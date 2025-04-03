@@ -5,13 +5,9 @@ import React, {
   useImperativeHandle,
   useState,
 } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setCitizenSearchId,
-  setSubtopicSelectDisabled,
-} from "../../store/slices/global";
+import { useSelector } from "react-redux";
 import style from "./index.module.scss";
-import { Button } from "@banch0u/core-project-test-repository";
+import Button from "../Button";
 const FormModal = (
   {
     okText,
@@ -35,7 +31,6 @@ const FormModal = (
 ) => {
   const { useForm } = Form;
   const [form] = useForm();
-  const dispatch = useDispatch();
   if (customForm) {
     customForm(form);
   }
@@ -78,7 +73,9 @@ const FormModal = (
 
       form.resetFields();
       setIsVisible(false);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }, [form, isEditing, onEdit, onSubmit]);
 
   const onDelete = useCallback((id) => {
