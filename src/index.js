@@ -1,4 +1,7 @@
 import React from "react";
+import "./assets/fonts/fonts.css";
+import "./assets/css/antd.css";
+import "./index.css";
 export { default as Button } from "./components/Button";
 export { default as ColSort } from "./components/ColSort";
 export { default as Filter } from "./components/Filter";

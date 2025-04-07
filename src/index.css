@@ -1,0 +1,33 @@
+body * {
+  font-family: var(--defaultFont) !important;
+}
+
+/* Apply styles globally to all scrollbars */
+* {
+  /* For modern browsers (Firefox) */
+  scrollbar-width: thin !important;
+  scrollbar-color: #eaeaea transparent !important;
+}
+
+/* For WebKit-based browsers (Chrome, Edge, Safari) */
+*::-webkit-scrollbar {
+  width: 6px !important;
+  /* Vertical scrollbar width */
+  height: 6px !important;
+  /* Horizontal scrollbar height */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #eaeaea !important;
+  border-radius: 3px !important;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #cccccc !important;
+  /* Darker color on hover */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent !important;
+  /* Transparent track */
+}

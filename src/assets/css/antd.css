@@ -1,0 +1,7 @@
+ .ant-select-clear {
+   display: flex !important;
+   align-items: center;
+   justify-content: center;
+   right: 8px;
+   display: none;
+ }
