@@ -5,6 +5,7 @@ import Button from "../Button";
 const Select = ({
   children,
   className,
+  size,
   placeholder = "",
   onChange = () => {},
   onOpen = () => {},
@@ -13,38 +14,28 @@ const Select = ({
   defaultValue,
   mode,
   text,
+  allowClear = true,
+  width,
 }) => {
+  console.log(
+    className ? className : size === "sm" ? style.select_sm : style.select
+  );
   return (
     <>
       {mode === "multiple" ? (
         <AntdSelect
-          className={className || style.select}
+          className={
+            className
+              ? className
+              : size === "sm"
+              ? style.select_sm
+              : style.select
+          }
+          style={{ width: width ? width + "px" : "100%" }}
           showSearch
           allowClear
           placeholder={placeholder}
           optionFilterProp="children"
-          filterOption={(input, option) => {
-            if (!option?.children || typeof option.children !== "string")
-              return false;
-
-            const normalizeAz = (str) =>
-              str
-                .replace(/I/g, "i")
-                .toLocaleLowerCase("az")
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .replace(/ç/g, "c")
-                .replace(/ş/g, "s")
-                .replace(/ğ/g, "g")
-                .replace(/ü/g, "u")
-                .replace(/ö/g, "o")
-                .replace(/ə/g, "e");
-
-            const normalizedInput = normalizeAz(input);
-            const normalizedOption = normalizeAz(option.children);
-
-            return normalizedOption.includes(normalizedInput);
-          }}
           onChange={onChange}
           disabled={disabled}
           value={value}
@@ -55,7 +46,14 @@ const Select = ({
         </AntdSelect>
       ) : mode === "divider" ? (
         <AntdSelect
-          className={className || style.select}
+          className={
+            className
+              ? className
+              : size === "sm"
+              ? style.select_sm
+              : style.select
+          }
+          style={{ width: width ? width + "px" : "100%" }}
           showSearch
           allowClear
           placeholder={placeholder}
@@ -99,9 +97,16 @@ const Select = ({
         </AntdSelect>
       ) : (
         <AntdSelect
-          className={className || style.select}
+          className={
+            className
+              ? className
+              : size === "sm"
+              ? style.select_sm
+              : style.select
+          }
+          style={{ width: width ? width + "px" : "100%" }}
           showSearch
-          allowClear
+          allowClear={allowClear}
           placeholder={placeholder}
           optionFilterProp="children"
           filterOption={(input, option) => {

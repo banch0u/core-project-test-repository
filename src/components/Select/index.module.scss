@@ -1,6 +1,5 @@
 .select > div {
   padding: 5px 16px !important;
-  // border-color: #bdbdbd !important;
   border-radius: 6px !important;
   height: 48px;
 }
@@ -8,6 +7,23 @@
   width: 100%;
   height: auto;
   height: 48px;
+  span {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    line-height: 24px !important;
+    text-align: left !important;
+  }
+}
+
+.select_sm > div {
+  padding: 5px 16px !important;
+  border-radius: 6px !important;
+  height: 34px;
+}
+.select_sm {
+  width: 100%;
+  height: auto;
+  height: 34px;
   span {
     font-size: 16px !important;
     font-weight: 500 !important;
