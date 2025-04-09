@@ -12,7 +12,7 @@ export { default as useNotification } from "./hooks/useNotification";
 export { default as message } from "./utils/message";
 export { default as Table } from "./components/Table";
 export { default as Select } from "./components/Select";
-
+export { default as Input } from "./components/Input";
 
 
 import LoginPage from "./pages/Login";
