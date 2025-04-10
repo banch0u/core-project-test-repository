@@ -17,9 +17,6 @@ const Select = ({
   allowClear = true,
   width,
 }) => {
-  console.log(
-    className ? className : size === "sm" ? style.select_sm : style.select
-  );
   return (
     <>
       {mode === "multiple" ? (
@@ -139,21 +136,6 @@ const Select = ({
         </AntdSelect>
       )}
     </>
-    //  dropdownRender={(menu) => (
-    //   <>
-    //     <div>
-    //       {menu}
-    //       {divider ? (
-    //         <>
-    //           <Divider style={{ margin: "4px 0" }} />
-    //           <div className={style.select_add_button}>
-    //             <Button onClick={onOpen}>{dividerButtonName}</Button>
-    //           </div>
-    //         </>
-    //       ) : null}
-    //     </div>
-    //   </>
-    // )}
   );
 };
 

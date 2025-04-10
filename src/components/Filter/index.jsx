@@ -4,15 +4,16 @@ import {
   Menu,
   Form,
   Input,
-  Select,
+  Select as AntdSelect,
   DatePicker,
   TreeSelect,
 } from "antd";
 import style from "./index.module.scss";
-import Button from "../Button";
 import { FilterIcon } from "../../assets/icons";
+import Select from "../Select";
+import Button from "../Button";
 
-const { Option } = Select;
+const { Option } = AntdSelect;
 const { RangePicker } = DatePicker;
 
 const Filter = ({
@@ -106,22 +107,12 @@ const Filter = ({
                   className={gridSpanClass} // Dynamically apply grid class
                 >
                   <Select
-                    showSearch={col.isDouble} // Enable search for double items
+                    // showSearch={col.isDouble}
+                    size="sm"
                     onChange={(value) => {
                       if (col.dataIndex === "topic") {
                         setSelectedTopic(value);
                       }
-                    }}
-                    filterOption={(input, option) => {
-                      if (!option || !option.children) return false; // Ensure option and children exist
-
-                      const optionText = String(option.children); // Convert to string if needed
-                      const normalizedInput = input.toLowerCase(); // Normalize input to lowercase
-                      const normalizedOption = optionText
-                        .replace(/İ/g, "I")
-                        .toLowerCase(); // Normalize option text
-
-                      return normalizedOption.includes(normalizedInput);
                     }}>
                     <Option value=""></Option>
                     {(col?.selectData || []).map((option, i) => {
@@ -164,7 +155,6 @@ const Filter = ({
                   className={gridSpanClass} // Dynamically apply grid class
                 >
                   <TreeSelect
-                    // style={{ width: "230px", marginTop: "5px" }}
                     showSearch
                     popupMatchSelectWidth={false}
                     allowClear
