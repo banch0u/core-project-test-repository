@@ -24,6 +24,12 @@ const labels = {
   sign: "İmza üçün",
   reject: "İmtina üçün",
   print: "Çap üçün",
+  accouncement: "Elanlar",
+  news: "Xəbərlər",
+  reservations: "Tədbir/İclas",
+  surveys: "Sorğular",
+  timeOffRequest: "İcazələr",
+  tutorials: "Təlimatlar və video",
 };
 
 const projectOptions = {
@@ -35,6 +41,17 @@ const projectOptions = {
     label: "Müqavilələr",
     keys: ["visa", "sign", "reject"],
   },
+  accountSettings: {
+    label: "Şəxsi kabinet",
+    keys: [
+      "accouncement",
+      "news",
+      "reservations",
+      "surveys",
+      "timeOffRequest",
+      "tutorials",
+    ],
+  },
 };
 
 const NotificationSettingsContent = React.forwardRef((props, ref) => {
@@ -45,7 +62,7 @@ const NotificationSettingsContent = React.forwardRef((props, ref) => {
   const initialValues = useSelector(
     (state) => state.notification.notificationSettings
   );
-  console.log(initialValues);
+  // console.log(initialValues);
   const getDefaultProjectFromPath = (path) => {
     if (path.includes("/contract")) return "contractSettings";
     return "docFlowSettings";
