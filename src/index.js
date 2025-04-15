@@ -13,6 +13,10 @@ export { default as message } from "./utils/message";
 export { default as Table } from "./components/Table";
 export { default as Select } from "./components/Select";
 export { default as Input } from "./components/Input";
+export { default as api } from "./utils/axios";
+export { default as NotFound } from "./pages/NotFound";
+
+
 
 
 import LoginPage from "./pages/Login";
