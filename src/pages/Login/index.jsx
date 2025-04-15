@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import style from "./index.module.scss";
 import { Form, Input } from "antd";
-import { useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { DsgLogo } from "../../assets/icons";
 import Loading from "../../components/Loading";
@@ -10,15 +9,22 @@ import { useDispatch, useSelector } from "react-redux";
 import AsanImza from "../../assets/icons/AsanImza.png";
 import Sima from "../../assets/icons/Sima.png";
 import Ldap from "../../assets/icons/Ldap.png";
-import Logo from "../../assets/balakhaniLogo.png";
+import { getCompanyInfo } from "../../store/slices/companyInfo";
+import api from "../../utils/axios"; // 💡 Make sure this points to your axios instance
+
 const { Item: Label, useForm } = Form;
 const { Password } = Input;
+
 const Login = () => {
   const [form] = useForm();
   const navigate = useNavigate();
-  const loading = useSelector((state) => state.global.loading);
   const dispatch = useDispatch();
-  const currentUrl = window.location.href;
+
+  const loading = useSelector((state) => state.global.loading);
+  const companyInfo = useSelector((state) => state.companyInfo.companyInfo);
+
+  const [imageSrc, setImageSrc] = useState(null);
+
   const loginValue = useCallback(
     (formdata) => {
       const data = {
@@ -29,12 +35,39 @@ const Login = () => {
     },
     [dispatch, navigate]
   );
+
+  const getBase64FromURL = useCallback(async (url) => {
+    try {
+      const res = await api.get(url);
+      return res?.data;
+    } catch (err) {
+      console.error("Error loading logo:", err);
+      return null;
+    }
+  }, []);
+
+  useEffect(() => {
+    dispatch(getCompanyInfo());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      if (companyInfo?.[0]?.filePath) {
+        const base64 = await getBase64FromURL(companyInfo[0].filePath);
+        setImageSrc(base64);
+      }
+    };
+
+    fetchImage();
+  }, [companyInfo, getBase64FromURL]);
+
   if (loading) return <Loading />;
+
   return (
     <div className={style.login}>
       <div className={style.logo}>
-        {currentUrl.includes("balakhanioc") ? (
-          <img src={Logo} alt="" />
+        {imageSrc ? (
+          <img src={imageSrc} alt="Company Logo" />
         ) : localStorage.getItem("theme") === "dark" ? (
           <DsgLogo dark={true} />
         ) : (
@@ -50,7 +83,7 @@ const Login = () => {
         <h2 className={style.title}>Daxil ol</h2>
         <div className={style.control}>
           <Label
-            name={"username"}
+            name="username"
             rules={[{ required: true, message: "" }]}
             style={{ marginBottom: "20px" }}>
             <Input
@@ -62,7 +95,7 @@ const Login = () => {
         </div>
         <div className={style.control}>
           <Label
-            name={"password"}
+            name="password"
             rules={[{ required: true, message: "" }]}
             style={{ marginBottom: "4px" }}>
             <Password

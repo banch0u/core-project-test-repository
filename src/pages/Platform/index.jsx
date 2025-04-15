@@ -1,33 +1,60 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import style from "./index.module.scss";
 import { entryData } from "./constant";
 
 import { Link } from "react-router-dom";
 import { getProfileInfo, scopes } from "../../store/slices/auth";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { DsgLogo, SettingsCogIcon, UserIcon } from "../../assets/icons";
 import { SETTINGS_PERMISSIONS } from "../../utils/path";
-import Logo from "../../assets/balakhaniLogo.png";
+import { getCompanyInfo } from "../../store/slices/companyInfo";
+import api from "../../utils/axios";
+
 const Platform = () => {
   const dispatch = useDispatch();
+  const { scopesData } = useSelector((state) => state.auth);
+  const companyInfo = useSelector((state) => state.companyInfo.companyInfo);
+
+  const [imageSrc, setImageSrc] = useState(null);
+
   let rootUrl;
   if (window.location.hostname === "localhost") {
     rootUrl = "http://localhost:" + window.location.port;
   } else {
     rootUrl = window.location.origin;
   }
-  const { scopesData } = useSelector((state) => state.auth);
+
+  const getBase64FromURL = useCallback(async (url) => {
+    try {
+      const res = await api.get(url);
+      return res?.data;
+    } catch (err) {
+      console.error("Error loading logo:", err);
+      return null;
+    }
+  }, []);
+
   useEffect(() => {
     dispatch(scopes());
     dispatch(getProfileInfo());
+    dispatch(getCompanyInfo());
   }, [dispatch]);
+
+  useEffect(() => {
+    const fetchLogo = async () => {
+      if (companyInfo?.[0]?.filePath) {
+        const base64 = await getBase64FromURL(companyInfo[0].filePath);
+        setImageSrc(base64);
+      }
+    };
+    fetchLogo();
+  }, [companyInfo, getBase64FromURL]);
 
   return (
     <div className={style.platform}>
       <div className={style.logo}>
-        {rootUrl.includes("balakhanioc") ? (
-          <img src={Logo} alt="" />
+        {imageSrc ? (
+          <img src={imageSrc} alt="Company Logo" />
         ) : localStorage.getItem("theme") === "dark" ? (
           <DsgLogo dark={true} />
         ) : (

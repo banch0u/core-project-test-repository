@@ -45,7 +45,7 @@ const NotificationSettingsContent = React.forwardRef((props, ref) => {
   const initialValues = useSelector(
     (state) => state.notification.notificationSettings
   );
-
+  console.log(initialValues);
   const getDefaultProjectFromPath = (path) => {
     if (path.includes("/contract")) return "contractSettings";
     return "docFlowSettings";
