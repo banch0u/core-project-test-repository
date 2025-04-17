@@ -5,7 +5,11 @@ import { entryData } from "./constant";
 import { Link } from "react-router-dom";
 import { getProfileInfo, scopes } from "../../store/slices/auth";
 import { useSelector, useDispatch } from "react-redux";
-import { DsgLogo, SettingsCogIcon, UserIcon } from "../../assets/icons";
+import {
+  DsgLogo,
+  SettingsCogIcon,
+  ConstructionRibbon,
+} from "../../assets/icons";
 import { SETTINGS_PERMISSIONS } from "../../utils/path";
 import { getCompanyInfo } from "../../store/slices/companyInfo";
 import api from "../../utils/axios";
@@ -65,40 +69,44 @@ const Platform = () => {
         <h2 className={style.title}>Data Platform</h2>
         <div className={style.links}>
           {entryData?.map((item) => {
-            if (scopesData === "*") {
-              return (
-                <Link to={item?.pathname} key={item?.id}>
-                  {item?.icon}
-                  <div data-no-invert>{item?.value}</div>
-                </Link>
-              );
-            } else {
-              if (!scopesData?.includes(item.scopes)) {
-                return (
-                  <div className={style.disableMenu} key={item?.id}>
-                    {item?.icon}
-                    <div data-no-invert>{item?.value}</div>
-                  </div>
-                );
-              } else {
-                return (
-                  <Link to={item?.pathname} key={item?.id}>
-                    {item?.icon}
-                    <div data-no-invert>{item?.value}</div>
-                  </Link>
-                );
-              }
+            if (
+              item.construction &&
+              window.location.hostname.includes("intranet")
+            ) {
+              return null;
             }
+
+            const isPrivate = item.scopes === "account";
+
+            const ItemContent = (
+              <>
+                {item?.icon}
+                <div data-no-invert>{item?.value}</div>
+              </>
+            );
+
+            return (
+              <div className={style.itemWrapper} key={item?.id}>
+                {item?.construction && (
+                  <span>
+                    <ConstructionRibbon />
+                  </span>
+                )}
+                {scopesData === "*" || isPrivate ? (
+                  <Link to={item?.pathname}>{ItemContent}</Link>
+                ) : !scopesData?.includes(item.scopes) ? (
+                  <div className={style.disableMenu}>{ItemContent}</div>
+                ) : (
+                  <Link to={item?.pathname}>{ItemContent}</Link>
+                )}
+              </div>
+            );
           })}
-          <Link to={`${rootUrl}/accounts/private`}>
-            <UserIcon />
-            <div data-no-invert>Şəxsi kabinet</div>
-          </Link>
         </div>
       </div>
       <div className={style.settings_button} data-no-invert-2>
         {scopesData === "*" ? (
-          <Link to={`${rootUrl}/docflow/${SETTINGS_PERMISSIONS}`}>
+          <Link to={`${rootUrl}/docflow${SETTINGS_PERMISSIONS}`}>
             <SettingsCogIcon />
             <div data-no-invert>Tənzimləmələr</div>
           </Link>

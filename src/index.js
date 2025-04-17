@@ -19,11 +19,18 @@ export { default as NotFound } from "./pages/NotFound";
 
 
 
+
 import LoginPage from "./pages/Login";
 import PlatformPage from "./pages/Platform";
 import HeaderLayout from "./layout/Header";
+import SidebarComponent from "./layout/Sidebar";
 import { CoreProvider } from "./store/coreProvider";
 
+export const Sidebar = (props) => (
+  <CoreProvider>
+    <SidebarComponent {...props} />
+  </CoreProvider>
+);
 export const Login = () => (
   <CoreProvider>
     <LoginPage />

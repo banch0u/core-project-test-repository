@@ -3,19 +3,19 @@
   width: 100%;
   align-items: center;
   flex-direction: column;
-  padding-top: 87px;
+  padding-top: 47px;
   height: 100vh;
   background: #f8f8f8;
   .logo {
     svg {
       width: 250px;
       height: auto;
-      margin-bottom: 165px;
+      margin-bottom: 40px;
     }
     img {
       width: 250px;
       height: auto;
-      margin-bottom: 85px;
+      margin-bottom: 40px;
     }
   }
   .buttons {
@@ -34,7 +34,8 @@
       margin-bottom: 37px;
     }
     .links {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       justify-content: space-between;
       gap: 30px;
       a {
@@ -57,6 +58,8 @@
         color: var(--darkBlueColor);
         svg {
           margin-top: 45px;
+          height: 70px;
+          width: auto;
         }
       }
       .disableMenu {
@@ -78,8 +81,11 @@
         color: #979797;
         svg {
           margin-top: 45px;
+          height: 70px;
+          width: auto;
           path {
-            fill: #979797;
+            filter: brightness(0) saturate(100%) invert(66%) sepia(0%)
+              saturate(2270%) hue-rotate(123deg) brightness(88%) contrast(94%);
           }
         }
       }
@@ -106,5 +112,14 @@
       cursor: pointer;
       text-decoration: none;
     }
+  }
+}
+.itemWrapper {
+  position: relative;
+  overflow: hidden;
+  span {
+    position: absolute;
+    top: 28px;
+    right: -7px;
   }
 }

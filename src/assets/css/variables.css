@@ -6,4 +6,10 @@
   --defaultFont: Inter;
   --secondaryFont: Lato;
   --transition: 250ms;
+
+  --lightBlue: #DEEAF6;
+  --blue: #035FB5;
+  --grey: #828282;
+  --black: #0C0C0C;
+  --white: #FFFFFF;
 }

@@ -1,19 +1,15 @@
 .header {
-  height: 84px;
-  background: #fff;
+  height: 81px;
+  background: var(--blue);
   align-items: center;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-  border-bottom: 1px solid #c4c4c4;
+  padding: 0 17px;
   z-index: 1;
-  svg {
-    width: 123px;
-    height: auto;
-  }
-  img {
-    width: 95px;
-    height: auto;
-  }
+  position: relative;
+  overflow: visible; // ✅ allows dropdowns to escape
+  // z-index: 10;
+}
+.header {
 }
