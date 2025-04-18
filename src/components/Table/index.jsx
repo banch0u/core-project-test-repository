@@ -11,6 +11,7 @@ const Table = ({
   selectedColumns,
   innerW,
   disableDrag,
+  big = false,
 }) => {
   const getSavedOrder = (id) => {
     const savedOrder = Cookies.get(`columnOrder_${id}`);
@@ -219,7 +220,15 @@ const Table = ({
           x:
             innerW *
             (Array.isArray(selectedColumns) ? selectedColumns.length - 1 : 0),
-          y: `calc(88vh - ${window.innerWidth > 1537 ? "260px" : "280px"})`,
+          y: `calc(88vh - ${
+            window.innerWidth > 1537
+              ? big === true
+                ? "180px"
+                : "260px"
+              : big === true
+              ? "200px"
+              : "280px"
+          })`,
         }}
       />
     </div>

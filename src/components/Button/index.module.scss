@@ -125,7 +125,7 @@
   line-height: 24px;
   letter-spacing: 0.5px;
   border: 1px solid #219653;
-  color: #fff;
+  color: #219653;
   cursor: pointer;
   transition: 250ms;
 
@@ -136,7 +136,19 @@
   svg {
     path {
       transition: 250ms;
-      fill: #219653 !important;
+      stroke: #219653;
+    }
+  }
+}
+.button_green_white:hover {
+  background: gray;
+  border: 1px solid gray;
+  transition: 250ms;
+  color: grey;
+  svg {
+    path {
+      transition: 250ms;
+      stroke: gray;
     }
   }
 }

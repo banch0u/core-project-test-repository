@@ -201,7 +201,7 @@ const Filter = ({
       onOpenChange={handleOpenChange} // Updated to use onOpenChange
     >
       <Button color="white">
-        <FilterIcon /> Filter menyu
+        <FilterIcon />
       </Button>
     </Dropdown>
   );

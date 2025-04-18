@@ -5,6 +5,7 @@ import { Collapse } from "antd";
 import { RightOutlined } from "@ant-design/icons";
 import style from "./index.module.scss";
 import { entryData } from "../../../pages/Platform/constant";
+import Portal from "../../Portal";
 
 const { Panel } = Collapse;
 
@@ -13,7 +14,9 @@ const AppSelect = () => {
   const { scopesData } = useSelector((state) => state.auth);
 
   const accordionRef = useRef(null);
-  const [activeKey, setActiveKey] = useState([]); // manage open/close state
+  const dropdownRef = useRef(null);
+  const [activeKey, setActiveKey] = useState([]);
+  const [dropdownStyle, setDropdownStyle] = useState({});
 
   const filteredOptions = useMemo(() => {
     return entryData.filter(
@@ -35,17 +38,32 @@ const AppSelect = () => {
     );
   }, [filteredOptions, baseSegment]);
 
-  // ✨ Outside click listener
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (accordionRef.current && !accordionRef.current.contains(e.target)) {
-        setActiveKey([]); // collapse if clicked outside
+      if (
+        accordionRef.current &&
+        !accordionRef.current.contains(e.target) &&
+        !dropdownRef.current?.contains(e.target)
+      ) {
+        setActiveKey([]);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    if (activeKey.length > 0 && accordionRef.current) {
+      const rect = accordionRef.current.getBoundingClientRect();
+      setDropdownStyle({
+        position: "absolute",
+        top: rect.bottom + window.scrollY + 4,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+        zIndex: 9999,
+      });
+    }
+  }, [activeKey]);
 
   return (
     <div ref={accordionRef}>
@@ -74,8 +92,17 @@ const AppSelect = () => {
               <span>{active?.value}</span>
             </div>
           }
-          key="1">
-          <div className={style.accordionBody}>
+          key="1"
+        />
+      </Collapse>
+
+      {activeKey.length > 0 && (
+        <Portal>
+          <div
+            data-no-invert
+            ref={dropdownRef}
+            className={style.accordionBody}
+            style={dropdownStyle}>
             {filteredOptions
               .filter((opt) => opt.pathname !== active?.pathname)
               .map((option) => (
@@ -88,8 +115,8 @@ const AppSelect = () => {
                 </a>
               ))}
           </div>
-        </Panel>
-      </Collapse>
+        </Portal>
+      )}
     </div>
   );
 };
