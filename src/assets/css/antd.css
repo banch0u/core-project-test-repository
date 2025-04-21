@@ -118,3 +118,7 @@
  .ant-tooltip-arrow {
    display: none !important;
  }
+
+ .ant-switch-checked {
+   background-color: #219653 !important;
+ }
