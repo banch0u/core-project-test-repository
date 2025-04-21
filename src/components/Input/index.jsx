@@ -64,8 +64,9 @@ const Input = ({
         />
       ) : (
         <AntdInput
-          className={style.input}
-          placeholder={placeholder}
+          className={
+            className ? className : size === "sm" ? style.input_sm : style.input
+          }
           {...rest}
         />
       )}

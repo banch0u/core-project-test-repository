@@ -122,3 +122,25 @@
  .ant-switch-checked {
    background-color: #219653 !important;
  }
+
+
+ .ant-checkbox-checked .ant-checkbox-inner {
+   background-color: var(--blue) !important;
+   border-color: var(--blue) !important;
+ }
+
+ .ant-checkbox-disabled .ant-checkbox-inner {
+   background-color: var(--blue) !important;
+   border-color: var(--blue) !important;
+   opacity: 0.5 !important;
+ }
+
+ .ant-checkbox-inner {
+   width: 21px !important;
+   height: 21px !important;
+   border-color: var(--blue) !important;
+ }
+
+ .ant-checkbox-inner::after {
+   border-color: var(--white) !important;
+ }
