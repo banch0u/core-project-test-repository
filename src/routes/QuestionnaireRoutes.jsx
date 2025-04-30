@@ -16,19 +16,24 @@ import QuestionnairesApplicationFormContent from "../pages/Questionnnaires/Quest
 import QuestionnairesDocumentWhomContent from "../pages/Questionnnaires/QuestionnairesDocumentWhomContent";
 import QuestionnairesMarginNoteTextsContent from "../pages/Questionnnaires/QuestionnairesMarginNoteTextsContent";
 
+import QuestionnairesBrandsContent from "../pages/Questionnnaires/QuestionnairesBrandsContent";
+import QuestionnairesChassisTypesContent from "../pages/Questionnnaires/QuestionnairesChassisTypesContent";
+import QuestionnairesColorsContent from "../pages/Questionnnaires/QuestionnairesColorsContent";
 import {
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_TOPIC,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_SUBTOPIC,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_EXECUTION_RULES,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_DOCUMENT_TYPES,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_COUNTRIES,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_STREETS,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_ORGANIZATIONS,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_STRUCTURES,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_APPLICATION_FORMS,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_DOCUMENT_WHOM,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_MARGIN_NOTE_TEXTS,
+  QUESTIONNAIRES_TOPIC,
+  QUESTIONNAIRES_SUBTOPIC,
+  QUESTIONNAIRES_EXECUTION_RULES,
+  QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
+  QUESTIONNAIRES_DOCUMENT_TYPES,
+  QUESTIONNAIRES_COUNTRIES,
+  QUESTIONNAIRES_STREETS,
+  QUESTIONNAIRES_ORGANIZATIONS,
+  QUESTIONNAIRES_STRUCTURES,
+  QUESTIONNAIRES_APPLICATION_FORMS,
+  QUESTIONNAIRES_DOCUMENT_WHOM,
+  QUESTIONNAIRES_MARGIN_NOTE_TEXTS,
+  QUESTIONNAIRES_BRANDS,
+  QUESTIONNAIRES_CHASSIS_TYPES,
   SETTINGS_QUESTIONNAIRES_TOPIC,
   SETTINGS_QUESTIONNAIRES_SUBTOPIC,
   SETTINGS_QUESTIONNAIRES_EXECUTION_RULES,
@@ -41,7 +46,32 @@ import {
   SETTINGS_QUESTIONNAIRES_APPLICATION_FORMS,
   SETTINGS_QUESTIONNAIRES_DOCUMENT_WHOM,
   SETTINGS_QUESTIONNAIRES_MARGIN_NOTE_TEXTS,
+  QUESTIONNAIRES_COLORS,
+  QUESTIONNAIRES_ENGINE_TYPES,
+  QUESTIONNAIRES_GEARBOX_TYPES,
+  QUESTIONNAIRES_ISSUED_AUTHORITIES,
+  QUESTIONNAIRES_MODELS,
+  QUESTIONNAIRES_OWNERSHIP_TYPES,
+  QUESTIONNAIRES_TRANSMITTER_TYPES,
+  QUESTIONNAIRES_VEHICLE_TYPES,
+  SETTINGS_QUESTIONNAIRES_BRANDS,
+  SETTINGS_QUESTIONNAIRES_CHASSISTYPES,
+  SETTINGS_QUESTIONNAIRES_COLORS,
+  SETTINGS_QUESTIONNAIRES_ENGINETYPES,
+  SETTINGS_QUESTIONNAIRES_GEARBOXTYPES,
+  SETTINGS_QUESTIONNAIRES_ISSUEDAUTHORITIES,
+  SETTINGS_QUESTIONNAIRES_MODELS,
+  SETTINGS_QUESTIONNAIRES_OWNERSHIPTYPES,
+  SETTINGS_QUESTIONNAIRES_TRANSMITTERTYPES,
+  SETTINGS_QUESTIONNAIRES_VEHICLETYPES,
 } from "../utils/path";
+import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
+import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
+import QuestionnairesModelsContent from "../pages/Questionnnaires/QuestionnairesModelsContent";
+import QuestionnairesOwnershipTypesContent from "../pages/Questionnnaires/QuestionnairesOwnershipTypesContent";
+import QuestionnairesTransmitterTypesContent from "../pages/Questionnnaires/QuestionnairesTransmitterTypesContent";
+import QuestionnairesVehicleTypesContent from "../pages/Questionnnaires/QuestionnairesVehicleTypesContent";
+import QuestionnairesIssuedAuthoritiesContent from "../pages/Questionnnaires/QuestionnairesIssuedAuthoritiesContent";
 
 export const questionnairesRoutes = (allowed) => {
   return (
@@ -52,52 +82,93 @@ export const questionnairesRoutes = (allowed) => {
         element={<QuestionnairesLayout allowed={allowed} />}>
         <Route index element={<Questionnnaires />} />
         <Route
-          path={DOCUMENT_CIRCULATION_QUESTIONNAIRES_TOPIC}
+          path={QUESTIONNAIRES_TOPIC}
           element={<QuestionnairesTopicContent />}
         />
         <Route
-          path={DOCUMENT_CIRCULATION_QUESTIONNAIRES_SUBTOPIC}
+          path={QUESTIONNAIRES_SUBTOPIC}
           element={<QuestionnairesSubtopicContent />}
         />
         <Route
-          path={DOCUMENT_CIRCULATION_QUESTIONNAIRES_EXECUTION_RULES}
+          path={QUESTIONNAIRES_EXECUTION_RULES}
           element={<QuestionnairesExecutionRulesContent />}
         />
         <Route
-          path={DOCUMENT_CIRCULATION_QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS}
+          path={QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS}
           element={<QuestionnairesDocumentRecieveMethodsContent />}
         />
         <Route
-          path={DOCUMENT_CIRCULATION_QUESTIONNAIRES_DOCUMENT_TYPES}
+          path={QUESTIONNAIRES_DOCUMENT_TYPES}
           element={<QuestionnairesDocumentTypeContent />}
         />
         <Route
-          path={DOCUMENT_CIRCULATION_QUESTIONNAIRES_COUNTRIES}
+          path={QUESTIONNAIRES_COUNTRIES}
           element={<QuestionnairesCountriesContent />}
         />
         <Route
-          path={DOCUMENT_CIRCULATION_QUESTIONNAIRES_STREETS}
+          path={QUESTIONNAIRES_STREETS}
           element={<QuestionnairesStreetsContent />}
         />
         <Route
-          path={DOCUMENT_CIRCULATION_QUESTIONNAIRES_ORGANIZATIONS}
+          path={QUESTIONNAIRES_ORGANIZATIONS}
           element={<QuestionnairesOrganizationsContent />}
         />
         <Route
-          path={DOCUMENT_CIRCULATION_QUESTIONNAIRES_STRUCTURES}
+          path={QUESTIONNAIRES_STRUCTURES}
           element={<QuestionnairesStructuresContent />}
         />
         <Route
-          path={DOCUMENT_CIRCULATION_QUESTIONNAIRES_APPLICATION_FORMS}
+          path={QUESTIONNAIRES_APPLICATION_FORMS}
           element={<QuestionnairesApplicationFormContent />}
         />
         <Route
-          path={DOCUMENT_CIRCULATION_QUESTIONNAIRES_DOCUMENT_WHOM}
+          path={QUESTIONNAIRES_DOCUMENT_WHOM}
           element={<QuestionnairesDocumentWhomContent />}
         />
         <Route
-          path={DOCUMENT_CIRCULATION_QUESTIONNAIRES_MARGIN_NOTE_TEXTS}
+          path={QUESTIONNAIRES_MARGIN_NOTE_TEXTS}
           element={<QuestionnairesMarginNoteTextsContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_BRANDS}
+          element={<QuestionnairesBrandsContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_CHASSIS_TYPES}
+          element={<QuestionnairesChassisTypesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_COLORS}
+          element={<QuestionnairesColorsContent />}
+        />
+
+        <Route
+          path={QUESTIONNAIRES_ENGINE_TYPES}
+          element={<QuestionnairesEngineTypesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_GEARBOX_TYPES}
+          element={<QuestionnairesGearboxTypesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_ISSUED_AUTHORITIES}
+          element={<QuestionnairesIssuedAuthoritiesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_MODELS}
+          element={<QuestionnairesModelsContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_OWNERSHIP_TYPES}
+          element={<QuestionnairesOwnershipTypesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_TRANSMITTER_TYPES}
+          element={<QuestionnairesTransmitterTypesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_VEHICLE_TYPES}
+          element={<QuestionnairesVehicleTypesContent />}
         />
       </Route>
 
@@ -153,6 +224,46 @@ export const questionnairesRoutes = (allowed) => {
         <Route
           path={SETTINGS_QUESTIONNAIRES_MARGIN_NOTE_TEXTS}
           element={<QuestionnairesMarginNoteTextsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_BRANDS}
+          element={<QuestionnairesBrandsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_CHASSISTYPES}
+          element={<QuestionnairesChassisTypesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_COLORS}
+          element={<QuestionnairesColorsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_ENGINETYPES}
+          element={<QuestionnairesEngineTypesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_GEARBOXTYPES}
+          element={<QuestionnairesGearboxTypesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_ISSUEDAUTHORITIES}
+          element={<QuestionnairesIssuedAuthoritiesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_MODELS}
+          element={<QuestionnairesModelsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_OWNERSHIPTYPES}
+          element={<QuestionnairesOwnershipTypesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_TRANSMITTERTYPES}
+          element={<QuestionnairesTransmitterTypesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_VEHICLETYPES}
+          element={<QuestionnairesVehicleTypesContent />}
         />
       </Route>
     </>

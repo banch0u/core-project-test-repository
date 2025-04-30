@@ -145,7 +145,7 @@ class Services {
   };
   static documentRecieveMethodVisibility = async (data) => {
     const response = await api.patch(
-      `/documentreceivemethods/${data?.id}/visibility/${data?.checked}/`
+      `/documentreceivemethods/${data?.id}/visibility/${data?.checked}`
     );
     return response?.data;
   };
@@ -186,7 +186,7 @@ class Services {
   };
   static documentTypesVisibility = async (data) => {
     const response = await api.patch(
-      `/documenttypes/${data?.id}/visibility/${data?.checked}/`
+      `/documenttypes/${data?.id}/visibility/${data?.checked}`
     );
     return response?.data;
   };
@@ -455,5 +455,175 @@ class Services {
     );
     return response?.data;
   };
+  static getBrands = async (size, page, query, visibility) => {
+    const response = await api.get(
+      `/brands/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+    return response?.data;
+  };
+  static getBrandsAll = async (visibility) => {
+    const response = await api.get(
+      `/brands?visibility=${visibility}`
+    );
+    return response?.data;
+  };
+  static addBrand = async (value) => {
+    const response = await api.post(`/brands`, value);
+    return response?.data;
+  };
+
+  static editBrand = async (value) => {
+    const response = await api.put(
+      `/brands/${value?.id}`,
+      value
+    );
+    return response?.data;
+  };
+
+  static deleteBrand = async (id) => {
+    const response = await api.delete(`/brands/${id}`);
+    return response?.data;
+  };
+  static brandVisibility = async (data) => {
+    const response = await api.patch(
+      `/brands/${data?.id}/visibility/${data?.checked}`
+    );
+    return response?.data;
+  };
+  // 🛠 chassistypes
+  static getChassiTypes = async (size, page, query, visibility) => {
+    const response = await api.get(`/chassistypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+    return response?.data;
+  };
+  static getChassiTypesAll = async (visibility) => {
+    const response = await api.get(`/chassistypes?visibility=${visibility}`);
+    return response?.data;
+  };
+  static addChassisType = async (value) => api.post(`/chassistypes`, value).then(r => r.data);
+  static editChassisType = async (value) => api.put(`/chassistypes/${value?.id}`, value).then(r => r.data);
+  static deleteChassisType = async (id) => api.delete(`/chassistypes/${id}`).then(r => r.data);
+  static chassisTypeVisibility = async (data) => api.patch(`/chassistypes/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
+
+  // 🎨 colors
+  static getColor = async (size, page, query, visibility) => {
+    const response = await api.get(`/colors/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+    return response?.data;
+  };
+  static getColorAll = async (visibility) => api.get(`/colors?visibility=${visibility}`).then(r => r.data);
+  static addColor = async (value) => api.post(`/colors`, value).then(r => r.data);
+  static editColor = async (value) => api.put(`/colors/${value?.id}`, value).then(r => r.data);
+  static deleteColor = async (id) => api.delete(`/colors/${id}`).then(r => r.data);
+  static colorVisibility = async (data) => api.patch(`/colors/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
+
+  // 🔧 enginetypes
+  static getEnginetype = async (size, page, query, visibility) => {
+    const response = await api.get(`/enginetypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+    return response?.data;
+  };
+  static getEnginetypeAll = async (visibility) => api.get(`/enginetypes?visibility=${visibility}`).then(r => r.data);
+  static addEnginetype = async (value) => api.post(`/enginetypes`, value).then(r => r.data);
+  static editEnginetype = async (value) => api.put(`/enginetypes/${value?.id}`, value).then(r => r.data);
+  static deleteEnginetype = async (id) => api.delete(`/enginetypes/${id}`).then(r => r.data);
+  static enginetypeVisibility = async (data) => api.patch(`/enginetypes/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
+
+  // ⚙️ gearboxtypes
+  static getGearboxtype = async (size, page, query, visibility) => {
+    const response = await api.get(`/gearboxtypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+    return response?.data;
+  };
+  static getGearboxtypeAll = async (visibility) => api.get(`/gearboxtypes?visibility=${visibility}`).then(r => r.data);
+  static addGearboxtype = async (value) => api.post(`/gearboxtypes`, value).then(r => r.data);
+  static editGearboxtype = async (value) => api.put(`/gearboxtypes/${value?.id}`, value).then(r => r.data);
+  static deleteGearboxtype = async (id) => api.delete(`/gearboxtypes/${id}`).then(r => r.data);
+  static gearboxtypeVisibility = async (data) => api.patch(`/gearboxtypes/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
+
+  // 🏛 issuedauthorities
+  static getIssuedauthorities = async (size, page, query, visibility) => {
+    const response = await api.get(`/issuedauthorities/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+    return response?.data;
+  };
+  static getIssuedauthoritiesAll = async (visibility) => api.get(`/issuedauthorities?visibility=${visibility}`).then(r => r.data);
+  static addIssuedauthorities = async (value) => api.post(`/issuedauthorities`, value).then(r => r.data);
+  static editIssuedauthorities = async (value) => api.put(`/issuedauthorities/${value?.id}`, value).then(r => r.data);
+  static deleteIssuedauthorities = async (id) => api.delete(`/issuedauthorities/${id}`).then(r => r.data);
+  static issuedauthoritiesVisibility = async (data) => api.patch(`/issuedauthorities/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
+
+  // 🚗 models
+  static getModel = async (size, page, query, visibility) => {
+    const response = await api.get(`/models/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+    return response?.data;
+  };
+  static getModelAll = async (visibility) => api.get(`/models?visibility=${visibility}`).then(r => r.data);
+  static addModel = async (value) => api.post(`/models`, value).then(r => r.data);
+  static editModel = async (value) => api.put(`/models/${value?.id}`, value).then(r => r.data);
+  static deleteModel = async (id) => api.delete(`/models/${id}`).then(r => r.data);
+  static modelsVisibility = async (data) => api.patch(`/models/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
+
+  // 📄 ownershiptypes
+  static getOwnershiptype = async (size, page, query, visibility) => {
+    const response = await api.get(`/ownershiptypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+    return response?.data;
+  };
+  static getOwnershiptypeAll = async (visibility) => api.get(`/ownershiptypes?visibility=${visibility}`).then(r => r.data);
+  static addOwnershiptype = async (value) => api.post(`/ownershiptypes`, value).then(r => r.data);
+  static editOwnershiptype = async (value) => api.put(`/ownershiptypes/${value?.id}`, value).then(r => r.data);
+  static deleteOwnershiptype = async (id) => api.delete(`/ownershiptypes/${id}`).then(r => r.data);
+  static ownershiptypesVisibility = async (data) => api.patch(`/ownershiptypes/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
+
+  // 🏢 organisationrecords
+  static getOrganisationrecords = async (size, page, query, visibility) => {
+    const response = await api.get(`/organisationrecords/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+    return response?.data;
+  };
+  static getOrganisationrecordsAll = async (visibility) => api.get(`/organisationrecords?visibility=${visibility}`).then(r => r.data);
+  static addOrganisationrecords = async (value) => api.post(`/organisationrecords`, value).then(r => r.data);
+  static editOrganisationrecords = async (value) => api.put(`/organisationrecords/${value?.id}`, value).then(r => r.data);
+  static deleteOrganisationrecords = async (id) => api.delete(`/organisationrecords/${id}`).then(r => r.data);
+  static organisationrecordsVisibility = async (data) => api.patch(`/organisationrecords/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
+
+  // 📡 transmittertypes
+  static getTransmittertypes = async (size, page, query, visibility) => {
+    const response = await api.get(`/transmittertypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+    return response?.data;
+  };
+  static getTransmittertypesAll = async (visibility) => api.get(`/transmittertypes?visibility=${visibility}`).then(r => r.data);
+  static addTransmittertypes = async (value) => api.post(`/transmittertypes`, value).then(r => r.data);
+  static editTransmittertypes = async (value) => api.put(`/transmittertypes/${value?.id}`, value).then(r => r.data);
+  static deleteTransmittertypes = async (id) => api.delete(`/transmittertypes/${id}`).then(r => r.data);
+  static transmittertypesVisibility = async (data) => api.patch(`/transmittertypes/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
+
+  // 🚙 vehicles
+  static getVehicles = async (size, page, query, visibility) => {
+    const response = await api.get(`/vehicles/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+    return response?.data;
+  };
+  static getVehiclesAll = async (visibility) => api.get(`/vehicles?visibility=${visibility}`).then(r => r.data);
+  static addVehicles = async (value) => api.post(`/vehicles`, value).then(r => r.data);
+  static editVehicles = async (value) => api.put(`/vehicles/${value?.id}`, value).then(r => r.data);
+  static deleteVehicles = async (id) => api.delete(`/vehicles/${id}`).then(r => r.data);
+  static vehiclesVisibility = async (data) => api.patch(`/vehicles/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
+
+  // 🚘 vehicletypes
+  static getVehicletypes = async (size, page, query, visibility) => {
+    const response = await api.get(`/vehicletypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+    return response?.data;
+  };
+  static getVehicletypesAll = async (visibility) => api.get(`/vehicletypes?visibility=${visibility}`).then(r => r.data);
+  static addVehicletypes = async (value) => api.post(`/vehicletypes`, value).then(r => r.data);
+  static editVehicletypes = async (value) => api.put(`/vehicletypes/${value?.id}`, value).then(r => r.data);
+  static deleteVehicletypes = async (id) => api.delete(`/vehicletypes/${id}`).then(r => r.data);
+  static vehicletypesVisibility = async (data) => api.patch(`/vehicletypes/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
+
+  // 📋 vrcs
+  static getVrcs = async (size, page, query, visibility) => {
+    const response = await api.get(`/vrcs/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+    return response?.data;
+  };
+  static getVrcsAll = async (visibility) => api.get(`/vrcs?visibility=${visibility}`).then(r => r.data);
+  static addVrcs = async (value) => api.post(`/vrcs`, value).then(r => r.data);
+  static editVrcs = async (value) => api.put(`/vrcs/${value?.id}`, value).then(r => r.data);
+  static deleteVrcs = async (id) => api.delete(`/vrcs/${id}`).then(r => r.data);
+  static vrcsVisibility = async (data) => api.patch(`/vrcs/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
+
 }
 export default Services;

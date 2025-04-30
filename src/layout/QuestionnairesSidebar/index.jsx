@@ -4,30 +4,48 @@ import style from "./index.module.scss";
 import { Layout, Menu, Input } from "antd";
 
 import {
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_APPLICATION_FORMS,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_COUNTRIES,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_DOCUMENT_TYPES,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_DOCUMENT_WHOM,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_EXECUTION_RULES,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_MARGIN_NOTE_TEXTS,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_ORGANIZATIONS,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_STREETS,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_STRUCTURES,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_SUBTOPIC,
-  DOCUMENT_CIRCULATION_QUESTIONNAIRES_TOPIC,
+  QUESTIONNAIRES_APPLICATION_FORMS,
+  QUESTIONNAIRES_BRANDS,
+  QUESTIONNAIRES_CHASSIS_TYPES,
+  QUESTIONNAIRES_COUNTRIES,
+  QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
+  QUESTIONNAIRES_DOCUMENT_TYPES,
+  QUESTIONNAIRES_DOCUMENT_WHOM,
+  QUESTIONNAIRES_ENGINE_TYPES,
+  QUESTIONNAIRES_EXECUTION_RULES,
+  QUESTIONNAIRES_GEARBOX_TYPES,
+  QUESTIONNAIRES_ISSUED_AUTHORITIES,
+  QUESTIONNAIRES_MARGIN_NOTE_TEXTS,
+  QUESTIONNAIRES_MODELS,
+  QUESTIONNAIRES_ORGANIZATIONS,
+  QUESTIONNAIRES_OWNERSHIP_TYPES,
+  QUESTIONNAIRES_STREETS,
+  QUESTIONNAIRES_STRUCTURES,
+  QUESTIONNAIRES_SUBTOPIC,
+  QUESTIONNAIRES_TOPIC,
+  QUESTIONNAIRES_TRANSMITTER_TYPES,
+  QUESTIONNAIRES_VEHICLE_TYPES,
   SETTINGS_QUESTIONNAIRES_APPLICATION_FORMS,
+  SETTINGS_QUESTIONNAIRES_BRANDS,
+  SETTINGS_QUESTIONNAIRES_CHASSISTYPES,
   SETTINGS_QUESTIONNAIRES_COUNTRIES,
   SETTINGS_QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
   SETTINGS_QUESTIONNAIRES_DOCUMENT_TYPES,
   SETTINGS_QUESTIONNAIRES_DOCUMENT_WHOM,
+  SETTINGS_QUESTIONNAIRES_ENGINETYPES,
   SETTINGS_QUESTIONNAIRES_EXECUTION_RULES,
+  SETTINGS_QUESTIONNAIRES_GEARBOXTYPES,
+  SETTINGS_QUESTIONNAIRES_ISSUEDAUTHORITIES,
   SETTINGS_QUESTIONNAIRES_MARGIN_NOTE_TEXTS,
+  SETTINGS_QUESTIONNAIRES_MODELS,
   SETTINGS_QUESTIONNAIRES_ORGANIZATIONS,
+  SETTINGS_QUESTIONNAIRES_OWNERSHIPTYPES,
   SETTINGS_QUESTIONNAIRES_STREETS,
   SETTINGS_QUESTIONNAIRES_STRUCTURES,
   SETTINGS_QUESTIONNAIRES_SUBTOPIC,
   SETTINGS_QUESTIONNAIRES_TOPIC,
+  SETTINGS_QUESTIONNAIRES_TRANSMITTERTYPES,
+  SETTINGS_QUESTIONNAIRES_VEHICLETYPES,
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -47,7 +65,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_TOPIC
-          : DOCUMENT_CIRCULATION_QUESTIONNAIRES_TOPIC,
+          : QUESTIONNAIRES_TOPIC,
     },
     {
       key: "subtopic",
@@ -55,7 +73,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_SUBTOPIC
-          : DOCUMENT_CIRCULATION_QUESTIONNAIRES_SUBTOPIC,
+          : QUESTIONNAIRES_SUBTOPIC,
     },
     {
       key: "executionRules",
@@ -63,7 +81,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_EXECUTION_RULES
-          : DOCUMENT_CIRCULATION_QUESTIONNAIRES_EXECUTION_RULES,
+          : QUESTIONNAIRES_EXECUTION_RULES,
     },
     {
       key: "document-recieve-methods",
@@ -71,7 +89,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS
-          : DOCUMENT_CIRCULATION_QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
+          : QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
     },
     {
       key: "documentType",
@@ -79,7 +97,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_DOCUMENT_TYPES
-          : DOCUMENT_CIRCULATION_QUESTIONNAIRES_DOCUMENT_TYPES,
+          : QUESTIONNAIRES_DOCUMENT_TYPES,
     },
     {
       key: "country",
@@ -87,7 +105,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_COUNTRIES
-          : DOCUMENT_CIRCULATION_QUESTIONNAIRES_COUNTRIES,
+          : QUESTIONNAIRES_COUNTRIES,
     },
     {
       key: "street",
@@ -95,7 +113,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_STREETS
-          : DOCUMENT_CIRCULATION_QUESTIONNAIRES_STREETS,
+          : QUESTIONNAIRES_STREETS,
     },
     {
       key: "organization",
@@ -103,7 +121,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_ORGANIZATIONS
-          : DOCUMENT_CIRCULATION_QUESTIONNAIRES_ORGANIZATIONS,
+          : QUESTIONNAIRES_ORGANIZATIONS,
     },
     {
       key: "structure",
@@ -111,7 +129,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_STRUCTURES
-          : DOCUMENT_CIRCULATION_QUESTIONNAIRES_STRUCTURES,
+          : QUESTIONNAIRES_STRUCTURES,
     },
     {
       key: "application_form",
@@ -119,7 +137,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_APPLICATION_FORMS
-          : DOCUMENT_CIRCULATION_QUESTIONNAIRES_APPLICATION_FORMS,
+          : QUESTIONNAIRES_APPLICATION_FORMS,
     },
     {
       key: "document_whom",
@@ -127,7 +145,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_DOCUMENT_WHOM
-          : DOCUMENT_CIRCULATION_QUESTIONNAIRES_DOCUMENT_WHOM,
+          : QUESTIONNAIRES_DOCUMENT_WHOM,
     },
     {
       key: "margin_note_texts",
@@ -135,15 +153,79 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_MARGIN_NOTE_TEXTS
-          : DOCUMENT_CIRCULATION_QUESTIONNAIRES_MARGIN_NOTE_TEXTS,
+          : QUESTIONNAIRES_MARGIN_NOTE_TEXTS,
     },
     {
       key: "brands",
       label: "Brendlər",
       link:
         mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_MARGIN_NOTE_TEXTS
-          : DOCUMENT_CIRCULATION_QUESTIONNAIRES_MARGIN_NOTE_TEXTS,
+          ? SETTINGS_QUESTIONNAIRES_BRANDS
+          : QUESTIONNAIRES_BRANDS,
+    },
+    {
+      key: "chassis-types",
+      label: "Şassi növləri",
+      link:
+        mainPath === "/settings"
+          ? SETTINGS_QUESTIONNAIRES_CHASSISTYPES
+          : QUESTIONNAIRES_CHASSIS_TYPES,
+    },
+    {
+      key: "engine-types",
+      label: "Mühərrik növləri",
+      link:
+        mainPath === "/settings"
+          ? SETTINGS_QUESTIONNAIRES_ENGINETYPES
+          : QUESTIONNAIRES_ENGINE_TYPES,
+    },
+    {
+      key: "gearbox-types",
+      label: "Sürətlər qutusu",
+      link:
+        mainPath === "/settings"
+          ? SETTINGS_QUESTIONNAIRES_GEARBOXTYPES
+          : QUESTIONNAIRES_GEARBOX_TYPES,
+    },
+    {
+      key: "issued-authorities",
+      label: "Verən orqanlar",
+      link:
+        mainPath === "/settings"
+          ? SETTINGS_QUESTIONNAIRES_ISSUEDAUTHORITIES
+          : QUESTIONNAIRES_ISSUED_AUTHORITIES,
+    },
+    {
+      key: "models",
+      label: "Modellər",
+      link:
+        mainPath === "/settings"
+          ? SETTINGS_QUESTIONNAIRES_MODELS
+          : QUESTIONNAIRES_MODELS,
+    },
+    {
+      key: "ownership-types",
+      label: "Mülkiyyət növləri",
+      link:
+        mainPath === "/settings"
+          ? SETTINGS_QUESTIONNAIRES_OWNERSHIPTYPES
+          : QUESTIONNAIRES_OWNERSHIP_TYPES,
+    },
+    {
+      key: "transmitter-types",
+      label: "Verici növləri",
+      link:
+        mainPath === "/settings"
+          ? SETTINGS_QUESTIONNAIRES_TRANSMITTERTYPES
+          : QUESTIONNAIRES_TRANSMITTER_TYPES,
+    },
+    {
+      key: "vehicle-types",
+      label: "Nəqliyyat növləri",
+      link:
+        mainPath === "/settings"
+          ? SETTINGS_QUESTIONNAIRES_VEHICLETYPES
+          : QUESTIONNAIRES_VEHICLE_TYPES,
     },
   ];
 
@@ -191,7 +273,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
         className="questionnaires_menu"
         style={{
           overflowY: "auto",
-          maxHeight: "calc(100vh - 325px)",
+          maxHeight: "calc(100vh - 225px)",
         }}>
         <Menu
           defaultSelectedKeys={[selectedKey]}

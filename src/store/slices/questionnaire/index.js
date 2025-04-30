@@ -16,6 +16,19 @@ import {
   setSubtopicsRender,
   setTopicsRender,
   setViewModalVisible,
+  setBrandRender,
+  setChassisTypeRender,
+  setColorRender,
+  setEnginetypeRender,
+  setGearboxtypeRender,
+  setIssuedauthoritieRender,
+  setModelRender,
+  setOwnershiptypeRender,
+  setOrganisationrecordRender,
+  setTransmittertypeRender,
+  setVehicleRender,
+  setVehicletypeRender,
+  setVrcRender
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -1269,6 +1282,1322 @@ export const getGeneralStructuresAll = createAsyncThunk(
   }
 );
 
+export const getBrands = createAsyncThunk(
+  "/getBrands",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getBrands(
+        data.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getBrandsAll = createAsyncThunk(
+  "/getBrandsAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getBrandsAll(
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteBrand = createAsyncThunk(
+  "/deleteBrand",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteBrand(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setBrandRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addBrand = createAsyncThunk(
+  "/addBrand",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addBrand(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setBrandRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editBrand = createAsyncThunk(
+  "/editBrand",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editBrand(data);
+      dispatch(setLoading(false));
+      dispatch(setBrandRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const brandVisibility = createAsyncThunk(
+  "/brandVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.brandVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setBrandRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getChassisTypes = createAsyncThunk(
+  "/getChassisTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getChassiTypes(data.size, data.page, data.query, data.visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error?.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getChassisTypesAll = createAsyncThunk(
+  "/getChassisTypesAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getChassiTypesAll(data.visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error?.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteChassisType = createAsyncThunk(
+  "/deleteChassisType",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteChassisType(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setChassisTypeRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error?.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addChassisType = createAsyncThunk(
+  "/addChassisType",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addChassisType(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setChassisTypeRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error?.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editChassisType = createAsyncThunk(
+  "/editChassisType",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editChassisType(data);
+      dispatch(setLoading(false));
+      dispatch(setChassisTypeRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error?.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const chassisTypeVisibility = createAsyncThunk(
+  "/chassisTypeVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.chassisTypeVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setChassisTypeRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error?.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+
+export const getColor = createAsyncThunk(
+  "/getColor",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getColor(
+        data.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getColorAll = createAsyncThunk(
+  "/getColorAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getColorAll(
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteColor = createAsyncThunk(
+  "/deleteColor",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteColor(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setColorRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addColor = createAsyncThunk(
+  "/addColor",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addColor(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setColorRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editColor = createAsyncThunk(
+  "/editColor",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editColor(data);
+      dispatch(setLoading(false));
+      dispatch(setColorRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const colorVisibility = createAsyncThunk(
+  "/colorVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.colorVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setColorRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getEnginetype = createAsyncThunk(
+  "/getEnginetype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getEnginetype(
+        data.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getEnginetypeAll = createAsyncThunk(
+  "/getEnginetypeAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getEnginetypeAll(
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteEnginetype = createAsyncThunk(
+  "/deleteEnginetype",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteEnginetype(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setEnginetypeRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addEnginetype = createAsyncThunk(
+  "/addEnginetype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addEnginetype(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setEnginetypeRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editEnginetype = createAsyncThunk(
+  "/editEnginetype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editEnginetype(data);
+      dispatch(setLoading(false));
+      dispatch(setEnginetypeRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const enginetypesVisibility = createAsyncThunk(
+  "/enginetypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.enginetypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setEnginetypeRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getGearboxtype = createAsyncThunk(
+  "/getGearboxtype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getGearboxtype(
+        data.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getGearboxtypeAll = createAsyncThunk(
+  "/getGearboxtypeAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getGearboxtypeAll(
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteGearboxtype = createAsyncThunk(
+  "/deleteGearboxtype",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteGearboxtype(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setGearboxtypeRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addGearboxtype = createAsyncThunk(
+  "/addGearboxtype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addGearboxtype(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setGearboxtypeRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editGearboxtype = createAsyncThunk(
+  "/editGearboxtype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editGearboxtype(data);
+      dispatch(setLoading(false));
+      dispatch(setGearboxtypeRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const gearboxtypesVisibility = createAsyncThunk(
+  "/gearboxtypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.gearboxtypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setGearboxtypeRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getIssuedauthoritie = createAsyncThunk(
+  "/getIssuedauthoritie",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getIssuedauthoritie(
+        data.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getIssuedauthoritieAll = createAsyncThunk(
+  "/getIssuedauthoritieAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getIssuedauthoritieAll(
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteIssuedauthoritie = createAsyncThunk(
+  "/deleteIssuedauthoritie",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteIssuedauthoritie(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setIssuedauthoritieRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addIssuedauthoritie = createAsyncThunk(
+  "/addIssuedauthoritie",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addIssuedauthoritie(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setIssuedauthoritieRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editIssuedauthoritie = createAsyncThunk(
+  "/editIssuedauthoritie",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editIssuedauthoritie(data);
+      dispatch(setLoading(false));
+      dispatch(setIssuedauthoritieRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const issuedauthoritiesVisibility = createAsyncThunk(
+  "/issuedauthoritiesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.issuedauthoritiesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setIssuedauthoritieRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getModel = createAsyncThunk(
+  "/getModel",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getModel(
+        data.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getModelAll = createAsyncThunk(
+  "/getModelAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getModelAll(
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteModel = createAsyncThunk(
+  "/deleteModel",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteModel(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setModelRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addModel = createAsyncThunk(
+  "/addModel",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addModel(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setModelRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editModel = createAsyncThunk(
+  "/editModel",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editModel(data);
+      dispatch(setLoading(false));
+      dispatch(setModelRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const modelsVisibility = createAsyncThunk(
+  "/modelsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.modelsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setModelRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getOwnershiptype = createAsyncThunk(
+  "/getOwnershiptype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getOwnershiptype(
+        data.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getOwnershiptypeAll = createAsyncThunk(
+  "/getOwnershiptypeAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getOwnershiptypeAll(
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteOwnershiptype = createAsyncThunk(
+  "/deleteOwnershiptype",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteOwnershiptype(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setOwnershiptypeRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addOwnershiptype = createAsyncThunk(
+  "/addOwnershiptype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addOwnershiptype(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setOwnershiptypeRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editOwnershiptype = createAsyncThunk(
+  "/editOwnershiptype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editOwnershiptype(data);
+      dispatch(setLoading(false));
+      dispatch(setOwnershiptypeRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const ownershiptypesVisibility = createAsyncThunk(
+  "/ownershiptypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.ownershiptypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setOwnershiptypeRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getOrganisationrecord = createAsyncThunk(
+  "/getOrganisationrecord",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getOrganisationrecord(
+        data.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getOrganisationrecordAll = createAsyncThunk(
+  "/getOrganisationrecordAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getOrganisationrecordAll(
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteOrganisationrecord = createAsyncThunk(
+  "/deleteOrganisationrecord",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteOrganisationrecord(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setOrganisationrecordRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addOrganisationrecord = createAsyncThunk(
+  "/addOrganisationrecord",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addOrganisationrecord(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setOrganisationrecordRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editOrganisationrecord = createAsyncThunk(
+  "/editOrganisationrecord",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editOrganisationrecord(data);
+      dispatch(setLoading(false));
+      dispatch(setOrganisationrecordRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const organisationrecordsVisibility = createAsyncThunk(
+  "/organisationrecordsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.organisationrecordsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setOrganisationrecordRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getTransmittertype = createAsyncThunk(
+  "/getTransmittertype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getTransmittertype(
+        data.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getTransmittertypeAll = createAsyncThunk(
+  "/getTransmittertypeAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getTransmittertypeAll(
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteTransmittertype = createAsyncThunk(
+  "/deleteTransmittertype",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteTransmittertype(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setTransmittertypeRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addTransmittertype = createAsyncThunk(
+  "/addTransmittertype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addTransmittertype(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setTransmittertypeRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editTransmittertype = createAsyncThunk(
+  "/editTransmittertype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editTransmittertype(data);
+      dispatch(setLoading(false));
+      dispatch(setTransmittertypeRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const transmittertypesVisibility = createAsyncThunk(
+  "/transmittertypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.transmittertypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setTransmittertypeRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getVehicle = createAsyncThunk(
+  "/getVehicle",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getVehicle(
+        data.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getVehicleAll = createAsyncThunk(
+  "/getVehicleAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getVehicleAll(
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteVehicle = createAsyncThunk(
+  "/deleteVehicle",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteVehicle(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setVehicleRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addVehicle = createAsyncThunk(
+  "/addVehicle",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addVehicle(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setVehicleRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editVehicle = createAsyncThunk(
+  "/editVehicle",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editVehicle(data);
+      dispatch(setLoading(false));
+      dispatch(setVehicleRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const vehiclesVisibility = createAsyncThunk(
+  "/vehiclesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.vehiclesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setVehicleRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getVehicletype = createAsyncThunk(
+  "/getVehicletype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getVehicletype(
+        data.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getVehicletypeAll = createAsyncThunk(
+  "/getVehicletypeAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getVehicletypeAll(
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteVehicletype = createAsyncThunk(
+  "/deleteVehicletype",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteVehicletype(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setVehicletypeRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addVehicletype = createAsyncThunk(
+  "/addVehicletype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addVehicletype(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setVehicletypeRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editVehicletype = createAsyncThunk(
+  "/editVehicletype",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editVehicletype(data);
+      dispatch(setLoading(false));
+      dispatch(setVehicletypeRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const vehicletypesVisibility = createAsyncThunk(
+  "/vehicletypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.vehicletypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setVehicletypeRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getVrc = createAsyncThunk(
+  "/getVrc",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getVrc(
+        data.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getVrcAll = createAsyncThunk(
+  "/getVrcAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getVrcAll(
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteVrc = createAsyncThunk(
+  "/deleteVrc",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteVrc(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setVrcRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addVrc = createAsyncThunk(
+  "/addVrc",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addVrc(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setVrcRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editVrc = createAsyncThunk(
+  "/editVrc",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editVrc(data);
+      dispatch(setLoading(false));
+      dispatch(setVrcRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const vrcsVisibility = createAsyncThunk(
+  "/vrcsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.vrcsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setVrcRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -1347,6 +2676,95 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getGeneralStructuresAll.fulfilled, (state, { payload }) => {
       state.generalStructuresAll = payload;
+    });
+    builder.addCase(getBrands.fulfilled, (state, { payload }) => {
+      state.brands = payload;
+    });
+    builder.addCase(getBrandsAll.fulfilled, (state, { payload }) => {
+      state.brandsAll = payload;
+    });
+    builder.addCase(getChassisTypes.fulfilled, (state, { payload }) => {
+      state.chassisTypes = payload;
+    });
+    builder.addCase(getChassisTypesAll.fulfilled, (state, { payload }) => {
+      state.chassisTypesAll = payload;
+    });
+
+    builder.addCase(getColor.fulfilled, (state, { payload }) => {
+      state.color = payload;
+    });
+    builder.addCase(getColorAll.fulfilled, (state, { payload }) => {
+      state.colorAll = payload;
+    });
+
+    builder.addCase(getEnginetype.fulfilled, (state, { payload }) => {
+      state.enginetype = payload;
+    });
+    builder.addCase(getEnginetypeAll.fulfilled, (state, { payload }) => {
+      state.enginetypeAll = payload;
+    });
+
+    builder.addCase(getGearboxtype.fulfilled, (state, { payload }) => {
+      state.gearboxtype = payload;
+    });
+    builder.addCase(getGearboxtypeAll.fulfilled, (state, { payload }) => {
+      state.gearboxtypeAll = payload;
+    });
+
+    builder.addCase(getIssuedauthoritie.fulfilled, (state, { payload }) => {
+      state.issuedauthoritie = payload;
+    });
+    builder.addCase(getIssuedauthoritieAll.fulfilled, (state, { payload }) => {
+      state.issuedauthoritieAll = payload;
+    });
+
+    builder.addCase(getModel.fulfilled, (state, { payload }) => {
+      state.model = payload;
+    });
+    builder.addCase(getModelAll.fulfilled, (state, { payload }) => {
+      state.modelAll = payload;
+    });
+
+    builder.addCase(getOwnershiptype.fulfilled, (state, { payload }) => {
+      state.ownershiptype = payload;
+    });
+    builder.addCase(getOwnershiptypeAll.fulfilled, (state, { payload }) => {
+      state.ownershiptypeAll = payload;
+    });
+
+    builder.addCase(getOrganisationrecord.fulfilled, (state, { payload }) => {
+      state.organisationrecord = payload;
+    });
+    builder.addCase(getOrganisationrecordAll.fulfilled, (state, { payload }) => {
+      state.organisationrecordAll = payload;
+    });
+
+    builder.addCase(getTransmittertype.fulfilled, (state, { payload }) => {
+      state.transmittertype = payload;
+    });
+    builder.addCase(getTransmittertypeAll.fulfilled, (state, { payload }) => {
+      state.transmittertypeAll = payload;
+    });
+
+    builder.addCase(getVehicle.fulfilled, (state, { payload }) => {
+      state.vehicle = payload;
+    });
+    builder.addCase(getVehicleAll.fulfilled, (state, { payload }) => {
+      state.vehicleAll = payload;
+    });
+
+    builder.addCase(getVehicletype.fulfilled, (state, { payload }) => {
+      state.vehicletype = payload;
+    });
+    builder.addCase(getVehicletypeAll.fulfilled, (state, { payload }) => {
+      state.vehicletypeAll = payload;
+    });
+
+    builder.addCase(getVrc.fulfilled, (state, { payload }) => {
+      state.vrc = payload;
+    });
+    builder.addCase(getVrcAll.fulfilled, (state, { payload }) => {
+      state.vrcAll = payload;
     });
   },
 });
