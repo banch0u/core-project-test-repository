@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 53px;
+  padding-top: 120px;
+  button {
+    padding: 9px 19px;
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+  }
+}
+
+.value {
+  margin-top: 18px;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+  text-align: left;
+  color: #0b0b0b;
+  margin-bottom: 53px;
+}

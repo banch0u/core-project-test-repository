@@ -3,6 +3,7 @@ import { global } from "./slices/global";
 import { auth } from "./slices/auth";
 import { notification } from "./slices/notification";
 import { companyInfo } from "./slices/companyInfo";
+import { questionnaire } from "./slices/questionnaire";
 
 export const store = configureStore({
   reducer: {
@@ -10,7 +11,7 @@ export const store = configureStore({
     [global.name]: global.reducer,
     [auth.name]: auth.reducer,
     [companyInfo.name]: companyInfo.reducer,
-
+    [questionnaire.name]: questionnaire.reducer,
   },
 });
 

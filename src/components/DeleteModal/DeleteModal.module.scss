@@ -1,0 +1,11 @@
+.absolute {
+  position: absolute;
+  right: 5px;
+  top: 105px;
+}
+.absolute > div > div {
+  padding: 12px !important;
+}
+.absolute > div > div > div {
+  margin: 0 !important;
+}

@@ -16,9 +16,9 @@ export { default as Input } from "./components/Input";
 export { default as api } from "./utils/axios";
 export { default as NotFound } from "./pages/NotFound";
 
+export { questionnairesRoutes } from "./routes/QuestionnaireRoutes";
 
-
-
+export { CoreProvider } from "./store/coreProvider";
 
 import LoginPage from "./pages/Login";
 import PlatformPage from "./pages/Platform";

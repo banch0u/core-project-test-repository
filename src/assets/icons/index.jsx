@@ -612,3 +612,152 @@ export const PlusIcon = () => {
     </svg>
   );
 };
+
+export const SearchIcon = () => {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M10.083 18.3332C14.6394 18.3332 18.333 14.6395 18.333 10.0832C18.333 5.52682 14.6394 1.83317 10.083 1.83317C5.52666 1.83317 1.83301 5.52682 1.83301 10.0832C1.83301 14.6395 5.52666 18.3332 10.083 18.3332Z"
+        stroke="#828282"
+        strokeWidth="1.375"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M17.3527 18.9655C17.8385 20.4322 18.9477 20.5788 19.8002 19.2955C20.5794 18.1222 20.066 17.1597 18.6544 17.1597C17.6094 17.1505 17.0227 17.9663 17.3527 18.9655Z"
+        stroke="#828282"
+        strokeWidth="1.375"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+export const OkIcon = () => {
+  return (
+    <svg
+      width="140"
+      height="140"
+      viewBox="0 0 140 140"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M70.0001 128.333C102.083 128.333 128.333 102.083 128.333 69.9998C128.333 37.9165 102.083 11.6665 70.0001 11.6665C37.9167 11.6665 11.6667 37.9165 11.6667 69.9998C11.6667 102.083 37.9167 128.333 70.0001 128.333Z"
+        stroke="#219653"
+        strokeWidth="8.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M45.2083 70L61.7166 86.5084L94.7916 53.4917"
+        stroke="#219653"
+        strokeWidth="8.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+export const EditIcon = () => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M20.5 11.3V7.04001C20.5 3.01001 19.56 2 15.78 2H8.22C4.44 2 3.5 3.01001 3.5 7.04001V18.3C3.5 20.96 4.96001 21.59 6.73001 19.69L6.73999 19.68C7.55999 18.81 8.80999 18.88 9.51999 19.83L10.53 21.18"
+        stroke="#016DAF"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8 7H16"
+        stroke="#016DAF"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9 11H15"
+        stroke="#016DAF"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M18.211 14.7703L14.671 18.3103C14.531 18.4503 14.401 18.7103 14.371 18.9003L14.181 20.2503C14.111 20.7403 14.451 21.0803 14.941 21.0103L16.291 20.8203C16.481 20.7903 16.751 20.6603 16.881 20.5203L20.421 16.9803C21.031 16.3703 21.321 15.6603 20.421 14.7603C19.531 13.8703 18.821 14.1603 18.211 14.7703Z"
+        stroke="#016DAF"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M17.6992 15.2803C17.9992 16.3603 18.8392 17.2003 19.9192 17.5003"
+        stroke="#016DAF"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+export const DeleteIconQ = () => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M8.81043 2L5.19043 5.63"
+        stroke="#EB5757"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15.1904 2L18.8104 5.63"
+        stroke="#EB5757"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M2 7.85C2 6 2.99 5.85 4.22 5.85H19.78C21.01 5.85 22 6 22 7.85C22 10 21.01 9.85 19.78 9.85H4.22C2.99 9.85 2 10 2 7.85Z"
+        stroke="#EB5757"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M9.75977 14V17.55"
+        stroke="#EB5757"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M14.3604 14V17.55"
+        stroke="#EB5757"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M3.5 10L4.91 18.64C5.23 20.58 6 22 8.86 22H14.89C18 22 18.46 20.64 18.82 18.76L20.5 10"
+        stroke="#EB5757"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+};
