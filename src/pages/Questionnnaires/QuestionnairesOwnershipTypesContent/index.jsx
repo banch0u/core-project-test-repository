@@ -152,7 +152,7 @@ const QuestionnairesOwnershipTypesContent = () => {
       <Layout className={style.layout}>
         <Content className={style.content}>
           <header className={style.header}>
-            <Button onClick={onClickModal} ownershiptype="green">
+            <Button onClick={onClickModal} color="green">
               <PlusIcon /> Soraqça əlavə et
             </Button>
             <Filter

@@ -159,7 +159,7 @@ const QuestionnairesIssuedAuthoritiesContent = () => {
       <Layout className={style.layout}>
         <Content className={style.content}>
           <header className={style.header}>
-            <Button onClick={onClickModal} issuedauthoritie="green">
+            <Button onClick={onClickModal} color="green">
               <PlusIcon /> Soraqça əlavə et
             </Button>
             <Filter
@@ -174,7 +174,7 @@ const QuestionnairesIssuedAuthoritiesContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Verildiyi orqar</h2>
+              <h2>Verən orqanlar</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}

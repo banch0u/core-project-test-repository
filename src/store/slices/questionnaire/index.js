@@ -1670,7 +1670,7 @@ export const enginetypesVisibility = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.enginetypesVisibility(data);
+      const response = await Services.enginetypeVisibility(data);
       dispatch(setLoading(false));
       dispatch(setEnginetypeRender((prev) => !prev));
       return response?.data;
@@ -1772,7 +1772,7 @@ export const gearboxtypesVisibility = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.gearboxtypesVisibility(data);
+      const response = await Services.gearboxtypeVisibility(data);
       dispatch(setLoading(false));
       dispatch(setGearboxtypeRender((prev) => !prev));
       return response?.data;
@@ -1788,7 +1788,7 @@ export const getIssuedauthoritie = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getIssuedauthoritie(
+      const response = await Services.getIssuedauthorities(
         data.size,
         data?.page,
         data?.query,
@@ -1808,7 +1808,7 @@ export const getIssuedauthoritieAll = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getIssuedauthoritieAll(
+      const response = await Services.getIssuedauthoritiesAll(
         data?.visibility
       );
       dispatch(setLoading(false));
@@ -1825,7 +1825,7 @@ export const deleteIssuedauthoritie = createAsyncThunk(
   async (id, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      await Services.deleteIssuedauthoritie(id);
+      await Services.deleteIssuedauthorities(id);
       dispatch(setLoading(false));
       dispatch(setDeleteModalVisible(false));
       dispatch(setIssuedauthoritieRender((prev) => !prev));
@@ -1842,7 +1842,7 @@ export const addIssuedauthoritie = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      await Services.addIssuedauthoritie(data);
+      await Services.addIssuedauthorities(data);
       dispatch(setLoading(false));
       dispatch(setViewModalVisible(true));
       dispatch(setIssuedauthoritieRender((prev) => !prev));
@@ -1858,7 +1858,7 @@ export const editIssuedauthoritie = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.editIssuedauthoritie(data);
+      const response = await Services.editIssuedauthorities(data);
       dispatch(setLoading(false));
       dispatch(setIssuedauthoritieRender((prev) => !prev));
       return response?.data;
@@ -2196,7 +2196,7 @@ export const getTransmittertype = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getTransmittertype(
+      const response = await Services.getTransmittertypes(
         data.size,
         data?.page,
         data?.query,
@@ -2216,7 +2216,7 @@ export const getTransmittertypeAll = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getTransmittertypeAll(
+      const response = await Services.getTransmittertypesAll(
         data?.visibility
       );
       dispatch(setLoading(false));
@@ -2233,7 +2233,7 @@ export const deleteTransmittertype = createAsyncThunk(
   async (id, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      await Services.deleteTransmittertype(id);
+      await Services.deleteTransmittertypes(id);
       dispatch(setLoading(false));
       dispatch(setDeleteModalVisible(false));
       dispatch(setTransmittertypeRender((prev) => !prev));
@@ -2250,7 +2250,7 @@ export const addTransmittertype = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      await Services.addTransmittertype(data);
+      await Services.addTransmittertypes(data);
       dispatch(setLoading(false));
       dispatch(setViewModalVisible(true));
       dispatch(setTransmittertypeRender((prev) => !prev));
@@ -2266,7 +2266,7 @@ export const editTransmittertype = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.editTransmittertype(data);
+      const response = await Services.editTransmittertypes(data);
       dispatch(setLoading(false));
       dispatch(setTransmittertypeRender((prev) => !prev));
       return response?.data;
@@ -2400,7 +2400,7 @@ export const getVehicletype = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getVehicletype(
+      const response = await Services.getVehicletypes(
         data.size,
         data?.page,
         data?.query,
@@ -2420,7 +2420,7 @@ export const getVehicletypeAll = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getVehicletypeAll(
+      const response = await Services.getVehicletypesAll(
         data?.visibility
       );
       dispatch(setLoading(false));
@@ -2437,7 +2437,7 @@ export const deleteVehicletype = createAsyncThunk(
   async (id, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      await Services.deleteVehicletype(id);
+      await Services.deleteVehicletypes(id);
       dispatch(setLoading(false));
       dispatch(setDeleteModalVisible(false));
       dispatch(setVehicletypeRender((prev) => !prev));
@@ -2454,7 +2454,7 @@ export const addVehicletype = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      await Services.addVehicletype(data);
+      await Services.addVehicletypes(data);
       dispatch(setLoading(false));
       dispatch(setViewModalVisible(true));
       dispatch(setVehicletypeRender((prev) => !prev));
@@ -2470,7 +2470,7 @@ export const editVehicletype = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.editVehicletype(data);
+      const response = await Services.editVehicletypes(data);
       dispatch(setLoading(false));
       dispatch(setVehicletypeRender((prev) => !prev));
       return response?.data;

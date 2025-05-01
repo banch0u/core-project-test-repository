@@ -7,6 +7,7 @@ import {
   QUESTIONNAIRES_APPLICATION_FORMS,
   QUESTIONNAIRES_BRANDS,
   QUESTIONNAIRES_CHASSIS_TYPES,
+  QUESTIONNAIRES_COLORS,
   QUESTIONNAIRES_COUNTRIES,
   QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
   QUESTIONNAIRES_DOCUMENT_TYPES,
@@ -28,6 +29,7 @@ import {
   SETTINGS_QUESTIONNAIRES_APPLICATION_FORMS,
   SETTINGS_QUESTIONNAIRES_BRANDS,
   SETTINGS_QUESTIONNAIRES_CHASSISTYPES,
+  SETTINGS_QUESTIONNAIRES_COLORS,
   SETTINGS_QUESTIONNAIRES_COUNTRIES,
   SETTINGS_QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
   SETTINGS_QUESTIONNAIRES_DOCUMENT_TYPES,
@@ -213,7 +215,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
     },
     {
       key: "transmitter-types",
-      label: "Verici növləri",
+      label: "Ötürücü növləri",
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_TRANSMITTERTYPES
@@ -226,6 +228,14 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_VEHICLETYPES
           : QUESTIONNAIRES_VEHICLE_TYPES,
+    },
+    {
+      key: "colors",
+      label: "Rənglər",
+      link:
+        mainPath === "/settings"
+          ? SETTINGS_QUESTIONNAIRES_COLORS
+          : QUESTIONNAIRES_COLORS,
     },
   ];
 

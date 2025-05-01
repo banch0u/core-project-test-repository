@@ -2,7 +2,7 @@ import React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Cookies from "js-cookie";
 import style from "../Questionnaires.module.scss";
-import { Form, Input, Layout } from "antd";
+import { Form, Input, Layout, Select as AntdSelect } from "antd";
 import { PlusIcon } from "../../../assets/icons";
 import FormModal from "../../../components/FormModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,12 +27,15 @@ import {
   addModel,
   deleteModel,
   editModel,
+  getBrandsAll,
   getModel,
   modelsVisibility,
 } from "../../../store/slices/questionnaire";
+import Select from "../../../components/Select";
 
 const { Content } = Layout;
 const { Item } = Form;
+const { Option } = AntdSelect;
 const QuestionnairesModelsContent = () => {
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
@@ -44,27 +47,30 @@ const QuestionnairesModelsContent = () => {
       ? JSON.parse(Cookies.get("pagination-size-questionnaire-models"))
       : 20
   );
+  const [brandSelect, setBrandSelect] = useState(null);
   const [query, setQuery] = useState({ name: "" });
   const { loading, modelRender } = useSelector((state) => state.global);
 
   const model = useSelector((state) => state.questionnaire.model);
+  const brandsAll = useSelector((state) => state.questionnaire.brandsAll);
   const paginationLength = setPaginationLength(model?.count, model?.size);
 
   const onSubmit = useCallback(
     async (data) => {
-      dispatch(addModel(data));
+      dispatch(addModel({ ...data, brandId: brandSelect }));
     },
-    [dispatch]
+    [dispatch, brandSelect]
   );
   const onEdit = useCallback(
     (id, record) => {
       const data = {
         id: id,
         name: record?.name,
+        brandId: brandSelect,
       };
       dispatch(editModel(data));
     },
-    [dispatch]
+    [dispatch, brandSelect]
   );
   const onStatusChange = useCallback(
     (data, checked) => {
@@ -116,6 +122,14 @@ const QuestionnairesModelsContent = () => {
     columns.map((col) => col.dataIndex)
   );
   useEffect(() => {
+    if (brandsAll) {
+      setBrandSelect(brandsAll?.[0]?.id);
+    }
+  }, [brandsAll]);
+  useEffect(() => {
+    dispatch(getBrandsAll({ visibility: "nondeleted" }));
+  }, [dispatch]);
+  useEffect(() => {
     if (window.innerWidth >= 1900) {
       setInnerW(210);
     } else {
@@ -124,11 +138,14 @@ const QuestionnairesModelsContent = () => {
     const data = {
       page: page,
       size: size,
+      brandId: brandSelect,
       query: query,
       visibility: "nondeleted",
     };
-    dispatch(getModel(data));
-  }, [dispatch, page, modelRender, query, size]);
+    if (brandSelect !== null) {
+      dispatch(getModel(data));
+    }
+  }, [dispatch, page, modelRender, brandSelect, query, size]);
   const updateSize = (newSize) => {
     setSize(newSize); // Update state
     Cookies.set(
@@ -146,7 +163,7 @@ const QuestionnairesModelsContent = () => {
       <Layout className={style.layout}>
         <Content className={style.content}>
           <header className={style.header}>
-            <Button onClick={onClickModal} model="green">
+            <Button onClick={onClickModal} color="green">
               <PlusIcon /> Soraqça əlavə et
             </Button>
             <Filter
@@ -163,6 +180,21 @@ const QuestionnairesModelsContent = () => {
             <div className={style.table_header}>
               <h2>Modellər</h2>
               <div className={style.buttons}>
+                <Select
+                  size="sm"
+                  width={200}
+                  allowClear={false}
+                  value={brandSelect}
+                  defaultValue={""}
+                  onChange={(value) => {
+                    setBrandSelect(value);
+                  }}>
+                  {brandsAll?.map((item) => (
+                    <Option key={item.id} value={item.id}>
+                      {item.name}
+                    </Option>
+                  ))}
+                </Select>
                 <ColSort
                   columns={columns}
                   selectedColumns={selectedColumns}
