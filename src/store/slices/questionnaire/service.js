@@ -549,11 +549,11 @@ class Services {
   static issuedauthoritiesVisibility = async (data) => api.patch(`/issuedauthorities/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
 
   // 🚗 models
-  static getModel = async (size, page, query, visibility) => {
-    const response = await api.get(`/models/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getModel = async (size, page, query, brands, visibility) => {
+    const response = await api.get(`/models/${size}/page/${page}?visibility=${visibility}&name=${query?.name}&brands=${brands}`);
     return response?.data;
   };
-  static getModelAll = async (visibility) => api.get(`/models?visibility=${visibility}`).then(r => r.data);
+  static getModelAll = async (visibility, brands) => api.get(`/models?visibility=${visibility}&brands=${brands}`).then(r => r.data);
   static addModel = async (value) => api.post(`/models`, value).then(r => r.data);
   static editModel = async (value) => api.put(`/models/${value?.id}`, value).then(r => r.data);
   static deleteModel = async (id) => api.delete(`/models/${id}`).then(r => r.data);

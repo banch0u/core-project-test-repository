@@ -2,6 +2,7 @@ import React from "react";
 import style from "./index.module.scss";
 import { Select as AntdSelect, Divider } from "antd";
 import Button from "../Button";
+
 const Select = ({
   children,
   className,
@@ -17,125 +18,80 @@ const Select = ({
   allowClear = true,
   width,
 }) => {
-  return (
-    <>
-      {mode === "multiple" ? (
-        <AntdSelect
-          className={
-            className
-              ? className
-              : size === "sm"
-              ? style.select_sm
-              : style.select
-          }
-          style={{ width: width ? width + "px" : "100%" }}
-          showSearch
-          allowClear
-          placeholder={placeholder}
-          optionFilterProp="children"
-          onChange={onChange}
-          disabled={disabled}
-          value={value}
-          defaultValue={defaultValue}
-          mode="multiple"
-          optionLabelProp="label">
-          {children}
-        </AntdSelect>
-      ) : mode === "divider" ? (
-        <AntdSelect
-          className={
-            className
-              ? className
-              : size === "sm"
-              ? style.select_sm
-              : style.select
-          }
-          style={{ width: width ? width + "px" : "100%" }}
-          showSearch
-          allowClear
-          placeholder={placeholder}
-          optionFilterProp="children"
-          filterOption={(input, option) => {
-            if (!option?.children || typeof option.children !== "string")
-              return false;
+  const getClassName = () => {
+    if (className) return className;
+    switch (size) {
+      case "sm":
+        return style.select_sm;
+      case "md":
+        return style.select_md;
+      default:
+        return style.select;
+    }
+  };
 
-            const normalizeAz = (str) =>
-              str
-                .replace(/I/g, "i")
-                .toLocaleLowerCase("az")
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .replace(/ç/g, "c")
-                .replace(/ş/g, "s")
-                .replace(/ğ/g, "g")
-                .replace(/ü/g, "u")
-                .replace(/ö/g, "o")
-                .replace(/ə/g, "e");
+  const commonProps = {
+    className: getClassName(),
+    style: { width: width ? `${width}px` : "100%" },
+    showSearch: true,
+    allowClear,
+    placeholder,
+    optionFilterProp: "children",
+    onChange,
+    disabled,
+    value,
+    defaultValue,
+  };
 
-            const normalizedInput = normalizeAz(input);
-            const normalizedOption = normalizeAz(option.children);
+  const normalizeAz = (str) =>
+    str
+      .replace(/I/g, "i")
+      .toLocaleLowerCase("az")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/ç/g, "c")
+      .replace(/ş/g, "s")
+      .replace(/ğ/g, "g")
+      .replace(/ü/g, "u")
+      .replace(/ö/g, "o")
+      .replace(/ə/g, "e");
 
-            return normalizedOption.includes(normalizedInput);
-          }}
-          onChange={onChange}
-          disabled={disabled}
-          value={value}
-          defaultValue={defaultValue}
-          dropdownRender={(menu) => (
-            <div>
-              {menu}
-              <Divider style={{ margin: "4px 0" }} />
-              <div className={style.select_add_button}>
-                <Button onClick={onOpen}>{text}</Button>
-              </div>
+  const filterOption = (input, option) => {
+    if (!option?.children || typeof option.children !== "string") return false;
+    return normalizeAz(option.children).includes(normalizeAz(input));
+  };
+
+  if (mode === "multiple") {
+    return (
+      <AntdSelect {...commonProps} mode="multiple" optionLabelProp="label">
+        {children}
+      </AntdSelect>
+    );
+  }
+
+  if (mode === "divider") {
+    return (
+      <AntdSelect
+        {...commonProps}
+        filterOption={filterOption}
+        dropdownRender={(menu) => (
+          <div>
+            {menu}
+            <Divider style={{ margin: "4px 0" }} />
+            <div className={style.select_add_button}>
+              <Button onClick={onOpen}>{text}</Button>
             </div>
-          )}>
-          {children}
-        </AntdSelect>
-      ) : (
-        <AntdSelect
-          className={
-            className
-              ? className
-              : size === "sm"
-              ? style.select_sm
-              : style.select
-          }
-          style={{ width: width ? width + "px" : "100%" }}
-          showSearch
-          allowClear={allowClear}
-          placeholder={placeholder}
-          optionFilterProp="children"
-          filterOption={(input, option) => {
-            if (!option?.children || typeof option.children !== "string")
-              return false;
+          </div>
+        )}>
+        {children}
+      </AntdSelect>
+    );
+  }
 
-            const normalizeAz = (str) =>
-              str
-                .replace(/I/g, "i")
-                .toLocaleLowerCase("az")
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .replace(/ç/g, "c")
-                .replace(/ş/g, "s")
-                .replace(/ğ/g, "g")
-                .replace(/ü/g, "u")
-                .replace(/ö/g, "o")
-                .replace(/ə/g, "e");
-
-            const normalizedInput = normalizeAz(input);
-            const normalizedOption = normalizeAz(option.children);
-
-            return normalizedOption.includes(normalizedInput);
-          }}
-          onChange={onChange}
-          disabled={disabled}
-          value={value}
-          defaultValue={defaultValue}>
-          {children}
-        </AntdSelect>
-      )}
-    </>
+  return (
+    <AntdSelect {...commonProps} filterOption={filterOption}>
+      {children}
+    </AntdSelect>
   );
 };
 

@@ -2,6 +2,7 @@ import React from "react";
 import style from "./index.module.scss";
 import { InputNumber, Input as AntdInput, DatePicker } from "antd";
 import dayjs from "dayjs";
+
 const { TextArea } = AntdInput;
 
 const Input = ({
@@ -10,28 +11,49 @@ const Input = ({
   className,
   disabledDate,
   placeholder = "",
+  allowDecimal = false,
   ...rest
 }) => {
+  const getClassName = (baseType) => {
+    if (className) return className;
+    switch (size) {
+      case "sm":
+        return style[`${baseType}_sm`];
+      case "md":
+        return style[`${baseType}_md`];
+      case "xs":
+        return style[`${baseType}_xs`];
+      default:
+        return style[baseType];
+    }
+  };
+
   return (
     <>
       {type === "number" ? (
         <InputNumber
-          className={
-            className
-              ? className
-              : size === "sm"
-              ? style.input_sm
-              : size === "xs"
-              ? style.input_xs
-              : style.input
-          }
+          className={getClassName("input")}
           min={1}
           placeholder={placeholder}
+          onKeyPress={(event) => {
+            const isDigit = /[0-9]/.test(event.key);
+            const isDot = event.key === ".";
+            const alreadyHasDot = event.currentTarget.value.includes(".");
+
+            if (!isDigit && (!allowDecimal || !isDot || alreadyHasDot)) {
+              event.preventDefault();
+            }
+          }}
+          onKeyDown={(e) => {
+            if (["e", "E", "+", "-"].includes(e.key)) {
+              e.preventDefault();
+            }
+          }}
           {...rest}
         />
       ) : type === "textarea" ? (
         <TextArea
-          className={style.textarea}
+          className={getClassName("textarea")}
           autoSize={{
             minRows: 2,
             maxRows: 4,
@@ -42,15 +64,7 @@ const Input = ({
         />
       ) : type === "date" ? (
         <DatePicker
-          className={
-            className
-              ? className
-              : size === "sm"
-              ? style.date_sm
-              : size === "xs"
-              ? style.date_xs
-              : style.date
-          }
+          className={getClassName("date")}
           format="DD.MM.YYYY"
           disabledDate={
             disabledDate === "until"
@@ -64,9 +78,8 @@ const Input = ({
         />
       ) : (
         <AntdInput
-          className={
-            className ? className : size === "sm" ? style.input_sm : style.input
-          }
+          className={getClassName("input")}
+          placeholder={placeholder}
           {...rest}
         />
       )}

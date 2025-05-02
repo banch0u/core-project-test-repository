@@ -1894,6 +1894,7 @@ export const getModel = createAsyncThunk(
         data.size,
         data?.page,
         data?.query,
+        data?.brands,
         data?.visibility
       );
       dispatch(setLoading(false));
@@ -1911,7 +1912,8 @@ export const getModelAll = createAsyncThunk(
     try {
       dispatch(setLoading(true));
       const response = await Services.getModelAll(
-        data?.visibility
+        data?.visibility,
+        data?.brands
       );
       dispatch(setLoading(false));
       return response?.data;

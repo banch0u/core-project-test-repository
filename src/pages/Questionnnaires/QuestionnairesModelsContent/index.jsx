@@ -138,7 +138,7 @@ const QuestionnairesModelsContent = () => {
     const data = {
       page: page,
       size: size,
-      brandId: brandSelect,
+      brands: brandSelect,
       query: query,
       visibility: "nondeleted",
     };
