@@ -159,7 +159,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
     },
     {
       key: "brands",
-      label: "Brendlər",
+      label: "Markalar",
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_BRANDS

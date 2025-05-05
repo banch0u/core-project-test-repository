@@ -5,7 +5,29 @@
   box-shadow: 0px 4px 4px 0px #0000001a !important;
   border: 1px solid #d1d1d1 !important;
   background: #deeaf6 !important;
+  max-height: 518px;
+  overflow-y: auto;
+  /* Scrollbar styles for WebKit browsers */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
 
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #fff !important; // 👈 your custom scrollbar color
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #fff !important;
+  }
+
+  /* Scrollbar styles for Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #fff transparent !important;
   .count {
     margin-bottom: 24px;
     display: flex;

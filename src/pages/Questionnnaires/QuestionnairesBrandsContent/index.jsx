@@ -161,7 +161,7 @@ const QuestionnairesBrandsContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Brendlər</h2>
+              <h2>Markalar</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}
