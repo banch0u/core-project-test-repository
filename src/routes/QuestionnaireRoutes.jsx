@@ -9,7 +9,6 @@ import QuestionnairesExecutionRulesContent from "../pages/Questionnnaires/Questi
 import QuestionnairesDocumentRecieveMethodsContent from "../pages/Questionnnaires/QuestionnairesDocumentRecieveMethodsContent";
 import QuestionnairesDocumentTypeContent from "../pages/Questionnnaires/QuestionnairesDocumentTypeContent";
 import QuestionnairesCountriesContent from "../pages/Questionnnaires/QuestionnairesCountriesContent";
-import QuestionnairesStreetsContent from "../pages/Questionnnaires/QuestionnairesStreetsContent";
 import QuestionnairesOrganizationsContent from "../pages/Questionnnaires/QuestionnairesOrganizationsContent";
 import QuestionnairesStructuresContent from "../pages/Questionnnaires/QuestionnairesStructuresContent";
 import QuestionnairesApplicationFormContent from "../pages/Questionnnaires/QuestionnairesApplicationFormContent";
@@ -26,7 +25,6 @@ import {
   QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
   QUESTIONNAIRES_DOCUMENT_TYPES,
   QUESTIONNAIRES_COUNTRIES,
-  QUESTIONNAIRES_STREETS,
   QUESTIONNAIRES_ORGANIZATIONS,
   QUESTIONNAIRES_STRUCTURES,
   QUESTIONNAIRES_APPLICATION_FORMS,
@@ -40,7 +38,6 @@ import {
   SETTINGS_QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
   SETTINGS_QUESTIONNAIRES_DOCUMENT_TYPES,
   SETTINGS_QUESTIONNAIRES_COUNTRIES,
-  SETTINGS_QUESTIONNAIRES_STREETS,
   SETTINGS_QUESTIONNAIRES_ORGANIZATIONS,
   SETTINGS_QUESTIONNAIRES_STRUCTURES,
   SETTINGS_QUESTIONNAIRES_APPLICATION_FORMS,
@@ -64,6 +61,52 @@ import {
   SETTINGS_QUESTIONNAIRES_OWNERSHIPTYPES,
   SETTINGS_QUESTIONNAIRES_TRANSMITTERTYPES,
   SETTINGS_QUESTIONNAIRES_VEHICLETYPES,
+  QUESTIONNAIRES_ACADEMIC_DEGREES,
+  QUESTIONNAIRES_DISABILITY_STATUSES,
+  QUESTIONNAIRES_HONORARY_TITLES,
+  QUESTIONNAIRES_MILITARY_STAFFS,
+  QUESTIONNAIRES_MILITARY_CATEGORIES,
+  QUESTIONNAIRES_MILITARY_RANKS,
+  QUESTIONNAIRES_MILITARY_GROUPS,
+  QUESTIONNAIRES_GENERAL_STRUCTURE_STATUSES,
+  QUESTIONNAIRES_WORK_SCHEDULES,
+  QUESTIONNAIRES_SPECIALIZATIONS,
+  QUESTIONNAIRES_WAR_PARTICIPANTS,
+  QUESTIONNAIRES_GENERAL_STRUCTURE_TYPES,
+  QUESTIONNAIRES_EDUCATION_INSTITUTIONS,
+  QUESTIONNAIRES_EDUCATION_PAYMENTS,
+  QUESTIONNAIRES_EDUCATION_LEVELS,
+  QUESTIONNAIRES_REPRIMAND_TYPES,
+  QUESTIONNAIRES_SPECIAL_DAYS,
+  SETTINGS_QUESTIONNAIRES_ACADEMIC_DEGREES,
+  SETTINGS_QUESTIONNAIRES_DISABILITY_STATUSES,
+  SETTINGS_QUESTIONNAIRES_HONORARY_TITLES,
+  SETTINGS_QUESTIONNAIRES_MILITARY_STAFFS,
+  SETTINGS_QUESTIONNAIRES_MILITARY_CATEGORIES,
+  SETTINGS_QUESTIONNAIRES_MILITARY_RANKS,
+  SETTINGS_QUESTIONNAIRES_MILITARY_GROUPS,
+  SETTINGS_QUESTIONNAIRES_GENERAL_STRUCTURE_STATUSES,
+  SETTINGS_QUESTIONNAIRES_WORK_SCHEDULES,
+  SETTINGS_QUESTIONNAIRES_SPECIALIZATIONS,
+  SETTINGS_QUESTIONNAIRES_WAR_PARTICIPANTS,
+  SETTINGS_QUESTIONNAIRES_GENERAL_STRUCTURE_TYPES,
+  SETTINGS_QUESTIONNAIRES_EDUCATION_INSTITUTIONS,
+  SETTINGS_QUESTIONNAIRES_EDUCATION_PAYMENTS,
+  SETTINGS_QUESTIONNAIRES_EDUCATION_LEVELS,
+  SETTINGS_QUESTIONNAIRES_REPRIMAND_TYPES,
+  SETTINGS_QUESTIONNAIRES_SPECIAL_DAYS,
+  QUESTIONNAIRES_CATEGORIES,
+  QUESTIONNAIRES_REGIONS,
+  QUESTIONNAIRES_AREAS,
+  QUESTIONNAIRES_COMPANIES,
+  QUESTIONNAIRES_POSITIONS,
+  QUESTIONNAIRES_HALLS,
+  SETTINGS_QUESTIONNAIRES_CATEGORIES,
+  SETTINGS_QUESTIONNAIRES_REGIONS,
+  SETTINGS_QUESTIONNAIRES_AREAS,
+  SETTINGS_QUESTIONNAIRES_COMPANIES,
+  SETTINGS_QUESTIONNAIRES_POSITIONS,
+  SETTINGS_QUESTIONNAIRES_HALLS,
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -72,6 +115,29 @@ import QuestionnairesOwnershipTypesContent from "../pages/Questionnnaires/Questi
 import QuestionnairesTransmitterTypesContent from "../pages/Questionnnaires/QuestionnairesTransmitterTypesContent";
 import QuestionnairesVehicleTypesContent from "../pages/Questionnnaires/QuestionnairesVehicleTypesContent";
 import QuestionnairesIssuedAuthoritiesContent from "../pages/Questionnnaires/QuestionnairesIssuedAuthoritiesContent";
+import QuestionnairesAcademicdegreesContent from "../pages/Questionnnaires/QuestionnairesAcademicdegreesContent";
+import QuestionnairesDisabilitystatusesContent from "../pages/Questionnnaires/QuestionnairesDisabilitystatusesContent";
+import QuestionnairesHonorarytitlesContent from "../pages/Questionnnaires/QuestionnairesHonorarytitlesContent";
+import QuestionnairesMilitarystaffsContent from "../pages/Questionnnaires/QuestionnairesMilitarystaffsContent";
+import QuestionnairesMilitarycategoriesContent from "../pages/Questionnnaires/QuestionnairesMilitarycategoriesContent";
+import QuestionnairesMilitaryranksContent from "../pages/Questionnnaires/QuestionnairesMilitaryranksContent";
+import QuestionnairesMilitarygroupsContent from "../pages/Questionnnaires/QuestionnairesMilitarygroupsContent";
+import QuestionnairesGeneralstructurestatusesContent from "../pages/Questionnnaires/QuestionnairesGeneralstructurestatusesContent";
+import QuestionnairesWorkschedulesContent from "../pages/Questionnnaires/QuestionnairesWorkschedulesContent";
+import QuestionnairesSpecializationsContent from "../pages/Questionnnaires/QuestionnairesSpecializationsContent";
+import QuestionnairesWarparticipantsContent from "../pages/Questionnnaires/QuestionnairesWarparticipantsContent";
+import QuestionnairesGeneralstructuretypesContent from "../pages/Questionnnaires/QuestionnairesGeneralstructuretypesContent";
+import QuestionnairesEducationinstitutionsContent from "../pages/Questionnnaires/QuestionnairesEducationinstitutionsContent";
+import QuestionnairesEducationpaymentsContent from "../pages/Questionnnaires/QuestionnairesEducationpaymentsContent";
+import QuestionnairesEducationlevelsContent from "../pages/Questionnnaires/QuestionnairesEducationlevelsContent";
+import QuestionnairesReprimandtypesContent from "../pages/Questionnnaires/QuestionnairesReprimandtypesContent";
+import QuestionnairesSpecialdaysContent from "../pages/Questionnnaires/QuestionnairesSpecialdaysContent";
+import QuestionnairesCategoriesContent from "../pages/Questionnnaires/QuestionnairesCategoriesContent";
+import QuestionnairesRegionsContent from "../pages/Questionnnaires/QuestionnairesRegionsContent";
+import QuestionnairesAreasContent from "../pages/Questionnnaires/QuestionnairesAreasContent";
+import QuestionnairesCompaniesContent from "../pages/Questionnnaires/QuestionnairesCompaniesContent";
+import QuestionnairesPositionsContent from "../pages/Questionnnaires/QuestionnairesPositionsContent";
+import QuestionnairesHallsContent from "../pages/Questionnnaires/QuestionnairesHallsContent";
 
 export const questionnairesRoutes = (allowed) => {
   return (
@@ -105,10 +171,7 @@ export const questionnairesRoutes = (allowed) => {
           path={QUESTIONNAIRES_COUNTRIES}
           element={<QuestionnairesCountriesContent />}
         />
-        <Route
-          path={QUESTIONNAIRES_STREETS}
-          element={<QuestionnairesStreetsContent />}
-        />
+
         <Route
           path={QUESTIONNAIRES_ORGANIZATIONS}
           element={<QuestionnairesOrganizationsContent />}
@@ -170,6 +233,98 @@ export const questionnairesRoutes = (allowed) => {
           path={QUESTIONNAIRES_VEHICLE_TYPES}
           element={<QuestionnairesVehicleTypesContent />}
         />
+        <Route
+          path={QUESTIONNAIRES_ACADEMIC_DEGREES}
+          element={<QuestionnairesAcademicdegreesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_DISABILITY_STATUSES}
+          element={<QuestionnairesDisabilitystatusesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_HONORARY_TITLES}
+          element={<QuestionnairesHonorarytitlesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_MILITARY_STAFFS}
+          element={<QuestionnairesMilitarystaffsContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_MILITARY_CATEGORIES}
+          element={<QuestionnairesMilitarycategoriesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_MILITARY_RANKS}
+          element={<QuestionnairesMilitaryranksContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_MILITARY_GROUPS}
+          element={<QuestionnairesMilitarygroupsContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_GENERAL_STRUCTURE_STATUSES}
+          element={<QuestionnairesGeneralstructurestatusesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_WORK_SCHEDULES}
+          element={<QuestionnairesWorkschedulesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_SPECIALIZATIONS}
+          element={<QuestionnairesSpecializationsContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_WAR_PARTICIPANTS}
+          element={<QuestionnairesWarparticipantsContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_GENERAL_STRUCTURE_TYPES}
+          element={<QuestionnairesGeneralstructuretypesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_EDUCATION_INSTITUTIONS}
+          element={<QuestionnairesEducationinstitutionsContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_EDUCATION_PAYMENTS}
+          element={<QuestionnairesEducationpaymentsContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_EDUCATION_LEVELS}
+          element={<QuestionnairesEducationlevelsContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_REPRIMAND_TYPES}
+          element={<QuestionnairesReprimandtypesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_SPECIAL_DAYS}
+          element={<QuestionnairesSpecialdaysContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_CATEGORIES}
+          element={<QuestionnairesCategoriesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_REGIONS}
+          element={<QuestionnairesRegionsContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_AREAS}
+          element={<QuestionnairesAreasContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_COMPANIES}
+          element={<QuestionnairesCompaniesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_POSITIONS}
+          element={<QuestionnairesPositionsContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_HALLS}
+          element={<QuestionnairesHallsContent />}
+        />
       </Route>
 
       {/* Settings Routes */}
@@ -200,10 +355,6 @@ export const questionnairesRoutes = (allowed) => {
         <Route
           path={SETTINGS_QUESTIONNAIRES_COUNTRIES}
           element={<QuestionnairesCountriesContent />}
-        />
-        <Route
-          path={SETTINGS_QUESTIONNAIRES_STREETS}
-          element={<QuestionnairesStreetsContent />}
         />
         <Route
           path={SETTINGS_QUESTIONNAIRES_ORGANIZATIONS}
@@ -264,6 +415,98 @@ export const questionnairesRoutes = (allowed) => {
         <Route
           path={SETTINGS_QUESTIONNAIRES_VEHICLETYPES}
           element={<QuestionnairesVehicleTypesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_ACADEMIC_DEGREES}
+          element={<QuestionnairesAcademicdegreesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_DISABILITY_STATUSES}
+          element={<QuestionnairesDisabilitystatusesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_HONORARY_TITLES}
+          element={<QuestionnairesHonorarytitlesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_MILITARY_STAFFS}
+          element={<QuestionnairesMilitarystaffsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_MILITARY_CATEGORIES}
+          element={<QuestionnairesMilitarycategoriesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_MILITARY_RANKS}
+          element={<QuestionnairesMilitaryranksContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_MILITARY_GROUPS}
+          element={<QuestionnairesMilitarygroupsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_GENERAL_STRUCTURE_STATUSES}
+          element={<QuestionnairesGeneralstructurestatusesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_WORK_SCHEDULES}
+          element={<QuestionnairesWorkschedulesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_SPECIALIZATIONS}
+          element={<QuestionnairesSpecializationsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_WAR_PARTICIPANTS}
+          element={<QuestionnairesWarparticipantsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_GENERAL_STRUCTURE_TYPES}
+          element={<QuestionnairesGeneralstructuretypesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_EDUCATION_INSTITUTIONS}
+          element={<QuestionnairesEducationinstitutionsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_EDUCATION_PAYMENTS}
+          element={<QuestionnairesEducationpaymentsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_EDUCATION_LEVELS}
+          element={<QuestionnairesEducationlevelsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_REPRIMAND_TYPES}
+          element={<QuestionnairesReprimandtypesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_SPECIAL_DAYS}
+          element={<QuestionnairesSpecialdaysContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_CATEGORIES}
+          element={<QuestionnairesCategoriesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_REGIONS}
+          element={<QuestionnairesRegionsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_AREAS}
+          element={<QuestionnairesAreasContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_COMPANIES}
+          element={<QuestionnairesCompaniesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_POSITIONS}
+          element={<QuestionnairesPositionsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_HALLS}
+          element={<QuestionnairesHallsContent />}
         />
       </Route>
     </>

@@ -27,6 +27,18 @@ export const getStreetColumns = (
       ellipsis: true,
     },
     {
+      key: "zip",
+      title: "Poçt indeksi",
+      dataIndex: "zip",
+      ellipsis: true,
+    },
+    {
+      key: "city_code",
+      title: "Şəhər kodu",
+      dataIndex: "parentDetailedName",
+      ellipsis: true,
+    },
+    {
       title: "Status",
       key: "status",
       disabled: true,

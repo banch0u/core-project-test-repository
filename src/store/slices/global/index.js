@@ -31,6 +31,29 @@ const initialState = {
   vehicleRender: false,
   vehicletypeRender: false,
   vrcRender: false,
+  academicdegreesRender: false,
+  disabilitystatusesRender: false,
+  honorarytitlesRender: false,
+  militaryStaffsRender: false,
+  militaryCategoriesRender: false,
+  militaryranksRender: false,
+  militarygroupsRender: false,
+  generalstructurestatusesRender: false,
+  workschedulesRender: false,
+  specializationsRender: false,
+  warparticipantsRender: false,
+  generalstructuretypesRender: false,
+  educationinstitutionsRender: false,
+  educationPaymentsRender: false,
+  educationlevelsRender: false,
+  reprimandTypesRender: false,
+  specialdaysRender: false,
+  categoriesRender: false,
+  regionsRender: false,
+  areasRender: false,
+  companiesRender: false,
+  positionsRender: false,
+  hallsRender: false,
 };
 
 export const global = createSlice({
@@ -127,11 +150,81 @@ export const global = createSlice({
     setVrcRender: (state, { payload }) => {
       state.vrcRender = payload;
     },
-
+    setAcademicdegreesRender: (state, { payload }) => {
+      state.academicdegreesRender = payload;
+    },
+    setDisabilitystatusesRender: (state, { payload }) => {
+      state.disabilitystatusesRender = payload;
+    },
+    setHonorarytitlesRender: (state, { payload }) => {
+      state.honorarytitlesRender = payload;
+    },
+    setMilitarystaffsRender: (state, { payload }) => {
+      state.militaryStaffsRender = payload;
+    },
+    setMilitarycategoriesRender: (state, { payload }) => {
+      state.militaryCategoriesRender = payload;
+    },
+    setMilitaryranksRender: (state, { payload }) => {
+      state.militaryranksRender = payload;
+    },
+    setMilitarygroupsRender: (state, { payload }) => {
+      state.militarygroupsRender = payload;
+    },
+    setGeneralstructurestatusesRender: (state, { payload }) => {
+      state.generalstructurestatusesRender = payload;
+    },
+    setWorkschedulesRender: (state, { payload }) => {
+      state.workschedulesRender = payload;
+    },
+    setSpecializationsRender: (state, { payload }) => {
+      state.specializationsRender = payload;
+    },
+    setWarparticipantsRender: (state, { payload }) => {
+      state.warparticipantsRender = payload;
+    },
+    setGeneralstructuretypesRender: (state, { payload }) => {
+      state.generalstructuretypesRender = payload;
+    },
+    setEducationinstitutionsRender: (state, { payload }) => {
+      state.educationinstitutionsRender = payload;
+    },
+    setEducationpaymentsRender: (state, { payload }) => {
+      state.educationPaymentsRender = payload;
+    },
+    setEducationlevelsRender: (state, { payload }) => {
+      state.educationlevelsRender = payload;
+    },
+    setReprimandtypesRender: (state, { payload }) => {
+      state.reprimandTypesRender = payload;
+    },
+    setSpecialdaysRender: (state, { payload }) => {
+      state.specialdaysRender = payload;
+    },
+    setCategoriesRender: (state, { payload }) => {
+      state.categoriesRender = payload;
+    },
+    setRegionsRender: (state, { payload }) => {
+      state.regionsRender = payload;
+    },
+    setAreasRender: (state, { payload }) => {
+      state.areasRender = payload;
+    },
+    setCompaniesRender: (state, { payload }) => {
+      state.companiesRender = payload;
+    },
+    setPositionsRender: (state, { payload }) => {
+      state.positionsRender = payload;
+    },
+    setHallsRender: (state, { payload }) => {
+      state.hallsRender = payload;
+    },
   },
 });
 
-export const { setLoading, setNotificationsRender,
+export const {
+  setLoading,
+  setNotificationsRender,
   setViewModalVisible,
   setViewMoreModalVisible,
   setDeleteModalVisible,
@@ -162,5 +255,28 @@ export const { setLoading, setNotificationsRender,
   setTransmittertypeRender,
   setVehicleRender,
   setVehicletypeRender,
-  setVrcRender
+  setVrcRender,
+  setAcademicdegreesRender,
+  setDisabilitystatusesRender,
+  setHonorarytitlesRender,
+  setMilitarystaffsRender,
+  setMilitarycategoriesRender,
+  setMilitaryranksRender,
+  setMilitarygroupsRender,
+  setGeneralstructurestatusesRender,
+  setWorkschedulesRender,
+  setSpecializationsRender,
+  setWarparticipantsRender,
+  setGeneralstructuretypesRender,
+  setEducationinstitutionsRender,
+  setEducationpaymentsRender,
+  setEducationlevelsRender,
+  setReprimandtypesRender,
+  setSpecialdaysRender,
+  setCategoriesRender,
+  setRegionsRender,
+  setAreasRender,
+  setCompaniesRender,
+  setPositionsRender,
+  setHallsRender,
 } = global.actions;

@@ -10,7 +10,8 @@ export const getStreetColumns = (
   onDelete,
   onStatusChange,
   dispatch,
-  innerW
+  positionOption,
+  categoryOption
 ) => [
     {
       title: "№",
@@ -20,17 +21,33 @@ export const getStreetColumns = (
       width: 35,
     },
     {
-      title: "Ad",
+      key: "position_name",
+      title: "Vəzifə adı",
+      filterKey: "ids",
       dataIndex: "name",
-      width: innerW,
-      disabled: true,
-      ellipsis: true,
+    },
+    {
+      key: "category_name",
+      title: "Kateqoriya",
+      filterKey: "categories",
+      dataIndex: "categoryId",
+    },
+    {
+      key: "from",
+      title: "Dərəcədən",
+      filterKey: "ids",
+      dataIndex: "from",
+    },
+    {
+      key: "to",
+      title: "Dərəcəyə",
+      filterKey: "ids",
+      dataIndex: "to",
     },
     {
       title: "Status",
       key: "status",
       disabled: true,
-
       filter: false,
       render: (data) => (
         <Tooltip placement="top" title="Statusu dəyiş">

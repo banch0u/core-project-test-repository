@@ -17,52 +17,60 @@ import ViewModal from "../../../components/ViewModal";
 import { getStreetColumns } from "./constant";
 
 import Pagination from "../../../components/Pagination";
-
 import ColSort from "../../../components/ColSort";
 import { setPaginationLength } from "../../../helpers/paginationLength";
 import Button from "../../../components/Button";
 import Loading from "../../../components/Loading";
+import Table from "../../../components/Table";
 import Filter from "../../../components/Filter";
 import {
-  addTopic,
-  deleteTopic,
-  editTopic,
-  topicVisibility,
+  addSpecialdays,
+  deleteSpecialdays,
+  specialdaysVisibility,
+  editSpecialdays,
+  getSpecialdays,
 } from "../../../store/slices/questionnaire";
+
 const { Content } = Layout;
 const { Item } = Form;
-const QuestionnairesStreetsContent = () => {
+const QuestionnairesDocumentTypeContent = () => {
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
   const dispatch = useDispatch();
   const [id, setId] = useState(0);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(
-    Cookies.get("pagination-size-questionnaire-streets")
-      ? JSON.parse(Cookies.get("pagination-size-questionnaire-streets"))
+    Cookies.get("pagination-size-questionnaire-document-type")
+      ? JSON.parse(Cookies.get("pagination-size-questionnaire-document-type"))
       : 20
   );
   const [query, setQuery] = useState({ name: "" });
-  const { loading, topicsRender } = useSelector((state) => state.global);
+  const [typeSelect, setTypeSelect] = useState(1);
 
-  const topics = useSelector((state) => state.questionnaire.topics);
+  const { loading, specialdaysRender } = useSelector((state) => state.global);
 
-  const paginationLength = setPaginationLength(topics?.count, topics?.size);
+  const specialdays = useSelector((state) => state.questionnaire.specialdays);
+  const paginationLength = setPaginationLength(
+    specialdays?.count,
+    specialdays?.size
+  );
+
   const onSubmit = useCallback(
     async (data) => {
-      dispatch(addTopic(data));
+      dispatch(addSpecialdays({ ...data, category: typeSelect }));
     },
-    [dispatch]
+    [dispatch, typeSelect]
   );
   const onEdit = useCallback(
     (id, record) => {
       const data = {
         id: id,
         name: record?.name,
+        category: typeSelect,
       };
-      dispatch(editTopic(data));
+      dispatch(editSpecialdays(data));
     },
-    [dispatch]
+    [dispatch, typeSelect]
   );
   const onStatusChange = useCallback(
     (data, checked) => {
@@ -70,7 +78,7 @@ const QuestionnairesStreetsContent = () => {
         id: data?.id,
         checked: checked,
       };
-      dispatch(topicVisibility(data_));
+      dispatch(specialdaysVisibility(data_));
     },
     [dispatch]
   );
@@ -86,7 +94,15 @@ const QuestionnairesStreetsContent = () => {
   const onDelete = useCallback((id) => {
     setId(id);
   }, []);
-
+  const handleSearch = (value) => {
+    setQuery({ name: value });
+    setPage(1);
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch(e.target.value);
+    }
+  };
   const handleColumnToggle = (checked, dataIndex) => {
     setSelectedColumns((prevSelected) => {
       if (checked) {
@@ -96,11 +112,10 @@ const QuestionnairesStreetsContent = () => {
       }
     });
   };
-
   let data = [];
-  if (topics?.items) {
-    data = topics?.items?.map((dataObj, i) => ({
-      num: topics?.size * topics?.page + i + 1 - topics?.size,
+  if (specialdays?.items) {
+    data = specialdays?.items?.map((dataObj, i) => ({
+      num: specialdays?.size * specialdays?.page + i + 1 - specialdays?.size,
       id: dataObj?.id,
       name: dataObj?.name,
       isActive: dataObj?.isActive,
@@ -108,7 +123,14 @@ const QuestionnairesStreetsContent = () => {
     }));
   }
   const columns = useMemo(
-    () => getStreetColumns(onEditClick, onDelete, onStatusChange, dispatch),
+    () =>
+      getStreetColumns(
+        onEditClick,
+        onDelete,
+        onStatusChange,
+
+        dispatch
+      ),
     [onEditClick, onDelete, onStatusChange, dispatch]
   );
 
@@ -122,18 +144,19 @@ const QuestionnairesStreetsContent = () => {
     } else {
       setInnerW(155);
     }
-    // const data = {
-    //   page: page,
-    //   size: size,
-    //   query: query,
-    //   visibility: "nondeleted",
-    // };
-    // dispatch(getTopics(data));
-  }, [dispatch, page, topicsRender, size, query]);
+    const data = {
+      page: page,
+      size: size,
+      query: query,
+      visibility: "nondeleted",
+      category: typeSelect,
+    };
+    dispatch(getSpecialdays(data));
+  }, [dispatch, page, specialdaysRender, typeSelect, size, query]);
   const updateSize = (newSize) => {
     setSize(newSize); // Update state
     Cookies.set(
-      "pagination-size-questionnaire-streets",
+      "pagination-size-questionnaire-document-type",
       JSON.stringify(newSize),
       {
         expires: 7,
@@ -163,7 +186,7 @@ const QuestionnairesStreetsContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Küçələr</h2>
+              <h2>Xüsusi günlər</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}
@@ -173,13 +196,13 @@ const QuestionnairesStreetsContent = () => {
               </div>
             </div>
             <div className="bigTable">
-              {/* <Table
+              <Table
                 selectedColumns={selectedColumns}
                 innerW={innerW}
                 dataSource={data}
                 columns={columns}
                 disableDrag={true}
-              /> */}
+              />
             </div>
             <div className={style.pagination}>
               <Pagination
@@ -215,7 +238,7 @@ const QuestionnairesStreetsContent = () => {
               onCancel={() => dispatch(setDeleteModalVisible(false))}
               width={280}>
               <Delete
-                onDelete={() => dispatch(deleteTopic(id))}
+                onDelete={() => dispatch(deleteSpecialdays(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
                 value={"Soraqçanı"}
               />
@@ -230,4 +253,4 @@ const QuestionnairesStreetsContent = () => {
   );
 };
 
-export default QuestionnairesStreetsContent;
+export default QuestionnairesDocumentTypeContent;

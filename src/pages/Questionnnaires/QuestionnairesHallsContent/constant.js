@@ -19,12 +19,24 @@ export const getStreetColumns = (
       ellipsis: true,
       width: 35,
     },
+
     {
-      title: "Ad",
+      key: "name",
+      title: "Zal",
       dataIndex: "name",
-      width: innerW,
-      disabled: true,
-      ellipsis: true,
+      ellipsis: true
+    },
+    {
+      key: "location",
+      title: "Ünvan",
+      dataIndex: "location",
+      ellipsis: true
+    },
+    {
+      key: "personCapacity",
+      title: "Tutum",
+      dataIndex: "personCapacity",
+      ellipsis: true
     },
     {
       title: "Status",

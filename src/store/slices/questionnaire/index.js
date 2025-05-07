@@ -28,7 +28,30 @@ import {
   setTransmittertypeRender,
   setVehicleRender,
   setVehicletypeRender,
-  setVrcRender
+  setVrcRender,
+  setAcademicdegreesRender,
+  setDisabilitystatusesRender,
+  setHonorarytitlesRender,
+  setMilitarystaffsRender,
+  setMilitarycategoriesRender,
+  setMilitaryranksRender,
+  setMilitarygroupsRender,
+  setGeneralstructurestatusesRender,
+  setWorkschedulesRender,
+  setSpecializationsRender,
+  setWarparticipantsRender,
+  setGeneralstructuretypesRender,
+  setEducationinstitutionsRender,
+  setEducationpaymentsRender,
+  setEducationlevelsRender,
+  setReprimandtypesRender,
+  setSpecialdaysRender,
+  setCategoriesRender,
+  setRegionsRender,
+  setAreasRender,
+  setCompaniesRender,
+  setPositionsRender,
+  setHallsRender,
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -1306,9 +1329,7 @@ export const getBrandsAll = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getBrandsAll(
-        data?.visibility
-      );
+      const response = await Services.getBrandsAll(data?.visibility);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
@@ -1386,7 +1407,12 @@ export const getChassisTypes = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getChassiTypes(data.size, data.page, data.query, data.visibility);
+      const response = await Services.getChassiTypes(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
@@ -1476,7 +1502,6 @@ export const chassisTypeVisibility = createAsyncThunk(
   }
 );
 
-
 export const getColor = createAsyncThunk(
   "/getColor",
   async (data, { dispatch }) => {
@@ -1502,9 +1527,7 @@ export const getColorAll = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getColorAll(
-        data?.visibility
-      );
+      const response = await Services.getColorAll(data?.visibility);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
@@ -1604,9 +1627,7 @@ export const getEnginetypeAll = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getEnginetypeAll(
-        data?.visibility
-      );
+      const response = await Services.getEnginetypeAll(data?.visibility);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
@@ -1706,9 +1727,7 @@ export const getGearboxtypeAll = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getGearboxtypeAll(
-        data?.visibility
-      );
+      const response = await Services.getGearboxtypeAll(data?.visibility);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
@@ -1808,9 +1827,7 @@ export const getIssuedauthoritieAll = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getIssuedauthoritiesAll(
-        data?.visibility
-      );
+      const response = await Services.getIssuedauthoritiesAll(data?.visibility);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
@@ -2014,9 +2031,7 @@ export const getOwnershiptypeAll = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getOwnershiptypeAll(
-        data?.visibility
-      );
+      const response = await Services.getOwnershiptypeAll(data?.visibility);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
@@ -2218,9 +2233,7 @@ export const getTransmittertypeAll = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getTransmittertypesAll(
-        data?.visibility
-      );
+      const response = await Services.getTransmittertypesAll(data?.visibility);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
@@ -2320,9 +2333,7 @@ export const getVehicleAll = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getVehicleAll(
-        data?.visibility
-      );
+      const response = await Services.getVehicleAll(data?.visibility);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
@@ -2422,9 +2433,7 @@ export const getVehicletypeAll = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getVehicletypesAll(
-        data?.visibility
-      );
+      const response = await Services.getVehicletypesAll(data?.visibility);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
@@ -2524,9 +2533,7 @@ export const getVrcAll = createAsyncThunk(
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getVrcAll(
-        data?.visibility
-      );
+      const response = await Services.getVrcAll(data?.visibility);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
@@ -2600,6 +2607,2236 @@ export const vrcsVisibility = createAsyncThunk(
     }
   }
 );
+export const getAcademicdegrees = createAsyncThunk(
+  "/getAcademicdegrees",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getAcademicdegrees(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getAcademicdegreesAll = createAsyncThunk(
+  "/getAcademicdegreesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getAcademicdegreesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addAcademicdegrees = createAsyncThunk(
+  "/addAcademicdegrees",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addAcademicdegrees(data);
+      dispatch(setLoading(false));
+      dispatch(setAcademicdegreesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editAcademicdegrees = createAsyncThunk(
+  "/editAcademicdegrees",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editAcademicdegrees(data);
+      dispatch(setLoading(false));
+      dispatch(setAcademicdegreesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteAcademicdegrees = createAsyncThunk(
+  "/deleteAcademicdegrees",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteAcademicdegrees(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setAcademicdegreesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const academicdegreesVisibility = createAsyncThunk(
+  "/academicdegreesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.academicdegreesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setAcademicdegreesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getDisabilitystatuses = createAsyncThunk(
+  "/getDisabilitystatuses",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getDisabilitystatuses(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getDisabilitystatusesAll = createAsyncThunk(
+  "/getDisabilitystatusesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getDisabilitystatusesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addDisabilitystatuses = createAsyncThunk(
+  "/addDisabilitystatuses",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addDisabilitystatuses(data);
+      dispatch(setLoading(false));
+      dispatch(setDisabilitystatusesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editDisabilitystatuses = createAsyncThunk(
+  "/editDisabilitystatuses",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editDisabilitystatuses(data);
+      dispatch(setLoading(false));
+      dispatch(setDisabilitystatusesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteDisabilitystatuses = createAsyncThunk(
+  "/deleteDisabilitystatuses",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteDisabilitystatuses(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setDisabilitystatusesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const disabilitystatusesVisibility = createAsyncThunk(
+  "/disabilitystatusesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.disabilitystatusesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setDisabilitystatusesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getHonorarytitles = createAsyncThunk(
+  "/getHonorarytitles",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getHonorarytitles(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getHonorarytitlesAll = createAsyncThunk(
+  "/getHonorarytitlesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getHonorarytitlesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addHonorarytitles = createAsyncThunk(
+  "/addHonorarytitles",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addHonorarytitles(data);
+      dispatch(setLoading(false));
+      dispatch(setHonorarytitlesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editHonorarytitles = createAsyncThunk(
+  "/editHonorarytitles",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editHonorarytitles(data);
+      dispatch(setLoading(false));
+      dispatch(setHonorarytitlesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteHonorarytitles = createAsyncThunk(
+  "/deleteHonorarytitles",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteHonorarytitles(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setHonorarytitlesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const honorarytitlesVisibility = createAsyncThunk(
+  "/honorarytitlesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.honorarytitlesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setHonorarytitlesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getMilitarystaffs = createAsyncThunk(
+  "/getMilitarystaffs",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getMilitarystaffs(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getMilitarystaffsAll = createAsyncThunk(
+  "/getMilitarystaffsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getMilitarystaffsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addMilitarystaffs = createAsyncThunk(
+  "/addMilitarystaffs",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addMilitarystaffs(data);
+      dispatch(setLoading(false));
+      dispatch(setMilitarystaffsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editMilitarystaffs = createAsyncThunk(
+  "/editMilitarystaffs",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editMilitarystaffs(data);
+      dispatch(setLoading(false));
+      dispatch(setMilitarystaffsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteMilitarystaffs = createAsyncThunk(
+  "/deleteMilitarystaffs",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteMilitarystaffs(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setMilitarystaffsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const militaryStaffsVisibility = createAsyncThunk(
+  "/militaryStaffsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.militaryStaffsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setMilitarystaffsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getMilitarycategories = createAsyncThunk(
+  "/getMilitarycategories",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getMilitarycategories(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getMilitarycategoriesAll = createAsyncThunk(
+  "/getMilitarycategoriesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getMilitarycategoriesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addMilitarycategories = createAsyncThunk(
+  "/addMilitarycategories",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addMilitarycategories(data);
+      dispatch(setLoading(false));
+      dispatch(setMilitarycategoriesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editMilitarycategories = createAsyncThunk(
+  "/editMilitarycategories",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editMilitarycategories(data);
+      dispatch(setLoading(false));
+      dispatch(setMilitarycategoriesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteMilitarycategories = createAsyncThunk(
+  "/deleteMilitarycategories",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteMilitarycategories(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setMilitarycategoriesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const militaryCategoriesVisibility = createAsyncThunk(
+  "/militaryCategoriesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.militaryCategoriesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setMilitarycategoriesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getMilitaryranks = createAsyncThunk(
+  "/getMilitaryranks",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getMilitaryranks(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getMilitaryranksAll = createAsyncThunk(
+  "/getMilitaryranksAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getMilitaryranksAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addMilitaryranks = createAsyncThunk(
+  "/addMilitaryranks",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addMilitaryranks(data);
+      dispatch(setLoading(false));
+      dispatch(setMilitaryranksRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editMilitaryranks = createAsyncThunk(
+  "/editMilitaryranks",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editMilitaryranks(data);
+      dispatch(setLoading(false));
+      dispatch(setMilitaryranksRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteMilitaryranks = createAsyncThunk(
+  "/deleteMilitaryranks",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteMilitaryranks(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setMilitaryranksRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const militaryranksVisibility = createAsyncThunk(
+  "/militaryranksVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.militaryranksVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setMilitaryranksRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getMilitarygroups = createAsyncThunk(
+  "/getMilitarygroups",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getMilitarygroups(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getMilitarygroupsAll = createAsyncThunk(
+  "/getMilitarygroupsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getMilitarygroupsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addMilitarygroups = createAsyncThunk(
+  "/addMilitarygroups",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addMilitarygroups(data);
+      dispatch(setLoading(false));
+      dispatch(setMilitarygroupsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editMilitarygroups = createAsyncThunk(
+  "/editMilitarygroups",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editMilitarygroups(data);
+      dispatch(setLoading(false));
+      dispatch(setMilitarygroupsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteMilitarygroups = createAsyncThunk(
+  "/deleteMilitarygroups",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteMilitarygroups(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setMilitarygroupsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const militarygroupsVisibility = createAsyncThunk(
+  "/militarygroupsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.militarygroupsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setMilitarygroupsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getGeneralstructurestatuses = createAsyncThunk(
+  "/getGeneralstructurestatuses",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getGeneralstructurestatuses(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getGeneralstructurestatusesAll = createAsyncThunk(
+  "/getGeneralstructurestatusesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getGeneralstructurestatusesAll(
+        visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addGeneralstructurestatuses = createAsyncThunk(
+  "/addGeneralstructurestatuses",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addGeneralstructurestatuses(data);
+      dispatch(setLoading(false));
+      dispatch(setGeneralstructurestatusesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editGeneralstructurestatuses = createAsyncThunk(
+  "/editGeneralstructurestatuses",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editGeneralstructurestatuses(data);
+      dispatch(setLoading(false));
+      dispatch(setGeneralstructurestatusesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteGeneralstructurestatuses = createAsyncThunk(
+  "/deleteGeneralstructurestatuses",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteGeneralstructurestatuses(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setGeneralstructurestatusesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const generalstructurestatusesVisibility = createAsyncThunk(
+  "/generalstructurestatusesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.generalstructurestatusesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setGeneralstructurestatusesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getWorkschedules = createAsyncThunk(
+  "/getWorkschedules",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getWorkschedules(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getWorkschedulesAll = createAsyncThunk(
+  "/getWorkschedulesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getWorkschedulesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addWorkschedules = createAsyncThunk(
+  "/addWorkschedules",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addWorkschedules(data);
+      dispatch(setLoading(false));
+      dispatch(setWorkschedulesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editWorkschedules = createAsyncThunk(
+  "/editWorkschedules",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editWorkschedules(data);
+      dispatch(setLoading(false));
+      dispatch(setWorkschedulesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteWorkschedules = createAsyncThunk(
+  "/deleteWorkschedules",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteWorkschedules(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setWorkschedulesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const workschedulesVisibility = createAsyncThunk(
+  "/workschedulesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.workschedulesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setWorkschedulesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getSpecializations = createAsyncThunk(
+  "/getSpecializations",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getSpecializations(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getSpecializationsAll = createAsyncThunk(
+  "/getSpecializationsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getSpecializationsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addSpecializations = createAsyncThunk(
+  "/addSpecializations",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addSpecializations(data);
+      dispatch(setLoading(false));
+      dispatch(setSpecializationsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editSpecializations = createAsyncThunk(
+  "/editSpecializations",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editSpecializations(data);
+      dispatch(setLoading(false));
+      dispatch(setSpecializationsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteSpecializations = createAsyncThunk(
+  "/deleteSpecializations",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteSpecializations(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setSpecializationsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const specializationsVisibility = createAsyncThunk(
+  "/specializationsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.specializationsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setSpecializationsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getWarparticipants = createAsyncThunk(
+  "/getWarparticipants",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getWarparticipants(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getWarparticipantsAll = createAsyncThunk(
+  "/getWarparticipantsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getWarparticipantsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addWarparticipants = createAsyncThunk(
+  "/addWarparticipants",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addWarparticipants(data);
+      dispatch(setLoading(false));
+      dispatch(setWarparticipantsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editWarparticipants = createAsyncThunk(
+  "/editWarparticipants",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editWarparticipants(data);
+      dispatch(setLoading(false));
+      dispatch(setWarparticipantsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteWarparticipants = createAsyncThunk(
+  "/deleteWarparticipants",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteWarparticipants(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setWarparticipantsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const warparticipantsVisibility = createAsyncThunk(
+  "/warparticipantsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.warparticipantsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setWarparticipantsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getGeneralstructuretypes = createAsyncThunk(
+  "/getGeneralstructuretypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getGeneralstructuretypes(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getGeneralstructuretypesAll = createAsyncThunk(
+  "/getGeneralstructuretypesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getGeneralstructuretypesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addGeneralstructuretypes = createAsyncThunk(
+  "/addGeneralstructuretypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addGeneralstructuretypes(data);
+      dispatch(setLoading(false));
+      dispatch(setGeneralstructuretypesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editGeneralstructuretypes = createAsyncThunk(
+  "/editGeneralstructuretypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editGeneralstructuretypes(data);
+      dispatch(setLoading(false));
+      dispatch(setGeneralstructuretypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteGeneralstructuretypes = createAsyncThunk(
+  "/deleteGeneralstructuretypes",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteGeneralstructuretypes(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setGeneralstructuretypesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const generalstructuretypesVisibility = createAsyncThunk(
+  "/generalstructuretypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.generalstructuretypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setGeneralstructuretypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getEducationinstitutions = createAsyncThunk(
+  "/getEducationinstitutions",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getEducationinstitutions(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getEducationinstitutionsAll = createAsyncThunk(
+  "/getEducationinstitutionsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getEducationinstitutionsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addEducationinstitutions = createAsyncThunk(
+  "/addEducationinstitutions",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addEducationinstitutions(data);
+      dispatch(setLoading(false));
+      dispatch(setEducationinstitutionsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editEducationinstitutions = createAsyncThunk(
+  "/editEducationinstitutions",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editEducationinstitutions(data);
+      dispatch(setLoading(false));
+      dispatch(setEducationinstitutionsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteEducationinstitutions = createAsyncThunk(
+  "/deleteEducationinstitutions",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteEducationinstitutions(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setEducationinstitutionsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const educationinstitutionsVisibility = createAsyncThunk(
+  "/educationinstitutionsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.educationinstitutionsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setEducationinstitutionsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getEducationpayments = createAsyncThunk(
+  "/getEducationpayments",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getEducationpayments(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getEducationpaymentsAll = createAsyncThunk(
+  "/getEducationpaymentsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getEducationpaymentsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addEducationpayments = createAsyncThunk(
+  "/addEducationpayments",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addEducationpayments(data);
+      dispatch(setLoading(false));
+      dispatch(setEducationpaymentsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editEducationpayments = createAsyncThunk(
+  "/editEducationpayments",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editEducationpayments(data);
+      dispatch(setLoading(false));
+      dispatch(setEducationpaymentsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteEducationpayments = createAsyncThunk(
+  "/deleteEducationpayments",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteEducationpayments(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setEducationpaymentsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const educationPaymentsVisibility = createAsyncThunk(
+  "/educationPaymentsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.educationPaymentsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setEducationpaymentsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getEducationlevels = createAsyncThunk(
+  "/getEducationlevels",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getEducationlevels(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getEducationlevelsAll = createAsyncThunk(
+  "/getEducationlevelsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getEducationlevelsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addEducationlevels = createAsyncThunk(
+  "/addEducationlevels",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addEducationlevels(data);
+      dispatch(setLoading(false));
+      dispatch(setEducationlevelsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editEducationlevels = createAsyncThunk(
+  "/editEducationlevels",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editEducationlevels(data);
+      dispatch(setLoading(false));
+      dispatch(setEducationlevelsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteEducationlevels = createAsyncThunk(
+  "/deleteEducationlevels",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteEducationlevels(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setEducationlevelsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const educationlevelsVisibility = createAsyncThunk(
+  "/educationlevelsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.educationlevelsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setEducationlevelsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getReprimandtypes = createAsyncThunk(
+  "/getReprimandtypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getReprimandtypes(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getReprimandtypesAll = createAsyncThunk(
+  "/getReprimandtypesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getReprimandtypesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addReprimandtypes = createAsyncThunk(
+  "/addReprimandtypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addReprimandtypes(data);
+      dispatch(setLoading(false));
+      dispatch(setReprimandtypesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editReprimandtypes = createAsyncThunk(
+  "/editReprimandtypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editReprimandtypes(data);
+      dispatch(setLoading(false));
+      dispatch(setReprimandtypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteReprimandtypes = createAsyncThunk(
+  "/deleteReprimandtypes",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteReprimandtypes(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setReprimandtypesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const reprimandTypesVisibility = createAsyncThunk(
+  "/reprimandTypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.reprimandTypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setReprimandtypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getSpecialdays = createAsyncThunk(
+  "/getSpecialdays",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getSpecialdays(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getSpecialdaysAll = createAsyncThunk(
+  "/getSpecialdaysAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getSpecialdaysAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const addSpecialdays = createAsyncThunk(
+  "/addSpecialdays",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addSpecialdays(data);
+      dispatch(setLoading(false));
+      dispatch(setSpecialdaysRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editSpecialdays = createAsyncThunk(
+  "/editSpecialdays",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editSpecialdays(data);
+      dispatch(setLoading(false));
+      dispatch(setSpecialdaysRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteSpecialdays = createAsyncThunk(
+  "/deleteSpecialdays",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteSpecialdays(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setSpecialdaysRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const specialdaysVisibility = createAsyncThunk(
+  "/specialdaysVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.specialdaysVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setSpecialdaysRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getCategories = createAsyncThunk(
+  "/getCategories",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getCategories(
+        data?.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getCategoriesAll = createAsyncThunk(
+  "/getCategoriesAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getCategoriesAll(data?.visibility);
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteCategories = createAsyncThunk(
+  "/deleteCategories",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteCategories(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setCategoriesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addCategories = createAsyncThunk(
+  "/addCategories",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addCategories(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setCategoriesRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editCategories = createAsyncThunk(
+  "/editCategories",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editCategories(data);
+      dispatch(setLoading(false));
+      dispatch(setCategoriesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const categoriesVisibility = createAsyncThunk(
+  "/categoriesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.categoriesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setCategoriesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getRegions = createAsyncThunk(
+  "/getRegions",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getRegions(
+        data?.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getRegionsAll = createAsyncThunk(
+  "/getRegionsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getRegionsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getRegionsChildren = createAsyncThunk(
+  "/getRegionsChildren",
+  async (_, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getRegionsChildren();
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage();
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const deleteRegions = createAsyncThunk(
+  "/deleteRegions",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteRegions(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setRegionsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addRegions = createAsyncThunk(
+  "/addRegions",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addRegions(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setRegionsRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editRegions = createAsyncThunk(
+  "/editRegions",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editRegions(data);
+      dispatch(setLoading(false));
+      dispatch(setRegionsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const regionsVisibility = createAsyncThunk(
+  "/regionsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.regionsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setRegionsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getAreas = createAsyncThunk(
+  "/getAreas",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getAreas(
+        data?.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getAreasAll = createAsyncThunk(
+  "/getAreasAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getAreasAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteAreas = createAsyncThunk(
+  "/deleteAreas",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteAreas(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setAreasRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addAreas = createAsyncThunk(
+  "/addAreas",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addAreas(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setAreasRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editAreas = createAsyncThunk(
+  "/editAreas",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editAreas(data);
+      dispatch(setLoading(false));
+      dispatch(setAreasRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const areasVisibility = createAsyncThunk(
+  "/areasVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.areasVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setAreasRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getCompanies = createAsyncThunk(
+  "/getCompanies",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getCompanies(
+        data?.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getCompaniesAll = createAsyncThunk(
+  "/getCompaniesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getCompaniesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteCompanies = createAsyncThunk(
+  "/deleteCompanies",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteCompanies(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setCompaniesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addCompanies = createAsyncThunk(
+  "/addCompanies",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addCompanies(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setCompaniesRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editCompanies = createAsyncThunk(
+  "/editCompanies",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editCompanies(data);
+      dispatch(setLoading(false));
+      dispatch(setCompaniesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const companiesVisibility = createAsyncThunk(
+  "/companiesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.companiesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setCompaniesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getPositions = createAsyncThunk(
+  "/getPositions",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getPositions(
+        data?.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getPositionsAll = createAsyncThunk(
+  "/getPositionsAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getPositionsAll(data?.visibility);
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deletePositions = createAsyncThunk(
+  "/deletePositions",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deletePositions(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setPositionsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addPositions = createAsyncThunk(
+  "/addPositions",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addPositions(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setPositionsRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editPositions = createAsyncThunk(
+  "/editPositions",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editPositions(data);
+      dispatch(setLoading(false));
+      dispatch(setPositionsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const positionsVisibility = createAsyncThunk(
+  "/positionsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.positionsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setPositionsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getHalls = createAsyncThunk(
+  "/getHalls",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getHalls(
+        data?.size,
+        data?.page,
+        data?.query,
+        data?.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getHallsAll = createAsyncThunk(
+  "/getHallsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getHallsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteHalls = createAsyncThunk(
+  "/deleteHalls",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteHalls(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setHallsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addHalls = createAsyncThunk(
+  "/addHalls",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addHalls(data);
+      dispatch(setLoading(false));
+      dispatch(setViewModalVisible(true));
+      dispatch(setHallsRender((prev) => !prev));
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editHalls = createAsyncThunk(
+  "/editHalls",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editHalls(data);
+      dispatch(setLoading(false));
+      dispatch(setHallsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const hallsVisibility = createAsyncThunk(
+  "/hallsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.hallsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setHallsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -2737,9 +4974,12 @@ export const questionnaire = createSlice({
     builder.addCase(getOrganisationrecord.fulfilled, (state, { payload }) => {
       state.organisationrecord = payload;
     });
-    builder.addCase(getOrganisationrecordAll.fulfilled, (state, { payload }) => {
-      state.organisationrecordAll = payload;
-    });
+    builder.addCase(
+      getOrganisationrecordAll.fulfilled,
+      (state, { payload }) => {
+        state.organisationrecordAll = payload;
+      }
+    );
 
     builder.addCase(getTransmittertype.fulfilled, (state, { payload }) => {
       state.transmittertype = payload;
@@ -2767,6 +5007,171 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getVrcAll.fulfilled, (state, { payload }) => {
       state.vrcAll = payload;
+    });
+    builder.addCase(getAcademicdegrees.fulfilled, (state, { payload }) => {
+      state.academicdegrees = payload;
+    });
+    builder.addCase(getAcademicdegreesAll.fulfilled, (state, { payload }) => {
+      state.academicdegreesAll = payload;
+    });
+    builder.addCase(getDisabilitystatuses.fulfilled, (state, { payload }) => {
+      state.disabilitystatuses = payload;
+    });
+    builder.addCase(
+      getDisabilitystatusesAll.fulfilled,
+      (state, { payload }) => {
+        state.disabilitystatusesAll = payload;
+      }
+    );
+    builder.addCase(getHonorarytitles.fulfilled, (state, { payload }) => {
+      state.honorarytitles = payload;
+    });
+    builder.addCase(getHonorarytitlesAll.fulfilled, (state, { payload }) => {
+      state.honorarytitlesAll = payload;
+    });
+    builder.addCase(getMilitarystaffs.fulfilled, (state, { payload }) => {
+      state.militaryStaffs = payload;
+    });
+    builder.addCase(getMilitarystaffsAll.fulfilled, (state, { payload }) => {
+      state.militaryStaffsAll = payload;
+    });
+    builder.addCase(getMilitarycategories.fulfilled, (state, { payload }) => {
+      state.militaryCategories = payload;
+    });
+    builder.addCase(
+      getMilitarycategoriesAll.fulfilled,
+      (state, { payload }) => {
+        state.militaryCategoriesAll = payload;
+      }
+    );
+    builder.addCase(getMilitaryranks.fulfilled, (state, { payload }) => {
+      state.militaryranks = payload;
+    });
+    builder.addCase(getMilitaryranksAll.fulfilled, (state, { payload }) => {
+      state.militaryranksAll = payload;
+    });
+    builder.addCase(getMilitarygroups.fulfilled, (state, { payload }) => {
+      state.militarygroups = payload;
+    });
+    builder.addCase(getMilitarygroupsAll.fulfilled, (state, { payload }) => {
+      state.militarygroupsAll = payload;
+    });
+    builder.addCase(
+      getGeneralstructurestatuses.fulfilled,
+      (state, { payload }) => {
+        state.generalstructurestatuses = payload;
+      }
+    );
+    builder.addCase(
+      getGeneralstructurestatusesAll.fulfilled,
+      (state, { payload }) => {
+        state.generalstructurestatusesAll = payload;
+      }
+    );
+    builder.addCase(getWorkschedules.fulfilled, (state, { payload }) => {
+      state.workschedules = payload;
+    });
+    builder.addCase(getWorkschedulesAll.fulfilled, (state, { payload }) => {
+      state.workschedulesAll = payload;
+    });
+    builder.addCase(getSpecializations.fulfilled, (state, { payload }) => {
+      state.specializations = payload;
+    });
+    builder.addCase(getSpecializationsAll.fulfilled, (state, { payload }) => {
+      state.specializationsAll = payload;
+    });
+    builder.addCase(getWarparticipants.fulfilled, (state, { payload }) => {
+      state.warparticipants = payload;
+    });
+    builder.addCase(getWarparticipantsAll.fulfilled, (state, { payload }) => {
+      state.warparticipantsAll = payload;
+    });
+    builder.addCase(
+      getGeneralstructuretypes.fulfilled,
+      (state, { payload }) => {
+        state.generalstructuretypes = payload;
+      }
+    );
+    builder.addCase(
+      getGeneralstructuretypesAll.fulfilled,
+      (state, { payload }) => {
+        state.generalstructuretypesAll = payload;
+      }
+    );
+    builder.addCase(
+      getEducationinstitutions.fulfilled,
+      (state, { payload }) => {
+        state.educationinstitutions = payload;
+      }
+    );
+    builder.addCase(
+      getEducationinstitutionsAll.fulfilled,
+      (state, { payload }) => {
+        state.educationinstitutionsAll = payload;
+      }
+    );
+    builder.addCase(getEducationpayments.fulfilled, (state, { payload }) => {
+      state.educationPayments = payload;
+    });
+    builder.addCase(getEducationpaymentsAll.fulfilled, (state, { payload }) => {
+      state.educationPaymentsAll = payload;
+    });
+    builder.addCase(getEducationlevels.fulfilled, (state, { payload }) => {
+      state.educationlevels = payload;
+    });
+    builder.addCase(getEducationlevelsAll.fulfilled, (state, { payload }) => {
+      state.educationlevelsAll = payload;
+    });
+    builder.addCase(getReprimandtypes.fulfilled, (state, { payload }) => {
+      state.reprimandTypes = payload;
+    });
+    builder.addCase(getReprimandtypesAll.fulfilled, (state, { payload }) => {
+      state.reprimandTypesAll = payload;
+    });
+    builder.addCase(getSpecialdays.fulfilled, (state, { payload }) => {
+      state.specialdays = payload;
+    });
+    builder.addCase(getSpecialdaysAll.fulfilled, (state, { payload }) => {
+      state.specialdaysAll = payload;
+    });
+    builder.addCase(getCategories.fulfilled, (state, { payload }) => {
+      state.categories = payload;
+    });
+    builder.addCase(getCategoriesAll.fulfilled, (state, { payload }) => {
+      state.categoriesAll = payload;
+    });
+    builder.addCase(getRegions.fulfilled, (state, { payload }) => {
+      state.regions = payload;
+    });
+    builder.addCase(getRegionsAll.fulfilled, (state, { payload }) => {
+      state.regionsAll = payload;
+    });
+    builder.addCase(getRegionsChildren.fulfilled, (state, { payload }) => {
+      state.regionChildren = payload;
+    });
+    builder.addCase(getAreas.fulfilled, (state, { payload }) => {
+      state.areas = payload;
+    });
+    builder.addCase(getAreasAll.fulfilled, (state, { payload }) => {
+      state.areasAll = payload;
+    });
+    builder.addCase(getCompanies.fulfilled, (state, { payload }) => {
+      state.companies = payload;
+    });
+    builder.addCase(getCompaniesAll.fulfilled, (state, { payload }) => {
+      state.companiesAll = payload;
+    });
+    builder.addCase(getPositions.fulfilled, (state, { payload }) => {
+      state.positions = payload;
+    });
+    builder.addCase(getPositionsAll.fulfilled, (state, { payload }) => {
+      state.positionsAll = payload;
+    });
+    builder.addCase(getHalls.fulfilled, (state, { payload }) => {
+      state.halls = payload;
+    });
+    builder.addCase(getHallsAll.fulfilled, (state, { payload }) => {
+      state.hallsAll = payload;
     });
   },
 });

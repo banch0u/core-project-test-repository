@@ -27,6 +27,19 @@ export const getStreetColumns = (
       ellipsis: true,
     },
     {
+      key: "parentId",
+      title: "Üzv olduğu kateqoriya",
+      dataIndex: "parentId",
+      disabled: true,
+      ellipsis: true,
+    },
+    {
+      key: "group",
+      title: "Qrup",
+      dataIndex: "group",
+      ellipsis: true,
+    },
+    {
       title: "Status",
       key: "status",
       disabled: true,

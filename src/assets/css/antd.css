@@ -826,7 +826,7 @@
  }
 
  body {
-   overflow: hidden !important;
+   /* overflow: hidden !important; */
  }
 
  .ant-tooltip-inner {

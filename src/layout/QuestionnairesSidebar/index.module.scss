@@ -5,6 +5,7 @@
   position: relative;
   margin: 20px;
   margin-right: 0;
+  border: 1px solid var(--blue);
   .logo {
     margin-top: 20px;
     margin-bottom: 18px;
@@ -15,7 +16,7 @@
       font-weight: 600;
       line-height: 20px;
       text-align: center;
-      color: var(--darkBlueColor);
+      color: var(--blue);
     }
   }
   .search {
@@ -44,7 +45,7 @@
         }
         svg:hover {
           path {
-            stroke: var(--darkBlueColor);
+            stroke: var(--blue);
             transition: 250ms;
           }
         }

@@ -625,5 +625,241 @@ class Services {
   static deleteVrcs = async (id) => api.delete(`/vrcs/${id}`).then(r => r.data);
   static vrcsVisibility = async (data) => api.patch(`/vrcs/${data?.id}/visibility/${data?.checked}`).then(r => r.data);
 
+  static getAcademicdegrees = async (size, page, query, visibility) => api.get(`/academicdegrees/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getAcademicdegreesAll = async (visibility) => api.get(`/academicdegrees?visibility=${visibility}`);
+  static addAcademicdegrees = async (value) => api.post(`/academicdegrees`, value);
+  static editAcademicdegrees = async (value) => api.put(`/academicdegrees/${value?.id}`, value);
+  static deleteAcademicdegrees = async (id) => api.delete(`/academicdegrees/${id}`);
+  static academicdegreesVisibility = async (data) => api.patch(`/academicdegrees/${data?.id}/visibility/${data?.checked}`);
+
+  static getDisabilitystatuses = async (size, page, query, visibility) => api.get(`/disabilitystatuses/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getDisabilitystatusesAll = async (visibility) => api.get(`/disabilitystatuses?visibility=${visibility}`);
+  static addDisabilitystatuses = async (value) => api.post(`/disabilitystatuses`, value);
+  static editDisabilitystatuses = async (value) => api.put(`/disabilitystatuses/${value?.id}`, value);
+  static deleteDisabilitystatuses = async (id) => api.delete(`/disabilitystatuses/${id}`);
+  static disabilitystatusesVisibility = async (data) => api.patch(`/disabilitystatuses/${data?.id}/visibility/${data?.checked}`);
+
+  static getHonorarytitles = async (size, page, query, visibility) => api.get(`/honorarytitles/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getHonorarytitlesAll = async (visibility) => api.get(`/honorarytitles?visibility=${visibility}`);
+  static addHonorarytitles = async (value) => api.post(`/honorarytitles`, value);
+  static editHonorarytitles = async (value) => api.put(`/honorarytitles/${value?.id}`, value);
+  static deleteHonorarytitles = async (id) => api.delete(`/honorarytitles/${id}`);
+  static honorarytitlesVisibility = async (data) => api.patch(`/honorarytitles/${data?.id}/visibility/${data?.checked}`);
+
+  static getMilitarystaffs = async (size, page, query, visibility) => api.get(`/militaryStaffs/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getMilitarystaffsAll = async (visibility) => api.get(`/militaryStaffs?visibility=${visibility}`);
+  static addMilitarystaffs = async (value) => api.post(`/militaryStaffs`, value);
+  static editMilitarystaffs = async (value) => api.put(`/militaryStaffs/${value?.id}`, value);
+  static deleteMilitarystaffs = async (id) => api.delete(`/militaryStaffs/${id}`);
+  static militaryStaffsVisibility = async (data) => api.patch(`/militaryStaffs/${data?.id}/visibility/${data?.checked}`);
+
+  static getMilitarycategories = async (size, page, query, visibility) => api.get(`/militaryCategories/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getMilitarycategoriesAll = async (visibility) => api.get(`/militaryCategories?visibility=${visibility}`);
+  static addMilitarycategories = async (value) => api.post(`/militaryCategories`, value);
+  static editMilitarycategories = async (value) => api.put(`/militaryCategories/${value?.id}`, value);
+  static deleteMilitarycategories = async (id) => api.delete(`/militaryCategories/${id}`);
+  static militaryCategoriesVisibility = async (data) => api.patch(`/militaryCategories/${data?.id}/visibility/${data?.checked}`);
+
+  static getMilitaryranks = async (size, page, query, visibility) => api.get(`/militaryranks/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getMilitaryranksAll = async (visibility) => api.get(`/militaryranks?visibility=${visibility}`);
+  static addMilitaryranks = async (value) => api.post(`/militaryranks`, value);
+  static editMilitaryranks = async (value) => api.put(`/militaryranks/${value?.id}`, value);
+  static deleteMilitaryranks = async (id) => api.delete(`/militaryranks/${id}`);
+  static militaryranksVisibility = async (data) => api.patch(`/militaryranks/${data?.id}/visibility/${data?.checked}`);
+
+  static getMilitarygroups = async (size, page, query, visibility) => api.get(`/militarygroups/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getMilitarygroupsAll = async (visibility) => api.get(`/militarygroups?visibility=${visibility}`);
+  static addMilitarygroups = async (value) => api.post(`/militarygroups`, value);
+  static editMilitarygroups = async (value) => api.put(`/militarygroups/${value?.id}`, value);
+  static deleteMilitarygroups = async (id) => api.delete(`/militarygroups/${id}`);
+  static militarygroupsVisibility = async (data) => api.patch(`/militarygroups/${data?.id}/visibility/${data?.checked}`);
+
+  static getGeneralstructurestatuses = async (size, page, query, visibility) => api.get(`/generalstructurestatuses/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getGeneralstructurestatusesAll = async (visibility) => api.get(`/generalstructurestatuses?visibility=${visibility}`);
+  static addGeneralstructurestatuses = async (value) => api.post(`/generalstructurestatuses`, value);
+  static editGeneralstructurestatuses = async (value) => api.put(`/generalstructurestatuses/${value?.id}`, value);
+  static deleteGeneralstructurestatuses = async (id) => api.delete(`/generalstructurestatuses/${id}`);
+  static generalstructurestatusesVisibility = async (data) => api.patch(`/generalstructurestatuses/${data?.id}/visibility/${data?.checked}`);
+
+  static getWorkschedules = async (size, page, query, visibility) => api.get(`/workschedules/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getWorkschedulesAll = async (visibility) => api.get(`/workschedules?visibility=${visibility}`);
+  static addWorkschedules = async (value) => api.post(`/workschedules`, value);
+  static editWorkschedules = async (value) => api.put(`/workschedules/${value?.id}`, value);
+  static deleteWorkschedules = async (id) => api.delete(`/workschedules/${id}`);
+  static workschedulesVisibility = async (data) => api.patch(`/workschedules/${data?.id}/visibility/${data?.checked}`);
+
+  static getSpecializations = async (size, page, query, visibility) => api.get(`/specializations/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getSpecializationsAll = async (visibility) => api.get(`/specializations?visibility=${visibility}`);
+  static addSpecializations = async (value) => api.post(`/specializations`, value);
+  static editSpecializations = async (value) => api.put(`/specializations/${value?.id}`, value);
+  static deleteSpecializations = async (id) => api.delete(`/specializations/${id}`);
+  static specializationsVisibility = async (data) => api.patch(`/specializations/${data?.id}/visibility/${data?.checked}`);
+
+  static getWarparticipants = async (size, page, query, visibility) => api.get(`/warparticipants/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getWarparticipantsAll = async (visibility) => api.get(`/warparticipants?visibility=${visibility}`);
+  static addWarparticipants = async (value) => api.post(`/warparticipants`, value);
+  static editWarparticipants = async (value) => api.put(`/warparticipants/${value?.id}`, value);
+  static deleteWarparticipants = async (id) => api.delete(`/warparticipants/${id}`);
+  static warparticipantsVisibility = async (data) => api.patch(`/warparticipants/${data?.id}/visibility/${data?.checked}`);
+
+  static getGeneralstructuretypes = async (size, page, query, visibility) => api.get(`/generalstructuretypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getGeneralstructuretypesAll = async (visibility) => api.get(`/generalstructuretypes?visibility=${visibility}`);
+  static addGeneralstructuretypes = async (value) => api.post(`/generalstructuretypes`, value);
+  static editGeneralstructuretypes = async (value) => api.put(`/generalstructuretypes/${value?.id}`, value);
+  static deleteGeneralstructuretypes = async (id) => api.delete(`/generalstructuretypes/${id}`);
+  static generalstructuretypesVisibility = async (data) => api.patch(`/generalstructuretypes/${data?.id}/visibility/${data?.checked}`);
+
+  static getEducationinstitutions = async (size, page, query, visibility) => api.get(`/educationinstitutions/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getEducationinstitutionsAll = async (visibility) => api.get(`/educationinstitutions?visibility=${visibility}`);
+  static addEducationinstitutions = async (value) => api.post(`/educationinstitutions`, value);
+  static editEducationinstitutions = async (value) => api.put(`/educationinstitutions/${value?.id}`, value);
+  static deleteEducationinstitutions = async (id) => api.delete(`/educationinstitutions/${id}`);
+  static educationinstitutionsVisibility = async (data) => api.patch(`/educationinstitutions/${data?.id}/visibility/${data?.checked}`);
+
+  static getEducationpayments = async (size, page, query, visibility) => api.get(`/educationPayments/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getEducationpaymentsAll = async (visibility) => api.get(`/educationPayments?visibility=${visibility}`);
+  static addEducationpayments = async (value) => api.post(`/educationPayments`, value);
+  static editEducationpayments = async (value) => api.put(`/educationPayments/${value?.id}`, value);
+  static deleteEducationpayments = async (id) => api.delete(`/educationPayments/${id}`);
+  static educationPaymentsVisibility = async (data) => api.patch(`/educationPayments/${data?.id}/visibility/${data?.checked}`);
+
+  static getEducationlevels = async (size, page, query, visibility) => api.get(`/educationlevels/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getEducationlevelsAll = async (visibility) => api.get(`/educationlevels?visibility=${visibility}`);
+  static addEducationlevels = async (value) => api.post(`/educationlevels`, value);
+  static editEducationlevels = async (value) => api.put(`/educationlevels/${value?.id}`, value);
+  static deleteEducationlevels = async (id) => api.delete(`/educationlevels/${id}`);
+  static educationlevelsVisibility = async (data) => api.patch(`/educationlevels/${data?.id}/visibility/${data?.checked}`);
+
+  static getReprimandtypes = async (size, page, query, visibility) => api.get(`/reprimandTypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getReprimandtypesAll = async (visibility) => api.get(`/reprimandTypes?visibility=${visibility}`);
+  static addReprimandtypes = async (value) => api.post(`/reprimandTypes`, value);
+  static editReprimandtypes = async (value) => api.put(`/reprimandTypes/${value?.id}`, value);
+  static deleteReprimandtypes = async (id) => api.delete(`/reprimandTypes/${id}`);
+  static reprimandTypesVisibility = async (data) => api.patch(`/reprimandTypes/${data?.id}/visibility/${data?.checked}`);
+
+  static getSpecialdays = async (size, page, query, visibility) => api.get(`/specialdays/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  static getSpecialdaysAll = async (visibility) => api.get(`/specialdays?visibility=${visibility}`);
+  static addSpecialdays = async (value) => api.post(`/specialdays`, value);
+  static editSpecialdays = async (value) => api.put(`/specialdays/${value?.id}`, value);
+  static deleteSpecialdays = async (id) => api.delete(`/specialdays/${id}`);
+  static specialdaysVisibility = async (data) => api.patch(`/specialdays/${data?.id}/visibility/${data?.checked}`);
+
+  static getCategories = async (size, page, query, visibility) => {
+    return await api.get(`/categories/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  };
+  static getCategoriesAll = async (visibility) => {
+    return await api.get(`/categories?visibility=${visibility}`);
+  };
+  static addCategories = async (value) => {
+    return await api.post(`/categories`, value);
+  };
+  static editCategories = async (value) => {
+    return await api.put(`/categories/${value?.id}`, value);
+  };
+  static deleteCategories = async (id) => {
+    return await api.delete(`/categories/${id}`);
+  };
+  static categoriesVisibility = async (data) => {
+    return await api.patch(`/categories/${data?.id}/visibility/${data?.checked}`);
+  };
+
+  static getRegions = async (size, page, query, visibility) => {
+    return await api.get(`/regions/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  };
+  static getRegionsAll = async (visibility) => {
+    return await api.get(`/regions?visibility=${visibility}`);
+  };
+  static treeSelect = async () => {
+    const response = await api.get(`/regions/${21}/page/${1}`);
+    return response?.data;
+  };
+  static addRegions = async (value) => {
+    return await api.post(`/regions`, value);
+  };
+  static editRegions = async (value) => {
+    return await api.put(`/regions/${value?.id}`, value);
+  };
+  static deleteRegions = async (id) => {
+    return await api.delete(`/regions/${id}`);
+  };
+  static regionsVisibility = async (data) => {
+    return await api.patch(`/regions/${data?.id}/visibility/${data?.checked}`);
+  };
+
+  static getAreas = async (size, page, query, visibility) => {
+    return await api.get(`/areas/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  };
+  static getAreasAll = async (visibility) => {
+    return await api.get(`/areas?visibility=${visibility}`);
+  };
+  static addAreas = async (value) => {
+    return await api.post(`/areas`, value);
+  };
+  static editAreas = async (value) => {
+    return await api.put(`/areas/${value?.id}`, value);
+  };
+  static deleteAreas = async (id) => {
+    return await api.delete(`/areas/${id}`);
+  };
+  static areasVisibility = async (data) => {
+    return await api.patch(`/areas/${data?.id}/visibility/${data?.checked}`);
+  };
+
+  static getCompanies = async (size, page, query, visibility) => {
+    return await api.get(`/companies/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  };
+  static getCompaniesAll = async (visibility) => {
+    return await api.get(`/companies?visibility=${visibility}`);
+  };
+  static addCompanies = async (value) => {
+    return await api.post(`/companies`, value);
+  };
+  static editCompanies = async (value) => {
+    return await api.put(`/companies/${value?.id}`, value);
+  };
+  static deleteCompanies = async (id) => {
+    return await api.delete(`/companies/${id}`);
+  };
+  static companiesVisibility = async (data) => {
+    return await api.patch(`/companies/${data?.id}/visibility/${data?.checked}`);
+  };
+
+  static getPositions = async (size, page, query, visibility) => {
+    return await api.get(`/positions/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  };
+  static getPositionsAll = async (visibility) => {
+    return await api.get(`/positions?visibility=${visibility}`);
+  };
+  static addPositions = async (value) => {
+    return await api.post(`/positions`, value);
+  };
+  static editPositions = async (value) => {
+    return await api.put(`/positions/${value?.id}`, value);
+  };
+  static deletePositions = async (id) => {
+    return await api.delete(`/positions/${id}`);
+  };
+  static positionsVisibility = async (data) => {
+    return await api.patch(`/positions/${data?.id}/visibility/${data?.checked}`);
+  };
+
+  static getHalls = async (size, page, query, visibility) => {
+    return await api.get(`/halls/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
+  };
+  static getHallsAll = async (visibility) => {
+    return await api.get(`/halls?visibility=${visibility}`);
+  };
+  static addHalls = async (value) => {
+    return await api.post(`/halls`, value);
+  };
+  static editHalls = async (value) => {
+    return await api.put(`/halls/${value?.id}`, value);
+  };
+  static deleteHalls = async (id) => {
+    return await api.delete(`/halls/${id}`);
+  };
+  static hallsVisibility = async (data) => {
+    return await api.patch(`/halls/${data?.id}/visibility/${data?.checked}`);
+  };
 }
 export default Services;

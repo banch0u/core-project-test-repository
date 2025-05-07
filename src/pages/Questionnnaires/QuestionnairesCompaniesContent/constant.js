@@ -20,11 +20,16 @@ export const getStreetColumns = (
       width: 35,
     },
     {
+      key: "name",
       title: "Ad",
       dataIndex: "name",
-      width: innerW,
       disabled: true,
-      ellipsis: true,
+    },
+    {
+      key: "fullName",
+      title: "Tam ad",
+      dataIndex: "fullName",
+      disabled: false,
     },
     {
       title: "Status",
