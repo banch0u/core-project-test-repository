@@ -52,6 +52,7 @@ import {
   setCompaniesRender,
   setPositionsRender,
   setHallsRender,
+  setDrivingcategoriesRender
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -4836,6 +4837,83 @@ export const hallsVisibility = createAsyncThunk(
     }
   }
 );
+export const getDrivingcategories = createAsyncThunk("/getDrivingcategories", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getDrivingcategories(data?.size, data?.page, data?.query, data?.visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const getDrivingcategoriesAll = createAsyncThunk("/getDrivingcategoriesAll", async (visibility, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getDrivingcategoriesAll(visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const addDrivingcategories = createAsyncThunk("/addDrivingcategories", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.addDrivingcategories(data);
+    dispatch(setLoading(false));
+    dispatch(setViewModalVisible(true));
+    dispatch(setDrivingcategoriesRender(prev => !prev));
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const editDrivingcategories = createAsyncThunk("/editDrivingcategories", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.editDrivingcategories(data);
+    dispatch(setLoading(false));
+    dispatch(setDrivingcategoriesRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const deleteDrivingcategories = createAsyncThunk("/deleteDrivingcategories", async (id, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.deleteDrivingcategories(id);
+    dispatch(setLoading(false));
+    dispatch(setDeleteModalVisible(false));
+    dispatch(setDrivingcategoriesRender(prev => !prev));
+  } catch (error) {
+    dispatch(setDeleteModalVisible(false));
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const drivingcategoriesVisibility = createAsyncThunk("/drivingcategoriesVisibility", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.drivingcategoriesVisibility(data);
+    dispatch(setLoading(false));
+    dispatch(setDrivingcategoriesRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
 
 export const questionnaire = createSlice({
   name: "questionnaire",
@@ -5172,6 +5250,12 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getHallsAll.fulfilled, (state, { payload }) => {
       state.hallsAll = payload;
+    });
+    builder.addCase(getDrivingcategories.fulfilled, (state, { payload }) => {
+      state.drivingcategories = payload;
+    });
+    builder.addCase(getDrivingcategoriesAll.fulfilled, (state, { payload }) => {
+      state.drivingcategoriesAll = payload;
     });
   },
 });

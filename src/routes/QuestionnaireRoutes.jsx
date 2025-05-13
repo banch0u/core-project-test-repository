@@ -107,6 +107,8 @@ import {
   SETTINGS_QUESTIONNAIRES_COMPANIES,
   SETTINGS_QUESTIONNAIRES_POSITIONS,
   SETTINGS_QUESTIONNAIRES_HALLS,
+  QUESTIONNAIRES_DRIVING_CATEGORIES,
+  SETTINGS_QUESTIONNAIRES_DRIVING_CATEGORIES,
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -138,6 +140,7 @@ import QuestionnairesAreasContent from "../pages/Questionnnaires/QuestionnairesA
 import QuestionnairesCompaniesContent from "../pages/Questionnnaires/QuestionnairesCompaniesContent";
 import QuestionnairesPositionsContent from "../pages/Questionnnaires/QuestionnairesPositionsContent";
 import QuestionnairesHallsContent from "../pages/Questionnnaires/QuestionnairesHallsContent";
+import QuestionnairesDrivingcategoriesContent from "../pages/Questionnnaires/QuestionnairesDrivingcategoriesContent";
 
 export const questionnairesRoutes = (allowed) => {
   return (
@@ -325,6 +328,10 @@ export const questionnairesRoutes = (allowed) => {
           path={QUESTIONNAIRES_HALLS}
           element={<QuestionnairesHallsContent />}
         />
+        <Route
+          path={QUESTIONNAIRES_DRIVING_CATEGORIES}
+          element={<QuestionnairesDrivingcategoriesContent />}
+        />
       </Route>
 
       {/* Settings Routes */}
@@ -507,6 +514,10 @@ export const questionnairesRoutes = (allowed) => {
         <Route
           path={SETTINGS_QUESTIONNAIRES_HALLS}
           element={<QuestionnairesHallsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_DRIVING_CATEGORIES}
+          element={<QuestionnairesDrivingcategoriesContent />}
         />
       </Route>
     </>
