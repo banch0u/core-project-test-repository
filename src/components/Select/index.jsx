@@ -30,19 +30,6 @@ const Select = ({
     }
   };
 
-  const commonProps = {
-    className: getClassName(),
-    style: { width: width ? `${width}px` : "100%" },
-    showSearch: true,
-    allowClear,
-    placeholder,
-    optionFilterProp: "children",
-    onChange,
-    disabled,
-    value,
-    defaultValue,
-  };
-
   const normalizeAz = (str) =>
     str
       .replace(/I/g, "i")
@@ -57,8 +44,23 @@ const Select = ({
       .replace(/ə/g, "e");
 
   const filterOption = (input, option) => {
-    if (!option?.children || typeof option.children !== "string") return false;
-    return normalizeAz(option.children).includes(normalizeAz(input));
+    const label = option?.title;
+    if (!label || typeof label !== "string") return false;
+    return normalizeAz(label).includes(normalizeAz(input));
+  };
+
+  const commonProps = {
+    className: getClassName(),
+    style: { width: width ? `${width}px` : "100%" },
+    showSearch: true,
+    allowClear,
+    placeholder,
+    optionFilterProp: "title",
+    filterOption,
+    onChange,
+    disabled,
+    value,
+    defaultValue,
   };
 
   if (mode === "multiple") {
@@ -73,7 +75,6 @@ const Select = ({
     return (
       <AntdSelect
         {...commonProps}
-        filterOption={filterOption}
         dropdownRender={(menu) => (
           <div>
             {menu}
@@ -88,11 +89,7 @@ const Select = ({
     );
   }
 
-  return (
-    <AntdSelect {...commonProps} filterOption={filterOption}>
-      {children}
-    </AntdSelect>
-  );
+  return <AntdSelect {...commonProps}>{children}</AntdSelect>;
 };
 
 export default Select;
