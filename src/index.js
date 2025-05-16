@@ -15,6 +15,7 @@ export { default as Select } from "./components/Select";
 export { default as Input } from "./components/Input";
 export { default as api } from "./utils/axios";
 export { default as NotFound } from "./pages/NotFound";
+export { default as ImagePreviewModal } from "./components/ImagePreviewModal";
 
 export { questionnairesRoutes } from "./routes/QuestionnaireRoutes";
 
