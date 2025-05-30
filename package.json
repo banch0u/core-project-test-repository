@@ -1,6 +1,6 @@
 {
   "name": "@banch0u/core-project-test-repository",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "description": "Shared core features for all projects",
   "main": "dist/index.js",
   "files": [
