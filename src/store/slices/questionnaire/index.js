@@ -52,7 +52,8 @@ import {
   setCompaniesRender,
   setPositionsRender,
   setHallsRender,
-  setDrivingcategoriesRender
+  setDrivingcategoriesRender,
+  setEmployeeConfigurationsRender
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -4915,6 +4916,83 @@ export const drivingcategoriesVisibility = createAsyncThunk("/drivingcategoriesV
 });
 
 
+export const getEmployeeConfigurations = createAsyncThunk("/getEmployeeConfigurations", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getEmployeeConfigurations(data?.size, data?.page, data?.query, data?.visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const getEmployeeConfigurationsAll = createAsyncThunk("/getEmployeeConfigurationsAll", async (visibility, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getEmployeeConfigurationsAll(visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const addEmployeeConfigurations = createAsyncThunk("/addEmployeeConfigurations", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.addEmployeeConfigurations(data);
+    dispatch(setLoading(false));
+    dispatch(setViewModalVisible(true));
+    dispatch(setEmployeeConfigurationsRender(prev => !prev));
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const editEmployeeConfigurations = createAsyncThunk("/editEmployeeConfigurations", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.editEmployeeConfigurations(data);
+    dispatch(setLoading(false));
+    dispatch(setEmployeeConfigurationsRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const deleteEmployeeConfigurations = createAsyncThunk("/deleteEmployeeConfigurations", async (id, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.deleteEmployeeConfigurations(id);
+    dispatch(setLoading(false));
+    dispatch(setDeleteModalVisible(false));
+    dispatch(setEmployeeConfigurationsRender(prev => !prev));
+  } catch (error) {
+    dispatch(setDeleteModalVisible(false));
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const employeeConfigurationsVisibility = createAsyncThunk("/employeeConfigurationsVisibility", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.employeeConfigurationsVisibility(data);
+    dispatch(setLoading(false));
+    dispatch(setEmployeeConfigurationsRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -5251,12 +5329,13 @@ export const questionnaire = createSlice({
     builder.addCase(getHallsAll.fulfilled, (state, { payload }) => {
       state.hallsAll = payload;
     });
-    builder.addCase(getDrivingcategories.fulfilled, (state, { payload }) => {
-      state.drivingcategories = payload;
+    builder.addCase(getEmployeeConfigurations.fulfilled, (state, { payload }) => {
+      state.employeeConfigurations = payload;
     });
-    builder.addCase(getDrivingcategoriesAll.fulfilled, (state, { payload }) => {
-      state.drivingcategoriesAll = payload;
+    builder.addCase(getEmployeeConfigurationsAll.fulfilled, (state, { payload }) => {
+      state.employeeConfigurationsAll = payload;
     });
+
   },
 });
 

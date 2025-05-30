@@ -54,7 +54,8 @@ const initialState = {
   companiesRender: false,
   positionsRender: false,
   hallsRender: false,
-  drivingcategoriesRender: false
+  drivingcategoriesRender: false,
+  employeeConfigurationsRender: false
 };
 
 export const global = createSlice({
@@ -223,6 +224,9 @@ export const global = createSlice({
     setDrivingcategoriesRender: (state, { payload }) => {
       state.drivingcategoriesRender = payload;
     },
+    setEmployeeConfigurationsRender: (state, { payload }) => {
+      state.employeeConfigurationsRender = payload;
+    },
   },
 });
 
@@ -283,5 +287,6 @@ export const {
   setCompaniesRender,
   setPositionsRender,
   setHallsRender,
-  setDrivingcategoriesRender
+  setDrivingcategoriesRender,
+  setEmployeeConfigurationsRender
 } = global.actions;

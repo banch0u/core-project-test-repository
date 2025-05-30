@@ -1139,5 +1139,34 @@ class Services {
       `/drivingcategories/${data?.id}/visibility/${data?.checked}`
     );
   };
+
+  static getEmployeeConfigurations = async (size, page, query, visibility) => {
+    return await api.get(
+      `/employeeconfigurations/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+  static getEmployeeConfigurationsAll = async (visibility) => {
+    return await api.get(`/employeeconfigurations?visibility=${visibility}`);
+  };
+  static addEmployeeConfigurations = async (data) => {
+    console.log(data);
+    return await api.post(`/employeeconfigurations`, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
+  static editEmployeeConfigurations = async (value) => {
+    return await api.put(`/employeeconfigurations/${value?.id}`, value);
+  };
+  static deleteEmployeeConfigurations = async (id) => {
+    return await api.delete(`/employeeconfigurations/${id}`);
+  };
+  static employeeConfigurationsVisibility = async (data) => {
+    return await api.patch(
+      `/employeeconfigurations/${data?.id}/visibility/${data?.checked}`
+    );
+  };
 }
 export default Services;
