@@ -1168,5 +1168,107 @@ class Services {
       `/employeeconfigurations/${data?.id}/visibility/${data?.checked}`
     );
   };
+  static getContragenttypes = async (size, page, query, visibility) => {
+    return await api.get(
+      `/contragenttypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+  static getContragenttypesAll = async (visibility) => {
+    return await api.get(`/contragenttypes?visibility=${visibility}`);
+  };
+  static addContragenttypes = async (data) => {
+    return await api.post(`/contragenttypes`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+  static editContragenttypes = async (value) => {
+    return await api.put(`/contragenttypes/${value?.id}`, value);
+  };
+  static deleteContragenttypes = async (id) => {
+    return await api.delete(`/contragenttypes/${id}`);
+  };
+  static contragenttypesVisibility = async (data) => {
+    return await api.patch(
+      `/contragenttypes/${data?.id}/visibility/${data?.checked}`
+    );
+  };
+
+  // Contracttypes
+  static getContracttypes = async (size, page, query, visibility) => {
+    return await api.get(
+      `/contracttypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+  static getContracttypesAll = async (visibility) => {
+    return await api.get(`/contracttypes?visibility=${visibility}`);
+  };
+  static addContracttypes = async (data) => {
+    return await api.post(`/contracttypes`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+  static editContracttypes = async (value) => {
+    return await api.put(`/contracttypes/${value?.id}`, value);
+  };
+  static deleteContracttypes = async (id) => {
+    return await api.delete(`/contracttypes/${id}`);
+  };
+  static contracttypesVisibility = async (data) => {
+    return await api.patch(
+      `/contracttypes/${data?.id}/visibility/${data?.checked}`
+    );
+  };
+
+  // Contractcurrencies
+  static getContractcurrencies = async (size, page, query, visibility) => {
+    return await api.get(
+      `/contractcurrencies/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+  static getContractcurrenciesAll = async (visibility) => {
+    return await api.get(`/contractcurrencies?visibility=${visibility}`);
+  };
+  static addContractcurrencies = async (data) => {
+    return await api.post(`/contractcurrencies`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+  static editContractcurrencies = async (value) => {
+    return await api.put(`/contractcurrencies/${value?.id}`, value);
+  };
+  static deleteContractcurrencies = async (id) => {
+    return await api.delete(`/contractcurrencies/${id}`);
+  };
+  static contractcurrenciesVisibility = async (data) => {
+    return await api.patch(
+      `/contractcurrencies/${data?.id}/visibility/${data?.checked}`
+    );
+  };
+
+  // Orders
+  static getOrders = async (size, page, query, visibility) => {
+    return await api.get(
+      `/orders/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+  static getOrdersAll = async (visibility) => {
+    return await api.get(`/orders?visibility=${visibility}`);
+  };
+  static addOrders = async (data) => {
+    return await api.post(`/orders`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+  static editOrders = async (value) => {
+    return await api.put(`/orders/${value?.id}`, value);
+  };
+  static deleteOrders = async (id) => {
+    return await api.delete(`/orders/${id}`);
+  };
+  static ordersVisibility = async (data) => {
+    return await api.patch(
+      `/orders/${data?.id}/visibility/${data?.checked}`
+    );
+  };
 }
 export default Services;

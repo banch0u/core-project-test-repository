@@ -53,7 +53,11 @@ import {
   setPositionsRender,
   setHallsRender,
   setDrivingcategoriesRender,
-  setEmployeeConfigurationsRender
+  setEmployeeConfigurationsRender,
+  setContracttypesRender,
+  setContragenttypesRender,
+  setOrdersRender,
+  setContractcurrenciesRender
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -4915,6 +4919,317 @@ export const drivingcategoriesVisibility = createAsyncThunk("/drivingcategoriesV
   }
 });
 
+export const getContractcurrencies = createAsyncThunk("/getContractcurrencies", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getContractcurrencies(data?.size, data?.page, data?.query, data?.visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const getContractcurrenciesAll = createAsyncThunk("/getContractcurrenciesAll", async (visibility, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getContractcurrenciesAll(visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const addContractcurrencies = createAsyncThunk("/addContractcurrencies", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.addContractcurrencies(data);
+    dispatch(setLoading(false));
+    dispatch(setViewModalVisible(true));
+    dispatch(setContractcurrenciesRender(prev => !prev));
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const editContractcurrencies = createAsyncThunk("/editContractcurrencies", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.editContractcurrencies(data);
+    dispatch(setLoading(false));
+    dispatch(setContractcurrenciesRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const deleteContractcurrencies = createAsyncThunk("/deleteContractcurrencies", async (id, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.deleteContractcurrencies(id);
+    dispatch(setLoading(false));
+    dispatch(setDeleteModalVisible(false));
+    dispatch(setContractcurrenciesRender(prev => !prev));
+  } catch (error) {
+    dispatch(setDeleteModalVisible(false));
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const contractcurrenciesVisibility = createAsyncThunk("/contractcurrenciesVisibility", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.contractcurrenciesVisibility(data);
+    dispatch(setLoading(false));
+    dispatch(setContractcurrenciesRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+// Orders
+
+export const getOrders = createAsyncThunk("/getOrders", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getOrders(data?.size, data?.page, data?.query, data?.visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const getOrdersAll = createAsyncThunk("/getOrdersAll", async (visibility, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getOrdersAll(visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const addOrders = createAsyncThunk("/addOrders", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.addOrders(data);
+    dispatch(setLoading(false));
+    dispatch(setViewModalVisible(true));
+    dispatch(setOrdersRender(prev => !prev));
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const editOrders = createAsyncThunk("/editOrders", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.editOrders(data);
+    dispatch(setLoading(false));
+    dispatch(setOrdersRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const deleteOrders = createAsyncThunk("/deleteOrders", async (id, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.deleteOrders(id);
+    dispatch(setLoading(false));
+    dispatch(setDeleteModalVisible(false));
+    dispatch(setOrdersRender(prev => !prev));
+  } catch (error) {
+    dispatch(setDeleteModalVisible(false));
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const ordersVisibility = createAsyncThunk("/ordersVisibility", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.ordersVisibility(data);
+    dispatch(setLoading(false));
+    dispatch(setOrdersRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const getContragenttypes = createAsyncThunk("/getContragenttypes", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getContragenttypes(data?.size, data?.page, data?.query, data?.visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const getContragenttypesAll = createAsyncThunk("/getContragenttypesAll", async (visibility, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getContragenttypesAll(visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const addContragenttypes = createAsyncThunk("/addContragenttypes", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.addContragenttypes(data);
+    dispatch(setLoading(false));
+    dispatch(setViewModalVisible(true));
+    dispatch(setContragenttypesRender(prev => !prev));
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const editContragenttypes = createAsyncThunk("/editContragenttypes", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.editContragenttypes(data);
+    dispatch(setLoading(false));
+    dispatch(setContragenttypesRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const deleteContragenttypes = createAsyncThunk("/deleteContragenttypes", async (id, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.deleteContragenttypes(id);
+    dispatch(setLoading(false));
+    dispatch(setDeleteModalVisible(false));
+    dispatch(setContragenttypesRender(prev => !prev));
+  } catch (error) {
+    dispatch(setDeleteModalVisible(false));
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const contragenttypesVisibility = createAsyncThunk("/contragenttypesVisibility", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.contragenttypesVisibility(data);
+    dispatch(setLoading(false));
+    dispatch(setContragenttypesRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+// Contracttypes
+export const getContracttypes = createAsyncThunk("/getContracttypes", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getContracttypes(data?.size, data?.page, data?.query, data?.visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const getContracttypesAll = createAsyncThunk("/getContracttypesAll", async (visibility, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getContracttypesAll(visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const addContracttypes = createAsyncThunk("/addContracttypes", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.addContracttypes(data);
+    dispatch(setLoading(false));
+    dispatch(setViewModalVisible(true));
+    dispatch(setContracttypesRender(prev => !prev));
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const editContracttypes = createAsyncThunk("/editContracttypes", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.editContracttypes(data);
+    dispatch(setLoading(false));
+    dispatch(setContracttypesRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const deleteContracttypes = createAsyncThunk("/deleteContracttypes", async (id, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.deleteContracttypes(id);
+    dispatch(setLoading(false));
+    dispatch(setDeleteModalVisible(false));
+    dispatch(setContracttypesRender(prev => !prev));
+  } catch (error) {
+    dispatch(setDeleteModalVisible(false));
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const contracttypesVisibility = createAsyncThunk("/contracttypesVisibility", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.contracttypesVisibility(data);
+    dispatch(setLoading(false));
+    dispatch(setContracttypesRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
 
 export const getEmployeeConfigurations = createAsyncThunk("/getEmployeeConfigurations", async (data, { dispatch }) => {
   try {
@@ -4992,6 +5307,7 @@ export const employeeConfigurationsVisibility = createAsyncThunk("/employeeConfi
     dispatch(setLoading(false));
   }
 });
+
 
 export const questionnaire = createSlice({
   name: "questionnaire",
@@ -5335,7 +5651,33 @@ export const questionnaire = createSlice({
     builder.addCase(getEmployeeConfigurationsAll.fulfilled, (state, { payload }) => {
       state.employeeConfigurationsAll = payload;
     });
+    builder.addCase(getContragenttypes.fulfilled, (state, { payload }) => {
+      state.contragenttypes = payload;
+    });
+    builder.addCase(getContragenttypesAll.fulfilled, (state, { payload }) => {
+      state.contragenttypesAll = payload;
+    });
 
+    builder.addCase(getContracttypes.fulfilled, (state, { payload }) => {
+      state.contracttypes = payload;
+    });
+    builder.addCase(getContracttypesAll.fulfilled, (state, { payload }) => {
+      state.contracttypesAll = payload;
+    });
+
+    builder.addCase(getContractcurrencies.fulfilled, (state, { payload }) => {
+      state.contractcurrencies = payload;
+    });
+    builder.addCase(getContractcurrenciesAll.fulfilled, (state, { payload }) => {
+      state.contractcurrenciesAll = payload;
+    });
+
+    builder.addCase(getOrders.fulfilled, (state, { payload }) => {
+      state.orders = payload;
+    });
+    builder.addCase(getOrdersAll.fulfilled, (state, { payload }) => {
+      state.ordersAll = payload;
+    });
   },
 });
 

@@ -111,6 +111,14 @@ import {
   SETTINGS_QUESTIONNAIRES_DRIVING_CATEGORIES,
   QUESTIONNAIRES_EMPLOYEE_CONFIGURATIONS,
   SETTINGS_EMPLOYEE_CONFIGURATIONS,
+  QUESTIONNAIRES_CONTRAGENTTYPES,
+  QUESTIONNAIRES_CONTRACTTYPES,
+  QUESTIONNAIRES_CONTRACTCURRENCIES,
+  QUESTIONNAIRES_ORDERS,
+  SETTINGS_QUESTIONNAIRES_CONTRAGENTTYPES,
+  SETTINGS_QUESTIONNAIRES_CONTRACTTYPES,
+  SETTINGS_QUESTIONNAIRES_CONTRACTCURRENCIES,
+  SETTINGS_QUESTIONNAIRES_ORDERS,
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -144,6 +152,10 @@ import QuestionnairesPositionsContent from "../pages/Questionnnaires/Questionnai
 import QuestionnairesHallsContent from "../pages/Questionnnaires/QuestionnairesHallsContent";
 import QuestionnairesDrivingcategoriesContent from "../pages/Questionnnaires/QuestionnairesDrivingcategoriesContent";
 import QuestionnairesEmployeeConfigurations from "../pages/Questionnnaires/QuestionnairesEmployeeConfigurations";
+import QuestionnairesContragenttypesContent from "../pages/Questionnnaires/QuestionnairesContragenttypesContent";
+import QuestionnairesContracttypesContent from "../pages/Questionnnaires/QuestionnairesContracttypesContent";
+import QuestionnairesContractcurrenciesContent from "../pages/Questionnnaires/QuestionnairesContractcurrenciesContent";
+import QuestionnairesOrdersContent from "../pages/Questionnnaires/QuestionnairesOrdersContent";
 
 export const questionnairesRoutes = (allowed) => {
   return (
@@ -339,6 +351,22 @@ export const questionnairesRoutes = (allowed) => {
           path={QUESTIONNAIRES_EMPLOYEE_CONFIGURATIONS}
           element={<QuestionnairesEmployeeConfigurations />}
         />
+        <Route
+          path={QUESTIONNAIRES_CONTRAGENTTYPES}
+          element={<QuestionnairesContragenttypesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_CONTRACTTYPES}
+          element={<QuestionnairesContracttypesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_CONTRACTCURRENCIES}
+          element={<QuestionnairesContractcurrenciesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_ORDERS}
+          element={<QuestionnairesOrdersContent />}
+        />
       </Route>
 
       {/* Settings Routes */}
@@ -529,6 +557,22 @@ export const questionnairesRoutes = (allowed) => {
         <Route
           path={SETTINGS_EMPLOYEE_CONFIGURATIONS}
           element={<QuestionnairesEmployeeConfigurations />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_CONTRAGENTTYPES}
+          element={<QuestionnairesContragenttypesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_CONTRACTTYPES}
+          element={<QuestionnairesContracttypesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_CONTRACTCURRENCIES}
+          element={<QuestionnairesContractcurrenciesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_ORDERS}
+          element={<QuestionnairesOrdersContent />}
         />
       </Route>
     </>

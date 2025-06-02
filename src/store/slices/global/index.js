@@ -55,7 +55,11 @@ const initialState = {
   positionsRender: false,
   hallsRender: false,
   drivingcategoriesRender: false,
-  employeeConfigurationsRender: false
+  employeeConfigurationsRender: false,
+  contractcurrenciesRender: false,
+  ordersRender: false,
+  contragenttypesRender: false,
+  contracttypesRender: false
 };
 
 export const global = createSlice({
@@ -227,6 +231,18 @@ export const global = createSlice({
     setEmployeeConfigurationsRender: (state, { payload }) => {
       state.employeeConfigurationsRender = payload;
     },
+    setContracttypesRender: (state, { payload }) => {
+      state.contracttypesRender = payload;
+    },
+    setContragenttypesRender: (state, { payload }) => {
+      state.contragenttypesRender = payload;
+    },
+    setOrdersRender: (state, { payload }) => {
+      state.ordersRender = payload;
+    },
+    setContractcurrenciesRender: (state, { payload }) => {
+      state.contractcurrenciesRender = payload;
+    },
   },
 });
 
@@ -288,5 +304,9 @@ export const {
   setPositionsRender,
   setHallsRender,
   setDrivingcategoriesRender,
-  setEmployeeConfigurationsRender
+  setEmployeeConfigurationsRender,
+  setContracttypesRender,
+  setContragenttypesRender,
+  setOrdersRender,
+  setContractcurrenciesRender
 } = global.actions;
