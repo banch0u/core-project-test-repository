@@ -1,6 +1,8 @@
 .accordion {
   background: var(--blue);
   width: 270px;
+  min-width: 270px;
+  max-width: 270px;
 }
 
 .accordionHeader {
@@ -31,6 +33,8 @@
   padding: 10px;
   top: 81px !important;
   width: 250px !important;
+  min-width: 250px !important;
+  max-width: 250px !important;
   border-radius: 0 0 6px 6px;
 }
 

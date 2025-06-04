@@ -189,7 +189,9 @@
   border-radius: 8px;
   background: var(--lightBlue);
   cursor: pointer;
-  width: 240px;
+  width: 280px;
+  max-width: 280px;
+  min-width: 280px;
 
   .pp {
     width: 32px;
@@ -229,7 +231,9 @@
   position: absolute;
   top: 100%;
   right: -1px;
-  width: 242px;
+  width: 300px;
+  max-width: 300px;
+  min-width: 300px;
   border-right: 1px solid var(--blue);
   border-left: 1px solid var(--blue);
   border-bottom: 1px solid var(--blue);

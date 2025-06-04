@@ -87,8 +87,9 @@ const ProfileOptions = () => {
         minWidth: "16px",
         lineHeight: "16px",
         padding: "0 4px",
-      }}>
-      <div className={style.icon_overlay} data-no-invert>
+      }}
+      data-no-invert-1>
+      <div className={style.icon_overlay}>
         <NotificationBell />
       </div>
     </Badge>
