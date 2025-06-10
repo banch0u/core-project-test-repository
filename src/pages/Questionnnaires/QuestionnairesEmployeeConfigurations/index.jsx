@@ -2,7 +2,7 @@ import React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Cookies from "js-cookie";
 import style from "../Questionnaires.module.scss";
-import { Form, Layout, Select as AntdSelect } from "antd";
+import { Form, Layout, Select as AntdSelect, TreeSelect } from "antd";
 import { PlusIcon } from "../../../assets/icons";
 import FormModal from "../../../components/FormModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +30,7 @@ import {
   editEmployeeConfigurations,
   employeeConfigurationsVisibility,
   getEmployeeConfigurations,
+  getGeneralStructuresAll,
   getPositionsAll,
 } from "../../../store/slices/questionnaire";
 import { getTransportEmployeesAll } from "../../../store/slices/employees";
@@ -59,6 +60,9 @@ const QuestionnairesEmployeeConfigurations = () => {
   const employeeConfigurations = useSelector(
     (state) => state.questionnaire.employeeConfigurations
   );
+  const generalStructuresAll = useSelector(
+    (state) => state.questionnaire.generalStructuresAll
+  );
   const transportEmployeesAll = useSelector(
     (state) => state.employees.transportEmployeesAll
   );
@@ -77,7 +81,7 @@ const QuestionnairesEmployeeConfigurations = () => {
         PersonInChargeForFuelIds: (data_.PersonInChargeForFuelIds ?? []).join(
           ","
         ),
-        GeneralStructures: "21,26,202,255",
+        GeneralStructures: (data_.GeneralStructures ?? []).join(","),
         OperatingManagerIds: (data_.OperatingManagerIds ?? []).join(","),
       };
 
@@ -91,8 +95,13 @@ const QuestionnairesEmployeeConfigurations = () => {
     (id, record) => {
       const data = {
         id: id,
-        name: record?.name,
-        category: typeSelect,
+        EmployeeIds: (record?.EmployeeIds ?? []).join(","),
+        Positions: (record?.Positions ?? []).join(","),
+        PersonInChargeForFuelIds: (record?.PersonInChargeForFuelIds ?? []).join(
+          ","
+        ),
+        GeneralStructures: (record?.GeneralStructures ?? []).join(","),
+        OperatingManagerIds: (record?.OperatingManagerIds ?? []).join(","),
       };
       dispatch(editEmployeeConfigurations(data));
     },
@@ -115,6 +124,7 @@ const QuestionnairesEmployeeConfigurations = () => {
     ref?.current?.open();
   };
   const onEditClick = useCallback((data) => {
+    console.log(data);
     ref?.current?.setEdit(data);
   }, []);
   const onDelete = useCallback((id) => {
@@ -160,6 +170,35 @@ const QuestionnairesEmployeeConfigurations = () => {
           .filter(Boolean)
           .join(", ");
       };
+      const formatGeneralStructures = (ids) => {
+        if (!Array.isArray(ids)) {
+          if (typeof ids === "string") {
+            ids = ids.split(",").map((id) => parseInt(id.trim(), 10));
+          } else {
+            return "";
+          }
+        }
+
+        const flatten = (nodes) => {
+          return nodes.reduce((acc, node) => {
+            acc.push(node);
+            if (node.children?.length) {
+              acc = acc.concat(flatten(node.children));
+            }
+            return acc;
+          }, []);
+        };
+
+        const flatList = flatten(generalStructuresAll || []);
+
+        return ids
+          .map((id) => {
+            const node = flatList.find((n) => n.id === id);
+            return node?.name || "";
+          })
+          .filter(Boolean)
+          .join(", ");
+      };
       const formatPositionNames = (ids) => {
         if (!Array.isArray(ids)) {
           if (typeof ids === "string") {
@@ -171,13 +210,20 @@ const QuestionnairesEmployeeConfigurations = () => {
 
         return ids
           .map((id) => {
-            const pos = positionsAll.find((p) => p.id === id);
+            const pos = positionsAll?.find((p) => p.id === id);
             return pos ? pos.name : "";
           })
           .filter(Boolean)
           .join(", ");
       };
-
+      const toArray = (value) => {
+        if (!value) return [];
+        if (Array.isArray(value)) return value;
+        if (typeof value === "string") {
+          return value.split(",").map((id) => parseInt(id.trim(), 10));
+        }
+        return [];
+      };
       return {
         num:
           employeeConfigurations?.size * employeeConfigurations?.page +
@@ -185,28 +231,52 @@ const QuestionnairesEmployeeConfigurations = () => {
           1 -
           employeeConfigurations?.size,
         id: dataObj?.id,
-        EmployeeIds: formatNames(dataObj?.employeeIds),
-        GeneralStructures: dataObj?.generalStructures,
-        OperatingManagerIds: formatNames(dataObj?.operatingManagerIds),
-        PersonInChargeForFuelIds: formatNames(
+        EmployeeIds1: formatNames(dataObj?.employeeIds),
+        GeneralStructures1: formatGeneralStructures(dataObj?.generalStructures),
+        OperatingManagerIds1: formatNames(dataObj?.operatingManagerIds),
+        PersonInChargeForFuelIds1: formatNames(
           dataObj?.personInChargeForFuelIds
         ),
-        Positions: formatPositionNames(dataObj?.positions),
+        Positions1: formatPositionNames(dataObj?.positions),
+
+        EmployeeIds: toArray(dataObj?.employeeIds),
+        GeneralStructures: toArray(dataObj?.generalStructures),
+        OperatingManagerIds: toArray(dataObj?.operatingManagerIds),
+        PersonInChargeForFuelIds: toArray(dataObj?.personInChargeForFuelIds),
+        Positions: toArray(dataObj?.positions),
+
         isActive: dataObj?.isActive,
         className: "rowClassName1",
       };
     });
   }
 
+  const convertToTreeData = (nodes) =>
+    nodes.map((node) => ({
+      title: node.name,
+      value: node.id,
+      key: node.id,
+      children: node.children?.length
+        ? convertToTreeData(node.children)
+        : undefined,
+    }));
+  const treeData = useMemo(() => {
+    if (!generalStructuresAll || !Array.isArray(generalStructuresAll))
+      return [];
+    const convertToTreeData = (nodes) =>
+      nodes.map((node) => ({
+        title: node.name,
+        value: node.id,
+        key: node.id,
+        children:
+          node.children && node.children.length > 0
+            ? convertToTreeData(node.children)
+            : undefined,
+      }));
+    return convertToTreeData(generalStructuresAll);
+  }, [generalStructuresAll]);
   const columns = useMemo(
-    () =>
-      getStreetColumns(
-        onEditClick,
-        onDelete,
-        onStatusChange,
-        transportEmployeesAll,
-        dispatch
-      ),
+    () => getStreetColumns(onEditClick, dispatch),
     [onEditClick, onDelete, onStatusChange, dispatch]
   );
 
@@ -233,6 +303,7 @@ const QuestionnairesEmployeeConfigurations = () => {
   useEffect(() => {
     dispatch(getTransportEmployeesAll());
     dispatch(getPositionsAll({ visibility: "nondeleted" }));
+    dispatch(getGeneralStructuresAll());
   }, [dispatch]);
   const updateSize = (newSize) => {
     setSize(newSize); // Update state
@@ -269,10 +340,14 @@ const QuestionnairesEmployeeConfigurations = () => {
       <Layout className={style.layout}>
         <Content className={style.content}>
           <header className={style.header}>
-            <Button onClick={onClickModal} color="green">
-              {" "}
-              <PlusIcon /> Soraqça əlavə et
-            </Button>
+            {employeeConfigurations?.count === 0 ? (
+              <Button onClick={onClickModal} color="green">
+                <PlusIcon /> Soraqça əlavə et
+              </Button>
+            ) : (
+              <div></div>
+            )}
+
             <Filter
               columns={columns}
               selectedColumns={selectedColumns}
@@ -324,12 +399,15 @@ const QuestionnairesEmployeeConfigurations = () => {
               className={"absolute"}
               centered={false}>
               <Item
-                rules={[{ required: true, message: "" }]}
+                rules={[{ required: false, message: "" }]}
                 name={"EmployeeIds"}
                 label={"Heyyət üzvü"}>
-                <Select mode={"multiple"}>
+                <Select mode="multiple" labelInValue>
                   {transportEmployeesAll?.map((item) => (
-                    <Option key={item.id} value={item.id}>
+                    <Option
+                      key={item.id}
+                      value={item.id}
+                      label={`${item.name} ${item.surname}`}>
                       {`${item.name} ${item.surname} ${item.patronymic}, ${item.generalStructureName}, ${item.positionName}`}
                     </Option>
                   ))}
@@ -339,7 +417,15 @@ const QuestionnairesEmployeeConfigurations = () => {
                 rules={[{ required: false, message: "" }]}
                 name={"GeneralStructures"}
                 label={"Struktur vahidi"}>
-                <Select mode={"multiple"}></Select>
+                <TreeSelect
+                  className={style.tree_select}
+                  dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                  placeholder=""
+                  allowClear
+                  multiple
+                  treeDefaultExpandAll
+                  treeData={treeData}
+                />
               </Item>
               <Item
                 rules={[{ required: false, message: "" }]}
@@ -347,31 +433,40 @@ const QuestionnairesEmployeeConfigurations = () => {
                 label={"Vəzifələr"}>
                 <Select mode={"multiple"}>
                   {positionsAll?.map((item) => (
-                    <Option key={item.id} value={item.id}>
+                    <Option
+                      key={item.id}
+                      value={item.id}
+                      label={`${item.name}`}>
                       {`${item.name}`}
                     </Option>
                   ))}
                 </Select>
               </Item>
               <Item
-                rules={[{ required: true, message: "" }]}
+                rules={[{ required: false, message: "" }]}
                 name={"PersonInChargeForFuelIds"}
                 label={"Məsul şəxs"}>
                 <Select mode={"multiple"}>
                   {transportEmployeesAll?.map((item) => (
-                    <Option key={item.id} value={item.id}>
+                    <Option
+                      key={item.id}
+                      value={item.id}
+                      label={`${item.name} ${item.surname}`}>
                       {`${item.name} ${item.surname} ${item.patronymic}, ${item.generalStructureName}, ${item.positionName}`}
                     </Option>
                   ))}
                 </Select>
               </Item>
               <Item
-                rules={[{ required: true, message: "" }]}
+                rules={[{ required: false, message: "" }]}
                 name={"OperatingManagerIds"}
                 label={"İstismar şöbəsinin rəisi"}>
                 <Select mode={"multiple"}>
                   {transportEmployeesAll?.map((item) => (
-                    <Option key={item.id} value={item.id}>
+                    <Option
+                      key={item.id}
+                      value={item.id}
+                      label={`${item.name} ${item.surname}`}>
                       {`${item.name} ${item.surname} ${item.patronymic}, ${item.generalStructureName}, ${item.positionName}`}
                     </Option>
                   ))}

@@ -1,15 +1,10 @@
 import React from "react";
-import { Switch, Tooltip } from "antd";
 
 import style from "../Questionnaires.module.scss";
-import { setDeleteModalVisible } from "../../../store/slices/global";
-import { DeleteIconQ, EditIcon } from "../../../assets/icons";
+import { EditIcon } from "../../../assets/icons";
 
 export const getStreetColumns = (
   onEditClick,
-  onDelete,
-  onStatusChange,
-  dispatch,
   innerW
 ) => [
     {
@@ -21,73 +16,50 @@ export const getStreetColumns = (
     },
     {
       title: "Heyyət üzvü",
-      dataIndex: "EmployeeIds",
+      dataIndex: "EmployeeIds1",
       width: innerW,
-      disabled: true,
+      disabled: false,
       ellipsis: true,
     },
     {
       title: "Struktur vahidi",
-      dataIndex: "GeneralStructures",
+      dataIndex: "GeneralStructures1",
       width: innerW,
-      disabled: true,
+      disabled: false,
       ellipsis: true,
     },
     {
       title: "Vəzifələr",
-      dataIndex: "Positions",
+      dataIndex: "Positions1",
       width: innerW,
-      disabled: true,
+      disabled: false,
       ellipsis: true,
     },
     {
       title: "Məsul şəxs",
-      dataIndex: "PersonInChargeForFuelIds",
+      dataIndex: "PersonInChargeForFuelIds1",
       width: innerW,
-      disabled: true,
+      disabled: false,
       ellipsis: true,
     },
     {
       title: "İstismar şöbəsinin rəisi",
-      dataIndex: "OperatingManagerIds",
+      dataIndex: "OperatingManagerIds1",
       width: innerW,
-      disabled: true,
+      disabled: false,
       ellipsis: true,
-    },
-    {
-      title: "Status",
-      key: "status",
-      disabled: true,
-      filter: false,
-      render: (data) => (
-        <Tooltip placement="top" title="Statusu dəyiş">
-          <Switch
-            size="medium"
-            checked={data?.isActive}
-            onChange={(checked) => onStatusChange(data, checked, dispatch)}
-          />
-        </Tooltip>
-      ),
     },
     {
       title: "",
       key: "actions",
       showCheckbox: false,
-      width: 80,
+      width: 40,
       render: (data) => (
         <>
           <div className={style.number}>
             <div className={style.actions}>
-              <div onClick={() => onEditClick(data)}>
+              <div onClick={() => onEditClick(data)} style={{ background: "#DEEAF6" }}>
                 <EditIcon />
-              </div>
-              <div
-                onClick={() => {
-                  onDelete(data?.id);
-                  dispatch(setDeleteModalVisible(true));
-                }}
-              >
-                <DeleteIconQ />
               </div>
             </div>
           </div>
