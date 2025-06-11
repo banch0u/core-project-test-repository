@@ -50,6 +50,27 @@ export const getStreetColumns = (
       ellipsis: true,
     },
     {
+      title: "Sürücülər",
+      dataIndex: "DriverPositions1",
+      width: innerW,
+      disabled: false,
+      ellipsis: true,
+    },
+    {
+      title: "Mexaniklər",
+      dataIndex: "MechanicPositions1",
+      width: innerW,
+      disabled: false,
+      ellipsis: true,
+    },
+    {
+      title: "Dispetçerlər",
+      dataIndex: "DispatcherPositions",
+      width: innerW,
+      disabled: false,
+      ellipsis: true,
+    },
+    {
       title: "",
       key: "actions",
       showCheckbox: false,

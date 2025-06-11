@@ -44,7 +44,6 @@ const Sidebar = ({ items = [] }) => {
 
     dispatch(getCompanyInfo());
   }, [dispatch]);
-  console.log(companyInfo);
   useEffect(() => {
     const fetchLogo = async () => {
       if (companyInfo?.[0]?.filePath) {

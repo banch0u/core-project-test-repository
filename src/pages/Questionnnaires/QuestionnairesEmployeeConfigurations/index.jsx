@@ -83,6 +83,9 @@ const QuestionnairesEmployeeConfigurations = () => {
         ),
         GeneralStructures: (data_.GeneralStructures ?? []).join(","),
         OperatingManagerIds: (data_.OperatingManagerIds ?? []).join(","),
+        DriverPositions: (data_.DriverPositions ?? []).join(","),
+        MechanicPositions: (data_.MechanicPositions ?? []).join(","),
+        DispatcherPositions: (data_.DispatcherPositions ?? []).join(","),
       };
 
       console.log(data);
@@ -102,6 +105,9 @@ const QuestionnairesEmployeeConfigurations = () => {
         ),
         GeneralStructures: (record?.GeneralStructures ?? []).join(","),
         OperatingManagerIds: (record?.OperatingManagerIds ?? []).join(","),
+        DriverPositions: (record?.DriverPositions ?? []).join(","),
+        MechanicPositions: (record?.MechanicPositions ?? []).join(","),
+        DispatcherPositions: (record?.DispatcherPositions ?? []).join(","),
       };
       dispatch(editEmployeeConfigurations(data));
     },
@@ -238,13 +244,18 @@ const QuestionnairesEmployeeConfigurations = () => {
           dataObj?.personInChargeForFuelIds
         ),
         Positions1: formatPositionNames(dataObj?.positions),
+        DriverPositions1: formatNames(dataObj?.driverPositions),
+        MechanicPositions1: formatNames(dataObj?.mechanicPositions),
+        DispatcherPositions1: formatNames(dataObj?.dispatcherPositions),
 
         EmployeeIds: toArray(dataObj?.employeeIds),
         GeneralStructures: toArray(dataObj?.generalStructures),
         OperatingManagerIds: toArray(dataObj?.operatingManagerIds),
         PersonInChargeForFuelIds: toArray(dataObj?.personInChargeForFuelIds),
         Positions: toArray(dataObj?.positions),
-
+        DriverPositions: toArray(dataObj?.driverPositions),
+        MechanicPositions: toArray(dataObj?.mechanicPositions),
+        DispatcherPositions: toArray(dataObj?.dispatcherPositions),
         isActive: dataObj?.isActive,
         className: "rowClassName1",
       };
@@ -461,6 +472,51 @@ const QuestionnairesEmployeeConfigurations = () => {
                 rules={[{ required: false, message: "" }]}
                 name={"OperatingManagerIds"}
                 label={"İstismar şöbəsinin rəisi"}>
+                <Select mode={"multiple"}>
+                  {transportEmployeesAll?.map((item) => (
+                    <Option
+                      key={item.id}
+                      value={item.id}
+                      label={`${item.name} ${item.surname}`}>
+                      {`${item.name} ${item.surname} ${item.patronymic}, ${item.generalStructureName}, ${item.positionName}`}
+                    </Option>
+                  ))}
+                </Select>
+              </Item>
+              <Item
+                rules={[{ required: false, message: "" }]}
+                name={"DriverPositions"}
+                label={"Sürücülər"}>
+                <Select mode={"multiple"}>
+                  {transportEmployeesAll?.map((item) => (
+                    <Option
+                      key={item.id}
+                      value={item.id}
+                      label={`${item.name} ${item.surname}`}>
+                      {`${item.name} ${item.surname} ${item.patronymic}, ${item.generalStructureName}, ${item.positionName}`}
+                    </Option>
+                  ))}
+                </Select>
+              </Item>
+              <Item
+                rules={[{ required: false, message: "" }]}
+                name={"MechanicPositions"}
+                label={"Mexaniklər"}>
+                <Select mode={"multiple"}>
+                  {transportEmployeesAll?.map((item) => (
+                    <Option
+                      key={item.id}
+                      value={item.id}
+                      label={`${item.name} ${item.surname}`}>
+                      {`${item.name} ${item.surname} ${item.patronymic}, ${item.generalStructureName}, ${item.positionName}`}
+                    </Option>
+                  ))}
+                </Select>
+              </Item>
+              <Item
+                rules={[{ required: false, message: "" }]}
+                name={"DispatcherPositions"}
+                label={"Dispetçerlər"}>
                 <Select mode={"multiple"}>
                   {transportEmployeesAll?.map((item) => (
                     <Option

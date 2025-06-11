@@ -61,7 +61,6 @@ const QuestionnairesDocumentTypeContent = () => {
     label: item?.name,
     value: item?.id,
   }));
-  console.log(categoriesAll);
   const onSubmit = useCallback(
     async (data) => {
       dispatch(addCategories({ ...data }));
@@ -70,7 +69,6 @@ const QuestionnairesDocumentTypeContent = () => {
   );
   const onEdit = useCallback(
     (id, record) => {
-      console.log(record);
       const data = {
         id: id,
         name: record?.name,

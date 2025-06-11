@@ -1149,7 +1149,6 @@ class Services {
     return await api.get(`/employeeconfigurations?visibility=${visibility}`);
   };
   static addEmployeeConfigurations = async (data) => {
-    console.log(data);
     return await api.post(`/employeeconfigurations`, data, {
       headers: {
         "Content-Type": "application/json",

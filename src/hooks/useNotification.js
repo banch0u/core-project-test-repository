@@ -32,9 +32,7 @@ const useNotification = () => {
     connection
       .start()
       .then(() => {
-        console.log("SignalR bağlantısı quruldu.");
         connection.on("receive", (message) => {
-          console.log("Yeni bildiriş:", message);
           store.dispatch(setNotificationsRender());
           infoMessageBottomRight(message);
         });
@@ -43,7 +41,6 @@ const useNotification = () => {
 
     return () => {
       connection.stop();
-      console.log("SignalR bağlantısı bağlandı.");
     };
   }, []);
 

@@ -5246,7 +5246,7 @@ export const getEmployeeConfigurations = createAsyncThunk("/getEmployeeConfigura
 export const getEmployeeConfigurationsAll = createAsyncThunk("/getEmployeeConfigurationsAll", async (visibility, { dispatch }) => {
   try {
     dispatch(setLoading(true));
-    const response = await Services.getEmployeeConfigurationsAll(visibility);
+    const response = await Services.getEmployeeConfigurationsAll(visibility?.visibility);
     dispatch(setLoading(false));
     return response?.data?.data;
   } catch (error) {
