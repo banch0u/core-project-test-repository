@@ -41,7 +41,7 @@ export const entryData = [
   {
     id: 4,
     value: "Şəxsi Kabinet",
-    pathname: `${rootUrl}/account/private`,
+    pathname: `${rootUrl}/accounts/private`,
     icon: <UserIcon />,
     scopes: "account",
   },
