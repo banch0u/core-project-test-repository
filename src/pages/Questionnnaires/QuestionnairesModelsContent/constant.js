@@ -5,10 +5,7 @@ import { setDeleteModalVisible } from "../../../store/slices/global";
 import { DeleteIconQ, EditIcon } from "../../../assets/icons";
 
 export const getStreetColumns = (
-  onEditClick,
-  onDelete,
-  onStatusChange,
-  dispatch,
+  onEditClick, onDelete, onStatusChange, drivingcategoriesAll, dispatch,
   innerW
 ) => [
     {
@@ -24,6 +21,16 @@ export const getStreetColumns = (
       width: innerW,
       disabled: true,
       ellipsis: true,
+    },
+    {
+      title: "Kateqoriya",
+      dataIndex: "category",
+      width: innerW,
+      disabled: false,
+      ellipsis: true,
+      type: "select",
+      selectData: drivingcategoriesAll,
+      queryName: "categoryIds"
     },
     {
       title: "Status",

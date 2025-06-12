@@ -5678,6 +5678,9 @@ export const questionnaire = createSlice({
     builder.addCase(getOrdersAll.fulfilled, (state, { payload }) => {
       state.ordersAll = payload;
     });
+    builder.addCase(getDrivingcategoriesAll.fulfilled, (state, { payload }) => {
+      state.drivingcategoriesAll = payload;
+    });
   },
 });
 

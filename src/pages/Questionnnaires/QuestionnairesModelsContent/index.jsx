@@ -28,6 +28,7 @@ import {
   deleteModel,
   editModel,
   getBrandsAll,
+  getDrivingcategoriesAll,
   getModel,
   modelsVisibility,
 } from "../../../store/slices/questionnaire";
@@ -53,13 +54,28 @@ const QuestionnairesModelsContent = () => {
 
   const model = useSelector((state) => state.questionnaire.model);
   const brandsAll = useSelector((state) => state.questionnaire.brandsAll);
+  const drivingcategoriesAll = useSelector(
+    (state) => state.questionnaire.drivingcategoriesAll
+  );
+  console.log(drivingcategoriesAll);
   const paginationLength = setPaginationLength(model?.count, model?.size);
 
   const onSubmit = useCallback(
     async (data) => {
-      dispatch(addModel({ ...data, brandId: brandSelect }));
+      const category = drivingcategoriesAll?.find(
+        (item) => item.id === data.categoryId
+      );
+      const categoryName = category?.name || "";
+
+      dispatch(
+        addModel({
+          ...data,
+          brandId: brandSelect,
+          categoryName,
+        })
+      );
     },
-    [dispatch, brandSelect]
+    [dispatch, brandSelect, drivingcategoriesAll]
   );
   const onEdit = useCallback(
     (id, record) => {
@@ -67,8 +83,14 @@ const QuestionnairesModelsContent = () => {
         id: id,
         name: record?.name,
         brandId: brandSelect,
+        categoryId: record?.categoryId,
       };
-      dispatch(editModel(data));
+      const category = drivingcategoriesAll?.find(
+        (item) => item.id === data.categoryId
+      );
+      const categoryName = category?.name || "";
+
+      dispatch(editModel({ ...data, categoryName: categoryName }));
     },
     [dispatch, brandSelect]
   );
@@ -110,13 +132,22 @@ const QuestionnairesModelsContent = () => {
       num: model?.size * model?.page + i + 1 - model?.size,
       id: dataObj?.id,
       name: dataObj?.name,
+      category: dataObj?.category?.text,
+      categoryId: dataObj?.category?.id,
       isActive: dataObj?.isActive,
       className: "rowClassName1",
     }));
   }
   const columns = useMemo(
-    () => getStreetColumns(onEditClick, onDelete, onStatusChange, dispatch),
-    [onEditClick, onDelete, onStatusChange, dispatch]
+    () =>
+      getStreetColumns(
+        onEditClick,
+        onDelete,
+        onStatusChange,
+        drivingcategoriesAll,
+        dispatch
+      ),
+    [onEditClick, onDelete, onStatusChange, drivingcategoriesAll, dispatch]
   );
   const [selectedColumns, setSelectedColumns] = useState(
     columns.map((col) => col.dataIndex)
@@ -128,6 +159,7 @@ const QuestionnairesModelsContent = () => {
   }, [brandsAll]);
   useEffect(() => {
     dispatch(getBrandsAll({ visibility: "nondeleted" }));
+    dispatch(getDrivingcategoriesAll("nondeleted"));
   }, [dispatch]);
   useEffect(() => {
     if (window.innerWidth >= 1900) {
@@ -239,6 +271,18 @@ const QuestionnairesModelsContent = () => {
                 name={"name"}
                 label={"Ad"}>
                 <Input className={style.modal_input} />
+              </Item>
+              <Item
+                rules={[{ required: true, message: "" }]}
+                name={"categoryId"}
+                label={"Kateqoriya"}>
+                <Select>
+                  {drivingcategoriesAll?.map((item) => (
+                    <Option key={item.id} value={item.id}>
+                      {item.name}
+                    </Option>
+                  ))}
+                </Select>
               </Item>
             </FormModal>
             <DeleteModal
