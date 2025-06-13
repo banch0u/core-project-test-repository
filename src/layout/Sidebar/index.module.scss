@@ -25,15 +25,20 @@
     position: absolute;
     left: 15px;
     bottom: 16px;
-    svg {
-      width: 100%;
-      height: auto;
-      padding-right: 15px;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     img {
-      width: 100%;
-      height: auto;
-      padding-right: 15px;
+      height: 100px;
+      width: auto;
+    }
+    .emblem {
+      svg {
+        height: auto;
+        width: 100%;
+        padding-right: 15px;
+      }
     }
   }
   .collapseButton {

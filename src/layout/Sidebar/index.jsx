@@ -87,7 +87,9 @@ const Sidebar = ({ items = [] }) => {
 
       <Link to={PLATFORM_PATH} className={style.buttons}>
         {collapsed ? (
-          <DsgLogoEmblem />
+          <div className={style.emblem}>
+            <DsgLogoEmblem />
+          </div>
         ) : imageSrc ? (
           <img src={imageSrc} alt="Company Logo" />
         ) : isDark ? (
