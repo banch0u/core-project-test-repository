@@ -70,7 +70,7 @@ const Sidebar = ({ items = [] }) => {
 
   return (
     <Sider
-      width={270}
+      width={287}
       collapsible
       collapsed={collapsed}
       collapsedWidth={64}
