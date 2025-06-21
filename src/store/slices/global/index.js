@@ -59,7 +59,9 @@ const initialState = {
   contractcurrenciesRender: false,
   ordersRender: false,
   contragenttypesRender: false,
-  contracttypesRender: false
+  contracttypesRender: false,
+  workModesRender: false,
+  vehicleCategoriesRender: false
 };
 
 export const global = createSlice({
@@ -243,6 +245,12 @@ export const global = createSlice({
     setContractcurrenciesRender: (state, { payload }) => {
       state.contractcurrenciesRender = payload;
     },
+    setWorkModesRender: (state, { payload }) => {
+      state.workModesRender = payload;
+    },
+    setVehicleCategoriesRender: (state, { payload }) => {
+      state.vehicleCategoriesRender = payload;
+    },
   },
 });
 
@@ -308,5 +316,9 @@ export const {
   setContracttypesRender,
   setContragenttypesRender,
   setOrdersRender,
-  setContractcurrenciesRender
+  setContractcurrenciesRender,
+  setWorkModesRender,
+  setVehicleCategoriesRender,
+
+
 } = global.actions;

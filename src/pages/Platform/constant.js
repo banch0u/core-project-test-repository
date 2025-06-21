@@ -48,7 +48,7 @@ export const entryData = [
   {
     id: 5,
     value: "Arxiv",
-    pathname: `${rootUrl}/archive/organization-administrative`,
+    pathname: `${rootUrl}/archive`,
     icon: <ArchiveIcon />,
     scopes: "archive",
     construction: true,
@@ -56,7 +56,7 @@ export const entryData = [
   {
     id: 6,
     value: "Nəqliyyat",
-    pathname: `${rootUrl}/transport`,
+    pathname: `${rootUrl}/transport/personnel`,
     icon: <TransportIcon />,
     scopes: "transport",
     construction: true,

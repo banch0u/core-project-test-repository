@@ -57,7 +57,9 @@ import {
   setContracttypesRender,
   setContragenttypesRender,
   setOrdersRender,
-  setContractcurrenciesRender
+  setContractcurrenciesRender,
+  setWorkModesRender,
+  setVehicleCategoriesRender
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -5309,6 +5311,161 @@ export const employeeConfigurationsVisibility = createAsyncThunk("/employeeConfi
 });
 
 
+export const getWorkModes = createAsyncThunk("/getWorkModes", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getWorkModes(data?.size, data?.page, data?.query, data?.visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const getWorkModesAll = createAsyncThunk("/getWorkModesAll", async (visibility, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getWorkModesAll(visibility?.visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const addWorkModes = createAsyncThunk("/addWorkModes", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.addWorkModes(data);
+    dispatch(setLoading(false));
+    dispatch(setViewModalVisible(true));
+    dispatch(setWorkModesRender(prev => !prev));
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const editWorkModes = createAsyncThunk("/editWorkModes", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.editWorkModes(data);
+    dispatch(setLoading(false));
+    dispatch(setWorkModesRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const deleteWorkModes = createAsyncThunk("/deleteWorkModes", async (id, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.deleteWorkModes(id);
+    dispatch(setLoading(false));
+    dispatch(setDeleteModalVisible(false));
+    dispatch(setWorkModesRender(prev => !prev));
+  } catch (error) {
+    dispatch(setDeleteModalVisible(false));
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const workModesVisibility = createAsyncThunk("/workModesVisibility", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.workModesVisibility(data);
+    dispatch(setLoading(false));
+    dispatch(setWorkModesRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+
+export const getVehicleCategories = createAsyncThunk("/getVehicleCategories", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getVehicleCategories(data?.size, data?.page, data?.query, data?.visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const getVehicleCategoriesAll = createAsyncThunk("/getVehicleCategoriesAll", async (visibility, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getVehicleCategoriesAll(visibility?.visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const addVehicleCategories = createAsyncThunk("/addVehicleCategories", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.addVehicleCategories(data);
+    dispatch(setLoading(false));
+    dispatch(setViewModalVisible(true));
+    dispatch(setVehicleCategoriesRender(prev => !prev));
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const editVehicleCategories = createAsyncThunk("/editVehicleCategories", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.editVehicleCategories(data);
+    dispatch(setLoading(false));
+    dispatch(setVehicleCategoriesRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const deleteVehicleCategories = createAsyncThunk("/deleteVehicleCategories", async (id, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.deleteVehicleCategories(id);
+    dispatch(setLoading(false));
+    dispatch(setDeleteModalVisible(false));
+    dispatch(setVehicleCategoriesRender(prev => !prev));
+  } catch (error) {
+    dispatch(setDeleteModalVisible(false));
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const vehicleCategoriesVisibility = createAsyncThunk("/vehicleCategoriesVisibility", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.vehicleCategoriesVisibility(data);
+    dispatch(setLoading(false));
+    dispatch(setVehicleCategoriesRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -5680,6 +5837,18 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getDrivingcategoriesAll.fulfilled, (state, { payload }) => {
       state.drivingcategoriesAll = payload;
+    });
+    builder.addCase(getWorkModes.fulfilled, (state, { payload }) => {
+      state.workModes = payload;
+    });
+    builder.addCase(getWorkModesAll.fulfilled, (state, { payload }) => {
+      state.workModesAll = payload;
+    });
+    builder.addCase(getVehicleCategories.fulfilled, (state, { payload }) => {
+      state.vehicleCategories = payload;
+    });
+    builder.addCase(getVehicleCategoriesAll.fulfilled, (state, { payload }) => {
+      state.vehicleCategoriesAll = payload;
     });
   },
 });

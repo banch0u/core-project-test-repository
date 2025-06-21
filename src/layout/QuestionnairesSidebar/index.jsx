@@ -51,8 +51,10 @@ import {
   QUESTIONNAIRES_SUBTOPIC,
   QUESTIONNAIRES_TOPIC,
   QUESTIONNAIRES_TRANSMITTER_TYPES,
+  QUESTIONNAIRES_VEHICLE_CATEGORIES,
   QUESTIONNAIRES_VEHICLE_TYPES,
   QUESTIONNAIRES_WAR_PARTICIPANTS,
+  QUESTIONNAIRES_WORK_MODES,
   QUESTIONNAIRES_WORK_SCHEDULES,
   SETTINGS_EMPLOYEE_CONFIGURATIONS,
   SETTINGS_QUESTIONNAIRES_ACADEMIC_DEGREES,
@@ -101,8 +103,10 @@ import {
   SETTINGS_QUESTIONNAIRES_SUBTOPIC,
   SETTINGS_QUESTIONNAIRES_TOPIC,
   SETTINGS_QUESTIONNAIRES_TRANSMITTERTYPES,
+  SETTINGS_QUESTIONNAIRES_VEHICLE_CATEGORIES,
   SETTINGS_QUESTIONNAIRES_VEHICLETYPES,
   SETTINGS_QUESTIONNAIRES_WAR_PARTICIPANTS,
+  SETTINGS_QUESTIONNAIRES_WORK_MODES,
   SETTINGS_QUESTIONNAIRES_WORK_SCHEDULES,
 } from "../../utils/path";
 
@@ -271,7 +275,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
     },
     {
       key: "vehicle-types",
-      label: "Nəqliyyat növləri",
+      label: "Nəqliyyat tipləri",
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_VEHICLETYPES
@@ -508,6 +512,22 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_ORDERS
           : QUESTIONNAIRES_ORDERS,
+    },
+    {
+      key: "work-modes",
+      label: "İş rejimi",
+      link:
+        mainPath === "/settings"
+          ? SETTINGS_QUESTIONNAIRES_WORK_MODES
+          : QUESTIONNAIRES_WORK_MODES,
+    },
+    {
+      key: "vehicle-categories",
+      label: "Nəqliyyat növləri",
+      link:
+        mainPath === "/settings"
+          ? SETTINGS_QUESTIONNAIRES_VEHICLE_CATEGORIES
+          : QUESTIONNAIRES_VEHICLE_CATEGORIES,
     },
   ];
 

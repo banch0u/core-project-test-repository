@@ -2,7 +2,7 @@ import React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Cookies from "js-cookie";
 import style from "../Questionnaires.module.scss";
-import { Form, Input, Layout, Select as AntdSelect } from "antd";
+import { Form, Input, Layout } from "antd";
 import { PlusIcon } from "../../../assets/icons";
 import FormModal from "../../../components/FormModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,82 +24,50 @@ import Loading from "../../../components/Loading";
 import Table from "../../../components/Table";
 import Filter from "../../../components/Filter";
 import {
-  addModel,
-  deleteModel,
-  editModel,
-  getBrandsAll,
-  getDrivingcategoriesAll,
-  getModel,
-  getVehicleCategoriesAll,
-  modelsVisibility,
+  addWorkModes,
+  deleteWorkModes,
+  editWorkModes,
+  getWorkModes,
+  workModesVisibility,
 } from "../../../store/slices/questionnaire";
-import Select from "../../../components/Select";
 
 const { Content } = Layout;
 const { Item } = Form;
-const { Option } = AntdSelect;
-const QuestionnairesModelsContent = () => {
+const QuestionnairesWorkModesContent = () => {
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
   const dispatch = useDispatch();
   const [id, setId] = useState(0);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(
-    Cookies.get("pagination-size-questionnaire-models")
-      ? JSON.parse(Cookies.get("pagination-size-questionnaire-models"))
+    Cookies.get("pagination-size-questionnaire-work-modes")
+      ? JSON.parse(Cookies.get("pagination-size-questionnaire-work-modes"))
       : 20
   );
-  const [brandSelect, setBrandSelect] = useState(null);
   const [query, setQuery] = useState({ name: "" });
-  const { loading, modelRender } = useSelector((state) => state.global);
+  const { loading, workModesRender } = useSelector((state) => state.global);
 
-  const model = useSelector((state) => state.questionnaire.model);
-  const brandsAll = useSelector((state) => state.questionnaire.brandsAll);
-  const drivingcategoriesAll = useSelector(
-    (state) => state.questionnaire.drivingcategoriesAll
+  const workModes = useSelector((state) => state.questionnaire.workModes);
+  const paginationLength = setPaginationLength(
+    workModes?.count,
+    workModes?.size
   );
-  const vehicleCategoriesAll = useSelector(
-    (state) => state.questionnaire.vehicleCategoriesAll
-  );
-  console.log(vehicleCategoriesAll);
-  const paginationLength = setPaginationLength(model?.count, model?.size);
 
   const onSubmit = useCallback(
     async (data) => {
-      const category = drivingcategoriesAll?.find(
-        (item) => item.id === data.drivingLicenceCategoryId
-      );
-      const drivingLicenceCategoryName = category?.name || "";
-
-      dispatch(
-        addModel({
-          ...data,
-          brandId: brandSelect,
-          drivingLicenceCategoryName,
-        })
-      );
+      dispatch(addWorkModes(data));
     },
-    [dispatch, brandSelect, drivingcategoriesAll]
+    [dispatch]
   );
   const onEdit = useCallback(
     (id, record) => {
       const data = {
         id: id,
         name: record?.name,
-        brandId: brandSelect,
-        drivingLicenceCategoryId: record?.drivingLicenceCategoryId,
-        vehicleCategoryId: record?.vehicleCategoryId,
       };
-      const category = drivingcategoriesAll?.find(
-        (item) => item.id === data.drivingLicenceCategoryId
-      );
-      const categoryName = category?.name || "";
-
-      dispatch(
-        editModel({ ...data, drivingLicenceCategoryName: categoryName })
-      );
+      dispatch(editWorkModes(data));
     },
-    [dispatch, brandSelect]
+    [dispatch]
   );
   const onStatusChange = useCallback(
     (data, checked) => {
@@ -107,7 +75,7 @@ const QuestionnairesModelsContent = () => {
         id: data?.id,
         checked: checked,
       };
-      dispatch(modelsVisibility(data_));
+      dispatch(workModesVisibility(data_));
     },
     [dispatch]
   );
@@ -134,51 +102,22 @@ const QuestionnairesModelsContent = () => {
   };
 
   let data = [];
-  if (model?.items) {
-    data = model?.items?.map((dataObj, i) => ({
-      num: model?.size * model?.page + i + 1 - model?.size,
+  if (workModes?.items) {
+    data = workModes?.items?.map((dataObj, i) => ({
+      num: workModes?.size * workModes?.page + i + 1 - workModes?.size,
       id: dataObj?.id,
       name: dataObj?.name,
-      drivingLicenceCategory: dataObj?.drivingLicenceCategory?.text,
-      drivingLicenceCategoryId: dataObj?.drivingLicenceCategory?.id,
-      vehicleCategory: dataObj?.vehicleCategory?.text,
-      vehicleCategoryId: dataObj?.vehicleCategory?.id,
       isActive: dataObj?.isActive,
       className: "rowClassName1",
     }));
   }
   const columns = useMemo(
-    () =>
-      getStreetColumns(
-        onEditClick,
-        onDelete,
-        onStatusChange,
-        drivingcategoriesAll,
-        vehicleCategoriesAll,
-        dispatch
-      ),
-    [
-      onEditClick,
-      onDelete,
-      onStatusChange,
-      drivingcategoriesAll,
-      vehicleCategoriesAll,
-      dispatch,
-    ]
+    () => getStreetColumns(onEditClick, onDelete, onStatusChange, dispatch),
+    [onEditClick, onDelete, onStatusChange, dispatch]
   );
   const [selectedColumns, setSelectedColumns] = useState(
     columns.map((col) => col.dataIndex)
   );
-  useEffect(() => {
-    if (brandsAll) {
-      setBrandSelect(brandsAll?.[0]?.id);
-    }
-  }, [brandsAll]);
-  useEffect(() => {
-    dispatch(getBrandsAll({ visibility: "nondeleted" }));
-    dispatch(getDrivingcategoriesAll("nondeleted"));
-    dispatch(getVehicleCategoriesAll({ visibility: "nondeleted" }));
-  }, [dispatch]);
   useEffect(() => {
     if (window.innerWidth >= 1900) {
       setInnerW(210);
@@ -188,18 +127,15 @@ const QuestionnairesModelsContent = () => {
     const data = {
       page: page,
       size: size,
-      brands: brandSelect,
       query: query,
       visibility: "nondeleted",
     };
-    if (brandSelect !== null) {
-      dispatch(getModel(data));
-    }
-  }, [dispatch, page, modelRender, brandSelect, query, size]);
+    dispatch(getWorkModes(data));
+  }, [dispatch, page, workModesRender, query, size]);
   const updateSize = (newSize) => {
     setSize(newSize); // Update state
     Cookies.set(
-      "pagination-size-questionnaire-models",
+      "pagination-size-questionnaire-work-modes",
       JSON.stringify(newSize),
       {
         expires: 7,
@@ -228,23 +164,8 @@ const QuestionnairesModelsContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Modellər</h2>
+              <h2>İş rejimi</h2>
               <div className={style.buttons}>
-                <Select
-                  size="sm"
-                  width={200}
-                  allowClear={false}
-                  value={brandSelect}
-                  defaultValue={""}
-                  onChange={(value) => {
-                    setBrandSelect(value);
-                  }}>
-                  {brandsAll?.map((item) => (
-                    <Option key={item.id} value={item.id}>
-                      {item.name}
-                    </Option>
-                  ))}
-                </Select>
                 <ColSort
                   columns={columns}
                   selectedColumns={selectedColumns}
@@ -282,44 +203,17 @@ const QuestionnairesModelsContent = () => {
               className={"absolute"}
               centered={false}>
               <Item
-                rules={[
-                  { required: true, message: "" },
-                  { min: 3, message: "Ən azından 3 simvol olmalıdır" },
-                ]}
+                rules={[{ required: true, message: "" }]}
                 name={"name"}
                 label={"Ad"}>
                 <Input className={style.modal_input} />
-              </Item>
-              <Item
-                rules={[{ required: true, message: "" }]}
-                name={"drivingLicenceCategoryId"}
-                label={"Sürücü kateqoriyası"}>
-                <Select>
-                  {drivingcategoriesAll?.map((item) => (
-                    <Option key={item.id} value={item.id}>
-                      {item.name}
-                    </Option>
-                  ))}
-                </Select>
-              </Item>
-              <Item
-                rules={[{ required: true, message: "" }]}
-                name={"vehicleCategoryId"}
-                label={"Nəqliyyat kateqoriyası"}>
-                <Select>
-                  {vehicleCategoriesAll?.map((item) => (
-                    <Option key={item.id} value={item.id}>
-                      {item.name}
-                    </Option>
-                  ))}
-                </Select>
               </Item>
             </FormModal>
             <DeleteModal
               onCancel={() => dispatch(setDeleteModalVisible(false))}
               width={280}>
               <Delete
-                onDelete={() => dispatch(deleteModel(id))}
+                onDelete={() => dispatch(deleteWorkModes(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
                 value={"Soraqçanı"}
               />
@@ -334,4 +228,4 @@ const QuestionnairesModelsContent = () => {
   );
 };
 
-export default QuestionnairesModelsContent;
+export default QuestionnairesWorkModesContent;

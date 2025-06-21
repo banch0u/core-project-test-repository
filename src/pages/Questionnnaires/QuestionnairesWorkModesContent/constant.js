@@ -5,7 +5,10 @@ import { setDeleteModalVisible } from "../../../store/slices/global";
 import { DeleteIconQ, EditIcon } from "../../../assets/icons";
 
 export const getStreetColumns = (
-  onEditClick, onDelete, onStatusChange, drivingcategoriesAll, vehicleCategoriesAll, dispatch,
+  onEditClick,
+  onDelete,
+  onStatusChange,
+  dispatch,
   innerW
 ) => [
     {
@@ -16,31 +19,11 @@ export const getStreetColumns = (
       width: 35,
     },
     {
-      title: "Növ",
+      title: "Ad",
       dataIndex: "name",
       width: innerW,
       disabled: true,
       ellipsis: true,
-    },
-    {
-      title: "Sürücü kateqoriyası",
-      dataIndex: "drivingLicenceCategory",
-      width: innerW,
-      disabled: false,
-      ellipsis: true,
-      type: "select",
-      selectData: drivingcategoriesAll,
-      queryName: "drivingLicenceCategories"
-    },
-    {
-      title: "Nəqliyyat kateqoriyası",
-      dataIndex: "vehicleCategory",
-      width: innerW,
-      disabled: false,
-      ellipsis: true,
-      type: "select",
-      selectData: vehicleCategoriesAll,
-      queryName: "vehicleCategories"
     },
     {
       title: "Status",

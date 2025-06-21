@@ -1269,5 +1269,55 @@ class Services {
       `/orders/${data?.id}/visibility/${data?.checked}`
     );
   };
+  // WorkModes
+  static getWorkModes = async (size, page, query, visibility) => {
+    return await api.get(
+      `/workmodes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+  static getWorkModesAll = async (visibility) => {
+    return await api.get(`/workmodes?visibility=${visibility}`);
+  };
+  static addWorkModes = async (data) => {
+    return await api.post(`/workmodes`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+  static editWorkModes = async (value) => {
+    return await api.put(`/workmodes/${value?.id}`, value);
+  };
+  static deleteWorkModes = async (id) => {
+    return await api.delete(`/workmodes/${id}`);
+  };
+  static workModesVisibility = async (data) => {
+    return await api.patch(
+      `/workmodes/${data?.id}/visibility/${data?.checked}`
+    );
+  };
+  // Vehicle Categories
+  static getVehicleCategories = async (size, page, query, visibility) => {
+    return await api.get(
+      `/vehiclecategories/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+  static getVehicleCategoriesAll = async (visibility) => {
+    return await api.get(`/vehiclecategories?visibility=${visibility}`);
+  };
+  static addVehicleCategories = async (data) => {
+    return await api.post(`/vehiclecategories`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+  static editVehicleCategories = async (value) => {
+    return await api.put(`/vehiclecategories/${value?.id}`, value);
+  };
+  static deleteVehicleCategories = async (id) => {
+    return await api.delete(`/vehiclecategories/${id}`);
+  };
+  static vehicleCategoriesVisibility = async (data) => {
+    return await api.patch(
+      `/vehiclecategories/${data?.id}/visibility/${data?.checked}`
+    );
+  };
 }
 export default Services;

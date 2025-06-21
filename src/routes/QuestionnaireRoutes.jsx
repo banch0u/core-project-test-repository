@@ -119,6 +119,10 @@ import {
   SETTINGS_QUESTIONNAIRES_CONTRACTTYPES,
   SETTINGS_QUESTIONNAIRES_CONTRACTCURRENCIES,
   SETTINGS_QUESTIONNAIRES_ORDERS,
+  QUESTIONNAIRES_WORK_MODES,
+  SETTINGS_QUESTIONNAIRES_WORK_MODES,
+  QUESTIONNAIRES_VEHICLE_CATEGORIES,
+  SETTINGS_QUESTIONNAIRES_VEHICLE_CATEGORIES,
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -156,6 +160,8 @@ import QuestionnairesContragenttypesContent from "../pages/Questionnnaires/Quest
 import QuestionnairesContracttypesContent from "../pages/Questionnnaires/QuestionnairesContracttypesContent";
 import QuestionnairesContractcurrenciesContent from "../pages/Questionnnaires/QuestionnairesContractcurrenciesContent";
 import QuestionnairesOrdersContent from "../pages/Questionnnaires/QuestionnairesOrdersContent";
+import QuestionnairesWorkModesContent from "../pages/Questionnnaires/QuestionnairesWorkModesContent";
+import QuestionnairesVehicleCategoriesContent from "../pages/Questionnnaires/QuestionnairesVehicleCategoriesContent";
 
 export const questionnairesRoutes = (allowed) => {
   return (
@@ -367,6 +373,14 @@ export const questionnairesRoutes = (allowed) => {
           path={QUESTIONNAIRES_ORDERS}
           element={<QuestionnairesOrdersContent />}
         />
+        <Route
+          path={QUESTIONNAIRES_WORK_MODES}
+          element={<QuestionnairesWorkModesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_VEHICLE_CATEGORIES}
+          element={<QuestionnairesVehicleCategoriesContent />}
+        />
       </Route>
 
       {/* Settings Routes */}
@@ -573,6 +587,14 @@ export const questionnairesRoutes = (allowed) => {
         <Route
           path={SETTINGS_QUESTIONNAIRES_ORDERS}
           element={<QuestionnairesOrdersContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_WORK_MODES}
+          element={<QuestionnairesWorkModesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_VEHICLE_CATEGORIES}
+          element={<QuestionnairesVehicleCategoriesContent />}
         />
       </Route>
     </>
