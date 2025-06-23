@@ -1,8 +1,9 @@
 import React, { forwardRef, useImperativeHandle, useState } from "react";
-import { Modal, Spin, Row, Col } from "antd";
+import { Modal, Spin, Row, Col, Empty } from "antd";
 import api from "../../utils/axios";
 import style from "./index.module.scss";
-const ImagePreviewModal = forwardRef((_, ref) => {
+
+const ImagePreviewModal = forwardRef(({ title = "Şəkil önizləməsi" }, ref) => {
   const [visible, setVisible] = useState(false);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -14,7 +15,7 @@ const ImagePreviewModal = forwardRef((_, ref) => {
         urls.map(async (url) => {
           try {
             const res = await api.get(url, { responseType: "text" });
-            return res.data; // must already be prefixed with data:image/*
+            return res.data;
           } catch (err) {
             console.error("Failed to load image:", url);
             return null;
@@ -45,11 +46,13 @@ const ImagePreviewModal = forwardRef((_, ref) => {
       open={visible}
       onCancel={() => setVisible(false)}
       footer={null}
-      title="Şəkil önizləməsi"
+      title={title}
       width={900}
       className={style.modal}>
       {loading ? (
         <Spin />
+      ) : images.length === 0 ? (
+        <Empty description="Şəkil tapılmadı" />
       ) : (
         <Row gutter={[16, 16]}>
           {images.map((img, idx) => (

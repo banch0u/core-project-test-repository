@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import style from "./index.module.scss";
 import { Select as AntdSelect, Divider } from "antd";
+import { FormItemInputContext } from "antd/es/form/context";
 import Button from "../Button";
 
 const Select = ({
@@ -10,7 +11,7 @@ const Select = ({
   placeholder = "",
   onChange = () => {},
   onOpen = () => {},
-  disabled = false,
+  disabled: customDisabled,
   value,
   defaultValue,
   mode,
@@ -19,6 +20,9 @@ const Select = ({
   width,
   ...rest
 }) => {
+  const formItemContext = useContext(FormItemInputContext);
+  const mergedDisabled = customDisabled ?? formItemContext?.disabled ?? false;
+
   const getClassName = () => {
     if (className) return className;
     switch (size) {
@@ -39,10 +43,9 @@ const Select = ({
     placeholder,
     optionFilterProp: "children",
     onChange,
-    disabled,
+    disabled: mergedDisabled,
     value,
     defaultValue,
-    ...rest,
   };
 
   const normalizeAz = (str) =>
@@ -65,7 +68,11 @@ const Select = ({
 
   if (mode === "multiple") {
     return (
-      <AntdSelect {...commonProps} mode="multiple" optionLabelProp="label">
+      <AntdSelect
+        {...commonProps}
+        {...rest}
+        mode="multiple"
+        optionLabelProp="label">
         {children}
       </AntdSelect>
     );
@@ -74,6 +81,7 @@ const Select = ({
   if (mode === "divider") {
     return (
       <AntdSelect
+        {...rest}
         {...commonProps}
         filterOption={filterOption}
         dropdownRender={(menu) => (
@@ -91,7 +99,7 @@ const Select = ({
   }
 
   return (
-    <AntdSelect {...commonProps} filterOption={filterOption}>
+    <AntdSelect {...commonProps} {...rest} filterOption={filterOption}>
       {children}
     </AntdSelect>
   );
