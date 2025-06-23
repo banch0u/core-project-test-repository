@@ -17,6 +17,7 @@ const Select = ({
   text,
   allowClear = true,
   width,
+  ...rest
 }) => {
   const getClassName = () => {
     if (className) return className;
@@ -41,6 +42,7 @@ const Select = ({
     disabled,
     value,
     defaultValue,
+    ...rest,
   };
 
   const normalizeAz = (str) =>
