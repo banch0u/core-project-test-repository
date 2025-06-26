@@ -19,3 +19,4 @@ foreach ($folder in $folders) {
   git commit -m "pkg upgrade"
   git push
 }
+Set-Location "C:\Users\fikre\repos\core-project-test-repository"
