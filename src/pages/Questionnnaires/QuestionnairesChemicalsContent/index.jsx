@@ -2,7 +2,7 @@ import React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Cookies from "js-cookie";
 import style from "../Questionnaires.module.scss";
-import { Form, Input, Layout } from "antd";
+import { Form, Input, Layout, Select as AntdSelect } from "antd";
 import { PlusIcon } from "../../../assets/icons";
 import FormModal from "../../../components/FormModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,51 +24,56 @@ import Loading from "../../../components/Loading";
 import Table from "../../../components/Table";
 import Filter from "../../../components/Filter";
 import {
-  addWorkModes,
-  deleteWorkModes,
-  editWorkModes,
-  getWorkModes,
-  workModesVisibility,
+  addChemicals,
+  chemicalsVisibility,
+  deleteChemicals,
+  editChemicals,
+  getChemicals,
 } from "../../../store/slices/questionnaire";
+import Select from "../../../components/Select";
 
 const { Content } = Layout;
 const { Item } = Form;
-const QuestionnairesWorkModesContent = () => {
+const QuestionnairesChemicalsContent = () => {
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
   const dispatch = useDispatch();
   const [id, setId] = useState(0);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(
-    Cookies.get("pagination-size-questionnaire-work-modes")
-      ? JSON.parse(Cookies.get("pagination-size-questionnaire-work-modes"))
+    Cookies.get("pagination-size-questionnaire-chemicals")
+      ? JSON.parse(Cookies.get("pagination-size-questionnaire-chemicals"))
       : 20
   );
   const [query, setQuery] = useState({ name: "" });
-  const { loading, workModesRender } = useSelector((state) => state.global);
+  const [typeSelect, setTypeSelect] = useState(1);
 
-  const workModes = useSelector((state) => state.questionnaire.workModes);
+  const { loading, chemicalsRender } = useSelector((state) => state.global);
+
+  const chemicals = useSelector((state) => state.questionnaire.chemicals);
   const paginationLength = setPaginationLength(
-    workModes?.count,
-    workModes?.size
+    chemicals?.count,
+    chemicals?.size
   );
 
   const onSubmit = useCallback(
     async (data) => {
-      dispatch(addWorkModes(data));
+      dispatch(addChemicals(data));
     },
-    [dispatch]
+    [dispatch, typeSelect]
   );
   const onEdit = useCallback(
     (id, record) => {
       const data = {
         id: id,
         name: record?.name,
-        fullname: record?.fullname,
+        casNumber: record?.casNumber,
+        unit: record?.unit,
+        description: record?.description,
       };
-      dispatch(editWorkModes(data));
+      dispatch(editChemicals(data));
     },
-    [dispatch]
+    [dispatch, typeSelect]
   );
   const onStatusChange = useCallback(
     (data, checked) => {
@@ -76,7 +81,7 @@ const QuestionnairesWorkModesContent = () => {
         id: data?.id,
         checked: checked,
       };
-      dispatch(workModesVisibility(data_));
+      dispatch(chemicalsVisibility(data_));
     },
     [dispatch]
   );
@@ -101,25 +106,36 @@ const QuestionnairesWorkModesContent = () => {
       }
     });
   };
-
   let data = [];
-  if (workModes?.items) {
-    data = workModes?.items?.map((dataObj, i) => ({
-      num: workModes?.size * workModes?.page + i + 1 - workModes?.size,
+  if (chemicals?.items) {
+    data = chemicals?.items?.map((dataObj, i) => ({
+      num: chemicals?.size * chemicals?.page + i + 1 - chemicals?.size,
       id: dataObj?.id,
       name: dataObj?.name,
-      fullname: dataObj?.fullname,
+      casNumber: dataObj?.casNumber,
+      unit: dataObj?.unit,
+      description: dataObj?.description,
+
       isActive: dataObj?.isActive,
       className: "rowClassName1",
     }));
   }
   const columns = useMemo(
-    () => getStreetColumns(onEditClick, onDelete, onStatusChange, dispatch),
+    () =>
+      getStreetColumns(
+        onEditClick,
+        onDelete,
+        onStatusChange,
+
+        dispatch
+      ),
     [onEditClick, onDelete, onStatusChange, dispatch]
   );
+
   const [selectedColumns, setSelectedColumns] = useState(
     columns.map((col) => col.dataIndex)
   );
+
   useEffect(() => {
     if (window.innerWidth >= 1900) {
       setInnerW(210);
@@ -132,12 +148,12 @@ const QuestionnairesWorkModesContent = () => {
       query: query,
       visibility: "nondeleted",
     };
-    dispatch(getWorkModes(data));
-  }, [dispatch, page, workModesRender, query, size]);
+    dispatch(getChemicals(data));
+  }, [dispatch, page, chemicalsRender, size, query]);
   const updateSize = (newSize) => {
     setSize(newSize); // Update state
     Cookies.set(
-      "pagination-size-questionnaire-work-modes",
+      "pagination-size-questionnaire-chemicals",
       JSON.stringify(newSize),
       {
         expires: 7,
@@ -152,6 +168,7 @@ const QuestionnairesWorkModesContent = () => {
         <Content className={style.content}>
           <header className={style.header}>
             <Button onClick={onClickModal} color="green">
+              {" "}
               <PlusIcon /> Soraqça əlavə et
             </Button>
             <Filter
@@ -166,7 +183,7 @@ const QuestionnairesWorkModesContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>İş rejimi</h2>
+              <h2>Kimyəvi maddələr</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}
@@ -205,15 +222,34 @@ const QuestionnairesWorkModesContent = () => {
               className={"absolute"}
               centered={false}>
               <Item
-                rules={[{ required: true, message: "" }]}
+                rules={[
+                  { required: true, message: "" },
+                  { min: 3, message: "Ən azından 3 simvol olmalıdır" },
+                ]}
                 name={"name"}
                 label={"Ad"}>
                 <Input className={style.modal_input} />
               </Item>
               <Item
                 rules={[{ required: true, message: "" }]}
-                name={"fullname"}
-                label={"Tam adı"}>
+                name={"casNumber"}
+                label={"CAS nömrəsi"}>
+                <Input className={style.modal_input} />
+              </Item>
+              <Item
+                rules={[{ required: true, message: "" }]}
+                name={"unit"}
+                label={"Ölçü vahidi"}>
+                <Select>
+                  <AntdSelect.Option value={1}>Ml</AntdSelect.Option>
+                  <AntdSelect.Option value={2}>G</AntdSelect.Option>
+                  <AntdSelect.Option value={3}>L</AntdSelect.Option>
+                </Select>
+              </Item>
+              <Item
+                rules={[{ required: true, message: "" }]}
+                name={"description"}
+                label={"Qeyd"}>
                 <Input className={style.modal_input} />
               </Item>
             </FormModal>
@@ -221,7 +257,7 @@ const QuestionnairesWorkModesContent = () => {
               onCancel={() => dispatch(setDeleteModalVisible(false))}
               width={280}>
               <Delete
-                onDelete={() => dispatch(deleteWorkModes(id))}
+                onDelete={() => dispatch(deleteChemicals(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
                 value={"Soraqçanı"}
               />
@@ -236,4 +272,4 @@ const QuestionnairesWorkModesContent = () => {
   );
 };
 
-export default QuestionnairesWorkModesContent;
+export default QuestionnairesChemicalsContent;

@@ -59,7 +59,8 @@ import {
   setOrdersRender,
   setContractcurrenciesRender,
   setWorkModesRender,
-  setVehicleCategoriesRender
+  setVehicleCategoriesRender,
+  setChemicalsRender
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -5466,6 +5467,82 @@ export const vehicleCategoriesVisibility = createAsyncThunk("/vehicleCategoriesV
   }
 });
 
+export const getChemicals = createAsyncThunk("/getChemicals", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getChemicals(data?.size, data?.page, data?.query, data?.visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const getChemicalsAll = createAsyncThunk("/getChemicalsAll", async (visibility, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.getChemicalsAll(visibility?.visibility);
+    dispatch(setLoading(false));
+    return response?.data?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const addChemicals = createAsyncThunk("/addChemicals", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.addChemicals(data);
+    dispatch(setLoading(false));
+    dispatch(setViewModalVisible(true));
+    dispatch(setChemicalsRender(prev => !prev));
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const editChemicals = createAsyncThunk("/editChemicals", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.editChemicals(data);
+    dispatch(setLoading(false));
+    dispatch(setChemicalsRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const deleteChemicals = createAsyncThunk("/deleteChemicals", async (id, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    await Services.deleteChemicals(id);
+    dispatch(setLoading(false));
+    dispatch(setDeleteModalVisible(false));
+    dispatch(setChemicalsRender(prev => !prev));
+  } catch (error) {
+    dispatch(setDeleteModalVisible(false));
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
+
+export const chemicalsVisibility = createAsyncThunk("/chemicalsVisibility", async (data, { dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await Services.chemicalsVisibility(data);
+    dispatch(setLoading(false));
+    dispatch(setChemicalsRender(prev => !prev));
+    return response?.data;
+  } catch (error) {
+    errorMessage(error.response?.data?.message);
+    dispatch(setLoading(false));
+  }
+});
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -5849,6 +5926,12 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getVehicleCategoriesAll.fulfilled, (state, { payload }) => {
       state.vehicleCategoriesAll = payload;
+    });
+    builder.addCase(getChemicals.fulfilled, (state, { payload }) => {
+      state.chemicals = payload;
+    });
+    builder.addCase(getChemicalsAll.fulfilled, (state, { payload }) => {
+      state.chemicalsAll = payload;
     });
   },
 });

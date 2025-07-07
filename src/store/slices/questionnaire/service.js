@@ -1319,5 +1319,30 @@ class Services {
       `/vehiclecategories/${data?.id}/visibility/${data?.checked}`
     );
   };
+  // Vehicle Categories
+  static getChemicals = async (size, page, query, visibility) => {
+    return await api.get(
+      `/chemicals/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+  static getChemicalsAll = async (visibility) => {
+    return await api.get(`/chemicals?visibility=${visibility}`);
+  };
+  static addChemicals = async (data) => {
+    return await api.post(`/chemicals`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+  static editChemicals = async (value) => {
+    return await api.put(`/chemicals/${value?.id}`, value);
+  };
+  static deleteChemicals = async (id) => {
+    return await api.delete(`/chemicals/${id}`);
+  };
+  static chemicalsVisibility = async (data) => {
+    return await api.patch(
+      `/chemicals/${data?.id}/visibility/${data?.checked}`
+    );
+  };
 }
 export default Services;

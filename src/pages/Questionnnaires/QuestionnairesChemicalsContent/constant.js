@@ -1,5 +1,6 @@
-import * as React from "react";
+import React from "react";
 import { Switch, Tooltip } from "antd";
+
 import style from "../Questionnaires.module.scss";
 import { setDeleteModalVisible } from "../../../store/slices/global";
 import { DeleteIconQ, EditIcon } from "../../../assets/icons";
@@ -26,8 +27,20 @@ export const getStreetColumns = (
       ellipsis: true,
     },
     {
-      title: "Tam adı",
-      dataIndex: "fullname",
+      title: "CAS nömrəsi",
+      dataIndex: "casNumber",
+      width: innerW,
+      ellipsis: true,
+    },
+    {
+      title: "Ölçü vahidi",
+      dataIndex: "unit",
+      width: innerW,
+      ellipsis: true,
+    },
+    {
+      title: "Qeyd",
+      dataIndex: "description",
       width: innerW,
       ellipsis: true,
     },
