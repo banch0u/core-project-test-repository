@@ -125,6 +125,12 @@ import {
   SETTINGS_QUESTIONNAIRES_VEHICLE_CATEGORIES,
   QUESTIONNAIRES_CHEMICALS,
   SETTINGS_QUESTIONNAIRES_CHEMICHALS,
+  SETTINGS_QUESTIONNAIRES_REPAIR_TYPES,
+  QUESTIONNAIRES_REPAIR_TYPES,
+  QUESTIONNAIRES_DETAIL_PARTS,
+  SETTINGS_QUESTIONNAIRES_DETAIL_PARTS,
+  SETTINGS_QUESTIONNAIRES_MEASUREMENT_TYPES,
+  QUESTIONNAIRES_MEASUREMENT_TYPES,
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -165,6 +171,9 @@ import QuestionnairesOrdersContent from "../pages/Questionnnaires/Questionnaires
 import QuestionnairesWorkModesContent from "../pages/Questionnnaires/QuestionnairesWorkModesContent";
 import QuestionnairesVehicleCategoriesContent from "../pages/Questionnnaires/QuestionnairesVehicleCategoriesContent";
 import QuestionnairesChemicalsContent from "../pages/Questionnnaires/QuestionnairesChemicalsContent";
+import QuestionnairesRepairTypesContent from "../pages/Questionnnaires/QuestionnairesRepairTypesContent";
+import QuestionnairesDetailPartsContent from "../pages/Questionnnaires/QuestionnairesDetailPartsContent";
+import QuestionnairesMeasurementTypesContent from "../pages/Questionnnaires/QuestionnairesMeasurementTypesContent";
 
 export const questionnairesRoutes = (allowed) => {
   return (
@@ -388,6 +397,18 @@ export const questionnairesRoutes = (allowed) => {
           path={QUESTIONNAIRES_CHEMICALS}
           element={<QuestionnairesChemicalsContent />}
         />
+        <Route
+          path={QUESTIONNAIRES_REPAIR_TYPES}
+          element={<QuestionnairesRepairTypesContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_DETAIL_PARTS}
+          element={<QuestionnairesDetailPartsContent />}
+        />
+        <Route
+          path={QUESTIONNAIRES_MEASUREMENT_TYPES}
+          element={<QuestionnairesMeasurementTypesContent />}
+        />
       </Route>
 
       {/* Settings Routes */}
@@ -606,6 +627,18 @@ export const questionnairesRoutes = (allowed) => {
         <Route
           path={SETTINGS_QUESTIONNAIRES_CHEMICHALS}
           element={<QuestionnairesChemicalsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_REPAIR_TYPES}
+          element={<QuestionnairesRepairTypesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_DETAIL_PARTS}
+          element={<QuestionnairesDetailPartsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_MEASUREMENT_TYPES}
+          element={<QuestionnairesMeasurementTypesContent />}
         />
       </Route>
     </>

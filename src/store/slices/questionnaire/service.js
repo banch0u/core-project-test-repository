@@ -1344,5 +1344,86 @@ class Services {
       `/chemicals/${data?.id}/visibility/${data?.checked}`
     );
   };
+  static getRepairtypes = async (size, page, query, visibility) => {
+    return await api.get(
+      `/repairtypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+
+  static getRepairtypesAll = async (visibility) => {
+    return await api.get(`/repairtypes?visibility=${visibility}`);
+  };
+
+  static addRepairtypes = async (data) => {
+    return await api.post(`/repairtypes`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+
+  static editRepairtypes = async (value) => {
+    return await api.put(`/repairtypes/${value?.id}`, value);
+  };
+
+  static deleteRepairtypes = async (id) => {
+    return await api.delete(`/repairtypes/${id}`);
+  };
+
+  static repairtypesVisibility = async (data) => {
+    return await api.patch(`/repairtypes/${data?.id}/visibility/${data?.checked}`);
+  };
+  static getDetailparts = async (size, page, query, visibility) => {
+    return await api.get(
+      `/detailparts/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+
+  static getDetailpartsAll = async (visibility) => {
+    return await api.get(`/detailparts?visibility=${visibility}`);
+  };
+
+  static addDetailparts = async (data) => {
+    return await api.post(`/detailparts`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+
+  static editDetailparts = async (value) => {
+    return await api.put(`/detailparts/${value?.id}`, value);
+  };
+
+  static deleteDetailparts = async (id) => {
+    return await api.delete(`/detailparts/${id}`);
+  };
+
+  static detailpartsVisibility = async (data) => {
+    return await api.patch(`/detailparts/${data?.id}/visibility/${data?.checked}`);
+  };
+  static getMeasurementtypes = async (size, page, query, visibility) => {
+    return await api.get(
+      `/measurementtypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+
+  static getMeasurementtypesAll = async (visibility) => {
+    return await api.get(`/measurementtypes?visibility=${visibility}`);
+  };
+
+  static addMeasurementtypes = async (data) => {
+    return await api.post(`/measurementtypes`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+
+  static editMeasurementtypes = async (value) => {
+    return await api.put(`/measurementtypes/${value?.id}`, value);
+  };
+
+  static deleteMeasurementtypes = async (id) => {
+    return await api.delete(`/measurementtypes/${id}`);
+  };
+
+  static measurementtypesVisibility = async (data) => {
+    return await api.patch(`/measurementtypes/${data?.id}/visibility/${data?.checked}`);
+  };
 }
 export default Services;

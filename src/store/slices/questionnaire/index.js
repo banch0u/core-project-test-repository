@@ -60,7 +60,10 @@ import {
   setContractcurrenciesRender,
   setWorkModesRender,
   setVehicleCategoriesRender,
-  setChemicalsRender
+  setChemicalsRender,
+  setRepairtypesRender,
+  setDetailpartsRender,
+  setMeasurementtypesRender
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -5543,6 +5546,305 @@ export const chemicalsVisibility = createAsyncThunk("/chemicalsVisibility", asyn
     dispatch(setLoading(false));
   }
 });
+
+export const getRepairtypes = createAsyncThunk(
+  "/getRepairtypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getRepairtypes(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getRepairtypesAll = createAsyncThunk(
+  "/getRepairtypesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getRepairtypesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addRepairtypes = createAsyncThunk(
+  "/addRepairtypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addRepairtypes(data);
+      dispatch(setLoading(false));
+      dispatch(setRepairtypesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editRepairtypes = createAsyncThunk(
+  "/editRepairtypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editRepairtypes(data);
+      dispatch(setLoading(false));
+      dispatch(setRepairtypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteRepairtypes = createAsyncThunk(
+  "/deleteRepairtypes",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteRepairtypes(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setRepairtypesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const repairtypesVisibility = createAsyncThunk(
+  "/repairtypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.repairtypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setRepairtypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getDetailparts = createAsyncThunk(
+  "/getDetailparts",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getDetailparts(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getDetailpartsAll = createAsyncThunk(
+  "/getDetailpartsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getDetailpartsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addDetailparts = createAsyncThunk(
+  "/addDetailparts",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addDetailparts(data);
+      dispatch(setLoading(false));
+      dispatch(setDetailpartsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editDetailparts = createAsyncThunk(
+  "/editDetailparts",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editDetailparts(data);
+      dispatch(setLoading(false));
+      dispatch(setDetailpartsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteDetailparts = createAsyncThunk(
+  "/deleteDetailparts",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteDetailparts(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setDetailpartsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const detailpartsVisibility = createAsyncThunk(
+  "/detailpartsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.detailpartsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setDetailpartsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const getMeasurementtypes = createAsyncThunk(
+  "/getMeasurementtypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getMeasurementtypes(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getMeasurementtypesAll = createAsyncThunk(
+  "/getMeasurementtypesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getMeasurementtypesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addMeasurementtypes = createAsyncThunk(
+  "/addMeasurementtypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addMeasurementtypes(data);
+      dispatch(setLoading(false));
+      dispatch(setMeasurementtypesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editMeasurementtypes = createAsyncThunk(
+  "/editMeasurementtypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editMeasurementtypes(data);
+      dispatch(setLoading(false));
+      dispatch(setMeasurementtypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteMeasurementtypes = createAsyncThunk(
+  "/deleteMeasurementtypes",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteMeasurementtypes(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setMeasurementtypesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const measurementtypesVisibility = createAsyncThunk(
+  "/measurementtypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.measurementtypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setMeasurementtypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -5932,6 +6234,26 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getChemicalsAll.fulfilled, (state, { payload }) => {
       state.chemicalsAll = payload;
+    });
+    builder.addCase(getRepairtypes.fulfilled, (state, { payload }) => {
+      state.repairtypes = payload;
+    });
+    builder.addCase(getRepairtypesAll.fulfilled, (state, { payload }) => {
+      state.repairtypesAll = payload;
+    });
+
+    builder.addCase(getDetailparts.fulfilled, (state, { payload }) => {
+      state.detailparts = payload;
+    });
+    builder.addCase(getDetailpartsAll.fulfilled, (state, { payload }) => {
+      state.detailpartsAll = payload;
+    });
+
+    builder.addCase(getMeasurementtypes.fulfilled, (state, { payload }) => {
+      state.measurementtypes = payload;
+    });
+    builder.addCase(getMeasurementtypesAll.fulfilled, (state, { payload }) => {
+      state.measurementtypesAll = payload;
     });
   },
 });
