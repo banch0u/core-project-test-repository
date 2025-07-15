@@ -5574,7 +5574,7 @@ export const getRepairtypesAll = createAsyncThunk(
       dispatch(setLoading(true));
       const response = await Services.getRepairtypesAll(visibility);
       dispatch(setLoading(false));
-      return response?.data;
+      return response?.data?.data;
     } catch (error) {
       errorMessage(error.response?.data?.message);
       dispatch(setLoading(false));
@@ -5674,7 +5674,7 @@ export const getDetailpartsAll = createAsyncThunk(
       dispatch(setLoading(true));
       const response = await Services.getDetailpartsAll(visibility);
       dispatch(setLoading(false));
-      return response?.data;
+      return response?.data?.data;
     } catch (error) {
       errorMessage(error.response?.data?.message);
       dispatch(setLoading(false));
@@ -5773,7 +5773,7 @@ export const getMeasurementtypesAll = createAsyncThunk(
       dispatch(setLoading(true));
       const response = await Services.getMeasurementtypesAll(visibility);
       dispatch(setLoading(false));
-      return response?.data;
+      return response?.data?.data;
     } catch (error) {
       errorMessage(error.response?.data?.message);
       dispatch(setLoading(false));
