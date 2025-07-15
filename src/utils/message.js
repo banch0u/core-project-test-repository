@@ -10,11 +10,11 @@ const playNotificationSound = async () => {
   }, 400);
 };
 
-export const errorMessage = ({ value, placeMent }) => {
+export const errorMessage = (value) => {
   return notification.error({
     message: "",
     description: value || "Serverdə problem baş verdi",
-    placement: placeMent,
+    placement: "topRight",
   });
 };
 
