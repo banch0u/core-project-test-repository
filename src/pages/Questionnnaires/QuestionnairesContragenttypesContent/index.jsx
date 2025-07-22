@@ -231,34 +231,27 @@ const QuestionnairesContragenttypesContent = () => {
                 label="Ad">
                 <Input className={style.modal_input} type={"text"} />
               </Item>
-              <Item
+              <Form.Item
                 className={style.label}
                 name="tin"
                 label="VÖEN"
                 rules={[
                   { required: true, message: "" },
-                  {
-                    pattern: /^\d{10}$/,
-                    message: "",
-                  },
+                  { min: 2, message: "" },
+                  { pattern: /^\d+$/, message: "" },
                 ]}>
                 <Input
                   className={style.modal_input}
-                  maxLength={10}
                   inputMode="numeric"
                   onBeforeInput={(e) => {
-                    if (!/^\d$/.test(e.data)) {
-                      e.preventDefault();
-                    }
+                    if (!/^\d$/.test(e.data)) e.preventDefault();
                   }}
                   onPaste={(e) => {
                     const pasted = e.clipboardData.getData("Text");
-                    if (!/^\d+$/.test(pasted)) {
-                      e.preventDefault();
-                    }
+                    if (!/^\d+$/.test(pasted)) e.preventDefault();
                   }}
                 />
-              </Item>
+              </Form.Item>
             </FormModal>
             <DeleteModal
               onCancel={() => dispatch(setDeleteModalVisible(false))}

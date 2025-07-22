@@ -16,8 +16,7 @@ const ViewMoreModal = ({ children, width, onCancel, isEditing }) => {
       }}
       width={width}
       open={viewMoreModalVisible}
-      onCancel={onCancel}
-    >
+      onCancel={onCancel}>
       {children}
     </Modal>
   );
