@@ -63,7 +63,8 @@ import {
   setChemicalsRender,
   setRepairtypesRender,
   setDetailpartsRender,
-  setMeasurementtypesRender
+  setMeasurementtypesRender,
+  setRepairmentWorkTypesRender
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -5845,6 +5846,106 @@ export const measurementtypesVisibility = createAsyncThunk(
     }
   }
 );
+
+export const getRepairmentWorkTypes = createAsyncThunk(
+  "/getRepairmentWorkTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getRepairmentWorkTypes(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getRepairmentWorkTypesAll = createAsyncThunk(
+  "/getRepairmentWorkTypesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getRepairmentWorkTypesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addRepairmentWorkTypes = createAsyncThunk(
+  "/addRepairmentWorkTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addRepairmentWorkTypes(data);
+      dispatch(setLoading(false));
+      dispatch(setRepairmentWorkTypesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editRepairmentWorkTypes = createAsyncThunk(
+  "/editRepairmentWorkTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editRepairmentWorkTypes(data);
+      dispatch(setLoading(false));
+      dispatch(setRepairmentWorkTypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteRepairmentWorkTypes = createAsyncThunk(
+  "/deleteRepairmentWorkTypes",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteRepairmentWorkTypes(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setRepairmentWorkTypesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const repairmentWorkTypesVisibility = createAsyncThunk(
+  "/repairmentWorkTypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.repairmentWorkTypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setRepairmentWorkTypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -6254,6 +6355,13 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getMeasurementtypesAll.fulfilled, (state, { payload }) => {
       state.measurementtypesAll = payload;
+    });
+
+    builder.addCase(getRepairmentWorkTypes.fulfilled, (state, { payload }) => {
+      state.repairmentWorkTypes = payload;
+    });
+    builder.addCase(getRepairmentWorkTypesAll.fulfilled, (state, { payload }) => {
+      state.repairmentWorkTypesAll = payload;
     });
   },
 });

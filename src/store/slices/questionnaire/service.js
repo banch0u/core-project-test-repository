@@ -1425,5 +1425,33 @@ class Services {
   static measurementtypesVisibility = async (data) => {
     return await api.patch(`/measurementtypes/${data?.id}/visibility/${data?.checked}`);
   };
+
+  static getRepairmentWorkTypes = async (size, page, query, visibility) => {
+    return await api.get(
+      `/repairmentworktypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+
+  static getRepairmentWorkTypesAll = async (visibility) => {
+    return await api.get(`/repairmentworktypes?visibility=${visibility}`);
+  };
+
+  static addRepairmentWorkTypes = async (data) => {
+    return await api.post(`/repairmentworktypes`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+
+  static editRepairmentWorkTypes = async (value) => {
+    return await api.put(`/repairmentworktypes/${value?.id}`, value);
+  };
+
+  static deleteRepairmentWorkTypes = async (id) => {
+    return await api.delete(`/repairmentworktypes/${id}`);
+  };
+
+  static repairmentWorkTypesVisibility = async (data) => {
+    return await api.patch(`/repairmentworktypes/${data?.id}/visibility/${data?.checked}`);
+  };
 }
 export default Services;
