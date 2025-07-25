@@ -1,9 +1,9 @@
 import React from "react";
 import { TreeSelect } from "antd";
 import useStructureOption from "../../hooks/useGeneralStructureOption";
-import style from "../Select/index.module.scss";
+// import style from "../Select/index.module.scss";
 
-const GeneralStructureTreeSelect = ({ size, className, ...rest }) => {
+const GeneralStructureTreeSelect = ({ size, ...rest }) => {
   const { generalStructureOption } = useStructureOption();
 
   const normalizeAz = (str) =>
@@ -25,21 +25,22 @@ const GeneralStructureTreeSelect = ({ size, className, ...rest }) => {
     return normalizeAz(title).includes(normalizeAz(input));
   };
 
-  const getClassName = () => {
-    if (className) return className;
-    switch (size) {
-      case "sm":
-        return style.select_sm;
-      case "md":
-        return style.select_md;
-      default:
-        return style.select;
-    }
-  };
-
+  // const getClassName = () => {
+  //   if (className) return className;
+  //   switch (size) {
+  //     case "sm":
+  //       return style.select_sm;
+  //     case "md":
+  //       return style.select_md;
+  //     default:
+  //       return style.select;
+  //   }
+  // };
+  console.log(size);
   return (
     <TreeSelect
-      className={getClassName()}
+      // className={getClassName()}
+      style={{ height: size == "md" ? 42 : size == "sm" ? 34 : 48 }}
       showSearch
       popupMatchSelectWidth={false}
       allowClear

@@ -66,7 +66,8 @@ const initialState = {
   repairtypesRender: false,
   detailpartsRender: false,
   measurementtypesRender: false,
-  repairmentWorkTypesRender: false
+  repairmentWorkTypesRender: false,
+  penaltyTypesRender: false
 };
 
 export const global = createSlice({
@@ -271,6 +272,9 @@ export const global = createSlice({
     setRepairmentWorkTypesRender: (state, { payload }) => {
       state.repairmentWorkTypesRender = payload;
     },
+    setPenaltyTypesRender: (state, { payload }) => {
+      state.penaltyTypesRender = payload;
+    },
   },
 });
 
@@ -343,6 +347,7 @@ export const {
   setRepairtypesRender,
   setDetailpartsRender,
   setMeasurementtypesRender,
-  setRepairmentWorkTypesRender
+  setRepairmentWorkTypesRender,
+  setPenaltyTypesRender
 
 } = global.actions;

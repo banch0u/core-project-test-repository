@@ -26,7 +26,6 @@ import PlatformPage from "./pages/Platform";
 import HeaderLayout from "./layout/Header";
 import SidebarComponent from "./layout/Sidebar";
 import { CoreProvider } from "./store/coreProvider";
-import GeneralStructureTreeSelect from "./components/GeneralStructureTreeSelect";
 
 export const Sidebar = (props) => (
   <CoreProvider>
@@ -48,10 +47,5 @@ export const Platform = () => (
 export const Header = () => (
   <CoreProvider>
     <HeaderLayout />
-  </CoreProvider>
-);
-export const TreeSelectGeneralStructure = () => (
-  <CoreProvider>
-    <GeneralStructureTreeSelect />
   </CoreProvider>
 );

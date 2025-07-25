@@ -64,7 +64,8 @@ import {
   setRepairtypesRender,
   setDetailpartsRender,
   setMeasurementtypesRender,
-  setRepairmentWorkTypesRender
+  setRepairmentWorkTypesRender,
+  setPenaltyTypesRender
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -5946,6 +5947,106 @@ export const repairmentWorkTypesVisibility = createAsyncThunk(
     }
   }
 );
+
+export const getPenaltyTypes = createAsyncThunk(
+  "/getPenaltyTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getPenaltyTypes(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getPenaltyTypesAll = createAsyncThunk(
+  "/getPenaltyTypesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getPenaltyTypesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addPenaltyTypes = createAsyncThunk(
+  "/addPenaltyTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addPenaltyTypes(data);
+      dispatch(setLoading(false));
+      dispatch(setPenaltyTypesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editPenaltyTypes = createAsyncThunk(
+  "/editPenaltyTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editPenaltyTypes(data);
+      dispatch(setLoading(false));
+      dispatch(setPenaltyTypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deletePenaltyTypes = createAsyncThunk(
+  "/deletePenaltyTypes",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deletePenaltyTypes(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setPenaltyTypesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const penaltyTypesVisibility = createAsyncThunk(
+  "/penaltyTypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.penaltyTypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setPenaltyTypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -6362,6 +6463,12 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getRepairmentWorkTypesAll.fulfilled, (state, { payload }) => {
       state.repairmentWorkTypesAll = payload;
+    });
+    builder.addCase(getPenaltyTypes.fulfilled, (state, { payload }) => {
+      state.penaltyTypes = payload;
+    });
+    builder.addCase(getPenaltyTypesAll.fulfilled, (state, { payload }) => {
+      state.penaltyTypesAll = payload;
     });
   },
 });

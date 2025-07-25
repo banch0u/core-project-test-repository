@@ -1453,5 +1453,33 @@ class Services {
   static repairmentWorkTypesVisibility = async (data) => {
     return await api.patch(`/repairmentworktypes/${data?.id}/visibility/${data?.checked}`);
   };
+  //
+  static getPenaltyTypes = async (size, page, query, visibility) => {
+    return await api.get(
+      `/penaltytypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+
+  static getPenaltyTypesAll = async (visibility) => {
+    return await api.get(`/penaltytypes?visibility=${visibility}`);
+  };
+
+  static addPenaltyTypes = async (data) => {
+    return await api.post(`/penaltytypes`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+
+  static editPenaltyTypes = async (value) => {
+    return await api.put(`/penaltytypes/${value?.id}`, value);
+  };
+
+  static deletePenaltyTypes = async (id) => {
+    return await api.delete(`/penaltytypes/${id}`);
+  };
+
+  static penaltyTypesVisibility = async (data) => {
+    return await api.patch(`/penaltytypes/${data?.id}/visibility/${data?.checked}`);
+  };
 }
 export default Services;
