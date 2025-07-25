@@ -65,7 +65,8 @@ import {
   setDetailpartsRender,
   setMeasurementtypesRender,
   setRepairmentWorkTypesRender,
-  setPenaltyTypesRender
+  setPenaltyTypesRender,
+  setCrushReasonsRender
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -6047,6 +6048,106 @@ export const penaltyTypesVisibility = createAsyncThunk(
     }
   }
 );
+//
+export const getCrushReasons = createAsyncThunk(
+  "/getCrushReasons",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getCrushReasons(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getCrushReasonsAll = createAsyncThunk(
+  "/getCrushReasonsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getCrushReasonsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addCrushReasons = createAsyncThunk(
+  "/addCrushReasons",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addCrushReasons(data);
+      dispatch(setLoading(false));
+      dispatch(setCrushReasonsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editCrushReasons = createAsyncThunk(
+  "/editCrushReasons",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editCrushReasons(data);
+      dispatch(setLoading(false));
+      dispatch(setCrushReasonsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteCrushReasons = createAsyncThunk(
+  "/deleteCrushReasons",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteCrushReasons(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setCrushReasonsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const crushReasonsVisibility = createAsyncThunk(
+  "/crushReasonsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.crushReasonsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setCrushReasonsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -6469,6 +6570,12 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getPenaltyTypesAll.fulfilled, (state, { payload }) => {
       state.penaltyTypesAll = payload;
+    });
+    builder.addCase(getCrushReasons.fulfilled, (state, { payload }) => {
+      state.crushReasons = payload;
+    });
+    builder.addCase(getCrushReasonsAll.fulfilled, (state, { payload }) => {
+      state.crushReasonsAll = payload;
     });
   },
 });

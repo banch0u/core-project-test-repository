@@ -1481,5 +1481,33 @@ class Services {
   static penaltyTypesVisibility = async (data) => {
     return await api.patch(`/penaltytypes/${data?.id}/visibility/${data?.checked}`);
   };
+  //
+  static getCrushReasons = async (size, page, query, visibility) => {
+    return await api.get(
+      `/crushreasons/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+
+  static getCrushReasonsAll = async (visibility) => {
+    return await api.get(`/crushreasons?visibility=${visibility}`);
+  };
+
+  static addCrushReasons = async (data) => {
+    return await api.post(`/crushreasons`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+
+  static editCrushReasons = async (value) => {
+    return await api.put(`/crushreasons/${value?.id}`, value);
+  };
+
+  static deleteCrushReasons = async (id) => {
+    return await api.delete(`/crushreasons/${id}`);
+  };
+
+  static crushReasonsVisibility = async (data) => {
+    return await api.patch(`/crushreasons/${data?.id}/visibility/${data?.checked}`);
+  };
 }
 export default Services;
