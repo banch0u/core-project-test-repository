@@ -137,6 +137,8 @@ import {
   QUESTIONNAIRES_PENALTY_TYPES,
   SETTINGS_QUESTIONNAIRES_CRUSH_REASONS,
   QUESTIONNAIRES_CRUSH_REASONS,
+  SETTINGS_QUESTIONNAIRES_INSURANCE_TYPES,
+  QUESTIONNAIRES_INSURANCE_TYPES,
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -183,6 +185,7 @@ import QuestionnairesMeasurementTypesContent from "../pages/Questionnnaires/Ques
 import QuestionnairesRepairmentWorkTypesContent from "../pages/Questionnnaires/QuestionnairesRepairmentWorkTypesContent";
 import QuestionnairesPenaltyTypesContent from "../pages/Questionnnaires/QuestionnairesPenaltyTypesContent";
 import QuestionnairesCrushReasonsContent from "../pages/Questionnnaires/QuestionnairesCrushReasonsContent";
+import QuestionnairesInsurancetypesContents from "../pages/Questionnnaires/QuestionnairesInsurancetypesContent";
 
 export const questionnairesRoutes = (allowed) => {
   return (
@@ -430,6 +433,10 @@ export const questionnairesRoutes = (allowed) => {
           path={QUESTIONNAIRES_CRUSH_REASONS}
           element={<QuestionnairesCrushReasonsContent />}
         />
+        <Route
+          path={QUESTIONNAIRES_INSURANCE_TYPES}
+          element={<QuestionnairesInsurancetypesContents />}
+        />
       </Route>
 
       {/* Settings Routes */}
@@ -672,6 +679,10 @@ export const questionnairesRoutes = (allowed) => {
         <Route
           path={SETTINGS_QUESTIONNAIRES_CRUSH_REASONS}
           element={<QuestionnairesCrushReasonsContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_INSURANCE_TYPES}
+          element={<QuestionnairesInsurancetypesContents />}
         />
       </Route>
     </>

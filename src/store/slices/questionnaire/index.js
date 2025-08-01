@@ -66,7 +66,8 @@ import {
   setMeasurementtypesRender,
   setRepairmentWorkTypesRender,
   setPenaltyTypesRender,
-  setCrushReasonsRender
+  setCrushReasonsRender,
+  insuranceTypesRender
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -4579,7 +4580,7 @@ export const getCompaniesAll = createAsyncThunk(
       dispatch(setLoading(true));
       const response = await Services.getCompaniesAll(visibility);
       dispatch(setLoading(false));
-      return response?.data;
+      return response?.data?.data;
     } catch (error) {
       errorMessage(error.response.data.message);
       dispatch(setLoading(false));
@@ -6148,6 +6149,106 @@ export const crushReasonsVisibility = createAsyncThunk(
     }
   }
 );
+//
+export const getInsuranceTypes = createAsyncThunk(
+  "/getInsuranceTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getInsuranceTypes(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getInsuranceTypesAll = createAsyncThunk(
+  "/getInsuranceTypesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getInsuranceTypesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addInsuranceTypes = createAsyncThunk(
+  "/addInsuranceTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addInsuranceTypes(data);
+      dispatch(setLoading(false));
+      dispatch(insuranceTypesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editInsuranceTypes = createAsyncThunk(
+  "/editInsuranceTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editInsuranceTypes(data);
+      dispatch(setLoading(false));
+      dispatch(insuranceTypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteInsuranceTypes = createAsyncThunk(
+  "/deleteInsuranceTypes",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteInsuranceTypes(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(insuranceTypesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const insuranceTypesVisibility = createAsyncThunk(
+  "/insuranceTypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.insuranceTypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(insuranceTypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -6576,6 +6677,12 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getCrushReasonsAll.fulfilled, (state, { payload }) => {
       state.crushReasonsAll = payload;
+    });
+    builder.addCase(getInsuranceTypes.fulfilled, (state, { payload }) => {
+      state.insuranceTypes = payload;
+    });
+    builder.addCase(getInsuranceTypesAll.fulfilled, (state, { payload }) => {
+      state.insuranceTypesAll = payload;
     });
   },
 });

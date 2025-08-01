@@ -1509,5 +1509,33 @@ class Services {
   static crushReasonsVisibility = async (data) => {
     return await api.patch(`/crushreasons/${data?.id}/visibility/${data?.checked}`);
   };
+  //
+  static getInsuranceTypes = async (size, page, query, visibility) => {
+    return await api.get(
+      `/insurancetypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+
+  static getInsuranceTypesAll = async (visibility) => {
+    return await api.get(`/insurancetypes?visibility=${visibility}`);
+  };
+
+  static addInsuranceTypes = async (data) => {
+    return await api.post(`/insurancetypes`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+
+  static editInsuranceTypes = async (value) => {
+    return await api.put(`/insurancetypes/${value?.id}`, value);
+  };
+
+  static deleteInsuranceTypes = async (id) => {
+    return await api.delete(`/insurancetypes/${id}`);
+  };
+
+  static insuranceTypesVisibility = async (data) => {
+    return await api.patch(`/insurancetypes/${data?.id}/visibility/${data?.checked}`);
+  };
 }
 export default Services;
