@@ -387,6 +387,10 @@ class Services {
     );
     return response?.data;
   };
+  static getOrganizationsAll = async (visibility) => {
+    const response = await api.get(`/organisations?visibility=${visibility}`);
+    return response?.data;
+  };
   /*marginNoteTexts */
   static getMarginNoteText = async (size, page, query, visibility) => {
     const queryStr = queryString(query);

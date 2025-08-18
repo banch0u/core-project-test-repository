@@ -30,6 +30,7 @@ import {
   documentWhomVisibility,
   editDocumentWhom,
   getDocumentWhom,
+  getOrganizationsAll,
 } from "../../../store/slices/questionnaire";
 const { Content } = Layout;
 const { Item } = Form;
@@ -48,7 +49,9 @@ const QuestionnairesDocumentWhomContent = () => {
   );
   const [query, setQuery] = useState({ name: "" });
   const [typeSelect, setTypeSelect] = useState(1);
-
+  const organizationsAll = useSelector(
+    (state) => state.questionnaire.organizationsAll
+  );
   const { loading, documentWhomRender } = useSelector((state) => state.global);
 
   const documentWhom = useSelector((state) => state.questionnaire.documentWhom);
@@ -64,13 +67,12 @@ const QuestionnairesDocumentWhomContent = () => {
           name: data?.name,
           surname: data?.surname,
           patronymic: data?.patronymic,
-          departmentname: data?.departmentname,
-          organisationname: data?.organisationname,
-          AddressType: typeSelect,
+          organisationId: data?.organisationId,
+          positionName: data?.positionName,
         })
       );
     },
-    [dispatch, typeSelect]
+    [dispatch]
   );
   const onEdit = useCallback(
     (id, record) => {
@@ -79,13 +81,12 @@ const QuestionnairesDocumentWhomContent = () => {
         name: record?.name,
         surname: record?.surname,
         patronymic: record?.patronymic,
-        departmentname: record?.departmentname,
-        organisationname: record?.organisationname,
-        AddressType: typeSelect,
+        positionName: record?.positionName,
+        organisationId: record?.organisationId,
       };
       dispatch(editDocumentWhom(data));
     },
-    [dispatch, typeSelect]
+    [dispatch]
   );
   const onStatusChange = useCallback(
     (data, checked) => {
@@ -127,15 +128,25 @@ const QuestionnairesDocumentWhomContent = () => {
       name: dataObj?.name,
       surname: dataObj?.surname,
       patronymic: dataObj?.patronymic,
-      organisationName: dataObj?.organisationName,
-      departmentName: dataObj?.departmentName,
+      organisationId: dataObj?.organisationId,
+      organisationName: organizationsAll?.find(
+        (org) => org.id === dataObj?.organisationId
+      )?.name,
+      positionName: dataObj?.positionName,
       isActive: dataObj?.isActive,
       className: "rowClassName1",
     }));
   }
   const columns = useMemo(
-    () => getStreetColumns(onEditClick, onDelete, onStatusChange, dispatch),
-    [onEditClick, onDelete, onStatusChange, dispatch]
+    () =>
+      getStreetColumns(
+        onEditClick,
+        onDelete,
+        onStatusChange,
+        dispatch,
+        organizationsAll
+      ),
+    [onEditClick, onDelete, onStatusChange, dispatch, organizationsAll]
   );
 
   const [selectedColumns, setSelectedColumns] = useState(
@@ -157,6 +168,10 @@ const QuestionnairesDocumentWhomContent = () => {
     };
     dispatch(getDocumentWhom(data));
   }, [dispatch, page, documentWhomRender, size, query, typeSelect]);
+
+  useEffect(() => {
+    dispatch(getOrganizationsAll({ visibility: "nondeleted" }));
+  }, [dispatch]);
   const updateSize = (newSize) => {
     setSize(newSize); // Update state
     Cookies.set(
@@ -243,7 +258,7 @@ const QuestionnairesDocumentWhomContent = () => {
               centered={false}>
               <Item
                 rules={[
-                  { required: false, message: "" },
+                  { required: true, message: "" },
                   { min: 3, message: "Ən azından 3 simvol olmalıdır" },
                 ]}
                 name={"name"}
@@ -252,7 +267,7 @@ const QuestionnairesDocumentWhomContent = () => {
               </Item>
               <Item
                 rules={[
-                  { required: false, message: "" },
+                  { required: true, message: "" },
                   { min: 3, message: "Ən azından 3 simvol olmalıdır" },
                 ]}
                 name={"surname"}
@@ -269,21 +284,24 @@ const QuestionnairesDocumentWhomContent = () => {
                 <Input className={style.modal_input} />
               </Item>
               <Item
-                rules={[
-                  { required: false, message: "" },
-                  { min: 3, message: "Ən azından 3 simvol olmalıdır" },
-                ]}
-                name={"organisationName"}
-                label={"Müəssə"}>
-                <Input className={style.modal_input} />
+                name="organisationId"
+                label="Təşkilatın adı"
+                rules={[{ required: true, message: "" }]}>
+                <Select>
+                  {organizationsAll?.map((option) => (
+                    <Option key={option.id} value={option.id}>
+                      {option.name}
+                    </Option>
+                  ))}
+                </Select>
               </Item>
               <Item
                 rules={[
-                  { required: false, message: "" },
+                  { required: true, message: "" },
                   { min: 3, message: "Ən azından 3 simvol olmalıdır" },
                 ]}
-                name={"departmentName"}
-                label={"Şöbə"}>
+                name={"positionName"}
+                label={"Vəzifə"}>
                 <Input className={style.modal_input} />
               </Item>
             </FormModal>

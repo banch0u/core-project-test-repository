@@ -1127,7 +1127,20 @@ export const documentWhomVisibility = createAsyncThunk(
     }
   }
 );
-
+export const getOrganizationsAll = createAsyncThunk(
+  "/getOrganizationsAll",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getOrganizationsAll(data?.visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 /* */
 export const getMarginNoteText = createAsyncThunk(
   "/getMarginNoteText",
@@ -6315,6 +6328,9 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getDocumentWhomAll.fulfilled, (state, { payload }) => {
       state.documentWhomAll = payload;
+    });
+    builder.addCase(getOrganizationsAll.fulfilled, (state, { payload }) => {
+      state.organizationsAll = payload;
     });
     builder.addCase(getMarginNoteText.fulfilled, (state, { payload }) => {
       state.marginNoteText = payload;

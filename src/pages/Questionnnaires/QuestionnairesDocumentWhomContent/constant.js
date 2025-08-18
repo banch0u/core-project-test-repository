@@ -10,89 +10,89 @@ export const getStreetColumns = (
   onDelete,
   onStatusChange,
   dispatch,
-  innerW
+  organizationsAll
 ) => [
-  {
-    title: "№",
-    dataIndex: "num",
-    showCheckbox: false,
-    ellipsis: true,
-    width: 35,
-  },
-  {
-    title: "Ad",
-    dataIndex: "name",
-    width: innerW,
-    disabled: true,
-    ellipsis: true,
-  },
-  {
-    title: "Soyad",
-    dataIndex: "surname",
-    width: innerW,
-    disabled: true,
-    ellipsis: true,
-  },
-  {
-    title: "Ata Adı",
-    dataIndex: "patronymic",
-    width: innerW,
-    disabled: true,
-    ellipsis: true,
-  },
-  {
-    title: "Müəssə",
-    dataIndex: "organisationName",
-    width: innerW,
-    disabled: true,
-    ellipsis: true,
-  },
-  {
-    title: "Şöbə",
-    dataIndex: "departmentName",
-    width: innerW,
-    disabled: true,
-    ellipsis: true,
-  },
-  {
-    title: "Status",
-    key: "status",
-    disabled: true,
+    {
+      title: "№",
+      dataIndex: "num",
+      showCheckbox: false,
+      ellipsis: true,
+      width: 35,
+    },
+    {
+      title: "Ad",
+      dataIndex: "name",
+      width: 150,
+      disabled: true,
+      ellipsis: true,
+    },
+    {
+      title: "Soyad",
+      dataIndex: "surname",
+      width: 150,
+      disabled: true,
+      ellipsis: true,
+    },
+    {
+      title: "Ata Adı",
+      dataIndex: "patronymic",
+      width: 150,
+      disabled: true,
+      ellipsis: true,
+    },
+    {
+      title: "Təşkilat",
+      dataIndex: "organisationName",
+      width: 150,
+      disabled: true,
+      ellipsis: true,
+    },
+    {
+      title: "Vəzifə",
+      dataIndex: "positionName",
+      width: 150,
+      disabled: true,
+      ellipsis: true,
+    },
+    {
+      title: "Status",
+      key: "status",
+      disabled: true,
 
-    filter: false,
-    render: (data) => (
-      <Tooltip placement="top" title="Statusu dəyiş">
-        <Switch
-          size="medium"
-          checked={data?.isActive}
-          onChange={(checked) => onStatusChange(data, checked, dispatch)}
-        />
-      </Tooltip>
-    ),
-  },
-  {
-    title: "",
-    key: "actions",
-    showCheckbox: false,
-    width: 80,
-    render: (data) => (
-      <>
-        <div className={style.number}>
-          <div className={style.actions}>
-            <div onClick={() => onEditClick(data)}>
-              <EditIcon />
-            </div>
-            <div
-              onClick={() => {
-                onDelete(data?.id);
-                dispatch(setDeleteModalVisible(true));
-              }}
-            >
-              <DeleteIconQ />
+      filter: false,
+      render: (data) => (
+        <Tooltip placement="top" title="Statusu dəyiş">
+          <Switch
+            size="medium"
+            checked={data?.isActive}
+            onChange={(checked) => onStatusChange(data, checked, dispatch)}
+          />
+        </Tooltip>
+      ),
+    },
+    {
+      title: "",
+      key: "actions",
+      showCheckbox: false,
+      width: 80,
+      render: (data) => (
+        <>
+          <div className={style.number}>
+            <div className={style.actions}>
+              <div onClick={() => onEditClick(data)}>
+                <EditIcon />
+              </div>
+              <div
+                onClick={() => {
+                  onDelete(data?.id);
+                  dispatch(setDeleteModalVisible(true));
+                }}
+              >
+                <DeleteIconQ />
+              </div>
             </div>
           </div>
-        </div>
-      </>
-    ),
-  },
-];
+        </>
+      ),
+    },
+  ];
