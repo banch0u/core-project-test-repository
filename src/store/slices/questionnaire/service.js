@@ -1541,5 +1541,33 @@ class Services {
   static insuranceTypesVisibility = async (data) => {
     return await api.patch(`/insurancetypes/${data?.id}/visibility/${data?.checked}`);
   };
+  //
+  static getExtraServices = async (size, page, query, visibility) => {
+    return await api.get(
+      `/extraservices/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+
+  static getExtraServicesAll = async (visibility) => {
+    return await api.get(`/extraservices?visibility=${visibility}`);
+  };
+
+  static addExtraServices = async (data) => {
+    return await api.post(`/extraservices`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+
+  static editExtraServices = async (value) => {
+    return await api.put(`/extraservices/${value?.id}`, value);
+  };
+
+  static deleteExtraServices = async (id) => {
+    return await api.delete(`/extraservices/${id}`);
+  };
+
+  static extraServicesVisibility = async (data) => {
+    return await api.patch(`/extraservices/${data?.id}/visibility/${data?.checked}`);
+  };
 }
 export default Services;

@@ -6262,6 +6262,106 @@ export const insuranceTypesVisibility = createAsyncThunk(
     }
   }
 );
+//
+export const getExtraServices = createAsyncThunk(
+  "/getExtraServices",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getExtraServices(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getExtraServicesAll = createAsyncThunk(
+  "/getExtraServicesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getExtraServicesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addExtraServices = createAsyncThunk(
+  "/addExtraServices",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addExtraServices(data);
+      dispatch(setLoading(false));
+      dispatch(insuranceTypesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editExtraServices = createAsyncThunk(
+  "/editExtraServices",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editExtraServices(data);
+      dispatch(setLoading(false));
+      dispatch(insuranceTypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteExtraServices = createAsyncThunk(
+  "/deleteExtraServices",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteExtraServices(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(insuranceTypesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const extraServicesVisibility = createAsyncThunk(
+  "/extraServicesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.extraServicesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(insuranceTypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -6699,6 +6799,12 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getInsuranceTypesAll.fulfilled, (state, { payload }) => {
       state.insuranceTypesAll = payload;
+    });
+    builder.addCase(getExtraServices.fulfilled, (state, { payload }) => {
+      state.extraServices = payload;
+    });
+    builder.addCase(getExtraServicesAll.fulfilled, (state, { payload }) => {
+      state.extraServicesAll = payload;
     });
   },
 });
