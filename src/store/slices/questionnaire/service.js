@@ -1569,5 +1569,33 @@ class Services {
   static extraServicesVisibility = async (data) => {
     return await api.patch(`/extraservices/${data?.id}/visibility/${data?.checked}`);
   };
+  //
+  static getFuelTypes = async (size, page, query, visibility) => {
+    return await api.get(
+      `/fueltypes/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+
+  static getFuelTypesAll = async (visibility) => {
+    return await api.get(`/fueltypes?visibility=${visibility}`);
+  };
+
+  static addFuelTypes = async (data) => {
+    return await api.post(`/fueltypes`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+
+  static editFuelTypes = async (value) => {
+    return await api.put(`/fueltypes/${value?.id}`, value);
+  };
+
+  static deleteFuelTypes = async (id) => {
+    return await api.delete(`/fueltypes/${id}`);
+  };
+
+  static fuelTypesVisibility = async (data) => {
+    return await api.patch(`/fueltypes/${data?.id}/visibility/${data?.checked}`);
+  };
 }
 export default Services;

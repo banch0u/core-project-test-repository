@@ -6362,6 +6362,106 @@ export const extraServicesVisibility = createAsyncThunk(
     }
   }
 );
+//
+export const getFuelTypes = createAsyncThunk(
+  "/getFuelTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getFuelTypes(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getFuelTypesAll = createAsyncThunk(
+  "/getFuelTypesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getFuelTypesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addFuelTypes = createAsyncThunk(
+  "/addFuelTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addFuelTypes(data);
+      dispatch(setLoading(false));
+      dispatch(setPenaltyTypesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editFuelTypes = createAsyncThunk(
+  "/editFuelTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editFuelTypes(data);
+      dispatch(setLoading(false));
+      dispatch(setPenaltyTypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteFuelTypes = createAsyncThunk(
+  "/deleteFuelTypes",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteFuelTypes(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setPenaltyTypesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const fuelTypesVisibility = createAsyncThunk(
+  "/fuelTypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.fuelTypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setPenaltyTypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -6805,6 +6905,12 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getExtraServicesAll.fulfilled, (state, { payload }) => {
       state.extraServicesAll = payload;
+    });
+    builder.addCase(getFuelTypes.fulfilled, (state, { payload }) => {
+      state.fuelTypes = payload;
+    });
+    builder.addCase(getFuelTypesAll.fulfilled, (state, { payload }) => {
+      state.fuelTypesAll = payload;
     });
   },
 });

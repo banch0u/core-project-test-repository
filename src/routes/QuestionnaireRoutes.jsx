@@ -141,6 +141,8 @@ import {
   QUESTIONNAIRES_INSURANCE_TYPES,
   QUESTIONNAIRES_EXTRA_SERVICES,
   SETTINGS_QUESTIONNAIRES_EXTRA_SERVICES,
+  QUESTIONNAIRES_FUEL_TYPES,
+  SETTINGS_QUESTIONNAIRES_FUEL_TYPES,
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -189,6 +191,7 @@ import QuestionnairesPenaltyTypesContent from "../pages/Questionnnaires/Question
 import QuestionnairesCrushReasonsContent from "../pages/Questionnnaires/QuestionnairesCrushReasonsContent";
 import QuestionnairesInsurancetypesContents from "../pages/Questionnnaires/QuestionnairesInsurancetypesContent";
 import QuestionnairesExtraServicesContent from "../pages/Questionnnaires/QuestionnairesExtraServicesContent";
+import QuestionnairesFuelTypesContent from "../pages/Questionnnaires/QuestionnairesFuelTypesContent";
 
 export const questionnairesRoutes = (allowed) => {
   return (
@@ -444,6 +447,10 @@ export const questionnairesRoutes = (allowed) => {
           path={QUESTIONNAIRES_EXTRA_SERVICES}
           element={<QuestionnairesExtraServicesContent />}
         />
+        <Route
+          path={QUESTIONNAIRES_FUEL_TYPES}
+          element={<QuestionnairesFuelTypesContent />}
+        />
       </Route>
 
       {/* Settings Routes */}
@@ -694,6 +701,10 @@ export const questionnairesRoutes = (allowed) => {
         <Route
           path={SETTINGS_QUESTIONNAIRES_EXTRA_SERVICES}
           element={<QuestionnairesExtraServicesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_FUEL_TYPES}
+          element={<QuestionnairesFuelTypesContent />}
         />
       </Route>
     </>
