@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import style from "./index.module.scss";
@@ -41,9 +41,9 @@ const Sidebar = ({ items = [] }) => {
   useEffect(() => {
     const sidebarState = Cookies.get("sidebarCollapsed") === "true";
     setCollapsed(sidebarState);
-
     dispatch(getCompanyInfo());
   }, [dispatch]);
+
   useEffect(() => {
     const fetchLogo = async () => {
       if (companyInfo?.[0]?.filePath) {
@@ -64,9 +64,41 @@ const Sidebar = ({ items = [] }) => {
     };
   }, []);
 
-  const selectedKey = items
-    .flatMap((item) => (item.children ? item.children : item))
-    .find((item) => location.pathname.includes(item.key))?.key;
+  // --- FIX: compute selectedKey by exact segment match OR full-path prefix match, prefer the longest match
+  const flatItems = useMemo(() => {
+    const flatten = (arr) =>
+      arr.flatMap((it) => (it?.children?.length ? flatten(it.children) : [it]));
+    return flatten(items || []);
+  }, [items]);
+
+  const selectedKey = useMemo(() => {
+    const rawPath = location.pathname || "/";
+    const path = rawPath.replace(/\/+$/, ""); // trim trailing slash
+    const segments = path.split("/").filter(Boolean);
+
+    const normalize = (s) => (typeof s === "string" ? s.trim() : "");
+    const candidates = flatItems
+      .map((it) => normalize(it?.key))
+      .filter(Boolean);
+
+    const isMatch = (key) => {
+      // Case A: key looks like a full path
+      if (key.startsWith("/")) {
+        const nk = key.replace(/\/+$/, "");
+        return path === nk || path.startsWith(nk + "/");
+      }
+      // Case B: key is a segment/token (e.g., "chlorine" or "chlorine-percentage")
+      // Match only exact segment equality, not substring
+      return segments.includes(key);
+    };
+
+    // gather all matches, then prefer the most specific (longest key string)
+    const matches = candidates
+      .filter(isMatch)
+      .sort((a, b) => b.length - a.length);
+
+    return matches[0]; // undefined if none
+  }, [location.pathname, flatItems]);
 
   return (
     <Sider
@@ -80,7 +112,7 @@ const Sidebar = ({ items = [] }) => {
         <Menu
           mode="inline"
           items={items}
-          selectedKeys={[selectedKey]}
+          selectedKeys={selectedKey ? [selectedKey] : []}
           className={style.menu}
         />
       </div>
