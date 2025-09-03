@@ -12,12 +12,13 @@ const Table = ({
   innerW,
   disableDrag,
   big = false,
+  isArchive = false,
+  expanded,
 }) => {
   const getSavedOrder = (id) => {
     const savedOrder = Cookies.get(`columnOrder_${id}`);
     return savedOrder ? savedOrder.split(",") : null;
   };
-
   const sortColumns = (cols, order) => {
     if (!order) return cols;
     const orderedCols = cols.filter((col) => order.includes(col.dataIndex));
@@ -220,15 +221,25 @@ const Table = ({
           x:
             innerW *
             (Array.isArray(selectedColumns) ? selectedColumns.length - 1 : 0),
-          y: `calc(88vh - ${
-            window.innerWidth > 1537
-              ? big === true
-                ? "180px"
-                : "260px"
-              : big === true
-              ? "200px"
-              : "280px"
-          })`,
+          y: !isArchive
+            ? `calc(88vh - ${
+                window.innerWidth > 1537
+                  ? big === true
+                    ? "180px"
+                    : "260px"
+                  : big === true
+                  ? "200px"
+                  : "280px"
+              })`
+            : `calc(88vh - ${
+                window.innerWidth > 1537
+                  ? expanded
+                    ? "349px"
+                    : "280px"
+                  : expanded
+                  ? "368px"
+                  : "300px"
+              })`,
         }}
       />
     </div>
