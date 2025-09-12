@@ -126,7 +126,7 @@ const Filter = ({
                               : option.id // Use ID directly
                           }>
                           {option.name} {option.surname} {option.text}
-                          {` [${option.registrationNumber}] ${option.vehicleBrand} ${option.vehicleModel}`}
+                          {` [${option.registrationNumber}] ${option.vehicleBrand?.text} ${option.vehicleModel?.text}`}
                           {/* Display the name */}
                         </Option>
                       );
