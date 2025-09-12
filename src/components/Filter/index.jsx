@@ -127,9 +127,9 @@ const Filter = ({
                           }>
                           {option.name} {option.surname} {option.text}
                           {option?.registrationNumber &&
-                            option?.vehicleBrand?.text &&
-                            option?.vehicleModel?.text &&
-                            ` [${option.registrationNumber}] ${option.vehicleBrand?.text} ${option.vehicleModel?.text}`}
+                            option?.brandId?.text &&
+                            option?.modelId?.text &&
+                            ` [${option.registrationNumber}] ${option.brandId?.text} ${option.modelId?.text}`}
                           {/* Display the name */}
                         </Option>
                       );
