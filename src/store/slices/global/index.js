@@ -69,7 +69,8 @@ const initialState = {
   repairmentWorkTypesRender: false,
   penaltyTypesRender: false,
   crushReasonsRender: false,
-  insuranceRender: false
+  insuranceRender: false,
+  oilFieldsRender: false
 };
 
 export const global = createSlice({
@@ -283,6 +284,9 @@ export const global = createSlice({
     insuranceTypesRender: (state, { payload }) => {
       state.insuranceRender = payload;
     },
+    setOilFieldsRender: (state, { payload }) => {
+      state.oilFieldsRender = payload;
+    },
   },
 });
 
@@ -358,6 +362,7 @@ export const {
   setRepairmentWorkTypesRender,
   setPenaltyTypesRender,
   setCrushReasonsRender,
-  insuranceTypesRender
+  insuranceTypesRender,
+  setOilFieldsRender
 
 } = global.actions;

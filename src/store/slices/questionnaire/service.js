@@ -1597,5 +1597,33 @@ class Services {
   static fuelTypesVisibility = async (data) => {
     return await api.patch(`/fueltypes/${data?.id}/visibility/${data?.checked}`);
   };
+  //
+  static getOilFields = async (size, page, query, visibility) => {
+    return await api.get(
+      `/oil-fields/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+
+  static getOilFieldsAll = async (visibility) => {
+    return await api.get(`/oil-fields?visibility=${visibility}`);
+  };
+
+  static addOilFields = async (data) => {
+    return await api.post(`/oil-fields`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+
+  static editOilFields = async (value) => {
+    return await api.put(`/oil-fields/${value?.id}`, value);
+  };
+
+  static deleteOilFields = async (id) => {
+    return await api.delete(`/oil-fields/${id}`);
+  };
+
+  static oilFieldsVisibility = async (data) => {
+    return await api.patch(`/oil-fields/${data?.id}/visibility/${data?.checked}`);
+  };
 }
 export default Services;

@@ -143,6 +143,8 @@ import {
   SETTINGS_QUESTIONNAIRES_EXTRA_SERVICES,
   QUESTIONNAIRES_FUEL_TYPES,
   SETTINGS_QUESTIONNAIRES_FUEL_TYPES,
+  QUESTIONNAIRES_OIL_FIELDS,
+  SETTINGS_QUESTIONNAIRES_OIL_FIELDS,
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -192,6 +194,7 @@ import QuestionnairesCrushReasonsContent from "../pages/Questionnnaires/Question
 import QuestionnairesInsurancetypesContents from "../pages/Questionnnaires/QuestionnairesInsurancetypesContent";
 import QuestionnairesExtraServicesContent from "../pages/Questionnnaires/QuestionnairesExtraServicesContent";
 import QuestionnairesFuelTypesContent from "../pages/Questionnnaires/QuestionnairesFuelTypesContent";
+import QuestionnairesOilFieldsContent from "../pages/Questionnnaires/QuestionnairesOilFieldsContent";
 
 export const questionnairesRoutes = (allowed) => {
   return (
@@ -451,6 +454,10 @@ export const questionnairesRoutes = (allowed) => {
           path={QUESTIONNAIRES_FUEL_TYPES}
           element={<QuestionnairesFuelTypesContent />}
         />
+        <Route
+          path={QUESTIONNAIRES_OIL_FIELDS}
+          element={<QuestionnairesOilFieldsContent />}
+        />
       </Route>
 
       {/* Settings Routes */}
@@ -705,6 +712,10 @@ export const questionnairesRoutes = (allowed) => {
         <Route
           path={SETTINGS_QUESTIONNAIRES_FUEL_TYPES}
           element={<QuestionnairesFuelTypesContent />}
+        />
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_OIL_FIELDS}
+          element={<QuestionnairesOilFieldsContent />}
         />
       </Route>
     </>

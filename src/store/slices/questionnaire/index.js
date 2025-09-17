@@ -67,7 +67,8 @@ import {
   setRepairmentWorkTypesRender,
   setPenaltyTypesRender,
   setCrushReasonsRender,
-  insuranceTypesRender
+  insuranceTypesRender,
+  setOilFieldsRender
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -6462,6 +6463,106 @@ export const fuelTypesVisibility = createAsyncThunk(
     }
   }
 );
+//
+export const getOilFields = createAsyncThunk(
+  "/getOilFields",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getOilFields(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getOilFieldsAll = createAsyncThunk(
+  "/getOilFieldsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getOilFieldsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addOilFields = createAsyncThunk(
+  "/addOilFields",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addOilFields(data);
+      dispatch(setLoading(false));
+      dispatch(setOilFieldsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editOilFields = createAsyncThunk(
+  "/editOilFields",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editOilFields(data);
+      dispatch(setLoading(false));
+      dispatch(setOilFieldsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteOilFields = createAsyncThunk(
+  "/deleteOilFields",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteOilFields(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setOilFieldsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const oilFieldsVisibility = createAsyncThunk(
+  "oilFieldsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.oilFieldsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setOilFieldsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -6911,6 +7012,12 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getFuelTypesAll.fulfilled, (state, { payload }) => {
       state.fuelTypesAll = payload;
+    });
+    builder.addCase(getOilFields.fulfilled, (state, { payload }) => {
+      state.oilFields = payload;
+    });
+    builder.addCase(getOilFieldsAll.fulfilled, (state, { payload }) => {
+      state.oilFieldsAll = payload;
     });
   },
 });
