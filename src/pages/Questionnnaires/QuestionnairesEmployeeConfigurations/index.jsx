@@ -25,7 +25,6 @@ import Table from "../../../components/Table";
 import Filter from "../../../components/Filter";
 import {
   addEmployeeConfigurations,
-  // addEmployeeConfigurations,
   deleteEmployeeConfigurations,
   editEmployeeConfigurations,
   employeeConfigurationsVisibility,
@@ -39,6 +38,7 @@ const { Option } = AntdSelect;
 
 const { Content } = Layout;
 const { Item } = Form;
+
 const QuestionnairesEmployeeConfigurations = () => {
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
@@ -46,8 +46,10 @@ const QuestionnairesEmployeeConfigurations = () => {
   const [id, setId] = useState(0);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(
-    Cookies.get("pagination-size-questionnaire-document-type")
-      ? JSON.parse(Cookies.get("pagination-size-questionnaire-document-type"))
+    Cookies.get("pagination-size-questionnaire-employee-configurations")
+      ? JSON.parse(
+          Cookies.get("pagination-size-questionnaire-employee-configurations")
+        )
       : 20
   );
   const [query, setQuery] = useState({ name: "" });
@@ -67,6 +69,7 @@ const QuestionnairesEmployeeConfigurations = () => {
     (state) => state.employees.transportEmployeesAll
   );
   const positionsAll = useSelector((state) => state.questionnaire.positionsAll);
+
   const paginationLength = setPaginationLength(
     employeeConfigurations?.count,
     employeeConfigurations?.size
@@ -113,6 +116,7 @@ const QuestionnairesEmployeeConfigurations = () => {
     },
     [dispatch, typeSelect]
   );
+
   const onStatusChange = useCallback(
     (data, checked) => {
       const data_ = {
@@ -123,28 +127,35 @@ const QuestionnairesEmployeeConfigurations = () => {
     },
     [dispatch]
   );
+
   const closeOnViewModal = useCallback(() => {
     dispatch(setViewModalVisible(false));
   }, [dispatch]);
+
   const onClickModal = () => {
     ref?.current?.open();
   };
+
   const onEditClick = useCallback((data) => {
     console.log(data);
     ref?.current?.setEdit(data);
   }, []);
+
   const onDelete = useCallback((id) => {
     setId(id);
   }, []);
+
   const handleSearch = (value) => {
     setQuery({ name: value });
     setPage(1);
   };
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSearch(e.target.value);
     }
   };
+
   const handleColumnToggle = (checked, dataIndex) => {
     setSelectedColumns((prevSelected) => {
       if (checked) {
@@ -154,6 +165,7 @@ const QuestionnairesEmployeeConfigurations = () => {
       }
     });
   };
+
   let data = [];
   if (employeeConfigurations?.items) {
     data = employeeConfigurations?.items?.map((dataObj, i) => {
@@ -176,6 +188,7 @@ const QuestionnairesEmployeeConfigurations = () => {
           .filter(Boolean)
           .join(", ");
       };
+
       const formatGeneralStructures = (ids) => {
         if (!Array.isArray(ids)) {
           if (typeof ids === "string") {
@@ -205,6 +218,7 @@ const QuestionnairesEmployeeConfigurations = () => {
           .filter(Boolean)
           .join(", ");
       };
+
       const formatPositionNames = (ids) => {
         if (!Array.isArray(ids)) {
           if (typeof ids === "string") {
@@ -222,6 +236,7 @@ const QuestionnairesEmployeeConfigurations = () => {
           .filter(Boolean)
           .join(", ");
       };
+
       const toArray = (value) => {
         if (!value) return [];
         if (Array.isArray(value)) return value;
@@ -230,6 +245,7 @@ const QuestionnairesEmployeeConfigurations = () => {
         }
         return [];
       };
+
       return {
         num:
           employeeConfigurations?.size * employeeConfigurations?.page +
@@ -237,6 +253,7 @@ const QuestionnairesEmployeeConfigurations = () => {
           1 -
           employeeConfigurations?.size,
         id: dataObj?.id,
+
         EmployeeIds1: formatNames(dataObj?.employeeIds),
         GeneralStructures1: formatGeneralStructures(dataObj?.generalStructures),
         OperatingManagerIds1: formatNames(dataObj?.operatingManagerIds),
@@ -256,6 +273,7 @@ const QuestionnairesEmployeeConfigurations = () => {
         DriverPositions: toArray(dataObj?.driverPositions),
         MechanicPositions: toArray(dataObj?.mechanicPositions),
         DispatcherPositions: toArray(dataObj?.dispatcherPositions),
+
         isActive: dataObj?.isActive,
         className: "rowClassName1",
       };
@@ -271,6 +289,7 @@ const QuestionnairesEmployeeConfigurations = () => {
         ? convertToTreeData(node.children)
         : undefined,
     }));
+
   const treeData = useMemo(() => {
     if (!generalStructuresAll || !Array.isArray(generalStructuresAll))
       return [];
@@ -286,6 +305,7 @@ const QuestionnairesEmployeeConfigurations = () => {
       }));
     return convertToTreeData(generalStructuresAll);
   }, [generalStructuresAll]);
+
   const columns = useMemo(
     () => getStreetColumns(onEditClick, dispatch),
     [onEditClick, onDelete, onStatusChange, dispatch]
@@ -316,34 +336,17 @@ const QuestionnairesEmployeeConfigurations = () => {
     dispatch(getPositionsAll({ visibility: "nondeleted" }));
     dispatch(getGeneralStructuresAll());
   }, [dispatch]);
+
   const updateSize = (newSize) => {
-    setSize(newSize); // Update state
+    setSize(newSize);
     Cookies.set(
-      "pagination-size-questionnaire-document-type",
+      "pagination-size-questionnaire-employee-configurations",
       JSON.stringify(newSize),
       {
         expires: 7,
       }
-    ); // Save to cookies
+    );
   };
-  // const processDataRecursively = (items) => {
-  //   return items?.map((item) => ({
-  //     title: item.name,
-  //     key: item.id,
-  //     value: item.id,
-  //     children: item.children ? processDataRecursively(item.children) : [],
-  //   }));
-  // };
-  // const uniqueData = useMemo(() => {
-  //   return allGeneralStructures?.reduce((acc, current) => {
-  //     const x = acc.find((item) => item.id === current.id);
-  //     if (!x) {
-  //       acc.push(current);
-  //     }
-  //     return acc;
-  //   }, []);
-  // }, [allGeneralStructures]);
-  // const generalStructureOption = processDataRecursively(uniqueData);
 
   return (
     <>
@@ -398,6 +401,7 @@ const QuestionnairesEmployeeConfigurations = () => {
                 onChange={setPage}
               />
             </div>
+
             <FormModal
               ref={ref}
               width={454}
@@ -409,11 +413,12 @@ const QuestionnairesEmployeeConfigurations = () => {
               onEdit={onEdit}
               className={"absolute"}
               centered={false}>
+              {/* EMPLOYEE IDS — fixed: removed labelInValue to return plain IDs */}
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"EmployeeIds"}
                 label={"Heyyət üzvü"}>
-                <Select mode="multiple" labelInValue>
+                <Select mode="multiple">
                   {transportEmployeesAll?.map((item) => (
                     <Option
                       key={item.id}
@@ -424,6 +429,7 @@ const QuestionnairesEmployeeConfigurations = () => {
                   ))}
                 </Select>
               </Item>
+
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"GeneralStructures"}
@@ -438,6 +444,7 @@ const QuestionnairesEmployeeConfigurations = () => {
                   treeData={treeData}
                 />
               </Item>
+
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"Positions"}
@@ -453,6 +460,7 @@ const QuestionnairesEmployeeConfigurations = () => {
                   ))}
                 </Select>
               </Item>
+
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"PersonInChargeForFuelIds"}
@@ -468,6 +476,7 @@ const QuestionnairesEmployeeConfigurations = () => {
                   ))}
                 </Select>
               </Item>
+
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"OperatingManagerIds"}
@@ -483,6 +492,7 @@ const QuestionnairesEmployeeConfigurations = () => {
                   ))}
                 </Select>
               </Item>
+
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"DriverPositions"}
@@ -498,6 +508,7 @@ const QuestionnairesEmployeeConfigurations = () => {
                   ))}
                 </Select>
               </Item>
+
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"MechanicPositions"}
@@ -513,6 +524,7 @@ const QuestionnairesEmployeeConfigurations = () => {
                   ))}
                 </Select>
               </Item>
+
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"DispatcherPositions"}
@@ -529,6 +541,7 @@ const QuestionnairesEmployeeConfigurations = () => {
                 </Select>
               </Item>
             </FormModal>
+
             <DeleteModal
               onCancel={() => dispatch(setDeleteModalVisible(false))}
               width={280}>
@@ -538,6 +551,7 @@ const QuestionnairesEmployeeConfigurations = () => {
                 value={"Soraqçanı"}
               />
             </DeleteModal>
+
             <ViewModal onCancel={closeOnViewModal} width={695}>
               {<Success onClick={closeOnViewModal} value={"Soraqça"} />}
             </ViewModal>
