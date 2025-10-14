@@ -48,10 +48,9 @@ export const entryData = [
   {
     id: 5,
     value: "Arxiv",
-    pathname: `${rootUrl}/archive`,
+    pathname: `${rootUrl}/archive/search`,
     icon: <ArchiveIcon />,
     scopes: "archive",
-    construction: true,
   },
   {
     id: 6,
@@ -59,14 +58,12 @@ export const entryData = [
     pathname: `${rootUrl}/transport/personnel`,
     icon: <TransportIcon />,
     scopes: "transport",
-    construction: true,
   },
   {
     id: 7,
     value: "Laboratoriya",
-    pathname: `${rootUrl}/lab`,
+    pathname: `${rootUrl}/lab/flasks`,
     icon: <LabIcon />,
     scopes: "lab",
-    construction: true,
   },
 ];
