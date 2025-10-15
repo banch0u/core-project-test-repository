@@ -33,7 +33,7 @@ export const getStreetColumns = (
       queryName: "drivingLicenceCategories"
     },
     {
-      title: "Nəqliyyat kateqoriyası",
+      title: "Nəqliyyat növü",
       dataIndex: "vehicleCategory",
       width: innerW,
       disabled: false,

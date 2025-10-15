@@ -305,7 +305,7 @@ const QuestionnairesModelsContent = () => {
               <Item
                 rules={[{ required: true, message: "" }]}
                 name={"vehicleCategoryId"}
-                label={"Nəqliyyat kateqoriyası"}>
+                label={"Nəqliyyat növü"}>
                 <Select>
                   {vehicleCategoriesAll?.map((item) => (
                     <Option key={item.id} value={item.id}>
