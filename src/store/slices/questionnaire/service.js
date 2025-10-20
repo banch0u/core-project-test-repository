@@ -1625,5 +1625,33 @@ class Services {
   static oilFieldsVisibility = async (data) => {
     return await api.patch(`/oil-fields/${data?.id}/visibility/${data?.checked}`);
   };
+  //
+  static getVehicleGroups = async (size, page, query, visibility) => {
+    return await api.get(
+      `/vehiclegroups/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`
+    );
+  };
+
+  static getVehicleGroupsAll = async (visibility) => {
+    return await api.get(`/vehiclegroups?visibility=${visibility}`);
+  };
+
+  static addVehicleGroups = async (data) => {
+    return await api.post(`/vehiclegroups`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+
+  static editVehicleGroups = async (value) => {
+    return await api.put(`/vehiclegroups/${value?.id}`, value);
+  };
+
+  static deleteVehicleGroups = async (id) => {
+    return await api.delete(`/vehiclegroups/${id}`);
+  };
+
+  static vehicleGroupsVisibility = async (data) => {
+    return await api.patch(`/vehiclegroups/${data?.id}/visibility/${data?.checked}`);
+  };
 }
 export default Services;

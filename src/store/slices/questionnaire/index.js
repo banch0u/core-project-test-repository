@@ -6563,6 +6563,106 @@ export const oilFieldsVisibility = createAsyncThunk(
     }
   }
 );
+//
+export const getVehicleGroups = createAsyncThunk(
+  "/getVehicleGroups",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getVehicleGroups(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getVehicleGroupsAll = createAsyncThunk(
+  "/getVehicleGroupsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getVehicleGroupsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addVehicleGroups = createAsyncThunk(
+  "/addVehicleGroups",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addVehicleGroups(data);
+      dispatch(setLoading(false));
+      dispatch(setOilFieldsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const editVehicleGroups = createAsyncThunk(
+  "/editVehicleGroups",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editVehicleGroups(data);
+      dispatch(setLoading(false));
+      dispatch(setOilFieldsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteVehicleGroups = createAsyncThunk(
+  "/deleteVehicleGroups",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteVehicleGroups(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setOilFieldsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const vehicleGroupsVisibility = createAsyncThunk(
+  "vehicleGroupsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.vehicleGroupsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setOilFieldsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -7018,6 +7118,12 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getOilFieldsAll.fulfilled, (state, { payload }) => {
       state.oilFieldsAll = payload;
+    });
+    builder.addCase(getVehicleGroups.fulfilled, (state, { payload }) => {
+      state.vehicleGroups = payload;
+    });
+    builder.addCase(getVehicleGroupsAll.fulfilled, (state, { payload }) => {
+      state.vehicleGroupsAll = payload;
     });
   },
 });
