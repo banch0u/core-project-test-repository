@@ -645,7 +645,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
 
     {
       key: "vehicle-groups",
-      label: "Nəqliyyat qrupları",
+      label: "Dəstələr",
       link:
         mainPath === "/settings"
           ? SETTINGS_QUESTIONNAIRES_VEHICLE_GROUPS
