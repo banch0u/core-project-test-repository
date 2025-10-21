@@ -48,10 +48,12 @@ const QuestionnairesVehicleGroupsContent = () => {
 
   const { loading, repairtypesRender } = useSelector((state) => state.global);
 
-  const repairtypes = useSelector((state) => state.questionnaire.repairtypes);
+  const vehicleGroups = useSelector(
+    (state) => state.questionnaire.vehicleGroups
+  );
   const paginationLength = setPaginationLength(
-    repairtypes?.count,
-    repairtypes?.size
+    vehicleGroups?.count,
+    vehicleGroups?.size
   );
 
   const onSubmit = useCallback(
@@ -103,9 +105,10 @@ const QuestionnairesVehicleGroupsContent = () => {
     });
   };
   let data = [];
-  if (repairtypes?.items) {
-    data = repairtypes?.items?.map((dataObj, i) => ({
-      num: repairtypes?.size * repairtypes?.page + i + 1 - repairtypes?.size,
+  if (vehicleGroups?.items) {
+    data = vehicleGroups?.items?.map((dataObj, i) => ({
+      num:
+        vehicleGroups?.size * vehicleGroups?.page + i + 1 - vehicleGroups?.size,
       id: dataObj?.id,
       name: dataObj?.name,
       isActive: dataObj?.isActive,
