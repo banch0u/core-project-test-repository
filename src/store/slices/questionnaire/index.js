@@ -68,7 +68,8 @@ import {
   setPenaltyTypesRender,
   setCrushReasonsRender,
   insuranceTypesRender,
-  setOilFieldsRender
+  setOilFieldsRender,
+  setVehicleGroupsRender
 } from "../global";
 import { errorMessage } from "../../../utils/message";
 
@@ -6606,7 +6607,7 @@ export const addVehicleGroups = createAsyncThunk(
       dispatch(setLoading(true));
       await Services.addVehicleGroups(data);
       dispatch(setLoading(false));
-      dispatch(setOilFieldsRender((prev) => !prev));
+      dispatch(setVehicleGroupsRender((prev) => !prev));
       dispatch(setViewModalVisible(true));
     } catch (error) {
       errorMessage(error.response?.data?.message);
@@ -6622,7 +6623,7 @@ export const editVehicleGroups = createAsyncThunk(
       dispatch(setLoading(true));
       const response = await Services.editVehicleGroups(data);
       dispatch(setLoading(false));
-      dispatch(setOilFieldsRender((prev) => !prev));
+      dispatch(setVehicleGroupsRender((prev) => !prev));
       return response?.data;
     } catch (error) {
       errorMessage(error.response?.data?.message);
@@ -6639,7 +6640,7 @@ export const deleteVehicleGroups = createAsyncThunk(
       await Services.deleteVehicleGroups(id);
       dispatch(setLoading(false));
       dispatch(setDeleteModalVisible(false));
-      dispatch(setOilFieldsRender((prev) => !prev));
+      dispatch(setVehicleGroupsRender((prev) => !prev));
     } catch (error) {
       dispatch(setDeleteModalVisible(false));
       errorMessage(error.response?.data?.message);
@@ -6655,7 +6656,7 @@ export const vehicleGroupsVisibility = createAsyncThunk(
       dispatch(setLoading(true));
       const response = await Services.vehicleGroupsVisibility(data);
       dispatch(setLoading(false));
-      dispatch(setOilFieldsRender((prev) => !prev));
+      dispatch(setVehicleGroupsRender((prev) => !prev));
       return response?.data;
     } catch (error) {
       errorMessage(error.response?.data?.message);

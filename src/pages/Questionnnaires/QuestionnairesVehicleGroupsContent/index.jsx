@@ -46,7 +46,7 @@ const QuestionnairesVehicleGroupsContent = () => {
   );
   const [query, setQuery] = useState({ name: "" });
 
-  const { loading, repairtypesRender } = useSelector((state) => state.global);
+  const { loading, vehicleGroupsRender } = useSelector((state) => state.global);
 
   const vehicleGroups = useSelector(
     (state) => state.questionnaire.vehicleGroups
@@ -144,7 +144,7 @@ const QuestionnairesVehicleGroupsContent = () => {
       visibility: "nondeleted",
     };
     dispatch(getVehicleGroups(data));
-  }, [dispatch, page, repairtypesRender, size, query]);
+  }, [dispatch, page, vehicleGroupsRender, size, query]);
   const updateSize = (newSize) => {
     setSize(newSize); // Update state
     Cookies.set(
