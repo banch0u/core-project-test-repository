@@ -13,7 +13,7 @@ const Delete = ({ value, onCancel, onDelete }) => {
           Geri
         </Button>
         <Button color="red" onClick={onDelete}>
-          Soraqçanı sil
+          Sil
         </Button>
       </div>
     </div>
