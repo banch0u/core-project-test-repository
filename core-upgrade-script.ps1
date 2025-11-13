@@ -1,11 +1,11 @@
 $folders = @(
-  "C:\Users\fikre\repos\account\frontend",
-  "C:\Users\fikre\repos\archive\frontend",
-  "C:\Users\fikre\repos\contract\frontend",
-  "C:\Users\fikre\repos\docflow\frontend",
-  "C:\Users\fikre\repos\hr\frontend",
-  "C:\Users\fikre\repos\lab\frontend",
-  "C:\Users\fikre\repos\transport-frontend"
+  "C:\Users\fikre\repos\accounts-ui",
+  "C:\Users\fikre\repos\archive-ui",
+  "C:\Users\fikre\repos\contracts-ui",
+  "C:\Users\fikre\repos\docflow-ui",
+  "C:\Users\fikre\repos\hr-ui",
+  "C:\Users\fikre\repos\laboratory-ui",
+  "C:\Users\fikre\repos\transport-ui"
 )
 
 foreach ($folder in $folders) {
