@@ -1,8 +1,10 @@
+// ---- generated import by questionnaireGenerator: Owners ----
+import QuestionnairesOwnersContent from "../pages/Questionnnaires/QuestionnairesOwnersContent";
+
 import React from "react";
 import { Route } from "react-router-dom";
 import QuestionnairesLayout from "../layout/QuestionnairesLayout";
 import Questionnnaires from "../pages/Questionnnaires";
-
 import QuestionnairesTopicContent from "../pages/Questionnnaires/QuestionnairesTopicContent";
 import QuestionnairesSubtopicContent from "../pages/Questionnnaires/QuestionnairesSubtopicContent";
 import QuestionnairesExecutionRulesContent from "../pages/Questionnnaires/QuestionnairesExecutionRulesContent";
@@ -14,7 +16,6 @@ import QuestionnairesStructuresContent from "../pages/Questionnnaires/Questionna
 import QuestionnairesApplicationFormContent from "../pages/Questionnnaires/QuestionnairesApplicationFormContent";
 import QuestionnairesDocumentWhomContent from "../pages/Questionnnaires/QuestionnairesDocumentWhomContent";
 import QuestionnairesMarginNoteTextsContent from "../pages/Questionnnaires/QuestionnairesMarginNoteTextsContent";
-
 import QuestionnairesBrandsContent from "../pages/Questionnnaires/QuestionnairesBrandsContent";
 import QuestionnairesChassisTypesContent from "../pages/Questionnnaires/QuestionnairesChassisTypesContent";
 import QuestionnairesColorsContent from "../pages/Questionnnaires/QuestionnairesColorsContent";
@@ -147,6 +148,8 @@ import {
   SETTINGS_QUESTIONNAIRES_OIL_FIELDS,
   SETTINGS_QUESTIONNAIRES_VEHICLE_GROUPS,
   QUESTIONNAIRES_VEHICLE_GROUPS,
+  QUESTIONNAIRES_OWNERS,
+  SETTINGS_QUESTIONNAIRES_OWNERS,
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -465,6 +468,11 @@ export const questionnairesRoutes = (allowed) => {
           path={QUESTIONNAIRES_VEHICLE_GROUPS}
           element={<QuestionnairesVehicleGroupsContent />}
         />
+
+        <Route
+          path={QUESTIONNAIRES_OWNERS}
+          element={<QuestionnairesOwnersContent />}
+        />
       </Route>
 
       {/* Settings Routes */}
@@ -727,6 +735,11 @@ export const questionnairesRoutes = (allowed) => {
         <Route
           path={SETTINGS_QUESTIONNAIRES_VEHICLE_GROUPS}
           element={<QuestionnairesVehicleGroupsContent />}
+        />
+
+        <Route
+          path={SETTINGS_QUESTIONNAIRES_OWNERS}
+          element={<QuestionnairesOwnersContent />}
         />
       </Route>
     </>

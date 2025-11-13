@@ -7,6 +7,7 @@ const initialState = {
   viewMoreModalVisible: false,
   deleteModalVisible: false,
   topicsRender: false,
+  OwnersRender: false,
   subtopicsRender: false,
   executionRulesRender: false,
   documentRecieveMethodsRender: false,
@@ -78,6 +79,10 @@ export const global = createSlice({
   name: "global",
   initialState,
   reducers: {
+    setOwnersRender: (state, { payload }) => {
+      state.OwnersRender = payload;
+    },
+
     setLoading: (state, { payload }) => {
       state.loading = payload;
     },
@@ -297,6 +302,7 @@ export const global = createSlice({
 export const {
   setLoading,
   setNotificationsRender,
+  setOwnersRender,
   setViewModalVisible,
   setViewMoreModalVisible,
   setDeleteModalVisible,
@@ -369,5 +375,4 @@ export const {
   insuranceTypesRender,
   setOilFieldsRender,
   setVehicleGroupsRender
-
 } = global.actions;

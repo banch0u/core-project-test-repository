@@ -1,76 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Services from "./service";
-import {
-  setApplicationFormsRender,
-  setCountryRender,
-  setDeleteModalVisible,
-  setDeliveryMethodRender,
-  setDocumentRecieveMethodsRender,
-  setDocumentTypesRender,
-  setDocumentWhomRender,
-  setExecutionRulesRender,
-  setLoading,
-  setMarginNoteTextRender,
-  setOrganizationRender,
-  setStructureRender,
-  setSubtopicsRender,
-  setTopicsRender,
-  setViewModalVisible,
-  setBrandRender,
-  setChassisTypeRender,
-  setColorRender,
-  setEnginetypeRender,
-  setGearboxtypeRender,
-  setIssuedauthoritieRender,
-  setModelRender,
-  setOwnershiptypeRender,
-  setOrganisationrecordRender,
-  setTransmittertypeRender,
-  setVehicleRender,
-  setVehicletypeRender,
-  setVrcRender,
-  setAcademicdegreesRender,
-  setDisabilitystatusesRender,
-  setHonorarytitlesRender,
-  setMilitarystaffsRender,
-  setMilitarycategoriesRender,
-  setMilitaryranksRender,
-  setMilitarygroupsRender,
-  setGeneralstructurestatusesRender,
-  setWorkschedulesRender,
-  setSpecializationsRender,
-  setWarparticipantsRender,
-  setGeneralstructuretypesRender,
-  setEducationinstitutionsRender,
-  setEducationpaymentsRender,
-  setEducationlevelsRender,
-  setReprimandtypesRender,
-  setSpecialdaysRender,
-  setCategoriesRender,
-  setRegionsRender,
-  setAreasRender,
-  setCompaniesRender,
-  setPositionsRender,
-  setHallsRender,
-  setDrivingcategoriesRender,
-  setEmployeeConfigurationsRender,
-  setContracttypesRender,
-  setContragenttypesRender,
-  setOrdersRender,
-  setContractcurrenciesRender,
-  setWorkModesRender,
-  setVehicleCategoriesRender,
-  setChemicalsRender,
-  setRepairtypesRender,
-  setDetailpartsRender,
-  setMeasurementtypesRender,
-  setRepairmentWorkTypesRender,
-  setPenaltyTypesRender,
-  setCrushReasonsRender,
-  insuranceTypesRender,
-  setOilFieldsRender,
-  setVehicleGroupsRender
-} from "../global";
+import { setApplicationFormsRender, setCountryRender, setDeleteModalVisible, setDeliveryMethodRender, setDocumentRecieveMethodsRender, setDocumentTypesRender, setDocumentWhomRender, setExecutionRulesRender, setLoading, setMarginNoteTextRender, setOrganizationRender, setStructureRender, setSubtopicsRender, setTopicsRender, setViewModalVisible, setBrandRender, setChassisTypeRender, setColorRender, setEnginetypeRender, setGearboxtypeRender, setIssuedauthoritieRender, setModelRender, setOwnershiptypeRender, setOrganisationrecordRender, setTransmittertypeRender, setVehicleRender, setVehicletypeRender, setVrcRender, setAcademicdegreesRender, setDisabilitystatusesRender, setHonorarytitlesRender, setMilitarystaffsRender, setMilitarycategoriesRender, setMilitaryranksRender, setMilitarygroupsRender, setGeneralstructurestatusesRender, setWorkschedulesRender, setSpecializationsRender, setWarparticipantsRender, setGeneralstructuretypesRender, setEducationinstitutionsRender, setEducationpaymentsRender, setEducationlevelsRender, setReprimandtypesRender, setSpecialdaysRender, setCategoriesRender, setRegionsRender, setAreasRender, setCompaniesRender, setPositionsRender, setHallsRender, setDrivingcategoriesRender, setEmployeeConfigurationsRender, setContracttypesRender, setContragenttypesRender, setOrdersRender, setContractcurrenciesRender, setWorkModesRender, setVehicleCategoriesRender, setChemicalsRender, setRepairtypesRender, setDetailpartsRender, setMeasurementtypesRender, setRepairmentWorkTypesRender, setPenaltyTypesRender, setCrushReasonsRender, insuranceTypesRender, setOilFieldsRender, setVehicleGroupsRender, setOwnersRender } from "../global";
 import { errorMessage } from "../../../utils/message";
 
 const initialState = {
@@ -6664,6 +6594,108 @@ export const vehicleGroupsVisibility = createAsyncThunk(
     }
   }
 );
+
+export const getOwners = createAsyncThunk(
+  "/getOwners",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getOwners(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getOwnersAll = createAsyncThunk(
+  "/getOwnersAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getOwnersAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addOwners = createAsyncThunk(
+  "/addOwners",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addOwners(data);
+      dispatch(setLoading(false));
+      dispatch(setOwnersRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editOwners = createAsyncThunk(
+  "/editOwners",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editOwners(data);
+      dispatch(setLoading(false));
+      dispatch(setOwnersRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteOwners = createAsyncThunk(
+  "/deleteOwners",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteOwners(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setOwnersRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const OwnersVisibility = createAsyncThunk(
+  "OwnersVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.OwnersVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setOwnersRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+// ---- end generated ----
+
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -7126,7 +7158,16 @@ export const questionnaire = createSlice({
     builder.addCase(getVehicleGroupsAll.fulfilled, (state, { payload }) => {
       state.vehicleGroupsAll = payload;
     });
-  },
+  
+    // ---- generated reducers for Owners ----
+    builder.addCase(getOwners.fulfilled, (state, { payload }) => {
+      state.owners = payload;
+    });
+    builder.addCase(getOwnersAll.fulfilled, (state, { payload }) => {
+      state.ownersAll = payload;
+    });
+    // ---- end generated reducers ----
+    },
 });
 
 export const { setPage } = questionnaire.actions;

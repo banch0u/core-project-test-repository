@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import style from "./index.module.scss";
-import { Layout, Menu, Input } from "antd";
-
 import {
-  QUESTIONNAIRES_ACADEMIC_DEGREES,
+  Link,
+  useLocation } from "react-router-dom";import style from "./index.module.scss";import { Layout,
+  Menu,
+  Input } from "antd";import {  QUESTIONNAIRES_ACADEMIC_DEGREES,
   QUESTIONNAIRES_APPLICATION_FORMS,
   QUESTIONNAIRES_AREAS,
   QUESTIONNAIRES_BRANDS,
@@ -132,6 +131,8 @@ import {
   SETTINGS_QUESTIONNAIRES_WAR_PARTICIPANTS,
   SETTINGS_QUESTIONNAIRES_WORK_MODES,
   SETTINGS_QUESTIONNAIRES_WORK_SCHEDULES,
+  QUESTIONNAIRES_OWNERS,
+  SETTINGS_QUESTIONNAIRES_OWNERS
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -651,7 +652,17 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
           ? SETTINGS_QUESTIONNAIRES_VEHICLE_GROUPS
           : QUESTIONNAIRES_VEHICLE_GROUPS,
     },
-  ];
+  
+    {
+      key: "owners", //delete the "/" at the start of string 
+      label: "Mülkiyyətçi", 
+      link:
+        mainPath === "/settings"
+          ? SETTINGS_QUESTIONNAIRES_OWNERS 
+          : QUESTIONNAIRES_OWNERS, 
+    },
+// ---- generated sidebar item by questionnaireGenerator: Owners ----
+];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
 
