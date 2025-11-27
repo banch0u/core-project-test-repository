@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import style from "./index.module.scss";
+import { Layout, Menu, Input } from "antd";
 import {
-  Link,
-  useLocation } from "react-router-dom";import style from "./index.module.scss";import { Layout,
-  Menu,
-  Input } from "antd";import {  QUESTIONNAIRES_ACADEMIC_DEGREES,
+  QUESTIONNAIRES_ACADEMIC_DEGREES,
   QUESTIONNAIRES_APPLICATION_FORMS,
   QUESTIONNAIRES_AREAS,
   QUESTIONNAIRES_BRANDS,
@@ -67,72 +67,7 @@ import {
   QUESTIONNAIRES_WAR_PARTICIPANTS,
   QUESTIONNAIRES_WORK_MODES,
   QUESTIONNAIRES_WORK_SCHEDULES,
-  SETTINGS_EMPLOYEE_CONFIGURATIONS,
-  SETTINGS_QUESTIONNAIRES_ACADEMIC_DEGREES,
-  SETTINGS_QUESTIONNAIRES_APPLICATION_FORMS,
-  SETTINGS_QUESTIONNAIRES_AREAS,
-  SETTINGS_QUESTIONNAIRES_BRANDS,
-  SETTINGS_QUESTIONNAIRES_CATEGORIES,
-  SETTINGS_QUESTIONNAIRES_CHASSISTYPES,
-  SETTINGS_QUESTIONNAIRES_CHEMICHALS,
-  SETTINGS_QUESTIONNAIRES_COLORS,
-  SETTINGS_QUESTIONNAIRES_COMPANIES,
-  SETTINGS_QUESTIONNAIRES_CONTRACTCURRENCIES,
-  SETTINGS_QUESTIONNAIRES_CONTRACTTYPES,
-  SETTINGS_QUESTIONNAIRES_CONTRAGENTTYPES,
-  SETTINGS_QUESTIONNAIRES_COUNTRIES,
-  SETTINGS_QUESTIONNAIRES_CRUSH_REASONS,
-  SETTINGS_QUESTIONNAIRES_DETAIL_PARTS,
-  SETTINGS_QUESTIONNAIRES_DISABILITY_STATUSES,
-  SETTINGS_QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
-  SETTINGS_QUESTIONNAIRES_DOCUMENT_TYPES,
-  SETTINGS_QUESTIONNAIRES_DOCUMENT_WHOM,
-  SETTINGS_QUESTIONNAIRES_DRIVING_CATEGORIES,
-  SETTINGS_QUESTIONNAIRES_EDUCATION_INSTITUTIONS,
-  SETTINGS_QUESTIONNAIRES_EDUCATION_LEVELS,
-  SETTINGS_QUESTIONNAIRES_EDUCATION_PAYMENTS,
-  SETTINGS_QUESTIONNAIRES_ENGINETYPES,
-  SETTINGS_QUESTIONNAIRES_EXECUTION_RULES,
-  SETTINGS_QUESTIONNAIRES_EXTRA_SERVICES,
-  SETTINGS_QUESTIONNAIRES_FUEL_TYPES,
-  SETTINGS_QUESTIONNAIRES_GEARBOXTYPES,
-  SETTINGS_QUESTIONNAIRES_GENERAL_STRUCTURE_STATUSES,
-  SETTINGS_QUESTIONNAIRES_GENERAL_STRUCTURE_TYPES,
-  SETTINGS_QUESTIONNAIRES_HALLS,
-  SETTINGS_QUESTIONNAIRES_HONORARY_TITLES,
-  SETTINGS_QUESTIONNAIRES_INSURANCE_TYPES,
-  SETTINGS_QUESTIONNAIRES_ISSUEDAUTHORITIES,
-  SETTINGS_QUESTIONNAIRES_MARGIN_NOTE_TEXTS,
-  SETTINGS_QUESTIONNAIRES_MEASUREMENT_TYPES,
-  SETTINGS_QUESTIONNAIRES_MILITARY_CATEGORIES,
-  SETTINGS_QUESTIONNAIRES_MILITARY_GROUPS,
-  SETTINGS_QUESTIONNAIRES_MILITARY_RANKS,
-  SETTINGS_QUESTIONNAIRES_MILITARY_STAFFS,
-  SETTINGS_QUESTIONNAIRES_MODELS,
-  SETTINGS_QUESTIONNAIRES_OIL_FIELDS,
-  SETTINGS_QUESTIONNAIRES_ORDERS,
-  SETTINGS_QUESTIONNAIRES_ORGANIZATIONS,
-  SETTINGS_QUESTIONNAIRES_OWNERSHIPTYPES,
-  SETTINGS_QUESTIONNAIRES_PENALTY_TYPES,
-  SETTINGS_QUESTIONNAIRES_POSITIONS,
-  SETTINGS_QUESTIONNAIRES_REPAIR_TYPES,
-  SETTINGS_QUESTIONNAIRES_REPAIRMENT_WORK_TYPES,
-  // SETTINGS_QUESTIONNAIRES_REGIONS,
-  SETTINGS_QUESTIONNAIRES_REPRIMAND_TYPES,
-  SETTINGS_QUESTIONNAIRES_SPECIAL_DAYS,
-  SETTINGS_QUESTIONNAIRES_SPECIALIZATIONS,
-  SETTINGS_QUESTIONNAIRES_STRUCTURES,
-  SETTINGS_QUESTIONNAIRES_SUBTOPIC,
-  SETTINGS_QUESTIONNAIRES_TOPIC,
-  SETTINGS_QUESTIONNAIRES_TRANSMITTERTYPES,
-  SETTINGS_QUESTIONNAIRES_VEHICLE_CATEGORIES,
-  SETTINGS_QUESTIONNAIRES_VEHICLE_GROUPS,
-  SETTINGS_QUESTIONNAIRES_VEHICLETYPES,
-  SETTINGS_QUESTIONNAIRES_WAR_PARTICIPANTS,
-  SETTINGS_QUESTIONNAIRES_WORK_MODES,
-  SETTINGS_QUESTIONNAIRES_WORK_SCHEDULES,
   QUESTIONNAIRES_OWNERS,
-  SETTINGS_QUESTIONNAIRES_OWNERS
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -149,528 +84,344 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
     {
       key: "topic",
       label: "Mövzular",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_TOPIC
-          : QUESTIONNAIRES_TOPIC,
+      link: QUESTIONNAIRES_TOPIC,
     },
     {
       key: "subtopic",
       label: "Alt mövzular",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_SUBTOPIC
-          : QUESTIONNAIRES_SUBTOPIC,
+      link: QUESTIONNAIRES_SUBTOPIC,
     },
     {
       key: "executionRules",
       label: "İcra qaydaları",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_EXECUTION_RULES
-          : QUESTIONNAIRES_EXECUTION_RULES,
+      link: QUESTIONNAIRES_EXECUTION_RULES,
     },
     {
       key: "document-recieve-methods",
       label: "Daxil olma yolları",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS
-          : QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
+      link: QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
     },
     {
       key: "documentType",
       label: "Sənəd Növləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_DOCUMENT_TYPES
-          : QUESTIONNAIRES_DOCUMENT_TYPES,
+      link: QUESTIONNAIRES_DOCUMENT_TYPES,
     },
     {
       key: "country",
       label: "Ölkələr",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_COUNTRIES
-          : QUESTIONNAIRES_COUNTRIES,
+      link: QUESTIONNAIRES_COUNTRIES,
     },
     {
       key: "organization",
       label: "Təşkilatlar",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_ORGANIZATIONS
-          : QUESTIONNAIRES_ORGANIZATIONS,
+      link: QUESTIONNAIRES_ORGANIZATIONS,
     },
     {
       key: "structure",
       label: "Strukturlar",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_STRUCTURES
-          : QUESTIONNAIRES_STRUCTURES,
+      link: QUESTIONNAIRES_STRUCTURES,
     },
     {
       key: "application_form",
       label: "Müraciət formaları",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_APPLICATION_FORMS
-          : QUESTIONNAIRES_APPLICATION_FORMS,
+      link: QUESTIONNAIRES_APPLICATION_FORMS,
     },
     {
       key: "document_whom",
       label: "Şəxslər",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_DOCUMENT_WHOM
-          : QUESTIONNAIRES_DOCUMENT_WHOM,
+      link: QUESTIONNAIRES_DOCUMENT_WHOM,
     },
     {
       key: "margin_note_texts",
       label: "Dərkənar mətni",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_MARGIN_NOTE_TEXTS
-          : QUESTIONNAIRES_MARGIN_NOTE_TEXTS,
+      link: QUESTIONNAIRES_MARGIN_NOTE_TEXTS,
     },
     {
       key: "brands",
       label: "Markalar",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_BRANDS
-          : QUESTIONNAIRES_BRANDS,
+      link: QUESTIONNAIRES_BRANDS,
     },
     {
       key: "chassis-types",
       label: "Şassi növləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_CHASSISTYPES
-          : QUESTIONNAIRES_CHASSIS_TYPES,
+      link: QUESTIONNAIRES_CHASSIS_TYPES,
     },
     {
       key: "engine-types",
       label: "Mühərrik növləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_ENGINETYPES
-          : QUESTIONNAIRES_ENGINE_TYPES,
+      link: QUESTIONNAIRES_ENGINE_TYPES,
     },
     {
       key: "gearbox-types",
       label: "Sürətlər qutusu",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_GEARBOXTYPES
-          : QUESTIONNAIRES_GEARBOX_TYPES,
+      link: QUESTIONNAIRES_GEARBOX_TYPES,
     },
     {
       key: "issued-authorities",
       label: "Verən orqanlar",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_ISSUEDAUTHORITIES
-          : QUESTIONNAIRES_ISSUED_AUTHORITIES,
+      link: QUESTIONNAIRES_ISSUED_AUTHORITIES,
     },
     {
       key: "models",
       label: "Modellər",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_MODELS
-          : QUESTIONNAIRES_MODELS,
+      link: QUESTIONNAIRES_MODELS,
     },
     {
       key: "ownership-types",
       label: "Mülkiyyət növləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_OWNERSHIPTYPES
-          : QUESTIONNAIRES_OWNERSHIP_TYPES,
+      link: QUESTIONNAIRES_OWNERSHIP_TYPES,
     },
     {
       key: "transmitter-types",
       label: "Ötürücü növləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_TRANSMITTERTYPES
-          : QUESTIONNAIRES_TRANSMITTER_TYPES,
+      link: QUESTIONNAIRES_TRANSMITTER_TYPES,
     },
     {
       key: "vehicle-types",
       label: "Nəqliyyat tipləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_VEHICLETYPES
-          : QUESTIONNAIRES_VEHICLE_TYPES,
+      link: QUESTIONNAIRES_VEHICLE_TYPES,
     },
     {
       key: "colors",
       label: "Rənglər",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_COLORS
-          : QUESTIONNAIRES_COLORS,
+      link: QUESTIONNAIRES_COLORS,
     },
     {
       key: "academic-degrees",
       label: "Akademik dərəcələr",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_ACADEMIC_DEGREES
-          : QUESTIONNAIRES_ACADEMIC_DEGREES,
+      link: QUESTIONNAIRES_ACADEMIC_DEGREES,
     },
     {
       key: "disability-statuses",
       label: "Əlillik statusları",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_DISABILITY_STATUSES
-          : QUESTIONNAIRES_DISABILITY_STATUSES,
+      link: QUESTIONNAIRES_DISABILITY_STATUSES,
     },
     {
       key: "honorary-titles",
       label: "Fəxri adlar",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_HONORARY_TITLES
-          : QUESTIONNAIRES_HONORARY_TITLES,
+      link: QUESTIONNAIRES_HONORARY_TITLES,
     },
     {
       key: "military-staffs",
       label: "Hərbi qulluqçular",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_MILITARY_STAFFS
-          : QUESTIONNAIRES_MILITARY_STAFFS,
+      link: QUESTIONNAIRES_MILITARY_STAFFS,
     },
     {
       key: "military-categories",
       label: "Hərbi kateqoriyalar",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_MILITARY_CATEGORIES
-          : QUESTIONNAIRES_MILITARY_CATEGORIES,
+      link: QUESTIONNAIRES_MILITARY_CATEGORIES,
     },
     {
       key: "military-ranks",
       label: "Hərbi rütbələr",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_MILITARY_RANKS
-          : QUESTIONNAIRES_MILITARY_RANKS,
+      link: QUESTIONNAIRES_MILITARY_RANKS,
     },
     {
       key: "military-groups",
       label: "Hərbi qruplar",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_MILITARY_GROUPS
-          : QUESTIONNAIRES_MILITARY_GROUPS,
+      link: QUESTIONNAIRES_MILITARY_GROUPS,
     },
     {
       key: "general-structure-statuses",
       label: "Ümumi struktur statusları",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_GENERAL_STRUCTURE_STATUSES
-          : QUESTIONNAIRES_GENERAL_STRUCTURE_STATUSES,
+      link: QUESTIONNAIRES_GENERAL_STRUCTURE_STATUSES,
     },
     {
       key: "work-schedules",
       label: "İş qrafikləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_WORK_SCHEDULES
-          : QUESTIONNAIRES_WORK_SCHEDULES,
+      link: QUESTIONNAIRES_WORK_SCHEDULES,
     },
     {
       key: "specializations",
       label: "İxtisaslar",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_SPECIALIZATIONS
-          : QUESTIONNAIRES_SPECIALIZATIONS,
+      link: QUESTIONNAIRES_SPECIALIZATIONS,
     },
     {
       key: "war-participants",
       label: "Müharibə iştirakçıları",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_WAR_PARTICIPANTS
-          : QUESTIONNAIRES_WAR_PARTICIPANTS,
+      link: QUESTIONNAIRES_WAR_PARTICIPANTS,
     },
     {
       key: "general-structure-types",
       label: "Ümumi struktur növləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_GENERAL_STRUCTURE_TYPES
-          : QUESTIONNAIRES_GENERAL_STRUCTURE_TYPES,
+      link: QUESTIONNAIRES_GENERAL_STRUCTURE_TYPES,
     },
     {
       key: "education-institutions",
       label: "Təhsil müəssisələri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_EDUCATION_INSTITUTIONS
-          : QUESTIONNAIRES_EDUCATION_INSTITUTIONS,
+      link: QUESTIONNAIRES_EDUCATION_INSTITUTIONS,
     },
     {
       key: "education-payments",
       label: "Təhsil ödənişləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_EDUCATION_PAYMENTS
-          : QUESTIONNAIRES_EDUCATION_PAYMENTS,
+      link: QUESTIONNAIRES_EDUCATION_PAYMENTS,
     },
     {
       key: "education-levels",
       label: "Təhsil səviyyələri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_EDUCATION_LEVELS
-          : QUESTIONNAIRES_EDUCATION_LEVELS,
+      link: QUESTIONNAIRES_EDUCATION_LEVELS,
     },
     {
       key: "reprimand-types",
       label: "Töhmət növləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_REPRIMAND_TYPES
-          : QUESTIONNAIRES_REPRIMAND_TYPES,
+      link: QUESTIONNAIRES_REPRIMAND_TYPES,
     },
     {
       key: "special-days",
       label: "Xüsusi günlər",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_SPECIAL_DAYS
-          : QUESTIONNAIRES_SPECIAL_DAYS,
+      link: QUESTIONNAIRES_SPECIAL_DAYS,
     },
     {
       key: "areas",
       label: "Sahələr",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_AREAS
-          : QUESTIONNAIRES_AREAS,
+      link: QUESTIONNAIRES_AREAS,
     },
     {
       key: "categories",
       label: "Kateqoriyalar",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_CATEGORIES
-          : QUESTIONNAIRES_CATEGORIES,
+      link: QUESTIONNAIRES_CATEGORIES,
     },
     {
       key: "companies",
       label: "Şirkətlər",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_COMPANIES
-          : QUESTIONNAIRES_COMPANIES,
+      link: QUESTIONNAIRES_COMPANIES,
     },
     {
       key: "halls",
       label: "Zallar",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_HALLS
-          : QUESTIONNAIRES_HALLS,
+      link: QUESTIONNAIRES_HALLS,
     },
     {
       key: "positions",
       label: "Vəzifələr",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_POSITIONS
-          : QUESTIONNAIRES_POSITIONS,
+      link: QUESTIONNAIRES_POSITIONS,
     },
     {
       key: "driving-categories",
       label: "Sürücülük kateqoriyaları",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_DRIVING_CATEGORIES
-          : QUESTIONNAIRES_DRIVING_CATEGORIES,
+      link: QUESTIONNAIRES_DRIVING_CATEGORIES,
     },
     {
       key: "employee-configurations",
       label: "Heyyət tənzimləmələri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_EMPLOYEE_CONFIGURATIONS
-          : QUESTIONNAIRES_EMPLOYEE_CONFIGURATIONS,
+      link: QUESTIONNAIRES_EMPLOYEE_CONFIGURATIONS,
     },
     {
       key: "contragent-types",
       label: "Müqavilənin tərəfi",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_CONTRAGENTTYPES
-          : QUESTIONNAIRES_CONTRAGENTTYPES,
+      link: QUESTIONNAIRES_CONTRAGENTTYPES,
     },
     {
       key: "contract-types",
       label: "Müqavilə növü",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_CONTRACTTYPES
-          : QUESTIONNAIRES_CONTRACTTYPES,
+      link: QUESTIONNAIRES_CONTRACTTYPES,
     },
     {
       key: "contract-currencies",
       label: "Müqavilə valyutaları",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_CONTRACTCURRENCIES
-          : QUESTIONNAIRES_CONTRACTCURRENCIES,
+      link: QUESTIONNAIRES_CONTRACTCURRENCIES,
     },
     {
       key: "orders",
       label: "Satınalma sifarişi",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_ORDERS
-          : QUESTIONNAIRES_ORDERS,
+      link: QUESTIONNAIRES_ORDERS,
     },
     {
       key: "work-modes",
       label: "İş rejimi",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_WORK_MODES
-          : QUESTIONNAIRES_WORK_MODES,
+      link: QUESTIONNAIRES_WORK_MODES,
     },
     {
       key: "vehicle-categories",
       label: "Nəqliyyat növləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_VEHICLE_CATEGORIES
-          : QUESTIONNAIRES_VEHICLE_CATEGORIES,
+      link: QUESTIONNAIRES_VEHICLE_CATEGORIES,
     },
     {
       key: "chemicals",
       label: "Kimyəvi maddələr",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_CHEMICHALS
-          : QUESTIONNAIRES_CHEMICALS,
+      link: QUESTIONNAIRES_CHEMICALS,
     },
 
     {
       key: "repair-types",
       label: "Təmir növləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_REPAIR_TYPES
-          : QUESTIONNAIRES_REPAIR_TYPES,
+      link: QUESTIONNAIRES_REPAIR_TYPES,
     },
     {
       key: "detail-parts",
       label: "Ehtiyyat hissələri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_DETAIL_PARTS
-          : QUESTIONNAIRES_DETAIL_PARTS,
+      link: QUESTIONNAIRES_DETAIL_PARTS,
     },
     {
       key: "measurement-types",
       label: "Ölçü vahidləri(Avtonəqliyyat)",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_MEASUREMENT_TYPES
-          : QUESTIONNAIRES_MEASUREMENT_TYPES,
+      link: QUESTIONNAIRES_MEASUREMENT_TYPES,
     },
     {
       key: "repairment-work-types",
       label: "Təmir işi növləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_REPAIRMENT_WORK_TYPES
-          : QUESTIONNAIRES_REPAIRMENT_WORK_TYPES,
+      link: QUESTIONNAIRES_REPAIRMENT_WORK_TYPES,
     },
     {
       key: "penalty-types",
       label: "Cərimə növləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_PENALTY_TYPES
-          : QUESTIONNAIRES_PENALTY_TYPES,
+      link: QUESTIONNAIRES_PENALTY_TYPES,
     },
     {
       key: "crush-reasons",
       label: "Qəza səbəbləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_CRUSH_REASONS
-          : QUESTIONNAIRES_CRUSH_REASONS,
+      link: QUESTIONNAIRES_CRUSH_REASONS,
     },
     {
       key: "insurance-types",
       label: "Sığorta növləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_INSURANCE_TYPES
-          : QUESTIONNAIRES_INSURANCE_TYPES,
+      link: QUESTIONNAIRES_INSURANCE_TYPES,
     },
     {
       key: "extra-services",
       label: "Əlavə xidmətlər",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_EXTRA_SERVICES
-          : QUESTIONNAIRES_EXTRA_SERVICES,
+      link: QUESTIONNAIRES_EXTRA_SERVICES,
     },
     {
       key: "fuel-types",
       label: "Yanacaq növləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_FUEL_TYPES
-          : QUESTIONNAIRES_FUEL_TYPES,
+      link: QUESTIONNAIRES_FUEL_TYPES,
     },
     {
       key: "oil-fields",
       label: "Neft şirkətləri",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_OIL_FIELDS
-          : QUESTIONNAIRES_OIL_FIELDS,
+      link: QUESTIONNAIRES_OIL_FIELDS,
     },
 
     {
       key: "vehicle-groups",
       label: "Dəstələr",
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_VEHICLE_GROUPS
-          : QUESTIONNAIRES_VEHICLE_GROUPS,
+      link: QUESTIONNAIRES_VEHICLE_GROUPS,
     },
-  
+
     {
-      key: "owners", //delete the "/" at the start of string 
-      label: "Mülkiyyətçi", 
-      link:
-        mainPath === "/settings"
-          ? SETTINGS_QUESTIONNAIRES_OWNERS 
-          : QUESTIONNAIRES_OWNERS, 
+      key: "owners", //delete the "/" at the start of string
+      label: "Mülkiyyətçi",
+      link: QUESTIONNAIRES_OWNERS,
     },
-// ---- generated sidebar item by questionnaireGenerator: Owners ----
-];
+    // ---- generated sidebar item by questionnaireGenerator: Owners ----
+  ];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
 
-  const filteredItems = sortedItems.filter(
-    (item) =>
-      item.label.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      allowed[item.key] // ✅ Check if allowed true
-  );
+  const isAllowAll = allowed === "*" || allowed?.includes("*");
+
+  const filteredItems = sortedItems.filter((item) => {
+    const matchesSearch = item.label
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+
+    // If allowed="*" → allow all items
+    if (isAllowAll) return matchesSearch;
+
+    // Otherwise use allowed[item.key] boolean
+    return matchesSearch && allowed[item.key];
+  });
 
   const defaultOpenKeys = items
     .filter(

@@ -10,7 +10,6 @@ import {
   SettingsCogIcon,
   ConstructionRibbon,
 } from "../../assets/icons";
-import { SETTINGS_PERMISSIONS } from "../../utils/path";
 import { getCompanyInfo } from "../../store/slices/companyInfo";
 import api from "../../utils/axios";
 
@@ -106,7 +105,7 @@ const Platform = () => {
       </div>
       <div className={style.settings_button} data-no-invert-2>
         {scopesData === "*" ? (
-          <Link to={`${rootUrl}/docflow${SETTINGS_PERMISSIONS}`}>
+          <Link to={`${rootUrl}/settings`}>
             <SettingsCogIcon />
             <div data-no-invert>Tənzimləmələr</div>
           </Link>

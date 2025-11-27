@@ -14,7 +14,7 @@ import {
 import { getNotifications } from "../../store/slices/notification";
 import NotificationDropdown from "../NotificationDropdown";
 import { Link, useNavigate } from "react-router-dom";
-import { LOGIN_PATH, SETTINGS_PERMISSIONS } from "../../utils/path";
+import { LOGIN_PATH } from "../../utils/path";
 
 const ProfileOptions = () => {
   const dispatch = useDispatch();
@@ -147,9 +147,7 @@ const ProfileOptions = () => {
         {open && (
           <div className={style.profileDropdown}>
             {scopesData === "*" && (
-              <Link
-                className={style.menuItem}
-                to={`${rootUrl}/docflow${SETTINGS_PERMISSIONS}`}>
+              <Link className={style.menuItem} to={`${rootUrl}/settings`}>
                 <SettingsCogIcon />
                 <span>Tənzimləmələr</span>
               </Link>
