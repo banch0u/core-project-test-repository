@@ -459,7 +459,8 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
         className="questionnaires_menu"
         style={{
           overflowY: "auto",
-          maxHeight: "calc(100vh - 225px)",
+          maxHeight: "calc(100vh - 217px)",
+          borderBottomLeftRadius: 18,
         }}>
         <Menu
           defaultSelectedKeys={[selectedKey]}
