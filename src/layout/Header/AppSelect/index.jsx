@@ -2,7 +2,7 @@ import React, { useMemo, useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { Collapse } from "antd";
-import { RightOutlined } from "@ant-design/icons";
+import { RightOutlined, SettingOutlined } from "@ant-design/icons";
 import style from "./index.module.scss";
 import { entryData } from "../../../pages/Platform/constant";
 import Portal from "../../Portal";
@@ -26,7 +26,6 @@ const AppSelect = () => {
         scopesData?.includes(item.scopes)
     );
   }, [scopesData]);
-
   const baseSegment = useMemo(() => {
     return window.location.pathname.split("/")[1];
   }, [location.pathname]);
@@ -34,7 +33,7 @@ const AppSelect = () => {
   const active = useMemo(() => {
     return (
       filteredOptions.find((opt) => opt.pathname.includes(`/${baseSegment}`)) ||
-      filteredOptions[0]
+      null
     );
   }, [filteredOptions, baseSegment]);
 
@@ -88,8 +87,19 @@ const AppSelect = () => {
         <Panel
           header={
             <div className={style.accordionHeader}>
-              <div>{active?.icon}</div>
-              <span>{active?.value}</span>
+              {baseSegment === "settings" ? (
+                <>
+                  <div>
+                    <SettingOutlined />
+                  </div>
+                  <span>Tənzimləmələr</span>
+                </>
+              ) : (
+                <>
+                  <div>{active?.icon}</div>
+                  <span>{active?.value}</span>
+                </>
+              )}
             </div>
           }
           key="1"
@@ -109,7 +119,11 @@ const AppSelect = () => {
                 <a
                   key={option.id}
                   href={option.pathname}
-                  className={style.accordionOption}>
+                  className={`${style.accordionOption} ${
+                    baseSegment === option.pathname.split("/")[1]
+                      ? style.selected
+                      : ""
+                  }`}>
                   {option.icon}
                   <span>{option.value}</span>
                 </a>
