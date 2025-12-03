@@ -164,7 +164,7 @@ const QuestionnairesVehicleTypesContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Nəqliyyat növü</h2>
+              <h2>Nəqliyyat tipi</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}
