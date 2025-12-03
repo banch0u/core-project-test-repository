@@ -585,75 +585,47 @@ function insertIntoClassBody(content, classNamePatterns, insertionText, marker) 
  *
  * Returns { updated, inserted, reason }.
  */
-function insertRouteIntoParentBlock(content, parentPath, insertionText, marker) {
-  if (marker && content.includes(marker)) return { updated: content, inserted: false, reason: "marker_present" };
+function insertRouteIntoParentBlock(content, parentPath, insertionText) {
+  // find <Route ... path="questionnaires" ... >
+  const openTagRegex = new RegExp(`<Route[^>]*path=\\{?["']?${parentPath}["']?\\}?[^>]*>`, "m");
 
-  // Build a search string for multiline <Route ... path="parentPath"
-  // We look for a pattern like: <Route\n  path="parentPath"
-  // but we will be permissive on whitespace and attributes ordering.
-  const parentPattern = new RegExp(`<Route[\\s\\S]*?path\\s*=\\s*["']${parentPath}["'][\\s\\S]*?>`, "m");
-  const match = content.match(parentPattern);
-  if (!match) return { updated: content, inserted: false, reason: "start_not_found" };
+  const openMatch = content.match(openTagRegex);
+  if (!openMatch) return { updated: content, inserted: false, reason: "parent_not_found" };
 
-  // match.index is start of the opening <Route
-  const matchIndex = match.index;
-  // find the opening "<Route" that contains this match (search backwards)
-  const openTagIdx = content.lastIndexOf("<Route", matchIndex);
-  if (openTagIdx === -1) return { updated: content, inserted: false, reason: "open_tag_not_found" };
+  const openIndex = openMatch.index;
+  const openEnd = content.indexOf(">", openIndex);
 
-  // Find end of opening tag '>'
-  const openingTagEnd = content.indexOf(">", openTagIdx);
-  if (openingTagEnd === -1) return { updated: content, inserted: false, reason: "opening_tag_end_not_found" };
-
-  // detect if self-closing like '<Route ... />' (then we cannot insert inside)
-  const openingTagText = content.slice(openTagIdx, openingTagEnd + 1);
-  const selfClosing = /\/\s*>$/.test(openingTagText);
-  if (selfClosing) return { updated: content, inserted: false, reason: "parent_self_closing" };
-
-  // Now scan forward from openTagIdx and match nested <Route> ... </Route>
-  const openRe = /<Route\b/g;
-  const closeRe = /<\/Route>/g;
-
-  let idx = openTagIdx;
+  // now find the matching closing </Route>
   let depth = 0;
-  let endIdx = -1;
+  let closeIndex = -1;
 
-  openRe.lastIndex = idx;
-  closeRe.lastIndex = idx;
-
-  while (true) {
-    const nextOpen = openRe.exec(content);
-    const nextClose = closeRe.exec(content);
-
-    if (nextOpen && (!nextClose || nextOpen.index < nextClose.index)) {
+  for (let i = openEnd + 1; i < content.length; i++) {
+    if (content.startsWith("<Route", i)) {
       depth++;
-      idx = nextOpen.index + 6; // move past '<Route'
-      openRe.lastIndex = idx;
-      closeRe.lastIndex = idx;
-      continue;
-    } else if (nextClose) {
-      depth--;
-      idx = nextClose.index + 8; // move past '</Route>'
+    } else if (content.startsWith("</Route>", i)) {
       if (depth === 0) {
-        endIdx = nextClose.index;
+        closeIndex = i; // <-- we insert BEFORE this
         break;
+      } else {
+        depth--;
       }
-      openRe.lastIndex = idx;
-      closeRe.lastIndex = idx;
-      continue;
-    } else {
-      break;
     }
   }
 
-  if (endIdx === -1) {
-    return { updated: content, inserted: false, reason: "matching_close_not_found" };
-  }
+  if (closeIndex === -1)
+    return { updated: content, inserted: false, reason: "closing_not_found" };
 
-  // Insert text before the found closing tag
-  const newContent = content.slice(0, endIdx) + insertionText + content.slice(endIdx);
-  return { updated: newContent, inserted: true, reason: "inserted_into_parent" };
+  // insert BEFORE the parent's </Route>
+  const updated =
+    content.slice(0, closeIndex) +
+    "\n" +
+    insertionText +
+    "\n" +
+    content.slice(closeIndex);
+
+  return { updated, inserted: true, reason: "ok" };
 }
+
 
 /* ------------------ MAIN ------------------ */
 
@@ -996,25 +968,40 @@ try {
       console.log("Component import already present — skipping import insertion.");
     }
 
-    // 6.c Insert Route entries (Document). Marker-protected.
-    const docRouteMarker = ``;
-    const routeEntryDocument = `\n${docRouteMarker}\n        <Route\n          path={${pathConstA}}\n          element={<Questionnaires${questionnaireName}Content />}\n        />\n`;
+    // 6.c Insert Route entry into questionnaires parent
+    const routeEntryDocument = `
+        <Route 
+          path={${pathConstA}} 
+          element={<Questionnaires${questionnaireName}Content />} 
+        />
+`;
+    // Insert route into <Route path="questionnaires">
+    const resDoc = insertRouteIntoParentBlock(
+      routesContent,
+      "questionnaires",
+      routeEntryDocument
+    );
 
-    // Insert into Document Circulation Routes parent block using robust inserter
-    const resDoc = insertRouteIntoParentBlock(routesContent, "questionnaires", routeEntryDocument);
     if (resDoc.inserted) {
       routesContent = resDoc.updated;
-      console.log("Inserted document route entry.");
+      console.log("Inserted questionnaire route inside questionnaires block.");
     } else {
-      // fallback: try to insert before Settings Routes anchor or append near end of document routes block
-      const settingsAnchor = routesContent.indexOf('{/* Settings Routes */}');
-      if (settingsAnchor !== -1) {
-        routesContent = routesContent.slice(0, settingsAnchor) + routeEntryDocument + routesContent.slice(settingsAnchor);
-        console.log("Fallback inserted document route before Settings anchor.");
+      console.warn("⚠ Could not insert questionnaire route:", resDoc.reason);
+
+      // fallback inserting BEFORE the parent closing </Route>
+      const parentClose = routesContent.lastIndexOf("</Route>");
+      if (parentClose !== -1) {
+        routesContent =
+          routesContent.slice(0, parentClose) +
+          routeEntryDocument +
+          routesContent.slice(parentClose);
+        console.log("Fallback inserted questionnaire route before closing </Route>.");
       } else {
-        console.warn("Couldn't reliably insert document route — please add manually. Reason:", resDoc.reason);
+        console.warn("⚠ No parent closing </Route> found — appending at bottom.");
+        routesContent += "\n" + routeEntryDocument;
       }
     }
+
 
     // write back routes file
     fs.writeFileSync(routesPath, routesContent, "utf8");
