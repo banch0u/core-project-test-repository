@@ -1,26 +1,15 @@
+// ---- generated import by questionnaireGenerator: ContractTopics ----
+import QuestionnairesContractTopicsContent from "../pages/Questionnnaires/QuestionnairesContractTopicsContent";
+
+// ---- generated import by questionnaireGenerator: ContractTypesSubtypes ----
+import QuestionnairesContractTypesSubtypesContent from "../pages/Questionnnaires/QuestionnairesContractTypesSubtypesContent";
+
 // ---- generated import by questionnaireGenerator: Owners ----
 import QuestionnairesOwnersContent from "../pages/Questionnnaires/QuestionnairesOwnersContent";
 
 import React from "react";
-import { Route } from "react-router-dom";
-import QuestionnairesLayout from "../layout/QuestionnairesLayout";
-import Questionnnaires from "../pages/Questionnnaires";
-import QuestionnairesTopicContent from "../pages/Questionnnaires/QuestionnairesTopicContent";
-import QuestionnairesSubtopicContent from "../pages/Questionnnaires/QuestionnairesSubtopicContent";
-import QuestionnairesExecutionRulesContent from "../pages/Questionnnaires/QuestionnairesExecutionRulesContent";
-import QuestionnairesDocumentRecieveMethodsContent from "../pages/Questionnnaires/QuestionnairesDocumentRecieveMethodsContent";
-import QuestionnairesDocumentTypeContent from "../pages/Questionnnaires/QuestionnairesDocumentTypeContent";
-import QuestionnairesCountriesContent from "../pages/Questionnnaires/QuestionnairesCountriesContent";
-import QuestionnairesOrganizationsContent from "../pages/Questionnnaires/QuestionnairesOrganizationsContent";
-import QuestionnairesStructuresContent from "../pages/Questionnnaires/QuestionnairesStructuresContent";
-import QuestionnairesApplicationFormContent from "../pages/Questionnnaires/QuestionnairesApplicationFormContent";
-import QuestionnairesDocumentWhomContent from "../pages/Questionnnaires/QuestionnairesDocumentWhomContent";
-import QuestionnairesMarginNoteTextsContent from "../pages/Questionnnaires/QuestionnairesMarginNoteTextsContent";
-import QuestionnairesBrandsContent from "../pages/Questionnnaires/QuestionnairesBrandsContent";
-import QuestionnairesChassisTypesContent from "../pages/Questionnnaires/QuestionnairesChassisTypesContent";
-import QuestionnairesColorsContent from "../pages/Questionnnaires/QuestionnairesColorsContent";
 import {
-  QUESTIONNAIRES_TOPIC,
+  Route } from "react-router-dom";import QuestionnairesLayout from "../layout/QuestionnairesLayout";import Questionnnaires from "../pages/Questionnnaires";import QuestionnairesTopicContent from "../pages/Questionnnaires/QuestionnairesTopicContent";import QuestionnairesSubtopicContent from "../pages/Questionnnaires/QuestionnairesSubtopicContent";import QuestionnairesExecutionRulesContent from "../pages/Questionnnaires/QuestionnairesExecutionRulesContent";import QuestionnairesDocumentRecieveMethodsContent from "../pages/Questionnnaires/QuestionnairesDocumentRecieveMethodsContent";import QuestionnairesDocumentTypeContent from "../pages/Questionnnaires/QuestionnairesDocumentTypeContent";import QuestionnairesCountriesContent from "../pages/Questionnnaires/QuestionnairesCountriesContent";import QuestionnairesOrganizationsContent from "../pages/Questionnnaires/QuestionnairesOrganizationsContent";import QuestionnairesStructuresContent from "../pages/Questionnnaires/QuestionnairesStructuresContent";import QuestionnairesApplicationFormContent from "../pages/Questionnnaires/QuestionnairesApplicationFormContent";import QuestionnairesDocumentWhomContent from "../pages/Questionnnaires/QuestionnairesDocumentWhomContent";import QuestionnairesMarginNoteTextsContent from "../pages/Questionnnaires/QuestionnairesMarginNoteTextsContent";import QuestionnairesBrandsContent from "../pages/Questionnnaires/QuestionnairesBrandsContent";import QuestionnairesChassisTypesContent from "../pages/Questionnnaires/QuestionnairesChassisTypesContent";import QuestionnairesColorsContent from "../pages/Questionnnaires/QuestionnairesColorsContent";import {  QUESTIONNAIRES_TOPIC,
   QUESTIONNAIRES_SUBTOPIC,
   QUESTIONNAIRES_EXECUTION_RULES,
   QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
@@ -85,6 +74,8 @@ import {
   QUESTIONNAIRES_OIL_FIELDS,
   QUESTIONNAIRES_VEHICLE_GROUPS,
   QUESTIONNAIRES_OWNERS,
+  QUESTIONNAIRES_CONTRACTTOPICS,
+  QUESTIONNAIRES_CONTRACTTYPESSUBTYPES
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -408,7 +399,17 @@ export const questionnairesRoutes = (allowed) => {
           path={QUESTIONNAIRES_OWNERS}
           element={<QuestionnairesOwnersContent />}
         />
-      </Route>
+      
+        <Route 
+          path={QUESTIONNAIRES_CONTRACTTOPICS} 
+          element={<QuestionnairesContractTopicsContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_CONTRACTTYPESSUBTYPES} 
+          element={<QuestionnairesContractTypesSubtypesContent />} 
+        />
+</Route>
     </>
   );
 };

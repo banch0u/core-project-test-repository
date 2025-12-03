@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Services from "./service";
-import { setApplicationFormsRender, setCountryRender, setDeleteModalVisible, setDeliveryMethodRender, setDocumentRecieveMethodsRender, setDocumentTypesRender, setDocumentWhomRender, setExecutionRulesRender, setLoading, setMarginNoteTextRender, setOrganizationRender, setStructureRender, setSubtopicsRender, setTopicsRender, setViewModalVisible, setBrandRender, setChassisTypeRender, setColorRender, setEnginetypeRender, setGearboxtypeRender, setIssuedauthoritieRender, setModelRender, setOwnershiptypeRender, setOrganisationrecordRender, setTransmittertypeRender, setVehicleRender, setVehicletypeRender, setVrcRender, setAcademicdegreesRender, setDisabilitystatusesRender, setHonorarytitlesRender, setMilitarystaffsRender, setMilitarycategoriesRender, setMilitaryranksRender, setMilitarygroupsRender, setGeneralstructurestatusesRender, setWorkschedulesRender, setSpecializationsRender, setWarparticipantsRender, setGeneralstructuretypesRender, setEducationinstitutionsRender, setEducationpaymentsRender, setEducationlevelsRender, setReprimandtypesRender, setSpecialdaysRender, setCategoriesRender, setRegionsRender, setAreasRender, setCompaniesRender, setPositionsRender, setHallsRender, setDrivingcategoriesRender, setEmployeeConfigurationsRender, setContracttypesRender, setContragenttypesRender, setOrdersRender, setContractcurrenciesRender, setWorkModesRender, setVehicleCategoriesRender, setChemicalsRender, setRepairtypesRender, setDetailpartsRender, setMeasurementtypesRender, setRepairmentWorkTypesRender, setPenaltyTypesRender, setCrushReasonsRender, insuranceTypesRender, setOilFieldsRender, setVehicleGroupsRender, setOwnersRender } from "../global";
+import { setApplicationFormsRender, setCountryRender, setDeleteModalVisible, setDeliveryMethodRender, setDocumentRecieveMethodsRender, setDocumentTypesRender, setDocumentWhomRender, setExecutionRulesRender, setLoading, setMarginNoteTextRender, setOrganizationRender, setStructureRender, setSubtopicsRender, setTopicsRender, setViewModalVisible, setBrandRender, setChassisTypeRender, setColorRender, setEnginetypeRender, setGearboxtypeRender, setIssuedauthoritieRender, setModelRender, setOwnershiptypeRender, setOrganisationrecordRender, setTransmittertypeRender, setVehicleRender, setVehicletypeRender, setVrcRender, setAcademicdegreesRender, setDisabilitystatusesRender, setHonorarytitlesRender, setMilitarystaffsRender, setMilitarycategoriesRender, setMilitaryranksRender, setMilitarygroupsRender, setGeneralstructurestatusesRender, setWorkschedulesRender, setSpecializationsRender, setWarparticipantsRender, setGeneralstructuretypesRender, setEducationinstitutionsRender, setEducationpaymentsRender, setEducationlevelsRender, setReprimandtypesRender, setSpecialdaysRender, setCategoriesRender, setRegionsRender, setAreasRender, setCompaniesRender, setPositionsRender, setHallsRender, setDrivingcategoriesRender, setEmployeeConfigurationsRender, setContracttypesRender, setContragenttypesRender, setOrdersRender, setContractcurrenciesRender, setWorkModesRender, setVehicleCategoriesRender, setChemicalsRender, setRepairtypesRender, setDetailpartsRender, setMeasurementtypesRender, setRepairmentWorkTypesRender, setPenaltyTypesRender, setCrushReasonsRender, insuranceTypesRender, setOilFieldsRender, setVehicleGroupsRender, setOwnersRender, setContractTopicsRender, setContractTypesSubtypesRender } from "../global";
 import { errorMessage } from "../../../utils/message";
 
 const initialState = {
@@ -6696,6 +6696,211 @@ export const OwnersVisibility = createAsyncThunk(
 
 // ---- end generated ----
 
+
+export const getContractTopics = createAsyncThunk(
+  "/getContractTopics",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getContractTopics(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getContractTopicsAll = createAsyncThunk(
+  "/getContractTopicsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getContractTopicsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addContractTopics = createAsyncThunk(
+  "/addContractTopics",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addContractTopics(data);
+      dispatch(setLoading(false));
+      dispatch(setContractTopicsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editContractTopics = createAsyncThunk(
+  "/editContractTopics",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editContractTopics(data);
+      dispatch(setLoading(false));
+      dispatch(setContractTopicsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteContractTopics = createAsyncThunk(
+  "/deleteContractTopics",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteContractTopics(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setContractTopicsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const contractTopicsVisibility = createAsyncThunk(
+  "contractTopicsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.contractTopicsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setContractTopicsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+// ---- end generated ----
+
+
+export const getContractTypesSubtypes = createAsyncThunk(
+  "/getContractTypesSubtypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getContractTypesSubtypes(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility,
+        data?.contractTypeId
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getContractTypesSubtypesAll = createAsyncThunk(
+  "/getContractTypesSubtypesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getContractTypesSubtypesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addContractTypesSubtypes = createAsyncThunk(
+  "/addContractTypesSubtypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addContractTypesSubtypes(data);
+      dispatch(setLoading(false));
+      dispatch(setContractTypesSubtypesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editContractTypesSubtypes = createAsyncThunk(
+  "/editContractTypesSubtypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editContractTypesSubtypes(data);
+      dispatch(setLoading(false));
+      dispatch(setContractTypesSubtypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteContractTypesSubtypes = createAsyncThunk(
+  "/deleteContractTypesSubtypes",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteContractTypesSubtypes(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setContractTypesSubtypesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const contractTypesSubtypesVisibility = createAsyncThunk(
+  "contractTypesSubtypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.contractTypesSubtypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setContractTypesSubtypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+// ---- end generated ----
+
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -7158,7 +7363,7 @@ export const questionnaire = createSlice({
     builder.addCase(getVehicleGroupsAll.fulfilled, (state, { payload }) => {
       state.vehicleGroupsAll = payload;
     });
-  
+
     // ---- generated reducers for Owners ----
     builder.addCase(getOwners.fulfilled, (state, { payload }) => {
       state.owners = payload;
@@ -7167,7 +7372,25 @@ export const questionnaire = createSlice({
       state.ownersAll = payload;
     });
     // ---- end generated reducers ----
-    },
+
+    // ---- generated reducers for ContractTopics ----
+    builder.addCase(getContractTopics.fulfilled, (state, { payload }) => {
+      state.contractTopics = payload;
+    });
+    builder.addCase(getContractTopicsAll.fulfilled, (state, { payload }) => {
+      state.contractTopicsAll = payload;
+    });
+    // ---- end generated reducers ----
+
+    // ---- generated reducers for ContractTypesSubtypes ----
+    builder.addCase(getContractTypesSubtypes.fulfilled, (state, { payload }) => {
+      state.contractTypesSubtypes = payload;
+    });
+    builder.addCase(getContractTypesSubtypesAll.fulfilled, (state, { payload }) => {
+      state.contractTypesSubtypesAll = payload;
+    });
+    // ---- end generated reducers ----
+  },
 });
 
 export const { setPage } = questionnaire.actions;

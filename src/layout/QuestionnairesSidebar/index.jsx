@@ -68,6 +68,8 @@ import {
   QUESTIONNAIRES_WORK_MODES,
   QUESTIONNAIRES_WORK_SCHEDULES,
   QUESTIONNAIRES_OWNERS,
+  QUESTIONNAIRES_CONTRACTTOPICS,
+  QUESTIONNAIRES_CONTRACTTYPESSUBTYPES,
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -405,11 +407,26 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_OWNERS,
     },
     // ---- generated sidebar item by questionnaireGenerator: Owners ----
+
+    {
+      key: "contracttopics", //delete the "/" at the start of string
+      label: "Mövzular (Müqavilələr)",
+      link: QUESTIONNAIRES_CONTRACTTOPICS,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: ContractTopics ----
+
+    {
+      key: "subtypes", //delete the "/" at the start of string
+      label: "Müqavilə alt növü",
+      link: QUESTIONNAIRES_CONTRACTTYPESSUBTYPES,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: ContractTypesSubtypes ----
   ];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
 
-  const isAllowAll = allowed === "*" || allowed?.includes("*");
+  const isAllowAll =
+    allowed === "*" || (Array.isArray(allowed) && allowed.includes("*"));
 
   const filteredItems = sortedItems.filter((item) => {
     const matchesSearch = item.label

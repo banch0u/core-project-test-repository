@@ -7,9 +7,9 @@ const fs = require("fs");
 const path = require("path");
 
 ////////// === CONFIG === //////////
-const questionnaireName = "Miyau"; // change as needed
-const constantColumnName = "Miyau";
-const endpointName = "/miyau";
+const questionnaireName = "ContractTypesSubtypes"; // change as needed
+const constantColumnName = "Müqavilə alt növü";
+const endpointName = "/contracttypes/subtypes";
 ///////////////////////////////////
 
 const upperName = questionnaireName.toUpperCase();
@@ -50,7 +50,7 @@ import {
   delete${questionnaireName},
   edit${questionnaireName},
   get${questionnaireName},
-  ${questionnaireName}Visibility,
+  ${lowercaseFirstChar(questionnaireName)}Visibility,
 } from "../../../store/slices/questionnaire";
 
 const { Content } = Layout;
@@ -99,7 +99,7 @@ const Questionnaires${questionnaireName}Content = () => {
         id: data?.id,
         checked: checked,
       };
-      dispatch(${questionnaireName}Visibility(data_));
+      dispatch(${lowercaseFirstChar(questionnaireName)}Visibility(data_));
     },
     [dispatch]
   );
@@ -414,12 +414,12 @@ export const delete${questionnaireName} = createAsyncThunk(
   }
 );
 
-export const ${questionnaireName}Visibility = createAsyncThunk(
-  "${questionnaireName}Visibility",
+export const ${lowercaseFirstChar(questionnaireName)}Visibility = createAsyncThunk(
+  "${lowercaseFirstChar(questionnaireName)}Visibility",
   async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.${questionnaireName}Visibility(data);
+      const response = await Services.${lowercaseFirstChar(questionnaireName)}Visibility(data);
       dispatch(setLoading(false));
       dispatch(set${questionnaireName}Render((prev) => !prev));
       return response?.data;
@@ -455,7 +455,7 @@ const servicesBoilerplateTemplate = `
     const response = await api.delete(\`${endpointName}/\${id}\`);
     return response?.data;
   };
-  static ${questionnaireName}Visibility = async (data) => {
+  static ${lowercaseFirstChar(questionnaireName)}Visibility = async (data) => {
     const response = await api.patch(\`${endpointName}/\${data?.id}/visibility/\${data?.checked}\`);
     return response?.data;
   };
@@ -1052,7 +1052,7 @@ try {
       // find the items = [ ... ] block
       const itemsArrayRegex = /const\s+items\s*=\s*\[\s*([\s\S]*?)\s*\];/m;
       const itemsMatch = sidebarContent.match(itemsArrayRegex);
-      const menuObject = `    {\n      key: "${endpointName.replace(/^\//, "")}", //delete the "/" at the start of string \n      label: "${constantColumnName}", \n      link:\n        mainPath === "/settings"\n          ? ${pathConstA} \n          : ${pathConstA}, \n    },\n`;
+      const menuObject = `    {\n      key: "${endpointName.replace(/^\//, "")}", //delete the "/" at the start of string \n      label: "${constantColumnName}", \n      link: ${pathConstA}, \n},\n`;
       if (itemsMatch) {
         // insert before closing bracket of the items array
         const startIdx = itemsMatch.index;
