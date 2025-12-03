@@ -5,14 +5,16 @@ $folders = @(
   "C:\Users\fikre\repos\docflow-ui",
   "C:\Users\fikre\repos\hr-ui",
   "C:\Users\fikre\repos\laboratory-ui",
-  "C:\Users\fikre\repos\transport-ui"
+  "C:\Users\fikre\repos\transport-ui",
+  "C:\Users\fikre\repos\settings-ui"
+
 )
 
 foreach ($folder in $folders) {
   Write-Host "`nProcessing: $folder" -ForegroundColor Cyan
   Set-Location $folder
 
-  git checkout dev
+  git checkout main
   git pull
   
   if (Test-Path "package.json") {
