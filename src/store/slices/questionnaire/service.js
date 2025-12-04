@@ -1718,8 +1718,8 @@ class Services {
     const response = await api.get(`/contracttypes/subtypes/${size}/page/${page}?visibility=${visibility}&contractTypeId=${contractTypeId}&name=${query?.name}`);
     return response?.data;
   };
-  static getContractTypesSubtypesAll = async (visibility) => {
-    const response = await api.get(`/contracttypes/subtypes?visibility=${visibility}`);
+  static getContractTypesSubtypesAll = async (typeId, visibility) => {
+    const response = await api.get(`/contracttypes/subtypes?visibility=${visibility}&contractTypeId=${typeId}`);
     return response?.data;
   };
   static addContractTypesSubtypes = async (value) => {

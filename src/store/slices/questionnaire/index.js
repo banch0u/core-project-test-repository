@@ -6822,10 +6822,10 @@ export const getContractTypesSubtypes = createAsyncThunk(
 
 export const getContractTypesSubtypesAll = createAsyncThunk(
   "/getContractTypesSubtypesAll",
-  async (visibility, { dispatch }) => {
+  async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getContractTypesSubtypesAll(visibility);
+      const response = await Services.getContractTypesSubtypesAll(data?.typeId, data?.visibility);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
