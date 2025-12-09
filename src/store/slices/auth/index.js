@@ -59,6 +59,20 @@ export const getProfileInfo = createAsyncThunk(
     }
   }
 );
+export const changePassword = createAsyncThunk(
+  "/changePassword",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await AuthServices.changePassword(data);
+      dispatch(setLoading(false));
+      return response;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 
 export const auth = createSlice({
   name: "auth",

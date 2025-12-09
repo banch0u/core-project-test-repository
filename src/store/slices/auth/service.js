@@ -16,6 +16,10 @@ class AuthServices {
     const response = await api.get("/profile/info");
     return response?.data;
   };
+  static changePassword = async (data) => {
+    const response = await api.put("/profile/change-password", data);
+    return response;
+  };
 }
 
 export default AuthServices;
