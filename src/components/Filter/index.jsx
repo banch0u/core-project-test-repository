@@ -110,7 +110,11 @@ const Filter = ({
                     // showSearch={col.isDouble}
                     size="sm"
                     onChange={(value) => {
-                      if (col.dataIndex === "topic") {
+                      if (
+                        col.dataIndex === "topic" ||
+                        col.dataIndex === "contractTypeId" ||
+                        col.dataIndex === "contractType"
+                      ) {
                         setSelectedTopic(value);
                       }
                     }}>
