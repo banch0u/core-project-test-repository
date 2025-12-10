@@ -7,6 +7,7 @@ const initialState = {
   viewMoreModalVisible: false,
   deleteModalVisible: false,
   topicsRender: false,
+  DefaultAgreementPlansRender: false,
   ContractTypesSubtypesRender: false,
   ContractTopicsRender: false,
   OwnersRender: false,
@@ -81,6 +82,10 @@ export const global = createSlice({
   name: "global",
   initialState,
   reducers: {
+    setDefaultAgreementPlansRender: (state, { payload }) => {
+      state.DefaultAgreementPlansRender = payload;
+    },
+
     setContractTypesSubtypesRender: (state, { payload }) => {
       state.ContractTypesSubtypesRender = payload;
     },
@@ -312,6 +317,7 @@ export const global = createSlice({
 export const {
   setLoading,
   setNotificationsRender,
+  setDefaultAgreementPlansRender,
   setContractTypesSubtypesRender,
   setContractTopicsRender,
   setOwnersRender,

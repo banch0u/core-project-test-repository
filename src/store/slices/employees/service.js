@@ -5,6 +5,10 @@ class Services {
     const response = await api.get(`/employees/transport`);
     return response?.data;
   };
+  static getExecutiveMembersAll = async () => {
+    const response = await api.get(`/permissions/executiveMembers`);
+    return response?.data;
+  };
 }
 
 export default Services;

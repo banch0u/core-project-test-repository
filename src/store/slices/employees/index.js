@@ -24,6 +24,20 @@ export const getTransportEmployeesAll = createAsyncThunk(
     }
   }
 );
+export const getExecutiveMembersAll = createAsyncThunk(
+  "/getExecutiveMembersAll",
+  async (_, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getExecutiveMembersAll();
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 
 export const employees = createSlice({
   name: "employees",
@@ -35,6 +49,9 @@ export const employees = createSlice({
         state.transportEmployeesAll = payload;
       }
     );
+    builder.addCase(getExecutiveMembersAll.fulfilled, (state, { payload }) => {
+      state.executiveMembersAll = payload;
+    });
   },
 });
 
