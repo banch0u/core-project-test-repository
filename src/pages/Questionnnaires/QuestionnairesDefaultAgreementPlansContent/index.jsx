@@ -87,7 +87,8 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
     (id, record) => {
       const data = {
         id: id,
-        name: record?.name,
+        responsiblePersonId: record?.responsiblePersonId,
+        rank: record?.rank,
       };
       dispatch(editDefaultAgreementPlans(data));
       setEditingRecord(null);
