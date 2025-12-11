@@ -170,7 +170,7 @@ const QuestionnairesOrdersContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Satınlama sifarişi</h2>
+              <h2>Sifariş növü</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}

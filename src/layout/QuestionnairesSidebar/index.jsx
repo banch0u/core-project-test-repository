@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import style from "./index.module.scss";
+import { Layout, Menu, Input } from "antd";
 import {
-  Link,
-  useLocation } from "react-router-dom";import style from "./index.module.scss";import { Layout,
-  Menu,
-  Input } from "antd";import {  QUESTIONNAIRES_ACADEMIC_DEGREES,
+  QUESTIONNAIRES_ACADEMIC_DEGREES,
   QUESTIONNAIRES_APPLICATION_FORMS,
   QUESTIONNAIRES_AREAS,
   QUESTIONNAIRES_BRANDS,
@@ -70,7 +70,7 @@ import {
   QUESTIONNAIRES_OWNERS,
   QUESTIONNAIRES_CONTRACTTOPICS,
   QUESTIONNAIRES_CONTRACTTYPESSUBTYPES,
-  QUESTIONNAIRES_DEFAULTAGREEMENTPLANS
+  QUESTIONNAIRES_DEFAULTAGREEMENTPLANS,
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -326,7 +326,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
     },
     {
       key: "orders",
-      label: "Satınalma sifarişi",
+      label: "Sifariş növü",
       link: QUESTIONNAIRES_ORDERS,
     },
     {
@@ -422,14 +422,14 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_CONTRACTTYPESSUBTYPES,
     },
     // ---- generated sidebar item by questionnaireGenerator: ContractTypesSubtypes ----
-  
+
     {
-      key: "defaultagreementplans", //delete the "/" at the start of string 
-      label: "Şablon razılaşma sxemi", 
-      link: QUESTIONNAIRES_DEFAULTAGREEMENTPLANS, 
-},
-// ---- generated sidebar item by questionnaireGenerator: DefaultAgreementPlans ----
-];
+      key: "defaultagreementplans", //delete the "/" at the start of string
+      label: "Şablon razılaşma sxemi",
+      link: QUESTIONNAIRES_DEFAULTAGREEMENTPLANS,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: DefaultAgreementPlans ----
+  ];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
 
