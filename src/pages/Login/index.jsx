@@ -1,14 +1,14 @@
 import React, { useEffect, useCallback, useState } from "react";
 import style from "./index.module.scss";
 import { Form, Input } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { DsgLogo } from "../../assets/icons";
 import Loading from "../../components/Loading";
 import { login } from "../../store/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
-import AsanImza from "../../assets/icons/AsanImza.png";
-import Sima from "../../assets/icons/Sima.png";
-import Ldap from "../../assets/icons/Ldap.png";
+// import AsanImza from "../../assets/icons/AsanImza.png";
+// import Sima from "../../assets/icons/Sima.png";
+// import Ldap from "../../assets/icons/Ldap.png";
 import { getCompanyInfo } from "../../store/slices/companyInfo";
 import api from "../../utils/axios"; // 💡 Make sure this points to your axios instance
 
@@ -105,13 +105,13 @@ const Login = () => {
             />
           </Label>
         </div>
-        <Link to={""}>Şifrəni unuttdun?</Link>
+        {/* <Link to={""}>Şifrəni unuttdun?</Link> */}
         <div className={style.button}>
           <div className={style.border} data-no-invert>
             <button type="submit">Daxil Ol</button>
           </div>
         </div>
-        <div className={style.alternative_login}>
+        {/* <div className={style.alternative_login}>
           <div>
             <div className={style.background}>
               <img src={AsanImza} alt="asan_imza" />
@@ -130,7 +130,7 @@ const Login = () => {
             </div>
             <h3>Ldap</h3>
           </div>
-        </div>
+        </div> */}
       </Form>
     </div>
   );
