@@ -3,7 +3,6 @@ import {
   Dropdown,
   Menu,
   Form,
-  Input,
   Select as AntdSelect,
   DatePicker,
   TreeSelect,
@@ -11,6 +10,7 @@ import {
 import style from "./index.module.scss";
 import { FilterIcon } from "../../assets/icons";
 import Select from "../Select";
+import Input from "../Input";
 import Button from "../Button";
 
 const { Option } = AntdSelect;
@@ -36,26 +36,49 @@ const Filter = ({
     const formattedMonth = String(month).padStart(2, "0");
     return `${formattedDay}.${formattedMonth}.${year}`;
   };
+
+  // ✅ detect dayjs/moment-like objects
+  const isDateLike = (v) => {
+    if (!v) return false;
+    if (typeof v?.isValid === "function" && v.isValid()) return true; // dayjs/moment
+    if (
+      typeof v?.date === "function" &&
+      typeof v?.month === "function" &&
+      typeof v?.year === "function"
+    )
+      return true; // fallback
+    return false;
+  };
+
+  // ✅ only treat [start,end] as date range if both are date-like
+  const isDateRange = (v) =>
+    Array.isArray(v) && v.length === 2 && isDateLike(v[0]) && isDateLike(v[1]);
+
   const handleFinish = (values) => {
     const formattedValues = { ...values };
+
     Object.keys(values).forEach((key) => {
-      if (Array.isArray(values[key]) && values[key].length === 2) {
-        const [start, end] = values[key];
-        if (start && end) {
-          const formattedStart = formatDate(
-            start.date(),
-            start.month() + 1,
-            start.year()
-          );
-          const formattedEnd = formatDate(
-            end.date(),
-            end.month() + 1,
-            end.year()
-          );
-          formattedValues[key] = `${formattedStart} - ${formattedEnd}`;
-        }
+      const val = values[key];
+
+      // ✅ only format RangePicker values, ignore multi-select arrays
+      if (isDateRange(val)) {
+        const [start, end] = val;
+
+        // Prefer .format if available (dayjs/moment), else manual
+        const formattedStart =
+          typeof start?.format === "function"
+            ? start.format("DD.MM.YYYY")
+            : formatDate(start.date(), start.month() + 1, start.year());
+
+        const formattedEnd =
+          typeof end?.format === "function"
+            ? end.format("DD.MM.YYYY")
+            : formatDate(end.date(), end.month() + 1, end.year());
+
+        formattedValues[key] = `${formattedStart} - ${formattedEnd}`;
       }
     });
+
     setQuery(formattedValues);
     setVisible(false);
   };
@@ -66,7 +89,7 @@ const Filter = ({
       (selectedColumns.includes(col.dataIndex) &&
         col.filter !== false &&
         col.filterDisable !== true) ||
-      col.dataIndex === "filterOnly" // Always include "filterOnly" columns in the filter
+      col.dataIndex === "filterOnly"
   );
 
   const getGrid = () => {
@@ -87,12 +110,10 @@ const Filter = ({
           layout="vertical"
           className={`${style.form} ${getGrid()}`}>
           {[
-            ...filteredColumns.filter((col) => !col.isDouble), // Non-double elements
-            ...filteredColumns.filter((col) => col.isDouble), // Double elements
+            ...filteredColumns.filter((col) => !col.isDouble),
+            ...filteredColumns.filter((col) => col.isDouble),
           ].map((col) => {
-            if (col.showCheckbox === false) {
-              return null;
-            }
+            if (col.showCheckbox === false) return null;
 
             const gridSpanClass = col.isDouble
               ? style.doubleGrid
@@ -104,11 +125,10 @@ const Filter = ({
                   key={col.dataIndex}
                   label={col.title}
                   name={col.queryName ? col.queryName : col.dataIndex}
-                  className={gridSpanClass} // Dynamically apply grid class
-                >
+                  className={gridSpanClass}>
                   <Select
-                    // showSearch={col.isDouble}
                     size="sm"
+                    style={{ height: "32px" }}
                     onChange={(value) => {
                       if (
                         col.dataIndex === "topic" ||
@@ -117,7 +137,9 @@ const Filter = ({
                       ) {
                         setSelectedTopic(value);
                       }
-                    }}>
+                    }}
+                    mode={col.selectType === "multiple" ? "multiple" : "single"}
+                    optionFilterProp="label">
                     <Option value=""></Option>
                     {(col?.selectData || []).map((option, i) => {
                       const isIdArray = Array.isArray(option.id);
@@ -125,16 +147,14 @@ const Filter = ({
                         <Option
                           key={i}
                           value={
-                            isIdArray
-                              ? JSON.stringify(option.id) // Convert array to string
-                              : option.id // Use ID directly
-                          }>
+                            isIdArray ? JSON.stringify(option.id) : option.id
+                          }
+                          label={option.name}>
                           {option.name} {option.surname} {option.text}
                           {option?.registrationNumber &&
                             option?.brandId?.text &&
                             option?.modelId?.text &&
                             ` [${option.registrationNumber}] ${option.brandId?.text} ${option.modelId?.text}`}
-                          {/* Display the name */}
                         </Option>
                       );
                     })}
@@ -142,26 +162,26 @@ const Filter = ({
                 </Form.Item>
               );
             }
+
             if (col.type === "date") {
               return (
                 <Form.Item
                   key={col.dataIndex}
                   label={col.title}
                   name={col.queryName ? col.queryName : col.dataIndex}
-                  className={gridSpanClass} // Dynamically apply grid class
-                >
+                  className={gridSpanClass}>
                   <RangePicker format="DD.MM.YYYY" placeholder="" />
                 </Form.Item>
               );
             }
+
             if (col.type === "recursive") {
               return (
                 <Form.Item
                   key={col.dataIndex}
                   label={col.title}
                   name={col.queryName ? col.queryName : col.dataIndex}
-                  className={gridSpanClass} // Dynamically apply grid class
-                >
+                  className={gridSpanClass}>
                   <TreeSelect
                     showSearch
                     popupMatchSelectWidth={false}
@@ -172,18 +192,19 @@ const Filter = ({
                 </Form.Item>
               );
             }
+
             return (
               <Form.Item
                 key={col.dataIndex}
                 label={col.title}
                 name={col.queryName ? col.queryName : col.dataIndex}
-                className={gridSpanClass} // Dynamically apply grid class
-              >
-                <Input />
+                className={gridSpanClass}>
+                <Input size="sm" />
               </Form.Item>
             );
           })}
         </Form>
+
         <div className={style.buttons}>
           <Button onClick={() => filterForm.resetFields()} color="white">
             Təmizlə
@@ -205,9 +226,8 @@ const Filter = ({
     <Dropdown
       overlay={menu}
       trigger={["click"]}
-      open={visible} // Updated to use open
-      onOpenChange={handleOpenChange} // Updated to use onOpenChange
-    >
+      open={visible}
+      onOpenChange={handleOpenChange}>
       <Button color="white">
         <FilterIcon />
       </Button>
