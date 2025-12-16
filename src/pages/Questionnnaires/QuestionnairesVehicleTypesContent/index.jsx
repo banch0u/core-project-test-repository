@@ -33,6 +33,7 @@ import {
 
 const { Content } = Layout;
 const { Item } = Form;
+
 const QuestionnairesVehicleTypesContent = () => {
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
@@ -79,6 +80,19 @@ const QuestionnairesVehicleTypesContent = () => {
     },
     [dispatch]
   );
+
+  const onTrailerChange = useCallback(
+    (data, checked) => {
+      const data_ = {
+        id: data?.id,
+        name: data?.name,
+        isTrailer: checked,
+      };
+      dispatch(editVehicletype(data_));
+    },
+    [dispatch]
+  );
+
   const closeOnViewModal = useCallback(() => {
     dispatch(setViewModalVisible(false));
   }, [dispatch]);
@@ -108,12 +122,21 @@ const QuestionnairesVehicleTypesContent = () => {
       id: dataObj?.id,
       name: dataObj?.name,
       isActive: dataObj?.isActive,
+      isTrailer: dataObj?.isTrailer,
+
       className: "rowClassName1",
     }));
   }
   const columns = useMemo(
-    () => getStreetColumns(onEditClick, onDelete, onStatusChange, dispatch),
-    [onEditClick, onDelete, onStatusChange, dispatch]
+    () =>
+      getStreetColumns(
+        onEditClick,
+        onDelete,
+        onStatusChange,
+        dispatch,
+        onTrailerChange
+      ),
+    [onEditClick, onDelete, onStatusChange, dispatch, onTrailerChange]
   );
   const [selectedColumns, setSelectedColumns] = useState(
     columns.map((col) => col.dataIndex)

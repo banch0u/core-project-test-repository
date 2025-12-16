@@ -9,7 +9,7 @@ export const getStreetColumns = (
   onDelete,
   onStatusChange,
   dispatch,
-  innerW
+  onTrailerChange
 ) => [
     {
       title: "№",
@@ -21,9 +21,24 @@ export const getStreetColumns = (
     {
       title: "Növ",
       dataIndex: "name",
-      width: innerW,
       disabled: true,
       ellipsis: true,
+    },
+    {
+      title: "Qoşqu",
+      key: "Qoşqu",
+      disabled: false,
+
+      filter: true,
+      render: (data) => (
+        <Tooltip placement="top" title="Qoşqu">
+          <Switch
+            size="medium"
+            checked={data?.isTrailer}
+            onChange={(checked) => onTrailerChange(data, checked, dispatch)}
+          />
+        </Tooltip>
+      ),
     },
     {
       title: "Status",
