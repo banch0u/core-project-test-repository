@@ -59,6 +59,20 @@ export const getProfileInfo = createAsyncThunk(
     }
   }
 );
+export const getLoginType = createAsyncThunk(
+  "/getLoginType",
+  async (_, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await AuthServices.getLoginType();
+      dispatch(setLoading(false));
+      return response.type;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 export const changePassword = createAsyncThunk(
   "/changePassword",
   async (data, { dispatch }) => {
@@ -105,6 +119,12 @@ export const auth = createSlice({
     builder.addCase(getProfileInfo.fulfilled, (state, { payload }) => {
       state.profileInfo = payload;
     });
+    builder.addCase(
+      getLoginType.fulfilled,
+      (state, { payload }) => {
+        state.loginType = payload;
+      }
+    );
   },
 });
 

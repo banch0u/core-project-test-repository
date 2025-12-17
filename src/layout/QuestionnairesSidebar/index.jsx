@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import style from "./index.module.scss";
-import { Layout, Menu, Input } from "antd";
 import {
-  QUESTIONNAIRES_ACADEMIC_DEGREES,
+  Link,
+  useLocation } from "react-router-dom";import style from "./index.module.scss";import { Layout,
+  Menu,
+  Input } from "antd";import {  QUESTIONNAIRES_ACADEMIC_DEGREES,
   QUESTIONNAIRES_APPLICATION_FORMS,
   QUESTIONNAIRES_AREAS,
   QUESTIONNAIRES_BRANDS,
@@ -71,6 +71,7 @@ import {
   QUESTIONNAIRES_CONTRACTTOPICS,
   QUESTIONNAIRES_CONTRACTTYPESSUBTYPES,
   QUESTIONNAIRES_DEFAULTAGREEMENTPLANS,
+  QUESTIONNAIRES_ROUTELOCATIONS
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -429,7 +430,14 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_DEFAULTAGREEMENTPLANS,
     },
     // ---- generated sidebar item by questionnaireGenerator: DefaultAgreementPlans ----
-  ];
+  
+    {
+      key: "routelocations", //delete the "/" at the start of string 
+      label: "Göndərilən yerlər", 
+      link: QUESTIONNAIRES_ROUTELOCATIONS, 
+},
+// ---- generated sidebar item by questionnaireGenerator: RouteLocations ----
+];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
 

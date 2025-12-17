@@ -29,6 +29,7 @@ const ProfileOptions = () => {
   const profileInfo = useSelector((state) => state.auth.profileInfo);
   const { notificationsRender } = useSelector((state) => state.global);
   const { scopesData } = useSelector((state) => state.auth);
+  const loginType = useSelector((state) => state.auth.loginType);
   const notifications = useSelector(
     (state) => state.notification.notifications
   );
@@ -201,10 +202,12 @@ const ProfileOptions = () => {
             )}
 
             {/* 🔥 CHANGE PASSWORD BUTTON */}
-            <div className={style.menuItem} onClick={openPasswordModal}>
-              <ChangePasswordIcon />
-              <span>Şifrəni dəyiş</span>
-            </div>
+            {loginType === 0 ? (
+              <div className={style.menuItem} onClick={openPasswordModal}>
+                <ChangePasswordIcon />
+                <span>Şifrəni dəyiş</span>
+              </div>
+            ) : null}
 
             <div className={style.menuItem} onClick={handleLogout}>
               <LogOutIcon />

@@ -7,9 +7,9 @@ const fs = require("fs");
 const path = require("path");
 
 ////////// === CONFIG === //////////
-const questionnaireName = "DefaultAgreementPlans"; // change as needed
-const constantColumnName = "Şablon razılaşma sxemi";
-const endpointName = "/defaultagreementplans";
+const questionnaireName = "RouteLocations"; // change as needed
+const constantColumnName = "Göndərilən yerlər";
+const endpointName = "/routelocations";
 ///////////////////////////////////
 
 const upperName = questionnaireName.toUpperCase();
