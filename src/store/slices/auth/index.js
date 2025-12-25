@@ -29,7 +29,11 @@ export const login = createAsyncThunk("/login", async (data, { dispatch }) => {
     succesMessage("Sistemə daxil olunur...");
 
     dispatch(setLoading(false));
-    data?.navigate(PLATFORM_PATH);
+    if (data?.mainPage) {
+      window.location.href = data?.mainPage;
+    } else {
+      data?.navigate(PLATFORM_PATH);
+    }
 
     return response?.data;
   } catch (error) {

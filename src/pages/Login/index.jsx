@@ -30,12 +30,12 @@ const Login = () => {
       const data = {
         formdata: formdata,
         navigate: navigate,
+        mainPage: companyInfo?.[0]?.mainPage,
       };
       dispatch(login(data));
     },
-    [dispatch, navigate]
+    [dispatch, navigate, companyInfo]
   );
-
   const getBase64FromURL = useCallback(async (url) => {
     try {
       const res = await api.get(url);
