@@ -9,14 +9,18 @@ import Portal from "../../Portal";
 
 const { Panel } = Collapse;
 
-const AppSelect = () => {
+const AppSelect = ({ mainPage }) => {
   const location = useLocation();
   const { scopesData } = useSelector((state) => state.auth);
 
   const accordionRef = useRef(null);
   const dropdownRef = useRef(null);
+
   const [activeKey, setActiveKey] = useState([]);
   const [dropdownStyle, setDropdownStyle] = useState({});
+
+  // ✅ if mainPage is provided => disable dropdown behavior
+  const isDisabled = !!mainPage;
 
   const filteredOptions = useMemo(() => {
     return entryData.filter(
@@ -26,6 +30,7 @@ const AppSelect = () => {
         scopesData?.includes(item.scopes)
     );
   }, [scopesData]);
+
   const baseSegment = useMemo(() => {
     return window.location.pathname.split("/")[1];
   }, [location.pathname]);
@@ -39,6 +44,8 @@ const AppSelect = () => {
 
   useEffect(() => {
     const handleClickOutside = (e) => {
+      if (isDisabled) return;
+
       if (
         accordionRef.current &&
         !accordionRef.current.contains(e.target) &&
@@ -47,11 +54,14 @@ const AppSelect = () => {
         setActiveKey([]);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [isDisabled]);
 
   useEffect(() => {
+    if (isDisabled) return;
+
     if (activeKey.length > 0 && accordionRef.current) {
       const rect = accordionRef.current.getBoundingClientRect();
       setDropdownStyle({
@@ -62,23 +72,33 @@ const AppSelect = () => {
         zIndex: 9999,
       });
     }
-  }, [activeKey]);
+  }, [activeKey, isDisabled]);
+
+  // ✅ make sure dropdown is closed if it becomes disabled
+  useEffect(() => {
+    if (isDisabled) setActiveKey([]);
+  }, [isDisabled]);
 
   return (
     <div ref={accordionRef}>
       <Collapse
         bordered={false}
-        activeKey={activeKey}
-        onChange={(key) => setActiveKey(key)}
+        activeKey={isDisabled ? [] : activeKey}
+        onChange={(key) => {
+          if (isDisabled) return;
+          setActiveKey(key);
+        }}
         expandIconPosition="end"
         expandIcon={({ isActive }) => (
           <div data-no-invert>
             <RightOutlined
               style={{
-                transform: `rotate(${isActive ? 270 : 90}deg)`,
+                transform: `rotate(${!isDisabled && isActive ? 270 : 90}deg)`,
                 transition: "transform 0.2s ease",
                 color: "white",
                 fontSize: "14px",
+                opacity: isDisabled ? 0.5 : 1,
+                cursor: isDisabled ? "not-allowed" : "pointer",
               }}
             />
           </div>
@@ -86,7 +106,12 @@ const AppSelect = () => {
         className={style.accordion}>
         <Panel
           header={
-            <div className={style.accordionHeader}>
+            <div
+              className={style.accordionHeader}
+              style={{
+                opacity: isDisabled ? 0.8 : 1,
+                cursor: isDisabled ? "default" : "pointer",
+              }}>
               {baseSegment === "settings" ? (
                 <>
                   <div>
@@ -106,7 +131,7 @@ const AppSelect = () => {
         />
       </Collapse>
 
-      {activeKey.length > 0 && (
+      {!isDisabled && activeKey.length > 0 && (
         <Portal>
           <div
             data-no-invert

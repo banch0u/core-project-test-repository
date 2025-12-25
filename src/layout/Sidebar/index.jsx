@@ -6,7 +6,6 @@ import { Layout, Menu } from "antd";
 import { DsgLogo, DsgLogoEmblem } from "../../assets/icons";
 import { PLATFORM_PATH } from "../../utils/path";
 import { useDispatch, useSelector } from "react-redux";
-import { getCompanyInfo } from "../../store/slices/companyInfo";
 import api from "../../utils/axios";
 
 const { Sider } = Layout;
@@ -41,13 +40,14 @@ const Sidebar = ({ items = [] }) => {
   useEffect(() => {
     const sidebarState = Cookies.get("sidebarCollapsed") === "true";
     setCollapsed(sidebarState);
-    dispatch(getCompanyInfo());
   }, [dispatch]);
 
   useEffect(() => {
     const fetchLogo = async () => {
-      if (companyInfo?.[0]?.filePath) {
-        const base64 = await getBase64FromURL(companyInfo[0].filePath);
+      const filePath =
+        companyInfo?.[0]?.filePath || companyInfo?.data?.[0]?.filePath;
+      if (filePath) {
+        const base64 = await getBase64FromURL(filePath);
         setImageSrc(base64);
       }
     };
@@ -63,6 +63,11 @@ const Sidebar = ({ items = [] }) => {
       window.removeEventListener("themeChange", handleThemeChange);
     };
   }, []);
+
+  // ✅ if mainPage exists -> logo should NOT be a link
+  const hasMainPage = useMemo(() => {
+    return !!(companyInfo?.[0]?.mainPage || companyInfo?.data?.[0]?.mainPage);
+  }, [companyInfo]);
 
   // --- FIX: compute selectedKey by exact segment match OR full-path prefix match, prefer the longest match
   const flatItems = useMemo(() => {
@@ -100,6 +105,12 @@ const Sidebar = ({ items = [] }) => {
     return matches[0]; // undefined if none
   }, [location.pathname, flatItems]);
 
+  // ✅ choose wrapper element (Link or div)
+  const LogoWrapper = hasMainPage ? "div" : Link;
+  const logoWrapperProps = hasMainPage
+    ? { className: style.buttons }
+    : { to: PLATFORM_PATH, className: style.buttons };
+
   return (
     <Sider
       width={287}
@@ -117,7 +128,7 @@ const Sidebar = ({ items = [] }) => {
         />
       </div>
 
-      <Link to={PLATFORM_PATH} className={style.buttons}>
+      <LogoWrapper {...logoWrapperProps}>
         {collapsed ? (
           <div className={style.emblem}>
             <DsgLogoEmblem />
@@ -129,7 +140,7 @@ const Sidebar = ({ items = [] }) => {
         ) : (
           <DsgLogo />
         )}
-      </Link>
+      </LogoWrapper>
 
       <div
         data-no-invert
