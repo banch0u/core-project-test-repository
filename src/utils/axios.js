@@ -82,7 +82,7 @@ const api = axios.create({
 // Function to refresh token
 const refreshAccessToken = async () => {
   try {
-    const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY); // Adjust storage as needed
+    const refreshToken = localStorage.getItem("refreshToken"); // Adjust storage as needed
     const response = await axios.post(
       baseUrl + "/profile/refresh-token",
       {},
