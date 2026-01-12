@@ -1,5 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Badge, Dropdown, Tooltip, Modal, Form, Input } from "antd";
+import {
+  Badge,
+  Dropdown,
+  Tooltip,
+  Modal,
+  Form,
+  Input,
+  Select as AntdSelect,
+} from "antd";
 import { SunOutlined } from "@ant-design/icons";
 import style from "./index.module.scss";
 
@@ -21,11 +29,14 @@ import NotificationDropdown from "../NotificationDropdown";
 import { Link, useNavigate } from "react-router-dom";
 import { LOGIN_PATH } from "../../utils/path";
 import Button from "../Button";
+import Select from "../Select";
+const { Option } = AntdSelect;
+import { useLang } from "../../hooks/useLang";
 
 const ProfileOptions = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const lang = useLang();
   const profileInfo = useSelector((state) => state.auth.profileInfo);
   const { notificationsRender } = useSelector((state) => state.global);
   const { scopesData } = useSelector((state) => state.auth);
@@ -33,7 +44,6 @@ const ProfileOptions = () => {
   const notifications = useSelector(
     (state) => state.notification.notifications
   );
-
   const [size, setSize] = useState(20);
   const [page, setPage] = useState(1);
   const [open, setOpen] = useState(false);
@@ -145,6 +155,20 @@ const ProfileOptions = () => {
 
   return (
     <div className={style.profile}>
+      <Select
+        className={style.lang_select}
+        popupClassName={style.lang_select_dropdown}
+        suffixIcon={null}
+        allowClear={false}
+        showSearch={false}
+        onChange={(val) => {
+          localStorage.setItem("lang", val);
+        }}
+        value={lang}>
+        <Option value="az">AZ</Option>
+        <Option value="en">EN</Option>
+        <Option value="ru">RU</Option>
+      </Select>
       <Dropdown
         overlay={
           <NotificationDropdown
