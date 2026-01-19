@@ -10,7 +10,7 @@ import style from "./index.module.scss";
 import NotificationSettingsContent from "../NotificationSettingsContent";
 import FormModal from "../FormModal";
 
-const NotificationDropdown = ({ size, setSize, setPage }) => {
+const NotificationDropdown = ({ size, setSize, setPage, lang, text }) => {
   const dispatch = useDispatch();
   const modalRef = useRef(); // ⬅️ Modal ref
   const contentRef = useRef(); // ⬅️ NotificationSettingsContent ref
@@ -27,10 +27,10 @@ const NotificationDropdown = ({ size, setSize, setPage }) => {
 
   const projects = [
     "",
-    "Sənəd dövriyyəsi",
-    "Kadrlar sistemi",
-    "Müqavilələr",
-    "Şəxsi kabinet",
+    text?.[lang]?.pages?.platform?.projects?.docflow,
+    text?.[lang]?.pages?.platform?.projects?.hr,
+    text?.[lang]?.pages?.platform?.projects?.contracts,
+    text?.[lang]?.pages?.platform?.projects?.privateAccount,
   ];
   const parseNotification = (value) => {
     try {
@@ -80,7 +80,9 @@ const NotificationDropdown = ({ size, setSize, setPage }) => {
     <>
       <div className={style.dropdownWrapper}>
         <div className={style.header}>
-          <Typography.Text strong>Bildirişlər ({totalCount})</Typography.Text>
+          <Typography.Text strong>
+            {text?.[lang]?.pages?.header?.notifications?.title} ({totalCount})
+          </Typography.Text>
           <div className={style.headerActions}>
             {notReadenCount > 0 && (
               <Button
@@ -88,7 +90,7 @@ const NotificationDropdown = ({ size, setSize, setPage }) => {
                 icon={<CheckOutlined />}
                 onClick={handleReadAll}
                 type="text">
-                Hamısını oxu
+                {text?.[lang]?.pages?.header?.notifications?.readAll}
               </Button>
             )}
             <Button
@@ -102,7 +104,10 @@ const NotificationDropdown = ({ size, setSize, setPage }) => {
 
         <List
           dataSource={items}
-          locale={{ emptyText: "Bildiriş yoxdur" }}
+          locale={{
+            emptyText:
+              text?.[lang]?.pages?.header?.notifications?.nonotification,
+          }}
           renderItem={(item) => {
             const parsed = parseNotification(item.text);
             return (
@@ -112,7 +117,8 @@ const NotificationDropdown = ({ size, setSize, setPage }) => {
                 }`}
                 actions={[
                   !item.isReaden && (
-                    <Tooltip title="Oxu">
+                    <Tooltip
+                      title={text?.[lang]?.pages?.header?.notifications?.read}>
                       <Button
                         size="small"
                         type="link"
@@ -129,7 +135,8 @@ const NotificationDropdown = ({ size, setSize, setPage }) => {
                         handleNotificationClick(item.text, item.id)
                       }
                       style={{ cursor: "pointer" }}>
-                      {projects[parsed.Project] || "Bildiriş"}
+                      {projects[parsed.Project] ||
+                        text?.[lang]?.pages?.header?.notifications?.title}
                     </div>
                   }
                   description={
@@ -139,7 +146,8 @@ const NotificationDropdown = ({ size, setSize, setPage }) => {
                         handleNotificationClick(item.text, item.id)
                       }
                       style={{ cursor: "pointer" }}>
-                      {parsed.Text || "Bildiriş"}
+                      {parsed.Text ||
+                        text?.[lang]?.pages?.header?.notifications?.title}
                     </div>
                   }
                 />
@@ -151,14 +159,14 @@ const NotificationDropdown = ({ size, setSize, setPage }) => {
         {hasMore && (
           <div className={style.loadMore}>
             <Button size="small" type="text" onClick={handleLoadMore}>
-              Daha çox göstər
+              {text?.[lang]?.pages?.header?.notifications?.showMore}
             </Button>
           </div>
         )}
       </div>
 
       <FormModal ref={modalRef} width={695} showButtons={false}>
-        <NotificationSettingsContent ref={contentRef} onClose={onCloseModal} />
+        <NotificationSettingsContent ref={contentRef} onClose={onCloseModal} lang={lang} text={text} />
       </FormModal>
     </>
   );

@@ -17,43 +17,6 @@ import Button from "../Button";
 const { Title, Text } = Typography;
 const { Option } = Select;
 
-const labels = {
-  internalIsActive: "Daxili bildirişlər",
-  emailIsActive: "Email bildirişləri",
-  visa: "Viza üçün",
-  sign: "İmza üçün",
-  reject: "İmtina üçün",
-  print: "Çap üçün",
-  accouncement: "Elanlar",
-  news: "Xəbərlər",
-  reservations: "Tədbir/İclas",
-  surveys: "Sorğular",
-  timeOffRequest: "İcazələr",
-  tutorials: "Təlimatlar və video",
-};
-
-const projectOptions = {
-  docFlowSettings: {
-    label: "Sənəd Dövriyyəsi",
-    keys: ["visa", "sign", "reject", "print"],
-  },
-  contractSettings: {
-    label: "Müqavilələr",
-    keys: ["visa", "sign", "reject"],
-  },
-  accountSettings: {
-    label: "Şəxsi kabinet",
-    keys: [
-      "accouncement",
-      "news",
-      "reservations",
-      "surveys",
-      "timeOffRequest",
-      "tutorials",
-    ],
-  },
-};
-
 const NotificationSettingsContent = React.forwardRef((props, ref) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -62,7 +25,33 @@ const NotificationSettingsContent = React.forwardRef((props, ref) => {
   const initialValues = useSelector(
     (state) => state.notification.notificationSettings
   );
-  // console.log(initialValues);
+
+  const labels =
+    props?.text?.[props?.lang]?.pages?.header?.notifications
+      ?.notificationsettings?.labels;
+
+  const projectOptions = {
+    docFlowSettings: {
+      label: props?.text?.[props?.lang]?.pages?.platform?.projects?.docflow,
+      keys: ["visa", "sign", "reject", "print"],
+    },
+    contractSettings: {
+      label: props?.text?.[props?.lang]?.pages?.platform?.projects?.contracts,
+      keys: ["visa", "sign", "reject"],
+    },
+    accountSettings: {
+      label: props?.text?.[props?.lang]?.pages?.platform?.projects?.accounts,
+      keys: [
+        "accouncement",
+        "news",
+        "reservations",
+        "surveys",
+        "timeOffRequest",
+        "tutorials",
+      ],
+    },
+  };
+
   const getDefaultProjectFromPath = (path) => {
     if (path.includes("/contract")) return "contractSettings";
     return "docFlowSettings";
@@ -199,7 +188,10 @@ const NotificationSettingsContent = React.forwardRef((props, ref) => {
   return (
     <div className={style.settingsWrapper}>
       <Title level={5} className={style.sectionTitle}>
-        Ümumi Bildiriş Ayarları
+        {
+          props?.text?.[props?.lang]?.pages?.header?.notifications
+            ?.notificationsettings?.title
+        }
       </Title>
       <Row gutter={[40, 0]}>
         <Col span={12}>
@@ -251,10 +243,20 @@ const NotificationSettingsContent = React.forwardRef((props, ref) => {
         </Select>
       </Form.Item>
 
-      <Text className={style.settingGroupTitle}>Daxili</Text>
+      <Text className={style.settingGroupTitle}>
+        {
+          props?.text?.[props?.lang]?.pages?.header?.notifications
+            ?.notificationsettings?.internal
+        }
+      </Text>
       <Row gutter={[24, 24]}>{renderSwitches("internalSettings")}</Row>
 
-      <Text className={style.settingGroupTitle}>Email</Text>
+      <Text className={style.settingGroupTitle}>
+        {
+          props?.text?.[props?.lang]?.pages?.header?.notifications
+            ?.notificationsettings?.email
+        }
+      </Text>
       <Row gutter={[24, 24]}>{renderSwitches("emailSettings")}</Row>
 
       <div className={style.next_buttons_}>
@@ -264,10 +266,10 @@ const NotificationSettingsContent = React.forwardRef((props, ref) => {
             e.preventDefault();
           }}
           color={"white"}>
-          Ləğv et
+          {props?.text?.[props?.lang]?.pages?.common?.cancel}
         </Button>
         <Button color="green" onClick={() => onSubmit(allValues)}>
-          Yadda saxla
+          {props?.text?.[props?.lang]?.pages?.common?.save}
         </Button>
       </div>
     </div>

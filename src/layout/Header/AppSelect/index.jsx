@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { Collapse } from "antd";
 import { RightOutlined, SettingOutlined } from "@ant-design/icons";
 import style from "./index.module.scss";
-import { entryData } from "../../../pages/Platform/constant";
+import { useEntryData } from "../../../pages/Platform/constant"; // ✅ changed
 import Portal from "../../Portal";
 
 const { Panel } = Collapse;
@@ -12,6 +12,8 @@ const { Panel } = Collapse;
 const AppSelect = ({ mainPage }) => {
   const location = useLocation();
   const { scopesData } = useSelector((state) => state.auth);
+
+  const entryData = useEntryData(); // ✅ hook inside component
 
   const accordionRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -23,16 +25,16 @@ const AppSelect = ({ mainPage }) => {
   const isDisabled = !!mainPage;
 
   const filteredOptions = useMemo(() => {
-    return entryData.filter(
+    return (entryData || []).filter(
       (item) =>
         item.scopes === "account" ||
         scopesData === "*" ||
         scopesData?.includes(item.scopes)
     );
-  }, [scopesData]);
+  }, [entryData, scopesData]);
 
   const baseSegment = useMemo(() => {
-    return window.location.pathname.split("/")[1];
+    return (location.pathname || "").split("/")[1];
   }, [location.pathname]);
 
   const active = useMemo(() => {
