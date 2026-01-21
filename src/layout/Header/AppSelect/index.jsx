@@ -4,16 +4,31 @@ import { useLocation } from "react-router-dom";
 import { Collapse } from "antd";
 import { RightOutlined, SettingOutlined } from "@ant-design/icons";
 import style from "./index.module.scss";
-import { useEntryData } from "../../../pages/Platform/constant"; // ✅ changed
+import { useEntryData } from "../../../pages/Platform/constant";
 import Portal from "../../Portal";
 
 const { Panel } = Collapse;
+
+// ✅ handles both absolute ("http://localhost:3004/contracts/...") and relative ("/contracts/...")
+const getPathnameFromAny = (value) => {
+  if (!value) return "";
+  try {
+    return new URL(value, window.location.origin).pathname || "";
+  } catch {
+    return String(value);
+  }
+};
+
+const getFirstSegment = (value) => {
+  const pathname = getPathnameFromAny(value);
+  return (pathname.split("/")[1] || "").trim();
+};
 
 const AppSelect = ({ mainPage }) => {
   const location = useLocation();
   const { scopesData } = useSelector((state) => state.auth);
 
-  const entryData = useEntryData(); // ✅ hook inside component
+  const entryData = useEntryData();
 
   const accordionRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -21,7 +36,6 @@ const AppSelect = ({ mainPage }) => {
   const [activeKey, setActiveKey] = useState([]);
   const [dropdownStyle, setDropdownStyle] = useState({});
 
-  // ✅ if mainPage is provided => disable dropdown behavior
   const isDisabled = !!mainPage;
 
   const filteredOptions = useMemo(() => {
@@ -33,15 +47,18 @@ const AppSelect = ({ mainPage }) => {
     );
   }, [entryData, scopesData]);
 
+  // ✅ IMPORTANT: use real browser path so basename won't hide "/contracts"
   const baseSegment = useMemo(() => {
-    return (location.pathname || "").split("/")[1];
+    // dependency uses location.pathname to re-run on route changes
+    return getFirstSegment(window.location.pathname || location.pathname || "");
   }, [location.pathname]);
 
   const active = useMemo(() => {
-    return (
-      filteredOptions.find((opt) => opt.pathname.includes(`/${baseSegment}`)) ||
-      null
+    // match by first segment (contracts, hr, docflow, settings...)
+    const found = filteredOptions.find(
+      (opt) => getFirstSegment(opt.pathname) === baseSegment
     );
+    return found || null;
   }, [filteredOptions, baseSegment]);
 
   useEffect(() => {
@@ -76,7 +93,6 @@ const AppSelect = ({ mainPage }) => {
     }
   }, [activeKey, isDisabled]);
 
-  // ✅ make sure dropdown is closed if it becomes disabled
   useEffect(() => {
     if (isDisabled) setActiveKey([]);
   }, [isDisabled]);
@@ -141,13 +157,13 @@ const AppSelect = ({ mainPage }) => {
             className={style.accordionBody}
             style={dropdownStyle}>
             {filteredOptions
-              .filter((opt) => opt.pathname !== active?.pathname)
+              .filter((opt) => getFirstSegment(opt.pathname) !== baseSegment)
               .map((option) => (
                 <a
                   key={option.id}
                   href={option.pathname}
                   className={`${style.accordionOption} ${
-                    baseSegment === option.pathname.split("/")[1]
+                    getFirstSegment(option.pathname) === baseSegment
                       ? style.selected
                       : ""
                   }`}>

@@ -71,7 +71,8 @@ import {
   QUESTIONNAIRES_CONTRACTTOPICS,
   QUESTIONNAIRES_CONTRACTTYPESSUBTYPES,
   QUESTIONNAIRES_DEFAULTAGREEMENTPLANS,
-  QUESTIONNAIRES_ROUTELOCATIONS
+  QUESTIONNAIRES_ROUTELOCATIONS,
+  QUESTIONNAIRES_INTERNALSTRUCTURE
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -437,6 +438,13 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_ROUTELOCATIONS, 
 },
 // ---- generated sidebar item by questionnaireGenerator: RouteLocations ----
+
+    {
+      key: "internalstructures", //delete the "/" at the start of string 
+      label: "Daxili Strukturlar", 
+      link: QUESTIONNAIRES_INTERNALSTRUCTURE, 
+},
+// ---- generated sidebar item by questionnaireGenerator: InternalStructure ----
 ];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));

@@ -29,8 +29,9 @@ import {
   editDefaultAgreementPlans,
   getDefaultAgreementPlans,
   getDefaultAgreementPlansAll,
+  getInternalStructureAll,
 } from "../../../store/slices/questionnaire";
-import { getExecutiveMembersAll } from "../../../store/slices/employees";
+import { getContractUsersAll } from "../../../store/slices/employees";
 import Select from "../../../components/Select";
 import Input from "../../../components/Input";
 
@@ -63,11 +64,15 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
   const DefaultAgreementPlansAll = useSelector(
     (state) => state.questionnaire.defaultAgreementPlansAll
   );
-  const executiveMemmbersAll = useSelector(
-    (state) => state.employees.executiveMembersAll
+  const internalStructureAll = useSelector(
+    (state) => state.questionnaire.internalStructureAll
+  );
+  console.log(internalStructureAll);
+
+  const contractUsersAll = useSelector(
+    (state) => state.employees.contractUsersAll
   );
 
-  // ⭐ NEW — store current editing record (not inside modal)
   const [editingRecord, setEditingRecord] = useState(null);
 
   const paginationLength = setPaginationLength(
@@ -88,7 +93,9 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
       const data = {
         id: id,
         responsiblePersonId: record?.responsiblePersonId,
+        flowPriority: record?.flowPriority, // ✅ include it for edit
         rank: record?.rank,
+        internalStructureId: record?.internalStructureId,
       };
       dispatch(editDefaultAgreementPlans(data));
       setEditingRecord(null);
@@ -135,7 +142,10 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
       id: dataObj?.id,
       responsiblePerson: dataObj?.responsiblePerson.fullName,
       responsiblePersonId: dataObj?.responsiblePerson?.id,
+      flowPriority: dataObj?.flowPriority, // ✅ so edit modal knows what to show
       rank: dataObj?.rank,
+      internalStructure: dataObj?.internalStructure?.text,
+      internalStructureId: dataObj?.internalStructure?.id,
       className: "rowClassName1",
     }));
   }
@@ -163,10 +173,11 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
     };
     dispatch(getDefaultAgreementPlans(data));
     dispatch(getDefaultAgreementPlansAll("onlyactive"));
+    dispatch(getInternalStructureAll("onlyactive"));
   }, [dispatch, page, DefaultAgreementPlansRender, query, size]);
 
   useEffect(() => {
-    dispatch(getExecutiveMembersAll());
+    dispatch(getContractUsersAll());
   }, [dispatch]);
 
   const updateSize = (newSize) => {
@@ -183,16 +194,6 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
   const assignedIds = useMemo(() => {
     return DefaultAgreementPlansAll?.map((item) => item.responsiblePerson?.id);
   }, [DefaultAgreementPlansAll]);
-
-  // ⭐ UPDATED — correct filtering with edit support
-  const availableExecutiveMembers = useMemo(() => {
-    return executiveMemmbersAll?.filter((person) => {
-      if (editingRecord && person.id === editingRecord.responsiblePersonId) {
-        return true; // allow current person
-      }
-      return !assignedIds?.includes(person.id);
-    });
-  }, [executiveMemmbersAll, assignedIds, editingRecord]);
 
   return (
     <>
@@ -259,39 +260,79 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
                 name={"responsiblePersonId"}
                 label={"Məsul şəxs"}>
                 <Select>
-                  {availableExecutiveMembers?.map((item) => (
+                  {contractUsersAll?.map((item) => (
                     <Option key={item.id} value={item.id}>
-                      {item.text}
+                      {`${item.firstName} ${item.lastName} ${item.patronymic}`}
                     </Option>
                   ))}
                 </Select>
               </Item>
 
               <Item
-                name="rank"
-                label="Qrup №"
-                rules={[
-                  { required: true, message: "" },
-                  {
-                    validator: (_, value) => {
-                      if (!value) return Promise.resolve();
-                      const numericValue = Number(value);
+                name="flowPriority"
+                label="Dövriyyə prioriteti"
+                rules={[{ required: true, message: "" }]}>
+                <Select size="md">
+                  <Option value={0}>Sənəd yaradan</Option>
+                  <Option value={1}>Birinci baxan</Option>
+                  <Option value={2}>İkinci baxan</Option>
+                  <Option value={3}>Digər baxanlar</Option>
+                </Select>
+              </Item>
 
-                      if (numericValue !== 1) return Promise.resolve();
+              {/* ✅ show Rank ONLY if flowPriority === 3 */}
+              <Item
+                noStyle
+                shouldUpdate={(prev, cur) =>
+                  prev.flowPriority !== cur.flowPriority
+                }>
+                {({ getFieldValue }) => {
+                  const flowPriority = getFieldValue("flowPriority");
+                  if (flowPriority !== 3) return null;
 
-                      const existsRank1 = DefaultAgreementPlansAll?.some(
-                        (item) =>
-                          item.rank === 1 &&
-                          (!editingRecord || item.id !== editingRecord.id)
-                      );
+                  return (
+                    <Item
+                      preserve={false}
+                      name="rank"
+                      label="Qrup №"
+                      rules={[
+                        { required: false, message: "" },
+                        {
+                          validator: (_, value) => {
+                            if (!value) return Promise.resolve();
+                            const numericValue = Number(value);
 
-                      return existsRank1
-                        ? Promise.reject("Yalnız bir qrup 1 ola bilər!")
-                        : Promise.resolve();
-                    },
-                  },
-                ]}>
-                <Input type="number" />
+                            if (numericValue !== 1) return Promise.resolve();
+
+                            const existsRank1 = DefaultAgreementPlansAll?.some(
+                              (item) =>
+                                item.rank === 1 &&
+                                (!editingRecord || item.id !== editingRecord.id)
+                            );
+
+                            return existsRank1
+                              ? Promise.reject("Yalnız bir qrup 1 ola bilər!")
+                              : Promise.resolve();
+                          },
+                        },
+                      ]}>
+                      <Input type="number" size="md" />
+                    </Item>
+                  );
+                }}
+              </Item>
+
+              <Item
+                rules={[{ required: true, message: "" }]}
+                name={"internalStructureId"}
+                label={"Daxili Struktur"}>
+                <Select size="md">
+                  {internalStructureAll?.map((item) => (
+                    <Option key={item.id} value={item.id}>
+                      {item.name}
+                    </Option>
+                  ))}
+                </Select>
               </Item>
             </FormModal>
 

@@ -10,6 +10,9 @@ import QuestionnairesDefaultAgreementPlansContent from "../pages/Questionnnaires
 // ---- generated import by questionnaireGenerator: RouteLocations ----
 import QuestionnairesRouteLocationsContent from "../pages/Questionnnaires/QuestionnairesRouteLocationsContent";
 
+// ---- generated import by questionnaireGenerator: InternalStructure ----
+import QuestionnairesInternalStructureContent from "../pages/Questionnnaires/QuestionnairesInternalStructureContent";
+
 // ---- generated import by questionnaireGenerator: Owners ----
 import QuestionnairesOwnersContent from "../pages/Questionnnaires/QuestionnairesOwnersContent";
 
@@ -83,7 +86,8 @@ import {
   QUESTIONNAIRES_CONTRACTTOPICS,
   QUESTIONNAIRES_CONTRACTTYPESSUBTYPES,
   QUESTIONNAIRES_DEFAULTAGREEMENTPLANS,
-  QUESTIONNAIRES_ROUTELOCATIONS
+  QUESTIONNAIRES_ROUTELOCATIONS,
+  QUESTIONNAIRES_INTERNALSTRUCTURE
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -426,6 +430,11 @@ export const questionnairesRoutes = (allowed) => {
         <Route 
           path={QUESTIONNAIRES_ROUTELOCATIONS} 
           element={<QuestionnairesRouteLocationsContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_INTERNALSTRUCTURE} 
+          element={<QuestionnairesInternalStructureContent />} 
         />
 </Route>
     </>
