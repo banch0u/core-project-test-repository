@@ -36,16 +36,22 @@ const AppSelect = ({ mainPage }) => {
   const [activeKey, setActiveKey] = useState([]);
   const [dropdownStyle, setDropdownStyle] = useState({});
 
-  const isDisabled = !!mainPage;
-
   const filteredOptions = useMemo(() => {
-    return (entryData || []).filter(
+    // Filter by scopes first
+    const scopeFiltered = (entryData || []).filter(
       (item) =>
         item.scopes === "account" ||
         scopesData === "*" ||
-        scopesData?.includes(item.scopes)
+        scopesData?.includes(item.scopes),
     );
-  }, [entryData, scopesData]);
+
+    // If mainPage is true, remove "account" option
+    if (mainPage) {
+      return scopeFiltered.filter((item) => item.scopes !== "account");
+    }
+
+    return scopeFiltered;
+  }, [entryData, scopesData, mainPage]);
 
   // ✅ IMPORTANT: use real browser path so basename won't hide "/contracts"
   const baseSegment = useMemo(() => {
@@ -56,15 +62,13 @@ const AppSelect = ({ mainPage }) => {
   const active = useMemo(() => {
     // match by first segment (contracts, hr, docflow, settings...)
     const found = filteredOptions.find(
-      (opt) => getFirstSegment(opt.pathname) === baseSegment
+      (opt) => getFirstSegment(opt.pathname) === baseSegment,
     );
     return found || null;
   }, [filteredOptions, baseSegment]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (isDisabled) return;
-
       if (
         accordionRef.current &&
         !accordionRef.current.contains(e.target) &&
@@ -76,11 +80,9 @@ const AppSelect = ({ mainPage }) => {
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isDisabled]);
+  }, []);
 
   useEffect(() => {
-    if (isDisabled) return;
-
     if (activeKey.length > 0 && accordionRef.current) {
       const rect = accordionRef.current.getBoundingClientRect();
       setDropdownStyle({
@@ -91,32 +93,28 @@ const AppSelect = ({ mainPage }) => {
         zIndex: 9999,
       });
     }
-  }, [activeKey, isDisabled]);
+  }, [activeKey]);
 
   useEffect(() => {
-    if (isDisabled) setActiveKey([]);
-  }, [isDisabled]);
+    // Clear active key when mainPage changes if needed
+    setActiveKey([]);
+  }, [mainPage]);
 
   return (
     <div ref={accordionRef}>
       <Collapse
         bordered={false}
-        activeKey={isDisabled ? [] : activeKey}
-        onChange={(key) => {
-          if (isDisabled) return;
-          setActiveKey(key);
-        }}
+        activeKey={activeKey}
+        onChange={(key) => setActiveKey(key)}
         expandIconPosition="end"
         expandIcon={({ isActive }) => (
           <div data-no-invert>
             <RightOutlined
               style={{
-                transform: `rotate(${!isDisabled && isActive ? 270 : 90}deg)`,
+                transform: `rotate(${isActive ? 270 : 90}deg)`,
                 transition: "transform 0.2s ease",
                 color: "white",
                 fontSize: "14px",
-                opacity: isDisabled ? 0.5 : 1,
-                cursor: isDisabled ? "not-allowed" : "pointer",
               }}
             />
           </div>
@@ -124,12 +122,7 @@ const AppSelect = ({ mainPage }) => {
         className={style.accordion}>
         <Panel
           header={
-            <div
-              className={style.accordionHeader}
-              style={{
-                opacity: isDisabled ? 0.8 : 1,
-                cursor: isDisabled ? "default" : "pointer",
-              }}>
+            <div className={style.accordionHeader}>
               {baseSegment === "settings" ? (
                 <>
                   <div>
@@ -149,7 +142,7 @@ const AppSelect = ({ mainPage }) => {
         />
       </Collapse>
 
-      {!isDisabled && activeKey.length > 0 && (
+      {activeKey.length > 0 && (
         <Portal>
           <div
             data-no-invert

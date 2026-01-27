@@ -48,36 +48,36 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
   const [size, setSize] = useState(
     Cookies.get("pagination-size-questionnaire-defaultagreementplans")
       ? JSON.parse(
-          Cookies.get("pagination-size-questionnaire-defaultagreementplans")
+          Cookies.get("pagination-size-questionnaire-defaultagreementplans"),
         )
-      : 20
+      : 20,
   );
   const [query, setQuery] = useState({ name: "" });
 
   const { loading, DefaultAgreementPlansRender } = useSelector(
-    (state) => state.global
+    (state) => state.global,
   );
 
   const DefaultAgreementPlans = useSelector(
-    (state) => state.questionnaire.defaultAgreementPlans
+    (state) => state.questionnaire.defaultAgreementPlans,
   );
   const DefaultAgreementPlansAll = useSelector(
-    (state) => state.questionnaire.defaultAgreementPlansAll
+    (state) => state.questionnaire.defaultAgreementPlansAll,
   );
   const internalStructureAll = useSelector(
-    (state) => state.questionnaire.internalStructureAll
+    (state) => state.questionnaire.internalStructureAll,
   );
   console.log(internalStructureAll);
 
   const contractUsersAll = useSelector(
-    (state) => state.employees.contractUsersAll
+    (state) => state.employees.contractUsersAll,
   );
 
   const [editingRecord, setEditingRecord] = useState(null);
 
   const paginationLength = setPaginationLength(
     DefaultAgreementPlans?.count,
-    DefaultAgreementPlans?.size
+    DefaultAgreementPlans?.size,
   );
 
   const onSubmit = useCallback(
@@ -85,7 +85,7 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
       dispatch(addDefaultAgreementPlans(data));
       setEditingRecord(null);
     },
-    [dispatch]
+    [dispatch],
   );
 
   const onEdit = useCallback(
@@ -100,7 +100,7 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
       dispatch(editDefaultAgreementPlans(data));
       setEditingRecord(null);
     },
-    [dispatch]
+    [dispatch],
   );
 
   const closeOnViewModal = useCallback(() => {
@@ -152,11 +152,11 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
 
   const columns = useMemo(
     () => getStreetColumns(onEditClick, onDelete, dispatch),
-    [onEditClick, onDelete, dispatch]
+    [onEditClick, onDelete, dispatch],
   );
 
   const [selectedColumns, setSelectedColumns] = useState(
-    columns.map((col) => col.dataIndex)
+    columns.map((col) => col.dataIndex),
   );
 
   useEffect(() => {
@@ -187,7 +187,7 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
       JSON.stringify(newSize),
       {
         expires: 7,
-      }
+      },
     );
   };
 
@@ -307,7 +307,8 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
                             const existsRank1 = DefaultAgreementPlansAll?.some(
                               (item) =>
                                 item.rank === 1 &&
-                                (!editingRecord || item.id !== editingRecord.id)
+                                (!editingRecord ||
+                                  item.id !== editingRecord.id),
                             );
 
                             return existsRank1
