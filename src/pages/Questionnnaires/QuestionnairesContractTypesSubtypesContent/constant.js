@@ -19,7 +19,7 @@ export const getStreetColumns = (
       width: 35,
     },
     {
-      title: "Müqavilə alt növü",
+      title: "Müqavilənin predmeti",
       dataIndex: "name",
       width: innerW,
       disabled: true,

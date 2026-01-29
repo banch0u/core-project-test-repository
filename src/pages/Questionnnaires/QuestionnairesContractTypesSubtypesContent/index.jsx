@@ -45,24 +45,24 @@ const QuestionnairesContractTypesSubtypesContent = () => {
   const [size, setSize] = useState(
     Cookies.get("pagination-size-questionnaire-contracttypessubtypes")
       ? JSON.parse(
-          Cookies.get("pagination-size-questionnaire-contracttypessubtypes")
+          Cookies.get("pagination-size-questionnaire-contracttypessubtypes"),
         )
-      : 20
+      : 20,
   );
   const [query, setQuery] = useState({ name: "" });
   const [subtopicSelect, setSubtopicSelect] = useState(null);
   const { loading, ContractTypesSubtypesRender } = useSelector(
-    (state) => state.global
+    (state) => state.global,
   );
   const contracttypesAll = useSelector(
-    (state) => state.questionnaire.contracttypesAll
+    (state) => state.questionnaire.contracttypesAll,
   );
   const ContractTypesSubtypes = useSelector(
-    (state) => state.questionnaire.contractTypesSubtypes
+    (state) => state.questionnaire.contractTypesSubtypes,
   );
   const paginationLength = setPaginationLength(
     ContractTypesSubtypes?.count,
-    ContractTypesSubtypes?.size
+    ContractTypesSubtypes?.size,
   );
 
   const onSubmit = useCallback(
@@ -71,10 +71,10 @@ const QuestionnairesContractTypesSubtypesContent = () => {
         addContractTypesSubtypes({
           ...data,
           contractTypeId: subtopicSelect,
-        })
+        }),
       );
     },
-    [dispatch, subtopicSelect]
+    [dispatch, subtopicSelect],
   );
   const onEdit = useCallback(
     (id, record) => {
@@ -85,7 +85,7 @@ const QuestionnairesContractTypesSubtypesContent = () => {
       };
       dispatch(editContractTypesSubtypes(data));
     },
-    [dispatch, subtopicSelect]
+    [dispatch, subtopicSelect],
   );
   const onStatusChange = useCallback(
     (data, checked) => {
@@ -95,7 +95,7 @@ const QuestionnairesContractTypesSubtypesContent = () => {
       };
       dispatch(contractTypesSubtypesVisibility(data_));
     },
-    [dispatch]
+    [dispatch],
   );
   const closeOnViewModal = useCallback(() => {
     dispatch(setViewModalVisible(false));
@@ -135,10 +135,10 @@ const QuestionnairesContractTypesSubtypesContent = () => {
   }
   const columns = useMemo(
     () => getStreetColumns(onEditClick, onDelete, onStatusChange, dispatch),
-    [onEditClick, onDelete, onStatusChange, dispatch]
+    [onEditClick, onDelete, onStatusChange, dispatch],
   );
   const [selectedColumns, setSelectedColumns] = useState(
-    columns.map((col) => col.dataIndex)
+    columns.map((col) => col.dataIndex),
   );
   useEffect(() => {
     if (contracttypesAll) {
@@ -179,7 +179,7 @@ const QuestionnairesContractTypesSubtypesContent = () => {
       JSON.stringify(newSize),
       {
         expires: 7,
-      }
+      },
     );
   };
 
@@ -204,7 +204,7 @@ const QuestionnairesContractTypesSubtypesContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Müqavilə alt növü</h2>
+              <h2>Müqavilənin predmeti</h2>
               <div className={style.buttons}>
                 <Select
                   size="sm"

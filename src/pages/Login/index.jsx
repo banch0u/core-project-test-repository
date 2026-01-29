@@ -35,7 +35,7 @@ const Login = () => {
       };
       dispatch(login(data));
     },
-    [dispatch, navigate, companyInfo]
+    [dispatch, navigate, companyInfo],
   );
   const getBase64FromURL = useCallback(async (url) => {
     try {

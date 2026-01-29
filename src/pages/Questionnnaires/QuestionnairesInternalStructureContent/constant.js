@@ -19,7 +19,7 @@ export const getStreetColumns = (
       width: 35,
     },
     {
-      title: "Daxili Strukturlar",
+      title: "Şablon strukturlar",
       dataIndex: "name",
       width: innerW,
       disabled: true,

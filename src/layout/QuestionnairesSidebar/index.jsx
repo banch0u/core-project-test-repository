@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import style from "./index.module.scss";
+import { Layout, Menu, Input } from "antd";
 import {
-  Link,
-  useLocation } from "react-router-dom";import style from "./index.module.scss";import { Layout,
-  Menu,
-  Input } from "antd";import {  QUESTIONNAIRES_ACADEMIC_DEGREES,
+  QUESTIONNAIRES_ACADEMIC_DEGREES,
   QUESTIONNAIRES_APPLICATION_FORMS,
   QUESTIONNAIRES_AREAS,
   QUESTIONNAIRES_BRANDS,
@@ -72,7 +72,7 @@ import {
   QUESTIONNAIRES_CONTRACTTYPESSUBTYPES,
   QUESTIONNAIRES_DEFAULTAGREEMENTPLANS,
   QUESTIONNAIRES_ROUTELOCATIONS,
-  QUESTIONNAIRES_INTERNALSTRUCTURE
+  QUESTIONNAIRES_INTERNALSTRUCTURE,
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -420,7 +420,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
 
     {
       key: "subtypes", //delete the "/" at the start of string
-      label: "Müqavilə alt növü",
+      label: "Müqavilənin predmeti",
       link: QUESTIONNAIRES_CONTRACTTYPESSUBTYPES,
     },
     // ---- generated sidebar item by questionnaireGenerator: ContractTypesSubtypes ----
@@ -431,21 +431,21 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_DEFAULTAGREEMENTPLANS,
     },
     // ---- generated sidebar item by questionnaireGenerator: DefaultAgreementPlans ----
-  
-    {
-      key: "routelocations", //delete the "/" at the start of string 
-      label: "Göndərilən yerlər", 
-      link: QUESTIONNAIRES_ROUTELOCATIONS, 
-},
-// ---- generated sidebar item by questionnaireGenerator: RouteLocations ----
 
     {
-      key: "internalstructures", //delete the "/" at the start of string 
-      label: "Daxili Strukturlar", 
-      link: QUESTIONNAIRES_INTERNALSTRUCTURE, 
-},
-// ---- generated sidebar item by questionnaireGenerator: InternalStructure ----
-];
+      key: "routelocations", //delete the "/" at the start of string
+      label: "Göndərilən yerlər",
+      link: QUESTIONNAIRES_ROUTELOCATIONS,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: RouteLocations ----
+
+    {
+      key: "internalstructures", //delete the "/" at the start of string
+      label: "Şablon strukturlar",
+      link: QUESTIONNAIRES_INTERNALSTRUCTURE,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: InternalStructure ----
+  ];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
 
@@ -468,7 +468,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
     .filter(
       (item) =>
         item.children &&
-        item.children.some((child) => child.key === selectedKey)
+        item.children.some((child) => child.key === selectedKey),
     )
     .map((item) => item.key);
 

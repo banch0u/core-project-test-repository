@@ -31,13 +31,6 @@ export const getStreetColumns = (
       ellipsis: true,
     },
     {
-      title: "Daxili Struktur",
-      dataIndex: "internalStructure",
-      width: innerW,
-      disabled: false,
-      ellipsis: true,
-    },
-    {
       title: "",
       key: "actions",
       showCheckbox: false,

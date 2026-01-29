@@ -42,28 +42,28 @@ const QuestionnairesInternalStructureContent = () => {
   const [size, setSize] = useState(
     Cookies.get("pagination-size-questionnaire-internalstructure")
       ? JSON.parse(
-          Cookies.get("pagination-size-questionnaire-internalstructure")
+          Cookies.get("pagination-size-questionnaire-internalstructure"),
         )
-      : 20
+      : 20,
   );
   const [query, setQuery] = useState({ name: "" });
   const { loading, internalStructureRender } = useSelector(
-    (state) => state.global
+    (state) => state.global,
   );
 
   const InternalStructure = useSelector(
-    (state) => state.questionnaire.internalStructure
+    (state) => state.questionnaire.internalStructure,
   );
   const paginationLength = setPaginationLength(
     InternalStructure?.count,
-    InternalStructure?.size
+    InternalStructure?.size,
   );
 
   const onSubmit = useCallback(
     async (data) => {
       dispatch(addInternalStructure(data));
     },
-    [dispatch]
+    [dispatch],
   );
   const onEdit = useCallback(
     (id, record) => {
@@ -73,7 +73,7 @@ const QuestionnairesInternalStructureContent = () => {
       };
       dispatch(editInternalStructure(data));
     },
-    [dispatch]
+    [dispatch],
   );
   const onStatusChange = useCallback(
     (data, checked) => {
@@ -83,7 +83,7 @@ const QuestionnairesInternalStructureContent = () => {
       };
       dispatch(internalStructureVisibility(data_));
     },
-    [dispatch]
+    [dispatch],
   );
   const closeOnViewModal = useCallback(() => {
     dispatch(setViewModalVisible(false));
@@ -123,10 +123,10 @@ const QuestionnairesInternalStructureContent = () => {
   }
   const columns = useMemo(
     () => getStreetColumns(onEditClick, onDelete, onStatusChange, dispatch),
-    [onEditClick, onDelete, onStatusChange, dispatch]
+    [onEditClick, onDelete, onStatusChange, dispatch],
   );
   const [selectedColumns, setSelectedColumns] = useState(
-    columns.map((col) => col.dataIndex)
+    columns.map((col) => col.dataIndex),
   );
   useEffect(() => {
     if (window.innerWidth >= 1900) {
@@ -149,7 +149,7 @@ const QuestionnairesInternalStructureContent = () => {
       JSON.stringify(newSize),
       {
         expires: 7,
-      }
+      },
     );
   };
 
@@ -174,7 +174,7 @@ const QuestionnairesInternalStructureContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Daxili Strukturlar</h2>
+              <h2>Şablon strukturlar</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}
