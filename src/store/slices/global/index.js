@@ -77,8 +77,7 @@ const initialState = {
   crushReasonsRender: false,
   insuranceRender: false,
   oilFieldsRender: false,
-  vehicleGroupsRender: false,
-  fieldsRender:false
+  vehicleGroupsRender: false
 };
 
 export const global = createSlice({
@@ -321,18 +320,8 @@ export const global = createSlice({
     },
     setVehicleGroupsRender: (state, { payload }) => {
       state.vehicleGroupsRender = payload;
-    },
-    setFieldsRender:(state, {payload})=>{
-      state.fieldsRender= payload;
-    },
-    setBarrelRender: (state, { payload }) => {
-      state.barrelRender = payload;
-    },
-    setWellRender:(state, {payload})=> {
-      state.wellRender = payload;
-    },
+    }
   },
-
 });
 
 export const {
@@ -412,9 +401,6 @@ export const {
   setMeasurementtypesRender,
   setRepairmentWorkTypesRender,
   setPenaltyTypesRender,
-  setFieldsRender,
-  setBarrelRender,
-  setWellRender,
   setCrushReasonsRender,
   insuranceTypesRender,
   setOilFieldsRender,

@@ -1,6 +1,6 @@
 {
   "name": "@banch0u/core-project-test-repository",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Shared core features for all projects",
   "main": "dist/index.js",
   "files": [
@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
-    "@banch0u/core-project-test-repository": "file:.yalc/@banch0u/core-project-test-repository",
     "@microsoft/signalr": "^8.0.7",
     "@pdftron/webviewer": "^11.2.0",
     "@reduxjs/toolkit": "^2.6.1",

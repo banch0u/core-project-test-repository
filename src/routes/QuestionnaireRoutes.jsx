@@ -86,7 +86,8 @@ import {
   QUESTIONNAIRES_CONTRACTTOPICS,
   QUESTIONNAIRES_CONTRACTTYPESSUBTYPES,
   QUESTIONNAIRES_DEFAULTAGREEMENTPLANS,
-  QUESTIONNAIRES_ROUTELOCATIONS
+  QUESTIONNAIRES_ROUTELOCATIONS,
+  QUESTIONNAIRES_INTERNALSTRUCTURE
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -138,9 +139,6 @@ import QuestionnairesExtraServicesContent from "../pages/Questionnnaires/Questio
 import QuestionnairesFuelTypesContent from "../pages/Questionnnaires/QuestionnairesFuelTypesContent";
 import QuestionnairesOilFieldsContent from "../pages/Questionnnaires/QuestionnairesOilFieldsContent";
 import QuestionnairesVehicleGroupsContent from "../pages/Questionnnaires/QuestionnairesVehicleGroupsContent";
-import QuestionnairesFieldContent from "../pages/Questionnnaires/QuestionnairesFieldContent";
-import QuestionnairesBarrelContent from "../pages/Questionnnaires/QuestionnairesBarrelContent";
-import QuestionnairesWellContent from "../pages/Questionnnaires/QuestionnairesWellContent";
 
 export const questionnairesRoutes = (allowed) => {
   return (
@@ -432,6 +430,11 @@ export const questionnairesRoutes = (allowed) => {
         <Route 
           path={QUESTIONNAIRES_ROUTELOCATIONS} 
           element={<QuestionnairesRouteLocationsContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_INTERNALSTRUCTURE} 
+          element={<QuestionnairesInternalStructureContent />} 
         />
 </Route>
     </>

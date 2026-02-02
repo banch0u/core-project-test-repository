@@ -72,9 +72,6 @@ import {
   QUESTIONNAIRES_CONTRACTTYPESSUBTYPES,
   QUESTIONNAIRES_DEFAULTAGREEMENTPLANS,
   QUESTIONNAIRES_ROUTELOCATIONS,
-  QUESTIONNAIRES_FIELDS,
-  QUESTIONNAIRES_BARREL,
-  QUESTIONNAIRES_WELL,
   QUESTIONNAIRES_INTERNALSTRUCTURE,
 } from "../../utils/path";
 
@@ -406,21 +403,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       label: "Dəstələr",
       link: QUESTIONNAIRES_VEHICLE_GROUPS,
     },
-    {
-      key: "fields",
-      label: "Sahə",
-      link: QUESTIONNAIRES_FIELDS
-    },
-    {
-      key:"barrel",
-      label:"Barel",
-      link: QUESTIONNAIRES_BARREL
-    },
-    {
-      key:"well",
-      label:" Quyu",
-      link: QUESTIONNAIRES_WELL
-    },
+
     {
       key: "owners", //delete the "/" at the start of string
       label: "Mülkiyyətçi",
