@@ -50,8 +50,8 @@ const QuestionnairesFieldContent = () => {
 
   const { loading, fieldsRender } = useSelector((state) => state.global);
 
-  const fields = useSelector((state) => state.questionnaire.fields);
-
+  const fields = useSelector((state) => state.questionnaire.field);
+console.log("field",fields)
   const paginationLength = setPaginationLength(fields?.count, fields?.size);
   const onSubmit = useCallback(
     async (data) => {

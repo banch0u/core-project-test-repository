@@ -27,7 +27,7 @@ import {
   addWell,
   deleteWell,
   editWell,
-  getFieldsAll,
+  getFieldAll,
   getWell,
   wellVisibility,
 
@@ -156,7 +156,7 @@ const QuestionnairesWellContent = () => {
     dispatch(getWell(data));
   }, [dispatch, page, wellRender, size, query]);
   useEffect(()=>{
-      dispatch(getFieldsAll("onlyactive"))
+      dispatch(getFieldAll("onlyactive"))
     },[dispatch])
   const updateSize = (newSize) => {
     setSize(newSize); // Update state

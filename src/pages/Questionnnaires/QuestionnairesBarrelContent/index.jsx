@@ -29,7 +29,7 @@ import {
   editBarrel,
   barrelVisibility,
   getBarrel,
-  getFieldsAll,
+  getFieldAll,
 } from "../../../store/slices/questionnaire";
 import Select from "../../../components/Select";
 import { typeENUM } from "../../../helpers/enums";
@@ -149,7 +149,7 @@ const fieldsAll = useSelector((state) => state.questionnaire.fieldsAll);
     dispatch(getBarrel(data));
   }, [dispatch, page, barrelRender, size, query]);
   useEffect(()=>{
-    dispatch(getFieldsAll("onlyactive"))
+    dispatch(getFieldAll("onlyactive"))
   },[dispatch]
 )
   const updateSize = (newSize) => {
