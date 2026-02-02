@@ -11,7 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 // import Ldap from "../../assets/icons/Ldap.png";
 import { getCompanyInfo } from "../../store/slices/companyInfo";
 import api from "../../utils/axios"; // 💡 Make sure this points to your axios instance
-
+import { useLang } from "../../hooks/useLang";
+import text from "../../translations/index.json";
 const { Item: Label, useForm } = Form;
 const { Password } = Input;
 
@@ -19,7 +20,7 @@ const Login = () => {
   const [form] = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const lang = useLang();
   const loading = useSelector((state) => state.global.loading);
   const companyInfo = useSelector((state) => state.companyInfo.companyInfo);
 
@@ -34,7 +35,7 @@ const Login = () => {
       };
       dispatch(login(data));
     },
-    [dispatch, navigate, companyInfo]
+    [dispatch, navigate, companyInfo],
   );
   const getBase64FromURL = useCallback(async (url) => {
     try {
@@ -80,7 +81,7 @@ const Login = () => {
         onFinish={loginValue}
         layout="vertical"
         requiredMark={false}>
-        <h2 className={style.title}>Daxil ol</h2>
+        <h2 className={style.title}>{text?.[lang]?.pages?.login?.title}</h2>
         <div className={style.control}>
           <Label
             name="username"
@@ -88,7 +89,9 @@ const Login = () => {
             style={{ marginBottom: "20px" }}>
             <Input
               type="text"
-              placeholder="İstifadəçi adı"
+              placeholder={
+                text?.[lang]?.pages?.login?.fields?.username?.placeholder
+              }
               className={style.control_input}
             />
           </Label>
@@ -100,7 +103,9 @@ const Login = () => {
             style={{ marginBottom: "4px" }}>
             <Password
               style={{ padding: 0 }}
-              placeholder="Şifrə"
+              placeholder={
+                text?.[lang]?.pages?.login?.fields?.password?.placeholder
+              }
               className={style.control_input}
             />
           </Label>
@@ -108,7 +113,9 @@ const Login = () => {
         {/* <Link to={""}>Şifrəni unuttdun?</Link> */}
         <div className={style.button}>
           <div className={style.border} data-no-invert>
-            <button type="submit">Daxil Ol</button>
+            <button type="submit">
+              {text?.[lang]?.pages?.login?.buttons?.login}
+            </button>
           </div>
         </div>
         {/* <div className={style.alternative_login}>

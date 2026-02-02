@@ -9,6 +9,10 @@ class Services {
     const response = await api.get(`/permissions/executiveMembers`);
     return response?.data;
   };
+  static getContractUsersAll = async () => {
+    const response = await api.get(`/defaultagreementplans/users`);
+    return response?.data;
+  };
 }
 
 export default Services;

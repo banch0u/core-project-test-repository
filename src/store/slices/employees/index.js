@@ -38,6 +38,20 @@ export const getExecutiveMembersAll = createAsyncThunk(
     }
   }
 );
+export const getContractUsersAll = createAsyncThunk(
+  "/getContractUsersAll",
+  async (_, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getContractUsersAll();
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 
 export const employees = createSlice({
   name: "employees",
@@ -51,6 +65,9 @@ export const employees = createSlice({
     );
     builder.addCase(getExecutiveMembersAll.fulfilled, (state, { payload }) => {
       state.executiveMembersAll = payload;
+    });
+    builder.addCase(getContractUsersAll.fulfilled, (state, { payload }) => {
+      state.contractUsersAll = payload;
     });
   },
 });

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Switch, Tooltip } from "antd";
 import style from "../Questionnaires.module.scss";
 import { setDeleteModalVisible } from "../../../store/slices/global";
 import { DeleteIconQ, EditIcon } from "../../../assets/icons";
@@ -6,6 +7,7 @@ import { DeleteIconQ, EditIcon } from "../../../assets/icons";
 export const getStreetColumns = (
   onEditClick,
   onDelete,
+  onStatusChange,
   dispatch,
   innerW
 ) => [
@@ -17,18 +19,27 @@ export const getStreetColumns = (
       width: 35,
     },
     {
-      title: "Məsul şəxs",
-      dataIndex: "responsiblePerson",
+      title: "Şablon strukturlar",
+      dataIndex: "name",
       width: innerW,
       disabled: true,
       ellipsis: true,
     },
     {
-      title: "Qrup №",
-      dataIndex: "rank",
-      width: innerW,
-      disabled: false,
-      ellipsis: true,
+      title: "Status",
+      key: "status",
+      disabled: true,
+
+      filter: false,
+      render: (data) => (
+        <Tooltip placement="top" title="Statusu dəyiş">
+          <Switch
+            size="medium"
+            checked={data?.isActive}
+            onChange={(checked) => onStatusChange(data, checked, dispatch)}
+          />
+        </Tooltip>
+      ),
     },
     {
       title: "",

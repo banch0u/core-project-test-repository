@@ -3,7 +3,7 @@ import { setLoading } from "../global";
 import AuthServices from "./service";
 import { errorMessage, succesMessage } from "../../../utils/message";
 import { LOGIN_PATH, PLATFORM_PATH } from "../../../utils/path";
-
+import text from "../../../translations/index.json";
 const initialState = {
   user: {},
 };
@@ -19,6 +19,7 @@ export const refreshToken = createAsyncThunk(
   }
 );
 
+const lang = localStorage.getItem("lang");
 export const login = createAsyncThunk("/login", async (data, { dispatch }) => {
   try {
     dispatch(setLoading(true));
@@ -26,7 +27,8 @@ export const login = createAsyncThunk("/login", async (data, { dispatch }) => {
 
     localStorage.setItem("token", response?.data.accessToken);
     localStorage.setItem("refreshToken", response?.data.refreshToken);
-    succesMessage("Sistemə daxil olunur...");
+
+    succesMessage(text?.[lang]?.pages?.messages?.loginSuccess);
 
     dispatch(setLoading(false));
     if (data?.mainPage) {
@@ -38,12 +40,10 @@ export const login = createAsyncThunk("/login", async (data, { dispatch }) => {
     return response?.data;
   } catch (error) {
     dispatch(setLoading(false));
-    if (error.response && error.response.status === 500) {
+    if (error.response && error.response.status === 400) {
       errorMessage(
-        "Giriş uğursuz oldu. Zəhmət olmasa məlumatlarınızı yoxlayın."
+        text?.[lang]?.pages?.messages?.loginError
       );
-    } else {
-      errorMessage("Xəta baş verdi. Zəhmət olmasa, yenidən cəhd edin.");
     }
     data?.navigate(LOGIN_PATH);
   }

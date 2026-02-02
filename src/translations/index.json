@@ -1,0 +1,364 @@
+{
+  "az": {
+    "pages": {
+      "messages": {
+        "loginSuccess": "Sistemə daxil olunur...",
+        "loginError": "Giriş uğursuz oldu. Zəhmət olmasa məlumatlarınızı yoxlayın.",
+        "generalError": "Serverdə problem baş verdi",
+        "successValue": "Uğurla tamamlandı"
+      },
+      "common": {
+        "count": "Sayı",
+        "cancel": "Ləğv et",
+        "save": "Yadda saxla",
+        "confirm": "Təsdiqlə",
+        "back": "Geri"
+      },
+      "login": {
+        "title": "Daxil ol",
+        "fields": {
+          "username": {
+            "placeholder": "İstifadəçi adı"
+          },
+          "password": {
+            "placeholder": "Şifrə"
+          }
+        },
+        "buttons": {
+          "login": "Daxil ol"
+        }
+      },
+      "platform": {
+        "projects": {
+          "docflow": "Sənəd dövriyyəsi",
+          "hr": "Kadrlar sistemi",
+          "contracts": "Müqavilələr",
+          "accounts": "Şəxsi kabinet",
+          "archive": "Arxiv",
+          "transport": "Nəqliyyat",
+          "lab": "Laboratoriya",
+          "settings": "Tənzimləmələr"
+        }
+      },
+      "header": {
+        "logout": "Çıxış",
+        "notifications": {
+          "title": "Bildirişlər",
+          "readAll": "Hamısını oxu",
+          "nonotification": "Bildiriş yoxdur",
+          "read": "Oxu",
+          "showMore": "Daha çox göstər",
+          "notificationsettings": {
+            "title": "Bildiriş tənzimləmələri",
+            "internal": "Daxili",
+            "email": "Email",
+            "labels": {
+              "internalIsActive": "Daxili bildirişlər",
+              "emailIsActive": "Email bildirişləri",
+              "visa": "Viza üçün",
+              "sign": "İmza üçün",
+              "reject": "İmtina üçün",
+              "print": "Çap üçün",
+              "accouncement": "Elanlar",
+              "news": "Xəbərlər",
+              "reservations": "Tədbir/İclas",
+              "surveys": "Sorğular",
+              "timeOffRequest": "İcazələr",
+              "tutorials": "Təlimatlar və video"
+            }
+          }
+        },
+        "lightMode": "Gündüz modu",
+        "darkMode": "Gecə modu",
+        "settings": "Tənzimləmələr",
+        "changePassword": {
+          "title": "Şifrəni dəyiş",
+          "oldPassword": "Köhnə şifrə",
+          "newPassword": "Yeni şifrə",
+          "newPasswordConfirmation": "Yeni şifrənin təsdiqi",
+          "hints": {
+            "passwordMismatch": "Şifrələr uyğun gəlmir",
+            "passwordLength": "Şifrə ən azı 8 simvoldan ibarət olmalıdır",
+            "passwordUppercase": "Şifrə ən azı bir böyük hərf daxil etməlidir",
+            "passwordLowercase": "Şifrə ən azı bir kiçik hərf daxil etməlidir",
+            "passwordDigit": "Şifrə ən azı bir rəqəm daxil etməlidir",
+            "passwordSpecialChar": "Şifrə ən azı bir xüsusi simvol daxil etməlidir (!@#$%^&*)",
+            "passwordDifferent": "Yeni şifrə köhnə şifrə ilə eyni ola bilməz!"
+          }
+        },
+        "logOut": "Çıxış et"
+      },
+      "docflow": {
+        "unreadDocuments": {
+          "title": "Mənim qovluğum",
+          "tags": {
+            "forConfirmation": "Təsdiq üçün",
+            "forSign": "İmza üçün",
+            "forVisa": "Viza üçün",
+            "marginNoteConfirmation": "Dərkənar təsdiqi",
+            "marginNotePreparation": "Dərkənar hazırlanması",
+            "forExecution": "İcra üçün",
+            "forExecutionAndInfo": "İcra və məlumat üçün",
+            "forInfoAndSpectation": "Məlumat və Nəzarət üçün",
+            "forInfo": "Məlumat üçün",
+            "forEdit": "Redaktə üçün"
+          },
+          "table": {
+            "internalNumber": "Qeydiyyat nömrəsi",
+
+            "registrationDate": "Qeydiyyat tarixi",
+            "number": "Sənədin nömrəsi",
+            "directionFrom": "Kimdən daxil olub",
+            "fromOrganisationName": "Hardan daxil olub",
+            "directionTo": "Kimə ünvanlanıb",
+            "sendingOption": "Əməliyyat Növü",
+            "sendingFrom": "Əməliyyatı aparan",
+            "docDescription": "Qısa məzmun",
+            "documentStatus": "Sənədin statusu"
+          }
+        }
+      }
+    }
+  },
+  "en": {
+    "pages": {
+      "messages": {
+        "loginSuccess": "Logging into the system...",
+        "loginError": "Login failed. Please check your credentials.",
+        "generalError": "Internal Server Error",
+        "successValue": "Completed successfully"
+      },
+
+      "common": {
+        "count": "Count",
+        "cancel": "Cancel",
+        "save": "Save",
+        "confirm": "Confirm",
+        "back": "Back"
+      },
+      "login": {
+        "title": "Log in",
+        "fields": {
+          "username": {
+            "placeholder": "Username"
+          },
+          "password": {
+            "placeholder": "Password"
+          }
+        },
+        "buttons": {
+          "login": "Log in"
+        }
+      },
+      "platform": {
+        "projects": {
+          "docflow": "Document Flow",
+          "hr": "HR System",
+          "contracts": "Contracts",
+          "accounts": "Personal Account",
+          "archive": "Archive",
+          "transport": "Transport",
+          "lab": "Laboratory",
+          "settings": "Settings"
+        }
+      },
+      "header": {
+        "logout": "Logout",
+        "notifications": {
+          "title": "Notifications",
+          "readAll": "Mark all as read",
+          "nonotification": "No notifications",
+          "read": "Read",
+          "showMore": "Show more",
+          "notificationsettings": {
+            "title": "Notification settings",
+            "internal": "Internal",
+            "email": "Email",
+            "labels": {
+              "internalIsActive": "Internal notifications",
+              "emailIsActive": "Email notifications",
+              "visa": "For visa",
+              "sign": "For signature",
+              "reject": "For rejection",
+              "print": "For printing",
+              "accouncement": "Announcements",
+              "news": "News",
+              "reservations": "Event/Meeting",
+              "surveys": "Surveys",
+              "timeOffRequest": "Time off requests",
+              "tutorials": "Guides and videos"
+            }
+          }
+        },
+        "lightMode": "Light mode",
+        "darkMode": "Dark mode",
+        "settings": "Settings",
+        "changePassword": {
+          "title": "Change password",
+          "oldPassword": "Old password",
+          "newPassword": "New password",
+          "newPasswordConfirmation": "Confirm new password",
+          "hints": {
+            "passwordMismatch": "Passwords do not match",
+            "passwordLength": "Password must be at least 8 characters long",
+            "passwordUppercase": "Password must contain at least one uppercase letter",
+            "passwordLowercase": "Password must contain at least one lowercase letter",
+            "passwordDigit": "Password must contain at least one digit",
+            "passwordSpecialChar": "Password must contain at least one special character (!@#$%^&*)",
+            "passwordDifferent": "The new password cannot be the same as the old password!"
+          }
+        },
+        "logOut": "Log out"
+      },
+      "docflow": {
+        "unreadDocuments": {
+          "title": "My folder",
+          "tags": {
+            "forConfirmation": "For confirmation",
+            "forSign": "For signature",
+            "forVisa": "For visa",
+            "marginNoteConfirmation": "Resolution approval",
+            "marginNotePreparation": "Preparation of resolution",
+            "forExecution": "For execution",
+            "forExecutionAndInfo": "For execution and information",
+            "forInfoAndSpectation": "For information and control",
+            "forInfo": "For information",
+            "forEdit": "For editing"
+          },
+          "table": {
+            "internalNumber": "Registration number",
+            "registrationDate": "Registration date",
+            "number": "Document number",
+            "directionFrom": "Received from",
+            "fromOrganisationName": "Received from (organization)",
+            "directionTo": "Addressed to",
+            "sendingOption": "Operation type",
+            "sendingFrom": "Processed by",
+            "docDescription": "Description",
+            "documentStatus": "Document status"
+          }
+        }
+      }
+    }
+  },
+  "ru": {
+    "pages": {
+      "messages": {
+        "loginSuccess": "Вход в систему...",
+        "loginError": "Ошибка входа. Пожалуйста, проверьте свои учетные данные.",
+        "generalError": "Произошла проблема на сервере",
+        "successValue": "Успешно завершено"
+      },
+      "common": {
+        "count": "Количество",
+        "cancel": "Отменить",
+        "save": "Сохранить",
+        "confirm": "Подтвердить",
+        "back": "Назад"
+      },
+      "login": {
+        "title": "Вход",
+        "fields": {
+          "username": {
+            "placeholder": "Имя пользователя"
+          },
+          "password": {
+            "placeholder": "Пароль"
+          }
+        },
+        "buttons": {
+          "login": "Войти"
+        }
+      },
+      "platform": {
+        "projects": {
+          "docflow": "Документооборот",
+          "hr": "Система управления персоналом",
+          "contracts": "Контракты",
+          "accounts": "Личный кабинет",
+          "archive": "Архив",
+          "transport": "Автотранспорт",
+          "lab": "Лаборатория",
+          "settings": "Настройки"
+        }
+      },
+      "header": {
+        "logout": "Выход",
+        "notifications": {
+          "title": "Уведомления",
+          "readAll": "Отметить все как прочитанные",
+          "nonotification": "Нет уведомлений",
+          "read": "Прочитать",
+          "showMore": "Показать больше",
+          "notificationsettings": {
+            "title": "Настройки уведомлений",
+            "internal": "Внутренние",
+            "email": "Email",
+            "labels": {
+              "internalIsActive": "Внутренние уведомления",
+              "emailIsActive": "Email-уведомления",
+              "visa": "Для визы",
+              "sign": "Для подписи",
+              "reject": "Для отказа",
+              "print": "Для печати",
+              "accouncement": "Объявления",
+              "news": "Новости",
+              "reservations": "Мероприятие/Совещание",
+              "surveys": "Опросы",
+              "timeOffRequest": "Отпуска",
+              "tutorials": "Инструкции и видео"
+            }
+          }
+        },
+        "lightMode": "Дневной режим",
+        "darkMode": "Ночной режим",
+        "settings": "Настройки",
+        "changePassword": {
+          "title": "Сменить пароль",
+          "oldPassword": "Старый пароль",
+          "newPassword": "Новый пароль",
+          "newPasswordConfirmation": "Подтвердить новый пароль",
+          "hints": {
+            "passwordMismatch": "Пароли не совпадают",
+            "passwordLength": "Пароль должен быть не менее 8 символов",
+            "passwordUppercase": "Пароль должен содержать хотя бы одну заглавную букву",
+            "passwordLowercase": "Пароль должен содержать хотя бы одну строчную букву",
+            "passwordDigit": "Пароль должен содержать хотя бы одну цифру",
+            "passwordSpecialChar": "Пароль должен содержать хотя бы один специальный символ (!@#$%^&*)",
+            "passwordDifferent": "Новый пароль не может совпадать со старым!"
+          }
+        },
+        "logOut": "Выйти"
+      },
+      "docflow": {
+        "unreadDocuments": {
+          "title": "Моя папка",
+          "tags": {
+            "forConfirmation": "Для подтверждения",
+            "forSign": "Для подписи",
+            "forVisa": "Для визы",
+            "marginNoteConfirmation": "Утверждение резолюции",
+            "marginNotePreparation": "Подготовка резолюции",
+            "forExecution": "Для исполнения",
+            "forExecutionAndInfo": "Для исполнения и сведения",
+            "forInfoAndSpectation": "Для сведения и контроля",
+            "forInfo": "Для сведения",
+            "forEdit": "Для редактирования"
+          },
+          "table": {
+            "internalNumber": "Регистрационный номер",
+            "registrationDate": "Дата регистрации",
+            "number": "Номер документа",
+            "directionFrom": "От кого поступило",
+            "fromOrganisationName": "Откуда поступило",
+            "directionTo": "Кому адресовано",
+            "sendingOption": "Тип операции",
+            "sendingFrom": "Кто обработал",
+            "docDescription": "Краткое содержание",
+            "documentStatus": "Статус документа"
+          }
+        }
+      }
+    }
+  }
+}

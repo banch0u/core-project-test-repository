@@ -2,7 +2,7 @@ import React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Cookies from "js-cookie";
 import style from "../Questionnaires.module.scss";
-import { Form, Input, Layout, Select as AntdSelect } from "antd";
+import { Form, Input, Layout } from "antd";
 import { PlusIcon } from "../../../assets/icons";
 import FormModal from "../../../components/FormModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,68 +24,56 @@ import Loading from "../../../components/Loading";
 import Table from "../../../components/Table";
 import Filter from "../../../components/Filter";
 import {
-  addContractTypesSubtypes,
-  deleteContractTypesSubtypes,
-  editContractTypesSubtypes,
-  getContractTypesSubtypes,
-  contractTypesSubtypesVisibility,
-  getContracttypesAll,
+  addInternalStructure,
+  deleteInternalStructure,
+  editInternalStructure,
+  getInternalStructure,
+  internalStructureVisibility,
 } from "../../../store/slices/questionnaire";
-import Select from "../../../components/Select";
 
 const { Content } = Layout;
 const { Item } = Form;
-const { Option } = AntdSelect;
-const QuestionnairesContractTypesSubtypesContent = () => {
+const QuestionnairesInternalStructureContent = () => {
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
   const dispatch = useDispatch();
   const [id, setId] = useState(0);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(
-    Cookies.get("pagination-size-questionnaire-contracttypessubtypes")
+    Cookies.get("pagination-size-questionnaire-internalstructure")
       ? JSON.parse(
-          Cookies.get("pagination-size-questionnaire-contracttypessubtypes"),
+          Cookies.get("pagination-size-questionnaire-internalstructure"),
         )
       : 20,
   );
   const [query, setQuery] = useState({ name: "" });
-  const [subtopicSelect, setSubtopicSelect] = useState(null);
-  const { loading, ContractTypesSubtypesRender } = useSelector(
+  const { loading, internalStructureRender } = useSelector(
     (state) => state.global,
   );
-  const contracttypesAll = useSelector(
-    (state) => state.questionnaire.contracttypesAll,
-  );
-  const ContractTypesSubtypes = useSelector(
-    (state) => state.questionnaire.contractTypesSubtypes,
+
+  const InternalStructure = useSelector(
+    (state) => state.questionnaire.internalStructure,
   );
   const paginationLength = setPaginationLength(
-    ContractTypesSubtypes?.count,
-    ContractTypesSubtypes?.size,
+    InternalStructure?.count,
+    InternalStructure?.size,
   );
 
   const onSubmit = useCallback(
     async (data) => {
-      dispatch(
-        addContractTypesSubtypes({
-          ...data,
-          contractTypeId: subtopicSelect,
-        }),
-      );
+      dispatch(addInternalStructure(data));
     },
-    [dispatch, subtopicSelect],
+    [dispatch],
   );
   const onEdit = useCallback(
     (id, record) => {
       const data = {
         id: id,
         name: record?.name,
-        contractTypeId: subtopicSelect,
       };
-      dispatch(editContractTypesSubtypes(data));
+      dispatch(editInternalStructure(data));
     },
-    [dispatch, subtopicSelect],
+    [dispatch],
   );
   const onStatusChange = useCallback(
     (data, checked) => {
@@ -93,7 +81,7 @@ const QuestionnairesContractTypesSubtypesContent = () => {
         id: data?.id,
         checked: checked,
       };
-      dispatch(contractTypesSubtypesVisibility(data_));
+      dispatch(internalStructureVisibility(data_));
     },
     [dispatch],
   );
@@ -120,13 +108,13 @@ const QuestionnairesContractTypesSubtypesContent = () => {
   };
 
   let data = [];
-  if (ContractTypesSubtypes?.items) {
-    data = ContractTypesSubtypes?.items?.map((dataObj, i) => ({
+  if (InternalStructure?.items) {
+    data = InternalStructure?.items?.map((dataObj, i) => ({
       num:
-        ContractTypesSubtypes?.size * ContractTypesSubtypes?.page +
+        InternalStructure?.size * InternalStructure?.page +
         i +
         1 -
-        ContractTypesSubtypes?.size,
+        InternalStructure?.size,
       id: dataObj?.id,
       name: dataObj?.name,
       isActive: dataObj?.isActive,
@@ -141,14 +129,6 @@ const QuestionnairesContractTypesSubtypesContent = () => {
     columns.map((col) => col.dataIndex),
   );
   useEffect(() => {
-    if (contracttypesAll) {
-      setSubtopicSelect(contracttypesAll?.[0]?.id);
-    }
-  }, [contracttypesAll]);
-  useEffect(() => {
-    dispatch(getContracttypesAll("nondeleted"));
-  }, [dispatch]);
-  useEffect(() => {
     if (window.innerWidth >= 1900) {
       setInnerW(210);
     } else {
@@ -159,23 +139,13 @@ const QuestionnairesContractTypesSubtypesContent = () => {
       size: size,
       query: query,
       visibility: "nondeleted",
-      contractTypeId: subtopicSelect,
     };
-    if (subtopicSelect !== null) {
-      dispatch(getContractTypesSubtypes(data));
-    }
-  }, [
-    dispatch,
-    page,
-    ContractTypesSubtypesRender,
-    query,
-    size,
-    subtopicSelect,
-  ]);
+    dispatch(getInternalStructure(data));
+  }, [dispatch, page, internalStructureRender, query, size]);
   const updateSize = (newSize) => {
     setSize(newSize);
     Cookies.set(
-      "pagination-size-questionnaire-contracttypessubtypes",
+      "pagination-size-questionnaire-internalstructure",
       JSON.stringify(newSize),
       {
         expires: 7,
@@ -204,23 +174,8 @@ const QuestionnairesContractTypesSubtypesContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Müqavilənin predmeti</h2>
+              <h2>Şablon strukturlar</h2>
               <div className={style.buttons}>
-                <Select
-                  size="sm"
-                  width={200}
-                  allowClear={false}
-                  value={subtopicSelect}
-                  defaultValue={""}
-                  onChange={(value) => {
-                    setSubtopicSelect(value);
-                  }}>
-                  {contracttypesAll?.map((item) => (
-                    <Option key={item.id} value={item.id}>
-                      {item.name}
-                    </Option>
-                  ))}
-                </Select>
                 <ColSort
                   columns={columns}
                   selectedColumns={selectedColumns}
@@ -271,7 +226,7 @@ const QuestionnairesContractTypesSubtypesContent = () => {
               onCancel={() => dispatch(setDeleteModalVisible(false))}
               width={280}>
               <Delete
-                onDelete={() => dispatch(deleteContractTypesSubtypes(id))}
+                onDelete={() => dispatch(deleteInternalStructure(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
                 value={"Soraqçanı"}
               />
@@ -286,4 +241,4 @@ const QuestionnairesContractTypesSubtypesContent = () => {
   );
 };
 
-export default QuestionnairesContractTypesSubtypesContent;
+export default QuestionnairesInternalStructureContent;

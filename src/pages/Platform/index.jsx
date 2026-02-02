@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import style from "./index.module.scss";
-import { entryData } from "./constant";
+import { useEntryData } from "./constant"; // ✅ change this
 
 import { Link } from "react-router-dom";
 import { getProfileInfo, scopes } from "../../store/slices/auth";
@@ -12,20 +12,20 @@ import {
 } from "../../assets/icons";
 import { getCompanyInfo } from "../../store/slices/companyInfo";
 import api from "../../utils/axios";
+import { useLang } from "../../hooks/useLang";
+import text from "../../translations/index.json";
 
 const Platform = () => {
+  const lang = useLang();
+  const entryData = useEntryData(); // ✅ add this (hook call inside component)
+
   const dispatch = useDispatch();
   const { scopesData } = useSelector((state) => state.auth);
   const companyInfo = useSelector((state) => state.companyInfo.companyInfo);
 
   const [imageSrc, setImageSrc] = useState(null);
 
-  let rootUrl;
-  if (window.location.hostname === "localhost") {
-    rootUrl = "http://localhost:" + window.location.port;
-  } else {
-    rootUrl = window.location.origin;
-  }
+  const rootUrl = window.location.origin; // ✅ this already includes port on localhost
 
   const getBase64FromURL = useCallback(async (url) => {
     try {
@@ -64,8 +64,10 @@ const Platform = () => {
           <DsgLogo />
         )}
       </div>
+
       <div className={style.buttons}>
         <h2 className={style.title}>Data Platform</h2>
+
         <div className={style.links}>
           {entryData?.map((item) => {
             if (
@@ -91,6 +93,7 @@ const Platform = () => {
                     <ConstructionRibbon />
                   </span>
                 )}
+
                 {scopesData === "*" || isPrivate ? (
                   <Link to={item?.pathname}>{ItemContent}</Link>
                 ) : !scopesData?.includes(item.scopes) ? (
@@ -103,11 +106,14 @@ const Platform = () => {
           })}
         </div>
       </div>
+
       <div className={style.settings_button} data-no-invert-2>
         {scopesData === "*" ? (
           <Link to={`${rootUrl}/settings`}>
             <SettingsCogIcon />
-            <div data-no-invert>Tənzimləmələr</div>
+            <div data-no-invert>
+              {text?.[lang]?.pages?.platform?.projects?.settings}
+            </div>
           </Link>
         ) : null}
       </div>

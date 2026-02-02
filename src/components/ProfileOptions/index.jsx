@@ -32,6 +32,7 @@ import Button from "../Button";
 import Select from "../Select";
 const { Option } = AntdSelect;
 import { useLang } from "../../hooks/useLang";
+import text from "../../translations/index.json";
 
 const ProfileOptions = () => {
   const dispatch = useDispatch();
@@ -176,19 +177,26 @@ const ProfileOptions = () => {
             page={page}
             setSize={setSize}
             setPage={setPage}
+            lang={lang}
+            text={text}
           />
         }
         trigger={["click"]}
         placement="bottomRight"
         overlayClassName={style.notificationDropdown}>
-        <Tooltip title={"Bildirişlər"}>
+        <Tooltip title={text?.[lang]?.pages?.header?.notifications?.title}>
           <button data-no-invert className={style.button}>
             <NotificationIcon />
           </button>
         </Tooltip>
       </Dropdown>
 
-      <Tooltip title={theme === "dark" ? "Gündüz modu" : "Gecə modu"}>
+      <Tooltip
+        title={
+          theme === "dark"
+            ? text?.[lang]?.pages?.header?.lightMode
+            : text?.[lang]?.pages?.header?.darkMode
+        }>
         <button onClick={toggleTheme} data-no-invert className={style.button}>
           <div className={style.icon_overlay} data-no-invert>
             {theme === "dark" ? (
@@ -221,7 +229,7 @@ const ProfileOptions = () => {
             {scopesData === "*" && (
               <Link className={style.menuItem} to={`${rootUrl}/settings`}>
                 <SettingsCogIcon />
-                <span>Tənzimləmələr</span>
+                <span>{text?.[lang]?.pages?.header?.settings}</span>
               </Link>
             )}
 
@@ -229,13 +237,17 @@ const ProfileOptions = () => {
             {loginType === 0 ? (
               <div className={style.menuItem} onClick={openPasswordModal}>
                 <ChangePasswordIcon />
-                <span>Şifrəni dəyiş</span>
+                <span>
+                  {text?.[lang]?.pages?.header?.changePassword?.title}
+                </span>
               </div>
             ) : null}
 
             <div className={style.menuItem} onClick={handleLogout}>
               <LogOutIcon />
-              <span className={style.logoutText}>Çıxış et</span>
+              <span className={style.logoutText}>
+                {text?.[lang]?.pages?.header?.logOut}
+              </span>
             </div>
           </div>
         )}
@@ -249,16 +261,16 @@ const ProfileOptions = () => {
         onCancel={closePasswordModal}
         footer={null}
         centered
-        title="Şifrəni dəyiş">
+        title={text?.[lang]?.pages?.header?.changePassword?.title}>
         <Form form={form} layout="vertical">
           <Form.Item
-            label="Köhnə şifrə"
+            label={text?.[lang]?.pages?.header?.changePassword?.oldPassword}
             name="currentPassword"
             rules={[{ required: true, message: "" }]}>
             <Input.Password style={{ height: "48px" }} />
           </Form.Item>
           <Form.Item
-            label="Yeni şifrə"
+            label={text?.[lang]?.pages?.header?.changePassword?.newPassword}
             name="newPassword"
             rules={[
               { required: true, message: "" },
@@ -270,25 +282,41 @@ const ProfileOptions = () => {
                   const errors = [];
 
                   if (value.length < 8) {
-                    errors.push("Şifrə ən azı 8 simvoldan ibarət olmalıdır");
+                    errors.push(
+                      text?.[lang]?.pages?.header?.changePassword?.hints
+                        ?.passwordLength
+                    );
                   }
                   if (!/[A-Z]/.test(value)) {
-                    errors.push("Şifrə ən azı bir böyük hərf daxil etməlidir");
+                    errors.push(
+                      text?.[lang]?.pages?.header?.changePassword?.hints
+                        ?.passwordUppercase
+                    );
                   }
                   if (!/[a-z]/.test(value)) {
-                    errors.push("Şifrə ən azı bir kiçik hərf daxil etməlidir");
+                    errors.push(
+                      text?.[lang]?.pages?.header?.changePassword?.hints
+                        ?.passwordLowercase
+                    );
                   }
                   if (!/[0-9]/.test(value)) {
-                    errors.push("Şifrə ən azı bir rəqəm daxil etməlidir");
+                    errors.push(
+                      text?.[lang]?.pages?.header?.changePassword?.hints
+                        ?.passwordDigit
+                    );
                   }
                   if (!/[!@#$%^&*]/.test(value)) {
                     errors.push(
-                      "Şifrə ən azı bir xüsusi simvol daxil etməlidir (!@#$%^&*)"
+                      text?.[lang]?.pages?.header?.changePassword?.hints
+                        ?.passwordSpecialChar
                     );
                   }
 
                   if (value && getFieldValue("currentPassword") === value) {
-                    errors.push("Yeni şifrə köhnə şifrə ilə eyni ola bilməz!");
+                    errors.push(
+                      text?.[lang]?.pages?.header?.changePassword?.hints
+                        ?.passwordDifferent
+                    );
                   }
 
                   // 🔥 Return each message as its own Error → AntD shows them line by line
@@ -302,7 +330,10 @@ const ProfileOptions = () => {
           </Form.Item>
 
           <Form.Item
-            label="Yeni şifrənin təsdiqi"
+            label={
+              text?.[lang]?.pages?.header?.changePassword
+                ?.newPasswordConfirmation
+            }
             name="confirmPassword"
             dependencies={["newPassword"]}
             rules={[
@@ -312,7 +343,10 @@ const ProfileOptions = () => {
                   if (!value || getFieldValue("newPassword") === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject("Şifrələr uyğun deyil!");
+                  return Promise.reject(
+                    text?.[lang]?.pages?.header?.changePassword?.hints
+                      ?.passwordMismatch
+                  );
                 },
               }),
             ]}>
@@ -330,14 +364,14 @@ const ProfileOptions = () => {
               className={style.cancelBtn}
               onClick={closePasswordModal}
               color="white">
-              Geri
+              {text?.[lang]?.pages?.common?.cancel}
             </Button>
 
             <Button
               className={style.confirmBtn}
               onClick={handlePasswordSubmit}
               color="green">
-              Təsdiqlə
+              {text?.[lang]?.pages?.common?.confirm}
             </Button>
           </div>
         </Form>
