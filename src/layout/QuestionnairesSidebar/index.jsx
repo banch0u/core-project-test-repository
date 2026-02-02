@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import style from "./index.module.scss";
-import { Layout, Menu, Input } from "antd";
 import {
-  QUESTIONNAIRES_ACADEMIC_DEGREES,
+  Link,
+  useLocation } from "react-router-dom";import style from "./index.module.scss";import { Layout,
+  Menu,
+  Input } from "antd";import {  QUESTIONNAIRES_ACADEMIC_DEGREES,
   QUESTIONNAIRES_APPLICATION_FORMS,
   QUESTIONNAIRES_AREAS,
   QUESTIONNAIRES_BRANDS,
@@ -73,6 +73,9 @@ import {
   QUESTIONNAIRES_DEFAULTAGREEMENTPLANS,
   QUESTIONNAIRES_ROUTELOCATIONS,
   QUESTIONNAIRES_INTERNALSTRUCTURE,
+  QUESTIONNAIRES_FIELD,
+  QUESTIONNAIRES_WELL,
+  QUESTIONNAIRES_BARREL
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -445,7 +448,28 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_INTERNALSTRUCTURE,
     },
     // ---- generated sidebar item by questionnaireGenerator: InternalStructure ----
-  ];
+  
+    {
+      key: "fields", //delete the "/" at the start of string 
+      label: "Sahələr", 
+      link: QUESTIONNAIRES_FIELD, 
+},
+// ---- generated sidebar item by questionnaireGenerator: Field ----
+
+    {
+      key: "wells", //delete the "/" at the start of string 
+      label: "Quyu", 
+      link: QUESTIONNAIRES_WELL, 
+},
+// ---- generated sidebar item by questionnaireGenerator: Well ----
+
+    {
+      key: "barrels", //delete the "/" at the start of string 
+      label: "Çən", 
+      link: QUESTIONNAIRES_BARREL, 
+},
+// ---- generated sidebar item by questionnaireGenerator: Barrel ----
+];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
 

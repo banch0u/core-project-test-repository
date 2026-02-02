@@ -7,6 +7,9 @@ const initialState = {
   viewMoreModalVisible: false,
   deleteModalVisible: false,
   topicsRender: false,
+  BarrelRender: false,
+  WellRender: false,
+  FieldRender: false,
   internalStructureRender: false,
   RouteLocationsRender: false,
   DefaultAgreementPlansRender: false,
@@ -84,6 +87,18 @@ export const global = createSlice({
   name: "global",
   initialState,
   reducers: {
+    setBarrelRender: (state, { payload }) => {
+      state.BarrelRender = payload;
+    },
+
+    setWellRender: (state, { payload }) => {
+      state.WellRender = payload;
+    },
+
+    setFieldRender: (state, { payload }) => {
+      state.FieldRender = payload;
+    },
+
     setInternalStructureRender: (state, { payload }) => {
       state.internalStructureRender = payload;
     },
@@ -327,6 +342,9 @@ export const global = createSlice({
 export const {
   setLoading,
   setNotificationsRender,
+  setBarrelRender,
+  setWellRender,
+  setFieldRender,
   setInternalStructureRender,
   setRouteLocationsRender,
   setDefaultAgreementPlansRender,

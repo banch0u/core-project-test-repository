@@ -87,7 +87,10 @@ import {
   QUESTIONNAIRES_CONTRACTTYPESSUBTYPES,
   QUESTIONNAIRES_DEFAULTAGREEMENTPLANS,
   QUESTIONNAIRES_ROUTELOCATIONS,
-  QUESTIONNAIRES_INTERNALSTRUCTURE
+  QUESTIONNAIRES_INTERNALSTRUCTURE,
+  QUESTIONNAIRES_FIELD,
+  QUESTIONNAIRES_WELL,
+  QUESTIONNAIRES_BARREL
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -139,6 +142,15 @@ import QuestionnairesExtraServicesContent from "../pages/Questionnnaires/Questio
 import QuestionnairesFuelTypesContent from "../pages/Questionnnaires/QuestionnairesFuelTypesContent";
 import QuestionnairesOilFieldsContent from "../pages/Questionnnaires/QuestionnairesOilFieldsContent";
 import QuestionnairesVehicleGroupsContent from "../pages/Questionnnaires/QuestionnairesVehicleGroupsContent";
+
+// ---- generated import by questionnaireGenerator: Field ----
+import QuestionnairesFieldContent from "../pages/Questionnnaires/QuestionnairesFieldContent";
+
+// ---- generated import by questionnaireGenerator: Well ----
+import QuestionnairesWellContent from "../pages/Questionnnaires/QuestionnairesWellContent";
+
+// ---- generated import by questionnaireGenerator: Barrel ----
+import QuestionnairesBarrelContent from "../pages/Questionnnaires/QuestionnairesBarrelContent";
 
 export const questionnairesRoutes = (allowed) => {
   return (
@@ -435,6 +447,21 @@ export const questionnairesRoutes = (allowed) => {
         <Route 
           path={QUESTIONNAIRES_INTERNALSTRUCTURE} 
           element={<QuestionnairesInternalStructureContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_FIELD} 
+          element={<QuestionnairesFieldContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_WELL} 
+          element={<QuestionnairesWellContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_BARREL} 
+          element={<QuestionnairesBarrelContent />} 
         />
 </Route>
     </>
