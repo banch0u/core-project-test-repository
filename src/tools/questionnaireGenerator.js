@@ -7,9 +7,9 @@ const fs = require("fs");
 const path = require("path");
 
 ////////// === CONFIG === //////////
-const questionnaireName = "Barrel"; // change as needed
-const constantColumnName = "Çən"; // change as needed
-const endpointName = "/barrels";
+const questionnaireName = "Departments"; // change as needed
+const constantColumnName = "Departamentlər"; // change as needed
+const endpointName = "/departments";
 ///////////////////////////////////
 
 const upperName = questionnaireName.toUpperCase();

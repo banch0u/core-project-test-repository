@@ -1,3 +1,9 @@
+// ---- generated import by questionnaireGenerator: BudgetComponents ----
+import QuestionnairesBudgetComponentsContent from "../pages/Questionnnaires/QuestionnairesBudgetComponentsContent";
+
+// ---- generated import by questionnaireGenerator: Departments ----
+import QuestionnairesDepartmentsContent from "../pages/Questionnnaires/QuestionnairesDepartmentsContent";
+
 // ---- generated import by questionnaireGenerator: ContractTopics ----
 import QuestionnairesContractTopicsContent from "../pages/Questionnnaires/QuestionnairesContractTopicsContent";
 
@@ -90,7 +96,9 @@ import {
   QUESTIONNAIRES_INTERNALSTRUCTURE,
   QUESTIONNAIRES_FIELD,
   QUESTIONNAIRES_WELL,
-  QUESTIONNAIRES_BARREL
+  QUESTIONNAIRES_BARREL,
+  QUESTIONNAIRES_BUDGETCOMPONENTS,
+  QUESTIONNAIRES_DEPARTMENTS
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -462,6 +470,16 @@ export const questionnairesRoutes = (allowed) => {
         <Route 
           path={QUESTIONNAIRES_BARREL} 
           element={<QuestionnairesBarrelContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_BUDGETCOMPONENTS} 
+          element={<QuestionnairesBudgetComponentsContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_DEPARTMENTS} 
+          element={<QuestionnairesDepartmentsContent />} 
         />
 </Route>
     </>

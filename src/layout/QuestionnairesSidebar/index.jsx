@@ -75,7 +75,9 @@ import {
   QUESTIONNAIRES_INTERNALSTRUCTURE,
   QUESTIONNAIRES_FIELD,
   QUESTIONNAIRES_WELL,
-  QUESTIONNAIRES_BARREL
+  QUESTIONNAIRES_BARREL,
+  QUESTIONNAIRES_BUDGETCOMPONENTS,
+  QUESTIONNAIRES_DEPARTMENTS
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -469,6 +471,20 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_BARREL, 
 },
 // ---- generated sidebar item by questionnaireGenerator: Barrel ----
+
+    {
+      key: "budget-components", //delete the "/" at the start of string 
+      label: "Büdcə Komponentləri", 
+      link: QUESTIONNAIRES_BUDGETCOMPONENTS, 
+},
+// ---- generated sidebar item by questionnaireGenerator: BudgetComponents ----
+
+    {
+      key: "departments", //delete the "/" at the start of string 
+      label: "Departamentlər", 
+      link: QUESTIONNAIRES_DEPARTMENTS, 
+},
+// ---- generated sidebar item by questionnaireGenerator: Departments ----
 ];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
