@@ -270,7 +270,7 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
 
   // ✅ fetch lists separately
   useEffect(() => {
-    dispatch(getDefaultAgreementPlansAll("onlyactive"));
+    dispatch(getDefaultAgreementPlansAll({ visibility: "onlyactive" }));
     dispatch(getInternalStructureAll("onlyactive"));
   }, [dispatch, DefaultAgreementPlansRender]);
 

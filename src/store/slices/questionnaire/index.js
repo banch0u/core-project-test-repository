@@ -6924,10 +6924,10 @@ export const getDefaultAgreementPlans = createAsyncThunk(
 
 export const getDefaultAgreementPlansAll = createAsyncThunk(
   "/getDefaultAgreementPlansAll",
-  async (visibility, { dispatch }) => {
+  async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getDefaultAgreementPlansAll(visibility);
+      const response = await Services.getDefaultAgreementPlansAll(data?.visibility, data?.internalStructureId);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
@@ -8206,7 +8206,7 @@ export const questionnaire = createSlice({
       state.contractTypesSubtypesAll = payload;
     });
     // ---- end generated reducers ----
-  
+
     // ---- generated reducers for DefaultAgreementPlans ----
     builder.addCase(getDefaultAgreementPlans.fulfilled, (state, { payload }) => {
       state.defaultAgreementPlans = payload;
@@ -8215,7 +8215,7 @@ export const questionnaire = createSlice({
       state.defaultAgreementPlansAll = payload;
     });
     // ---- end generated reducers ----
-    
+
     // ---- generated reducers for RouteLocations ----
     builder.addCase(getRouteLocations.fulfilled, (state, { payload }) => {
       state.routeLocations = payload;
@@ -8224,7 +8224,7 @@ export const questionnaire = createSlice({
       state.routeLocationsAll = payload;
     });
     // ---- end generated reducers ----
-    
+
     // ---- generated reducers for InternalStructure ----
     builder.addCase(getInternalStructure.fulfilled, (state, { payload }) => {
       state.internalStructure = payload;
@@ -8233,7 +8233,7 @@ export const questionnaire = createSlice({
       state.internalStructureAll = payload;
     });
     // ---- end generated reducers ----
-    
+
     // ---- generated reducers for Field ----
     builder.addCase(getField.fulfilled, (state, { payload }) => {
       state.field = payload;
@@ -8242,7 +8242,7 @@ export const questionnaire = createSlice({
       state.fieldAll = payload;
     });
     // ---- end generated reducers ----
-    
+
     // ---- generated reducers for Well ----
     builder.addCase(getWell.fulfilled, (state, { payload }) => {
       state.well = payload;
@@ -8251,7 +8251,7 @@ export const questionnaire = createSlice({
       state.wellAll = payload;
     });
     // ---- end generated reducers ----
-    
+
     // ---- generated reducers for Barrel ----
     builder.addCase(getBarrel.fulfilled, (state, { payload }) => {
       state.barrel = payload;
