@@ -77,7 +77,8 @@ import {
   QUESTIONNAIRES_WELL,
   QUESTIONNAIRES_BARREL,
   QUESTIONNAIRES_BUDGETCOMPONENTS,
-  QUESTIONNAIRES_DEPARTMENTS
+  QUESTIONNAIRES_DEPARTMENTS,
+  QUESTIONNAIRES_PENTIONS
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -485,6 +486,13 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_DEPARTMENTS, 
 },
 // ---- generated sidebar item by questionnaireGenerator: Departments ----
+
+    {
+      key: "pentions", //delete the "/" at the start of string 
+      label: "Təqaüd növü", 
+      link: QUESTIONNAIRES_PENTIONS, 
+},
+// ---- generated sidebar item by questionnaireGenerator: Pentions ----
 ];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
