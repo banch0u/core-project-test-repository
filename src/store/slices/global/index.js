@@ -9,9 +9,9 @@ const initialState = {
   topicsRender: false,
   DepartmentsRender: false,
   BudgetComponentsRender: false,
-  BarrelRender: false,
+  barrelRender: false,
   wellRender: false,
-  FieldRender: false,
+  fieldRender: false,
   internalStructureRender: false,
   RouteLocationsRender: false,
   DefaultAgreementPlansRender: false,
@@ -98,7 +98,7 @@ export const global = createSlice({
     },
 
     setBarrelRender: (state, { payload }) => {
-      state.BarrelRender = payload;
+      state.barrelRender = payload;
     },
 
     setWellRender: (state, { payload }) => {
@@ -106,7 +106,7 @@ export const global = createSlice({
     },
 
     setFieldRender: (state, { payload }) => {
-      state.FieldRender = payload;
+      state.fieldRender = payload;
     },
 
     setInternalStructureRender: (state, { payload }) => {

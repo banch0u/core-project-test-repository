@@ -34,6 +34,13 @@ export const getStreetColumns = (
     ellipsis: true,
   },
   {
+      title: "Sahə",
+      dataIndex: "fieldName",
+      width: innerW,
+      disabled: true,
+      ellipsis: true,
+    },
+  {
     title: "Status",
     key: "status",
     disabled: true,

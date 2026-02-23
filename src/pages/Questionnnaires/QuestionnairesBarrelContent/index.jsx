@@ -53,7 +53,7 @@ const QuestionnairesBarrelContent = () => {
   const { loading, barrelRender } = useSelector((state) => state.global);
 
   const barrel = useSelector((state) => state.questionnaire.barrel);
-const fieldsAll = useSelector((state) => state.questionnaire.fieldsAll);
+const fieldsAll = useSelector((state) => state.questionnaire.fieldAll);
 
   const paginationLength = setPaginationLength(barrel?.count, barrel?.size);
   const onSubmit = useCallback(
@@ -117,6 +117,7 @@ const fieldsAll = useSelector((state) => state.questionnaire.fieldsAll);
       className: "rowClassName1",
       typeText: idFinder(dataObj.type.id),
       type: dataObj.type.id,
+      fieldName: dataObj.fieldName
     }));
   }
   const columns = useMemo(
