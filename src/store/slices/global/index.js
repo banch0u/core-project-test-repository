@@ -10,7 +10,7 @@ const initialState = {
   DepartmentsRender: false,
   BudgetComponentsRender: false,
   BarrelRender: false,
-  WellRender: false,
+  wellRender: false,
   FieldRender: false,
   internalStructureRender: false,
   RouteLocationsRender: false,
@@ -102,7 +102,7 @@ export const global = createSlice({
     },
 
     setWellRender: (state, { payload }) => {
-      state.WellRender = payload;
+      state.wellRender = payload;
     },
 
     setFieldRender: (state, { payload }) => {
