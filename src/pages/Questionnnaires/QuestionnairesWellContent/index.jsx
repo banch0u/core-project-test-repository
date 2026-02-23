@@ -56,9 +56,9 @@ const QuestionnairesWellContent = () => {
     (state) => state.questionnaire.well
   );
   const fieldsAll = useSelector(
-    (state) => state.questionnaire.fieldsAll
+    (state) => state.questionnaire.fieldAll
   );
-  console.log("well",well)
+  console.log("fields",fieldsAll)
   const paginationLength = setPaginationLength(
     well?.count,
     well?.size
@@ -238,7 +238,7 @@ const QuestionnairesWellContent = () => {
               </Item>
               <Item className={style.label}
                 rules={[{ required: true, message: "" }]}
-                name="fieldId"
+                name="field"
                 label="Sahə">
                   <Select>
                     {fieldsAll?.map((item)=>(

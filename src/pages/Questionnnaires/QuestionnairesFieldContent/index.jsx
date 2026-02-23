@@ -48,7 +48,7 @@ const QuestionnairesFieldContent = () => {
   );
   const [query, setQuery] = useState({ name: "" });
 
-  const { loading, fieldsRender } = useSelector((state) => state.global);
+  const { loading, fieldRender } = useSelector((state) => state.global);
 
   const fields = useSelector((state) => state.questionnaire.field);
 console.log("field",fields)
@@ -139,7 +139,7 @@ console.log("field",fields)
       visibility: "nondeleted",
     };
     dispatch(getField(data));
-  }, [dispatch, page, fieldsRender, size, query]);
+  }, [dispatch, page, fieldRender, size, query]);
   const updateSize = (newSize) => {
     setSize(newSize); // Update state
     Cookies.set(
