@@ -27,7 +27,7 @@ const FormModal = (
     overlayClosable = true,
     closable = true,
   },
-  ref
+  ref,
 ) => {
   const { useForm } = Form;
   const [form] = useForm();
@@ -93,6 +93,7 @@ const FormModal = (
       onCancel={closeModal}
       maskClosable={overlayClosable}
       closable={closable}
+      destroyOnClose
       footer={
         showButtons ? (
           <div className={style.buttons}>

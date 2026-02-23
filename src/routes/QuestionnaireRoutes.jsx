@@ -1,3 +1,6 @@
+// ---- generated import by questionnaireGenerator: Pentions ----
+import QuestionnairesPentionsContent from "../pages/Questionnnaires/QuestionnairesPentionsContent";
+
 // ---- generated import by questionnaireGenerator: BudgetComponents ----
 import QuestionnairesBudgetComponentsContent from "../pages/Questionnnaires/QuestionnairesBudgetComponentsContent";
 
@@ -98,7 +101,8 @@ import {
   QUESTIONNAIRES_WELL,
   QUESTIONNAIRES_BARREL,
   QUESTIONNAIRES_BUDGETCOMPONENTS,
-  QUESTIONNAIRES_DEPARTMENTS
+  QUESTIONNAIRES_DEPARTMENTS,
+  QUESTIONNAIRES_PENTIONS
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -480,6 +484,11 @@ export const questionnairesRoutes = (allowed) => {
         <Route 
           path={QUESTIONNAIRES_DEPARTMENTS} 
           element={<QuestionnairesDepartmentsContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_PENTIONS} 
+          element={<QuestionnairesPentionsContent />} 
         />
 </Route>
     </>
