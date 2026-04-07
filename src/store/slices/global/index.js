@@ -7,6 +7,8 @@ const initialState = {
   viewMoreModalVisible: false,
   deleteModalVisible: false,
   topicsRender: false,
+  CustomersRender: false,
+  ProjectsRender: false,
   PentionsRender: false,
   DepartmentsRender: false,
   BudgetComponentsRender: false,
@@ -90,6 +92,14 @@ export const global = createSlice({
   name: "global",
   initialState,
   reducers: {
+    setCustomersRender: (state, { payload }) => {
+      state.CustomersRender = payload;
+    },
+
+    setProjectsRender: (state, { payload }) => {
+      state.ProjectsRender = payload;
+    },
+
     setPentionsRender: (state, { payload }) => {
       state.PentionsRender = payload;
     },
@@ -357,6 +367,8 @@ export const global = createSlice({
 export const {
   setLoading,
   setNotificationsRender,
+  setCustomersRender,
+  setProjectsRender,
   setPentionsRender,
   setDepartmentsRender,
   setBudgetComponentsRender,

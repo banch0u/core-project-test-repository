@@ -78,7 +78,9 @@ import {
   QUESTIONNAIRES_BARREL,
   QUESTIONNAIRES_BUDGETCOMPONENTS,
   QUESTIONNAIRES_DEPARTMENTS,
-  QUESTIONNAIRES_PENTIONS
+  QUESTIONNAIRES_PENTIONS,
+  QUESTIONNAIRES_PROJECTS,
+  QUESTIONNAIRES_CUSTOMERS
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -493,6 +495,20 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_PENTIONS, 
 },
 // ---- generated sidebar item by questionnaireGenerator: Pentions ----
+
+    {
+      key: "projects", //delete the "/" at the start of string 
+      label: "Layihələr", 
+      link: QUESTIONNAIRES_PROJECTS, 
+},
+// ---- generated sidebar item by questionnaireGenerator: Projects ----
+
+    {
+      key: "customers", //delete the "/" at the start of string 
+      label: "Müştərilər", 
+      link: QUESTIONNAIRES_CUSTOMERS, 
+},
+// ---- generated sidebar item by questionnaireGenerator: Customers ----
 ];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));

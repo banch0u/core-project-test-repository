@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Services from "./service";
-import { setApplicationFormsRender, setCountryRender, setDeleteModalVisible, setDeliveryMethodRender, setDocumentRecieveMethodsRender, setDocumentTypesRender, setDocumentWhomRender, setExecutionRulesRender, setLoading, setMarginNoteTextRender, setOrganizationRender, setStructureRender, setSubtopicsRender, setTopicsRender, setViewModalVisible, setBrandRender, setChassisTypeRender, setColorRender, setEnginetypeRender, setGearboxtypeRender, setIssuedauthoritieRender, setModelRender, setOwnershiptypeRender, setOrganisationrecordRender, setTransmittertypeRender, setVehicleRender, setVehicletypeRender, setVrcRender, setAcademicdegreesRender, setDisabilitystatusesRender, setHonorarytitlesRender, setMilitarystaffsRender, setMilitarycategoriesRender, setMilitaryranksRender, setMilitarygroupsRender, setGeneralstructurestatusesRender, setWorkschedulesRender, setSpecializationsRender, setWarparticipantsRender, setGeneralstructuretypesRender, setEducationinstitutionsRender, setEducationpaymentsRender, setEducationlevelsRender, setReprimandtypesRender, setSpecialdaysRender, setCategoriesRender, setRegionsRender, setAreasRender, setCompaniesRender, setPositionsRender, setHallsRender, setDrivingcategoriesRender, setEmployeeConfigurationsRender, setContracttypesRender, setContragenttypesRender, setOrdersRender, setContractcurrenciesRender, setWorkModesRender, setVehicleCategoriesRender, setChemicalsRender, setRepairtypesRender, setDetailpartsRender, setMeasurementtypesRender, setRepairmentWorkTypesRender, setPenaltyTypesRender, setCrushReasonsRender, insuranceTypesRender, setOilFieldsRender, setVehicleGroupsRender, setOwnersRender, setContractTopicsRender, setContractTypesSubtypesRender, setDefaultAgreementPlansRender, setRouteLocationsRender, setInternalStructureRender, setFieldRender, setWellRender, setBarrelRender, setBudgetComponentsRender, setDepartmentsRender, setPentionsRender } from "../global";
+import { setApplicationFormsRender, setCountryRender, setDeleteModalVisible, setDeliveryMethodRender, setDocumentRecieveMethodsRender, setDocumentTypesRender, setDocumentWhomRender, setExecutionRulesRender, setLoading, setMarginNoteTextRender, setOrganizationRender, setStructureRender, setSubtopicsRender, setTopicsRender, setViewModalVisible, setBrandRender, setChassisTypeRender, setColorRender, setEnginetypeRender, setGearboxtypeRender, setIssuedauthoritieRender, setModelRender, setOwnershiptypeRender, setOrganisationrecordRender, setTransmittertypeRender, setVehicleRender, setVehicletypeRender, setVrcRender, setAcademicdegreesRender, setDisabilitystatusesRender, setHonorarytitlesRender, setMilitarystaffsRender, setMilitarycategoriesRender, setMilitaryranksRender, setMilitarygroupsRender, setGeneralstructurestatusesRender, setWorkschedulesRender, setSpecializationsRender, setWarparticipantsRender, setGeneralstructuretypesRender, setEducationinstitutionsRender, setEducationpaymentsRender, setEducationlevelsRender, setReprimandtypesRender, setSpecialdaysRender, setCategoriesRender, setRegionsRender, setAreasRender, setCompaniesRender, setPositionsRender, setHallsRender, setDrivingcategoriesRender, setEmployeeConfigurationsRender, setContracttypesRender, setContragenttypesRender, setOrdersRender, setContractcurrenciesRender, setWorkModesRender, setVehicleCategoriesRender, setChemicalsRender, setRepairtypesRender, setDetailpartsRender, setMeasurementtypesRender, setRepairmentWorkTypesRender, setPenaltyTypesRender, setCrushReasonsRender, insuranceTypesRender, setOilFieldsRender, setVehicleGroupsRender, setOwnersRender, setContractTopicsRender, setContractTypesSubtypesRender, setDefaultAgreementPlansRender, setRouteLocationsRender, setInternalStructureRender, setFieldRender, setWellRender, setBarrelRender, setBudgetComponentsRender, setDepartmentsRender, setPentionsRender, setProjectsRender, setCustomersRender } from "../global";
 import { errorMessage } from "../../../utils/message";
 
 const initialState = {
@@ -7819,6 +7819,210 @@ export const pentionsVisibility = createAsyncThunk(
 
 // ---- end generated ----
 
+
+export const getProjects = createAsyncThunk(
+  "/getProjects",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getProjects(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getProjectsAll = createAsyncThunk(
+  "/getProjectsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getProjectsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addProjects = createAsyncThunk(
+  "/addProjects",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addProjects(data);
+      dispatch(setLoading(false));
+      dispatch(setProjectsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editProjects = createAsyncThunk(
+  "/editProjects",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editProjects(data);
+      dispatch(setLoading(false));
+      dispatch(setProjectsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteProjects = createAsyncThunk(
+  "/deleteProjects",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteProjects(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setProjectsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const projectsVisibility = createAsyncThunk(
+  "projectsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.projectsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setProjectsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+// ---- end generated ----
+
+
+export const getCustomers = createAsyncThunk(
+  "/getCustomers",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getCustomers(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getCustomersAll = createAsyncThunk(
+  "/getCustomersAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getCustomersAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addCustomers = createAsyncThunk(
+  "/addCustomers",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addCustomers(data);
+      dispatch(setLoading(false));
+      dispatch(setCustomersRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editCustomers = createAsyncThunk(
+  "/editCustomers",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editCustomers(data);
+      dispatch(setLoading(false));
+      dispatch(setCustomersRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteCustomers = createAsyncThunk(
+  "/deleteCustomers",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteCustomers(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setCustomersRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const customersVisibility = createAsyncThunk(
+  "customersVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.customersVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setCustomersRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+// ---- end generated ----
+
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -8387,6 +8591,24 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getPentionsAll.fulfilled, (state, { payload }) => {
       state.pentionsAll = payload;
+    });
+    // ---- end generated reducers ----
+    
+    // ---- generated reducers for Projects ----
+    builder.addCase(getProjects.fulfilled, (state, { payload }) => {
+      state.projects = payload;
+    });
+    builder.addCase(getProjectsAll.fulfilled, (state, { payload }) => {
+      state.projectsAll = payload;
+    });
+    // ---- end generated reducers ----
+    
+    // ---- generated reducers for Customers ----
+    builder.addCase(getCustomers.fulfilled, (state, { payload }) => {
+      state.customers = payload;
+    });
+    builder.addCase(getCustomersAll.fulfilled, (state, { payload }) => {
+      state.customersAll = payload;
     });
     // ---- end generated reducers ----
     },

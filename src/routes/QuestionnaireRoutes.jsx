@@ -1,6 +1,12 @@
 // ---- generated import by questionnaireGenerator: Pentions ----
 import QuestionnairesPentionsContent from "../pages/Questionnnaires/QuestionnairesPentionsContent";
 
+// ---- generated import by questionnaireGenerator: Projects ----
+import QuestionnairesProjectsContent from "../pages/Questionnnaires/QuestionnairesProjectsContent";
+
+// ---- generated import by questionnaireGenerator: Customers ----
+import QuestionnairesCustomersContent from "../pages/Questionnnaires/QuestionnairesCustomersContent";
+
 // ---- generated import by questionnaireGenerator: BudgetComponents ----
 import QuestionnairesBudgetComponentsContent from "../pages/Questionnnaires/QuestionnairesBudgetComponentsContent";
 
@@ -102,7 +108,9 @@ import {
   QUESTIONNAIRES_BARREL,
   QUESTIONNAIRES_BUDGETCOMPONENTS,
   QUESTIONNAIRES_DEPARTMENTS,
-  QUESTIONNAIRES_PENTIONS
+  QUESTIONNAIRES_PENTIONS,
+  QUESTIONNAIRES_PROJECTS,
+  QUESTIONNAIRES_CUSTOMERS
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -489,6 +497,16 @@ export const questionnairesRoutes = (allowed) => {
         <Route 
           path={QUESTIONNAIRES_PENTIONS} 
           element={<QuestionnairesPentionsContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_PROJECTS} 
+          element={<QuestionnairesProjectsContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_CUSTOMERS} 
+          element={<QuestionnairesCustomersContent />} 
         />
 </Route>
     </>
