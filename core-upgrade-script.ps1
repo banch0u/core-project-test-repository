@@ -6,8 +6,9 @@ $folders = @(
   "C:\Users\fikre\repos\hr-ui",
   "C:\Users\fikre\repos\laboratory-ui",
   "C:\Users\fikre\repos\transport-ui",
-  "C:\Users\fikre\repos\settings-ui"
-
+  "C:\Users\fikre\repos\settings-ui",
+  "C:\Users\fikre\repos\licence-ui",
+  "C:\Users\fikre\repos\procurement-ui"
 )
 
 foreach ($folder in $folders) {
