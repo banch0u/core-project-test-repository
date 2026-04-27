@@ -24,6 +24,10 @@ class AuthServices {
     const response = await api.put("/profile/change-password", data);
     return response;
   };
+  static requestActivation = async () => {
+    const response = await api.put("/licences", { prompt: "Request Activation" });
+    return response;
+  };
 }
 
 export default AuthServices;

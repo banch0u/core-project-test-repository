@@ -1,6 +1,15 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
+import { Modal } from "antd";
+import Button from "../Button";
+import { useDispatch } from "react-redux";
+import { requestActivation } from "../../store/slices/auth";
 
 const LicenseWatermark = ({ companyInfo, pathname }) => {
+  const [open, setOpen] = useState(false);
+  const [note, setNote] = useState("");
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
   // ----------------------------
   // URL → project mapping
   // ----------------------------
@@ -111,29 +120,73 @@ const LicenseWatermark = ({ companyInfo, pathname }) => {
   }, [currentProject]);
 
   // ----------------------------
+  // activation handler
+  // ----------------------------
+  const handleActivate = async () => {
+    try {
+      setLoading(true);
+
+      await dispatch(requestActivation());
+
+      setOpen(false);
+      setNote("");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+      window.location.reload();
+    }
+  };
+
+  // ----------------------------
   // render
   // ----------------------------
   if (licenseStatus.status === "valid") return null;
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        background: licenseStatus.color,
-        fontSize: 18,
-        color: "#000",
-        width: "100%",
-        zIndex: 9999,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}>
-      {licenseStatus.status === "expired"
-        ? "Lisenziya müddəti bitib"
-        : licenseStatus.text}
-    </div>
+    <>
+      {/* WATERMARK */}
+      <div
+        onClick={() => setOpen(true)}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          background: licenseStatus.color,
+          fontSize: 18,
+          color: "#000",
+          width: "100%",
+          zIndex: 9999,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          cursor: "pointer",
+        }}>
+        {licenseStatus.status === "expired"
+          ? "Lisenziya müddəti bitib"
+          : licenseStatus.text}
+      </div>
+
+      {/* MODAL */}
+      <Modal
+        title="Lisenziyanın aktivləşdirilməsi"
+        open={open}
+        onCancel={() => setOpen(false)}
+        footer={null}>
+        <div
+          style={{
+            marginTop: 16,
+            textAlign: "right",
+            gap: 8,
+            display: "flex",
+            justifyContent: "flex-end",
+          }}>
+          <Button color="green" loading={loading} onClick={handleActivate}>
+            Aktivasiya tələb et
+          </Button>
+        </div>
+      </Modal>
+    </>
   );
 };
 
