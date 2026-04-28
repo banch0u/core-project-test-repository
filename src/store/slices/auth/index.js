@@ -19,7 +19,7 @@ export const refreshToken = createAsyncThunk(
   }
 );
 
-const lang = localStorage.getItem("lang");
+const lang = localStorage.getItem("lang") ? localStorage.getItem("lang") : "az";
 export const login = createAsyncThunk("/login", async (data, { dispatch }) => {
   try {
     dispatch(setLoading(true));
@@ -40,9 +40,15 @@ export const login = createAsyncThunk("/login", async (data, { dispatch }) => {
     return response?.data;
   } catch (error) {
     dispatch(setLoading(false));
-    if (error.response && error.response.status === 400) {
+    const lang = localStorage.getItem("lang") ? localStorage.getItem("lang") : "az";
+    if (error.response.data && error.response.data.statusCode === 400) {
+      console.log(error.response.data);
       errorMessage(
         text?.[lang]?.pages?.messages?.loginError
+      );
+    } else {
+      errorMessage(
+        error.response.data.message
       );
     }
     data?.navigate(LOGIN_PATH);
