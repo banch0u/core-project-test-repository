@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import style from "./index.module.scss";
+import { Layout, Menu, Input } from "antd";
 import {
-  Link,
-  useLocation } from "react-router-dom";import style from "./index.module.scss";import { Layout,
-  Menu,
-  Input } from "antd";import {  QUESTIONNAIRES_ACADEMIC_DEGREES,
+  QUESTIONNAIRES_ACADEMIC_DEGREES,
   QUESTIONNAIRES_APPLICATION_FORMS,
   QUESTIONNAIRES_AREAS,
   QUESTIONNAIRES_BRANDS,
@@ -80,7 +80,10 @@ import {
   QUESTIONNAIRES_DEPARTMENTS,
   QUESTIONNAIRES_PENTIONS,
   QUESTIONNAIRES_PROJECTS,
-  QUESTIONNAIRES_CUSTOMERS
+  QUESTIONNAIRES_CUSTOMERS,
+  QUESTIONNAIRES_INVENTORYBRANDS,
+  QUESTIONNAIRES_INVENTORYCATEGORIES,
+  QUESTIONNAIRES_INVENTORYMODELS,
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -453,63 +456,84 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_INTERNALSTRUCTURE,
     },
     // ---- generated sidebar item by questionnaireGenerator: InternalStructure ----
-  
-    {
-      key: "fields", //delete the "/" at the start of string 
-      label: "Sahələr", 
-      link: QUESTIONNAIRES_FIELD, 
-},
-// ---- generated sidebar item by questionnaireGenerator: Field ----
 
     {
-      key: "wells", //delete the "/" at the start of string 
-      label: "Quyu", 
-      link: QUESTIONNAIRES_WELL, 
-},
-// ---- generated sidebar item by questionnaireGenerator: Well ----
+      key: "fields", //delete the "/" at the start of string
+      label: "Sahələr",
+      link: QUESTIONNAIRES_FIELD,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: Field ----
 
     {
-      key: "barrels", //delete the "/" at the start of string 
-      label: "Çən", 
-      link: QUESTIONNAIRES_BARREL, 
-},
-// ---- generated sidebar item by questionnaireGenerator: Barrel ----
+      key: "wells", //delete the "/" at the start of string
+      label: "Quyu",
+      link: QUESTIONNAIRES_WELL,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: Well ----
 
     {
-      key: "budget-components", //delete the "/" at the start of string 
-      label: "Büdcə Komponentləri", 
-      link: QUESTIONNAIRES_BUDGETCOMPONENTS, 
-},
-// ---- generated sidebar item by questionnaireGenerator: BudgetComponents ----
+      key: "barrels", //delete the "/" at the start of string
+      label: "Çən",
+      link: QUESTIONNAIRES_BARREL,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: Barrel ----
 
     {
-      key: "departments", //delete the "/" at the start of string 
-      label: "Departamentlər", 
-      link: QUESTIONNAIRES_DEPARTMENTS, 
-},
-// ---- generated sidebar item by questionnaireGenerator: Departments ----
+      key: "budget-components", //delete the "/" at the start of string
+      label: "Büdcə Komponentləri",
+      link: QUESTIONNAIRES_BUDGETCOMPONENTS,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: BudgetComponents ----
 
     {
-      key: "pentions", //delete the "/" at the start of string 
-      label: "Təqaüd növü", 
-      link: QUESTIONNAIRES_PENTIONS, 
-},
-// ---- generated sidebar item by questionnaireGenerator: Pentions ----
+      key: "departments", //delete the "/" at the start of string
+      label: "Departamentlər",
+      link: QUESTIONNAIRES_DEPARTMENTS,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: Departments ----
 
     {
-      key: "projects", //delete the "/" at the start of string 
-      label: "Layihələr", 
-      link: QUESTIONNAIRES_PROJECTS, 
-},
-// ---- generated sidebar item by questionnaireGenerator: Projects ----
+      key: "pentions", //delete the "/" at the start of string
+      label: "Təqaüd növü",
+      link: QUESTIONNAIRES_PENTIONS,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: Pentions ----
 
     {
-      key: "customers", //delete the "/" at the start of string 
-      label: "Müştərilər", 
-      link: QUESTIONNAIRES_CUSTOMERS, 
-},
-// ---- generated sidebar item by questionnaireGenerator: Customers ----
-];
+      key: "projects", //delete the "/" at the start of string
+      label: "Layihələr",
+      link: QUESTIONNAIRES_PROJECTS,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: Projects ----
+
+    {
+      key: "customers", //delete the "/" at the start of string
+      label: "Müştərilər",
+      link: QUESTIONNAIRES_CUSTOMERS,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: Customers ----
+
+    {
+      key: "inventoryBrands", //delete the "/" at the start of string
+      label: "Brendlər (Mal-meteriallar)",
+      link: QUESTIONNAIRES_INVENTORYBRANDS,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: InventoryBrands ----
+
+    {
+      key: "inventoryCategories", //delete the "/" at the start of string
+      label: "Kateqoriyalar (Mal-meteriallar)",
+      link: QUESTIONNAIRES_INVENTORYCATEGORIES,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: InventoryCategories ----
+
+    {
+      key: "inventoryModels", //delete the "/" at the start of string
+      label: "Modellər (Mal-meteriallar)",
+      link: QUESTIONNAIRES_INVENTORYMODELS,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: InventoryModels ----
+  ];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
 

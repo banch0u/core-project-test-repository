@@ -7,6 +7,15 @@ import QuestionnairesProjectsContent from "../pages/Questionnnaires/Questionnair
 // ---- generated import by questionnaireGenerator: Customers ----
 import QuestionnairesCustomersContent from "../pages/Questionnnaires/QuestionnairesCustomersContent";
 
+// ---- generated import by questionnaireGenerator: InventoryBrands ----
+import QuestionnairesInventoryBrandsContent from "../pages/Questionnnaires/QuestionnairesInventoryBrandsContent";
+
+// ---- generated import by questionnaireGenerator: InventoryCategories ----
+import QuestionnairesInventoryCategoriesContent from "../pages/Questionnnaires/QuestionnairesInventoryCategoriesContent";
+
+// ---- generated import by questionnaireGenerator: InventoryModels ----
+import QuestionnairesInventoryModelsContent from "../pages/Questionnnaires/QuestionnairesInventoryModelsContent";
+
 // ---- generated import by questionnaireGenerator: BudgetComponents ----
 import QuestionnairesBudgetComponentsContent from "../pages/Questionnnaires/QuestionnairesBudgetComponentsContent";
 
@@ -110,7 +119,10 @@ import {
   QUESTIONNAIRES_DEPARTMENTS,
   QUESTIONNAIRES_PENTIONS,
   QUESTIONNAIRES_PROJECTS,
-  QUESTIONNAIRES_CUSTOMERS
+  QUESTIONNAIRES_CUSTOMERS,
+  QUESTIONNAIRES_INVENTORYBRANDS,
+  QUESTIONNAIRES_INVENTORYCATEGORIES,
+  QUESTIONNAIRES_INVENTORYMODELS
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -507,6 +519,21 @@ export const questionnairesRoutes = (allowed) => {
         <Route 
           path={QUESTIONNAIRES_CUSTOMERS} 
           element={<QuestionnairesCustomersContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_INVENTORYBRANDS} 
+          element={<QuestionnairesInventoryBrandsContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_INVENTORYCATEGORIES} 
+          element={<QuestionnairesInventoryCategoriesContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_INVENTORYMODELS} 
+          element={<QuestionnairesInventoryModelsContent />} 
         />
 </Route>
     </>
