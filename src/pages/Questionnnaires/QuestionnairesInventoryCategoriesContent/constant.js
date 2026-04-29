@@ -9,34 +9,52 @@ export const getStreetColumns = (
   onDelete,
   onStatusChange,
   dispatch,
-  innerW
+  innerW,
+  dynamicNumWidth
 ) => [
     {
-      title: "№",
+      title: "",
       dataIndex: "num",
       showCheckbox: false,
       ellipsis: true,
-      width: 35,
+      width: Math.max(dynamicNumWidth || 120, 100), // ✅ dynamic
     },
     {
-      title: "Kateqoriyalar (Mal-meteriallar)",
+      title: "Kateqoriyalar (Kod)",
       dataIndex: "name",
-      width: innerW,
       disabled: true,
       ellipsis: true,
+      render: (text, record) => (
+        <div
+          style={{
+            paddingLeft: `${record.level * 20}px`,
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          <span>{text}</span>
+
+          {record.code && (
+            <span style={{ color: "#888" }}>
+              ({record.code})
+            </span>
+          )}
+        </div>
+      ),
     },
     {
       title: "Status",
       key: "status",
       disabled: true,
-
+      width: 100,
       filter: false,
       render: (data) => (
         <Tooltip placement="top" title="Statusu dəyiş">
           <Switch
             size="medium"
             checked={data?.isActive}
-            onChange={(checked) => onStatusChange(data, checked, dispatch)}
+            onChange={(checked) => onStatusChange(data, checked)}
           />
         </Tooltip>
       ),
@@ -47,23 +65,21 @@ export const getStreetColumns = (
       showCheckbox: false,
       width: 80,
       render: (data) => (
-        <>
-          <div className={style.number}>
-            <div className={style.actions}>
-              <div onClick={() => onEditClick(data)}>
-                <EditIcon />
-              </div>
-              <div
-                onClick={() => {
-                  onDelete(data?.id);
-                  dispatch(setDeleteModalVisible(true));
-                }}
-              >
-                <DeleteIconQ />
-              </div>
+        <div className={style.number}>
+          <div className={style.actions}>
+            <div onClick={() => onEditClick(data)}>
+              <EditIcon />
+            </div>
+            <div
+              onClick={() => {
+                onDelete(data?.id);
+                dispatch(setDeleteModalVisible(true));
+              }}
+            >
+              <DeleteIconQ />
             </div>
           </div>
-        </>
+        </div>
       ),
     },
   ];

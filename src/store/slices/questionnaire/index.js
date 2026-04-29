@@ -8134,7 +8134,6 @@ export const getInventoryCategories = createAsyncThunk(
       const response = await Services.getInventoryCategories(
         data.size,
         data.page,
-        data.query,
         data.visibility
       );
       dispatch(setLoading(false));
@@ -8237,7 +8236,8 @@ export const getInventoryModels = createAsyncThunk(
         data.size,
         data.page,
         data.query,
-        data.visibility
+        data.visibility,
+        data?.inventoryBrands
       );
       dispatch(setLoading(false));
       return response?.data;
@@ -8872,7 +8872,7 @@ export const questionnaire = createSlice({
       state.barrelAll = payload;
     });
     // ---- end generated reducers ----
-    
+
     // ---- generated reducers for BudgetComponents ----
     builder.addCase(getBudgetComponents.fulfilled, (state, { payload }) => {
       state.budgetComponents = payload;
@@ -8881,7 +8881,7 @@ export const questionnaire = createSlice({
       state.budgetComponentsAll = payload;
     });
     // ---- end generated reducers ----
-    
+
     // ---- generated reducers for Departments ----
     builder.addCase(getDepartments.fulfilled, (state, { payload }) => {
       state.departments = payload;
@@ -8890,7 +8890,7 @@ export const questionnaire = createSlice({
       state.departmentsAll = payload;
     });
     // ---- end generated reducers ----
-    
+
     // ---- generated reducers for Pentions ----
     builder.addCase(getPentions.fulfilled, (state, { payload }) => {
       state.pentions = payload;
@@ -8899,7 +8899,7 @@ export const questionnaire = createSlice({
       state.pentionsAll = payload;
     });
     // ---- end generated reducers ----
-    
+
     // ---- generated reducers for Projects ----
     builder.addCase(getProjects.fulfilled, (state, { payload }) => {
       state.projects = payload;
@@ -8908,7 +8908,7 @@ export const questionnaire = createSlice({
       state.projectsAll = payload;
     });
     // ---- end generated reducers ----
-    
+
     // ---- generated reducers for Customers ----
     builder.addCase(getCustomers.fulfilled, (state, { payload }) => {
       state.customers = payload;
@@ -8917,7 +8917,7 @@ export const questionnaire = createSlice({
       state.customersAll = payload;
     });
     // ---- end generated reducers ----
-    
+
     // ---- generated reducers for InventoryBrands ----
     builder.addCase(getInventoryBrands.fulfilled, (state, { payload }) => {
       state.inventoryBrands = payload;
@@ -8926,7 +8926,7 @@ export const questionnaire = createSlice({
       state.inventoryBrandsAll = payload;
     });
     // ---- end generated reducers ----
-    
+
     // ---- generated reducers for InventoryCategories ----
     builder.addCase(getInventoryCategories.fulfilled, (state, { payload }) => {
       state.inventoryCategories = payload;
@@ -8935,7 +8935,7 @@ export const questionnaire = createSlice({
       state.inventoryCategoriesAll = payload;
     });
     // ---- end generated reducers ----
-    
+
     // ---- generated reducers for InventoryModels ----
     builder.addCase(getInventoryModels.fulfilled, (state, { payload }) => {
       state.inventoryModels = payload;
@@ -8944,7 +8944,7 @@ export const questionnaire = createSlice({
       state.inventoryModelsAll = payload;
     });
     // ---- end generated reducers ----
-    },
+  },
 });
 
 export const { setPage } = questionnaire.actions;

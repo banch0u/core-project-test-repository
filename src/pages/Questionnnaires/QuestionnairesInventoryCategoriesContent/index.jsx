@@ -1,8 +1,12 @@
-import React from "react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Cookies from "js-cookie";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import style from "../Questionnaires.module.scss";
-import { Form, Input, Layout } from "antd";
+import { Form, Input, Layout, TreeSelect } from "antd";
 import { PlusIcon } from "../../../assets/icons";
 import FormModal from "../../../components/FormModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,15 +18,10 @@ import {
   setViewModalVisible,
 } from "../../../store/slices/global";
 import ViewModal from "../../../components/ViewModal";
-import { getStreetColumns } from "./constant";
-
-import Pagination from "../../../components/Pagination";
-import ColSort from "../../../components/ColSort";
-import { setPaginationLength } from "../../../helpers/paginationLength";
 import Button from "../../../components/Button";
 import Loading from "../../../components/Loading";
 import Table from "../../../components/Table";
-import Filter from "../../../components/Filter";
+
 import {
   addInventoryCategories,
   deleteInventoryCategories,
@@ -31,169 +30,195 @@ import {
   inventoryCategoriesVisibility,
 } from "../../../store/slices/questionnaire";
 
+import { getStreetColumns } from "./constant";
+
 const { Content } = Layout;
 const { Item } = Form;
+
 const QuestionnairesInventoryCategoriesContent = () => {
-  const [innerW, setInnerW] = useState(null);
-  const ref = useRef();
   const dispatch = useDispatch();
-  const [id, setId] = useState(0);
-  const [page, setPage] = useState(1);
-  const [size, setSize] = useState(
-    Cookies.get("pagination-size-questionnaire-inventorycategories")
-      ? JSON.parse(Cookies.get("pagination-size-questionnaire-inventorycategories"))
-      : 20
+  const ref = useRef();
+
+  const [id, setId] = useState(null);
+  const [innerW, setInnerW] = useState(160);
+
+  const { loading, InventoryCategoriesRender } = useSelector(
+    (state) => state.global,
   );
-  const [query, setQuery] = useState({ name: "" });
-  const { loading, InventoryCategoriesRender } = useSelector((state) => state.global);
 
   const InventoryCategories = useSelector(
-    (state) => state.questionnaire.inventoryCategories
-  );
-  const paginationLength = setPaginationLength(
-    InventoryCategories?.count,
-    InventoryCategories?.size
+    (state) => state.questionnaire.inventoryCategories,
   );
 
-  const onSubmit = useCallback(
-    async (data) => {
-      dispatch(addInventoryCategories(data));
-    },
-    [dispatch]
-  );
-  const onEdit = useCallback(
-    (id, record) => {
-      const data = {
-        id: id,
-        name: record?.name,
+  // ✅ BUILD TREE WITH LEVEL
+  const buildTree = (list) => {
+    const map = {};
+    const roots = [];
+
+    list.forEach((item, index) => {
+      map[item.id] = {
+        key: item.id,
+        id: item.id,
+        name: item.name,
+        code: item.code,
+        parentId: item.parentId,
+        isActive: item.isActive,
+        // num: index + 1,
+        children: [],
+        level: 0,
+        className: "rowClassName1",
       };
-      dispatch(editInventoryCategories(data));
-    },
-    [dispatch]
-  );
-  const onStatusChange = useCallback(
-    (data, checked) => {
-      const data_ = {
-        id: data?.id,
-        checked: checked,
-      };
-      dispatch(inventoryCategoriesVisibility(data_));
-    },
-    [dispatch]
-  );
-  const closeOnViewModal = useCallback(() => {
-    dispatch(setViewModalVisible(false));
-  }, [dispatch]);
-  const onClickModal = () => {
-    ref?.current?.open();
+    });
+
+    list.forEach((item) => {
+      if (item.parentId) {
+        const parent = map[item.parentId];
+        if (parent) {
+          map[item.id].level = parent.level + 1;
+          parent.children.push(map[item.id]);
+        }
+      } else {
+        roots.push(map[item.id]);
+      }
+    });
+
+    return roots;
   };
+
+  const treeData = useMemo(() => {
+    return buildTree(InventoryCategories?.items || []);
+  }, [InventoryCategories]);
+
+  // ✅ MAX DEPTH
+  const getMaxDepth = (nodes) => {
+    let max = 0;
+
+    const traverse = (arr, level = 0) => {
+      arr.forEach((node) => {
+        if (level > max) max = level;
+        if (node.children?.length) {
+          traverse(node.children, level + 1);
+        }
+      });
+    };
+
+    traverse(nodes);
+    return max;
+  };
+
+  const maxDepth = useMemo(() => getMaxDepth(treeData), [treeData]);
+
+  const dynamicNumWidth = useMemo(() => {
+    const base = 40;
+    const perLevel = 20;
+    return base + maxDepth * perLevel;
+  }, [maxDepth]);
+
+  // ✅ TreeSelect
+  const treeSelectData = useMemo(() => {
+    const convert = (nodes) =>
+      nodes.map((node) => ({
+        title: node.name,
+        value: node.id,
+        children: convert(node.children || []),
+      }));
+
+    return convert(treeData);
+  }, [treeData]);
+
+  // ✅ ACTIONS
+  const onSubmit = useCallback(
+    (data) => dispatch(addInventoryCategories(data)),
+    [dispatch],
+  );
+
+  const onEdit = useCallback(
+    (id, record) =>
+      dispatch(
+        editInventoryCategories({
+          id,
+          name: record.name,
+          code: record.code,
+          parentId: record.parentId,
+        }),
+      ),
+    [dispatch],
+  );
+
   const onEditClick = useCallback((data) => {
-    ref?.current?.setEdit(data);
+    ref.current.setEdit(data);
   }, []);
+
   const onDelete = useCallback((id) => {
     setId(id);
   }, []);
-  const handleColumnToggle = (checked, dataIndex) => {
-    setSelectedColumns((prevSelected) => {
-      if (checked) {
-        return [...prevSelected, dataIndex];
-      } else {
-        return prevSelected.filter((col) => col !== dataIndex);
-      }
-    });
-  };
 
-  let data = [];
-  if (InventoryCategories?.items) {
-    data = InventoryCategories?.items?.map((dataObj, i) => ({
-      num:
-        InventoryCategories?.size * InventoryCategories?.page + i + 1 - InventoryCategories?.size,
-      id: dataObj?.id,
-      name: dataObj?.name,
-      isActive: dataObj?.isActive,
-      className: "rowClassName1",
-    }));
-  }
+  const onStatusChange = useCallback(
+    (data, checked) =>
+      dispatch(
+        inventoryCategoriesVisibility({
+          id: data?.id,
+          checked,
+        }),
+      ),
+    [dispatch],
+  );
+
+  // ✅ COLUMNS
   const columns = useMemo(
-    () => getStreetColumns(onEditClick, onDelete, onStatusChange, dispatch),
-    [onEditClick, onDelete, onStatusChange, dispatch]
+    () =>
+      getStreetColumns(
+        onEditClick,
+        onDelete,
+        onStatusChange,
+        dispatch,
+        innerW,
+        dynamicNumWidth,
+      ),
+    [onEditClick, onDelete, onStatusChange, dispatch, innerW, dynamicNumWidth],
   );
-  const [selectedColumns, setSelectedColumns] = useState(
-    columns.map((col) => col.dataIndex)
-  );
+
+  // ✅ FETCH
   useEffect(() => {
-    if (window.innerWidth >= 1900) {
-      setInnerW(210);
-    } else {
-      setInnerW(155);
-    }
-    const data = {
-      page: page,
-      size: size,
-      query: query,
-      visibility: "nondeleted",
-    };
-    dispatch(getInventoryCategories(data));
-  }, [dispatch, page, InventoryCategoriesRender, query, size]);
-  const updateSize = (newSize) => {
-    setSize(newSize);
-    Cookies.set(
-      "pagination-size-questionnaire-inventorycategories",
-      JSON.stringify(newSize),
-      {
-        expires: 7,
-      }
+    setInnerW(window.innerWidth >= 1900 ? 210 : 155);
+
+    dispatch(
+      getInventoryCategories({
+        page: 1,
+        size: 99999,
+        visibility: "nondeleted",
+      }),
     );
-  };
+  }, [dispatch, InventoryCategoriesRender]);
 
   return (
     <>
-      {loading ? <Loading /> : null}
+      {loading && <Loading />}
+
       <Layout className={style.layout}>
         <Content className={style.content}>
           <header className={style.header}>
-            <Button onClick={onClickModal} color="green">
-              <PlusIcon /> Soraqça əlavə et
+            <Button onClick={() => ref.current.open()} color="green">
+              <PlusIcon /> Kateqoriya əlavə et
             </Button>
-            <Filter
-              columns={columns}
-              selectedColumns={selectedColumns}
-              setQuery={setQuery}
-              disabledElementCount={3}
-              setPage={setPage}
-            />
           </header>
         </Content>
+
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Kateqoriyalar (Mal-meteriallar)</h2>
-              <div className={style.buttons}>
-                <ColSort
-                  columns={columns}
-                  selectedColumns={selectedColumns}
-                  handleColumnToggle={handleColumnToggle}
-                />
-              </div>
+              <h2>Kateqoriyalar (Mal-materiallar)</h2>
             </div>
+
             <div className="bigTable">
               <Table
-                selectedColumns={selectedColumns}
-                innerW={innerW}
-                dataSource={data}
+                dataSource={treeData}
                 columns={columns}
                 disableDrag={true}
               />
             </div>
-            <div className={style.pagination}>
-              <Pagination
-                size={size}
-                setSize={updateSize}
-                total={paginationLength}
-                page={page}
-                onChange={setPage}
-              />
-            </div>
+
+            {/* MODAL */}
             <FormModal
               ref={ref}
               width={454}
@@ -206,26 +231,48 @@ const QuestionnairesInventoryCategoriesContent = () => {
               className={"absolute"}
               centered={false}>
               <Item
+                name="name"
+                label="Ad"
                 rules={[
                   { required: true, message: "" },
-                  { min: 3, message: "Ən azından 3 simvol olmalıdır" },
-                ]}
-                name={"name"}
-                label={"Ad"}>
+                  { min: 3, message: "Ən az 3 simvol" },
+                ]}>
                 <Input className={style.modal_input} />
               </Item>
+
+              <Item name="code" label="Kod">
+                <Input className={style.modal_input} />
+              </Item>
+
+              <Item name="parentId" label="Üst kateqoriya">
+                <TreeSelect
+                  allowClear
+                  treeData={treeSelectData}
+                  placeholder=""
+                  className={style.modal_input}
+                />
+              </Item>
             </FormModal>
+
+            {/* DELETE */}
             <DeleteModal
               onCancel={() => dispatch(setDeleteModalVisible(false))}
               width={280}>
               <Delete
                 onDelete={() => dispatch(deleteInventoryCategories(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
-                value={"Soraqçanı"}
+                value={"Kateqoriyanı"}
               />
             </DeleteModal>
-            <ViewModal onCancel={closeOnViewModal} width={695}>
-              {<Success onClick={closeOnViewModal} value={"Soraqça"} />}
+
+            {/* SUCCESS */}
+            <ViewModal
+              onCancel={() => dispatch(setViewModalVisible(false))}
+              width={695}>
+              <Success
+                onClick={() => dispatch(setViewModalVisible(false))}
+                value={"Kateqoriya"}
+              />
             </ViewModal>
           </Content>
         </Layout>
