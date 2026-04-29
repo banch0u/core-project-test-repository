@@ -7,7 +7,8 @@ let baseUrl;
 if (window.location.hostname === "localhost") {
   baseUrl = process.env.REACT_APP_BASE_URL;
 } else {
-  baseUrl = window.location.origin + "/api";
+  baseUrl = window.location.origin + "/api";       //prod
+  // baseUrl = "https://dev-sys.datasupport.az/api";  //dev test
 }
 
 const api = axios.create({ baseURL: baseUrl });
