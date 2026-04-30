@@ -537,7 +537,7 @@ export const getCountries = createAsyncThunk(
       dispatch(setLoading(false));
       return response?.data?.data;
     } catch (error) {
-      errorMessage();
+      errorMessage(error.response.data.message);
       dispatch(setLoading(false));
     }
   }
@@ -551,7 +551,7 @@ export const getCountriesAll = createAsyncThunk(
       dispatch(setLoading(false));
       return response?.data?.data;
     } catch (error) {
-      errorMessage();
+      errorMessage(error.response.data.message);
       dispatch(setLoading(false));
     }
   }
@@ -567,7 +567,7 @@ export const addCountry = createAsyncThunk(
       dispatch(setCountryRender((prev) => !prev));
     } catch (error) {
       dispatch(setLoading(false));
-      errorMessage();
+      errorMessage(error.response.data.message);
     }
   }
 );
@@ -583,7 +583,7 @@ export const editCountry = createAsyncThunk(
       return response?.data;
     } catch (error) {
       dispatch(setLoading(false));
-      errorMessage();
+      errorMessage(error.response.data.message);
     }
   }
 );
@@ -598,7 +598,7 @@ export const countryVisibility = createAsyncThunk(
       dispatch(setCountryRender((prev) => !prev));
     } catch (error) {
       dispatch(setLoading(false));
-      errorMessage();
+      errorMessage(error.response.data.message);
     }
   }
 );
@@ -614,7 +614,7 @@ export const deleteCountry = createAsyncThunk(
       dispatch(setCountryRender((prev) => !prev));
     } catch (error) {
       dispatch(setLoading(false));
-      errorMessage();
+      errorMessage(error.response.data.message);
       dispatch(setDeleteModalVisible(false));
     }
   }
@@ -634,7 +634,7 @@ export const deleteCountry = createAsyncThunk(
 //       dispatch(setLoading(false));
 //       return response?.data;
 //     } catch (error) {
-//       errorMessage();
+//        errorMessage(error.response.data.message);
 //       dispatch(setLoading(false));
 //     }
 //   }
@@ -651,7 +651,7 @@ export const deleteCountry = createAsyncThunk(
 //       dispatch(setStreetRender((prev) => !prev));
 //     } catch (error) {
 //       dispatch(setLoading(false));
-//       errorMessage();
+//        errorMessage(error.response.data.message);
 //     }
 //   }
 // );
@@ -666,7 +666,7 @@ export const deleteCountry = createAsyncThunk(
 //       dispatch(setStreetRender((prev) => !prev));
 //     } catch (error) {
 //       dispatch(setLoading(false));
-//       errorMessage();
+//        errorMessage(error.response.data.message);
 //     }
 //   }
 // );
@@ -681,7 +681,7 @@ export const deleteCountry = createAsyncThunk(
 //       dispatch(setStreetRender((prev) => !prev));
 //     } catch (error) {
 //       dispatch(setLoading(false));
-//       errorMessage();
+//        errorMessage(error.response.data.message);
 //     }
 //   }
 // );
@@ -698,7 +698,7 @@ export const deleteCountry = createAsyncThunk(
 //     } catch (error) {
 //       dispatch(setLoading(false));
 //       dispatch(setDeleteModalVisible(false));
-//       errorMessage();
+//        errorMessage(error.response.data.message);
 //     }
 //   }
 // );
@@ -717,7 +717,7 @@ export const getOrganizations = createAsyncThunk(
       dispatch(setLoading(false));
       return response?.data?.data;
     } catch (error) {
-      errorMessage();
+      errorMessage(error.response.data.message);
       dispatch(setLoading(false));
     }
   }
@@ -733,7 +733,8 @@ export const organizationVisibility = createAsyncThunk(
       dispatch(setOrganizationRender((prev) => prev));
     } catch (error) {
       dispatch(setLoading(false));
-      errorMessage();
+      console.log(error.response.data);
+      errorMessage(error.response.data.message);
     }
   }
 );
@@ -749,7 +750,7 @@ export const addOrganization = createAsyncThunk(
       dispatch(setOrganizationRender((prev) => !prev));
     } catch (error) {
       dispatch(setLoading(false));
-      errorMessage();
+      errorMessage(error.response.data.message);
     }
   }
 );
@@ -764,7 +765,7 @@ export const editOrganization = createAsyncThunk(
       dispatch(setOrganizationRender((prev) => prev));
     } catch (error) {
       dispatch(setLoading(false));
-      errorMessage();
+      errorMessage(error.response.data.message);
     }
   }
 );
@@ -779,7 +780,7 @@ export const deleteOrganization = createAsyncThunk(
       dispatch(setOrganizationRender((prev) => !prev));
     } catch (error) {
       dispatch(setLoading(false));
-      errorMessage();
+      errorMessage(error.response.data.message);
     }
   }
 );
@@ -798,7 +799,7 @@ export const getStructures = createAsyncThunk(
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
-      errorMessage();
+      errorMessage(error.response.data.message);
     }
   }
 );
@@ -813,7 +814,7 @@ export const addStructure = createAsyncThunk(
       dispatch(setStructureRender((prev) => !prev));
     } catch (error) {
       dispatch(setLoading(false));
-      errorMessage();
+      errorMessage(error.response.data.message);
     }
   }
 );
@@ -829,7 +830,7 @@ export const editStructure = createAsyncThunk(
       return response?.data;
     } catch (error) {
       dispatch(setLoading(false));
-      errorMessage();
+      errorMessage(error.response.data.message);
     }
   }
 );
@@ -844,7 +845,7 @@ export const deleteStructure = createAsyncThunk(
       dispatch(setStructureRender((prev) => !prev));
     } catch (error) {
       dispatch(setLoading(false));
-      errorMessage();
+      errorMessage(error.response.data.message);
     }
   }
 );
@@ -859,7 +860,7 @@ export const structureVisibility = createAsyncThunk(
       dispatch(setStructureRender((prev) => !prev));
     } catch (error) {
       dispatch(setLoading(false));
-      errorMessage();
+      errorMessage(error.response.data.message);
     }
   }
 );
@@ -4328,7 +4329,7 @@ export const getRegionsChildren = createAsyncThunk(
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
-      errorMessage();
+      errorMessage(error.response.data.message);
       dispatch(setLoading(false));
     }
   }

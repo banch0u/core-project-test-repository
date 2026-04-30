@@ -4,11 +4,10 @@ export const ACCESS_TOKEN_KEY = "token";
 export const REFRESH_TOKEN_KEY = "refreshToken";
 
 let baseUrl;
-if (window.location.hostname === "localhost") {
+if (window.location.hostname === "localhost" || window.location.hostname.startsWith("192.168.11.")) {
   baseUrl = process.env.REACT_APP_BASE_URL;
 } else {
-  baseUrl = window.location.origin + "/api";       //prod
-  // baseUrl = "https://dev-sys.datasupport.az/api";  //dev test
+  baseUrl = window.location.origin + "/api";
 }
 
 const api = axios.create({ baseURL: baseUrl });
