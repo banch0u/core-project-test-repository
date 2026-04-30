@@ -14,6 +14,7 @@ const endpointName = "/inventoryModels"; // change as needed (should match backe
 
 const upperName = questionnaireName.toUpperCase();
 const pathConstA = `QUESTIONNAIRES_${upperName}`;
+const safeEndpointName = endpointName.replace(/^\//, ""); // 👈 add this line
 
 /* ------------------ TEMPLATES ------------------ */
 function lowercaseFirstChar(questionnaireName) {
