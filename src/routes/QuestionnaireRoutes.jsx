@@ -41,8 +41,25 @@ import QuestionnairesInternalStructureContent from "../pages/Questionnnaires/Que
 import QuestionnairesOwnersContent from "../pages/Questionnnaires/QuestionnairesOwnersContent";
 
 import React from "react";
+import { Route } from "react-router-dom";
+import QuestionnairesLayout from "../layout/QuestionnairesLayout";
+import Questionnnaires from "../pages/Questionnnaires";
+import QuestionnairesTopicContent from "../pages/Questionnnaires/QuestionnairesTopicContent";
+import QuestionnairesSubtopicContent from "../pages/Questionnnaires/QuestionnairesSubtopicContent";
+import QuestionnairesExecutionRulesContent from "../pages/Questionnnaires/QuestionnairesExecutionRulesContent";
+import QuestionnairesDocumentRecieveMethodsContent from "../pages/Questionnnaires/QuestionnairesDocumentRecieveMethodsContent";
+import QuestionnairesDocumentTypeContent from "../pages/Questionnnaires/QuestionnairesDocumentTypeContent";
+import QuestionnairesCountriesContent from "../pages/Questionnnaires/QuestionnairesCountriesContent";
+import QuestionnairesOrganizationsContent from "../pages/Questionnnaires/QuestionnairesOrganizationsContent";
+import QuestionnairesStructuresContent from "../pages/Questionnnaires/QuestionnairesStructuresContent";
+import QuestionnairesApplicationFormContent from "../pages/Questionnnaires/QuestionnairesApplicationFormContent";
+import QuestionnairesDocumentWhomContent from "../pages/Questionnnaires/QuestionnairesDocumentWhomContent";
+import QuestionnairesMarginNoteTextsContent from "../pages/Questionnnaires/QuestionnairesMarginNoteTextsContent";
+import QuestionnairesBrandsContent from "../pages/Questionnnaires/QuestionnairesBrandsContent";
+import QuestionnairesChassisTypesContent from "../pages/Questionnnaires/QuestionnairesChassisTypesContent";
+import QuestionnairesColorsContent from "../pages/Questionnnaires/QuestionnairesColorsContent";
 import {
-  Route } from "react-router-dom";import QuestionnairesLayout from "../layout/QuestionnairesLayout";import Questionnnaires from "../pages/Questionnnaires";import QuestionnairesTopicContent from "../pages/Questionnnaires/QuestionnairesTopicContent";import QuestionnairesSubtopicContent from "../pages/Questionnnaires/QuestionnairesSubtopicContent";import QuestionnairesExecutionRulesContent from "../pages/Questionnnaires/QuestionnairesExecutionRulesContent";import QuestionnairesDocumentRecieveMethodsContent from "../pages/Questionnnaires/QuestionnairesDocumentRecieveMethodsContent";import QuestionnairesDocumentTypeContent from "../pages/Questionnnaires/QuestionnairesDocumentTypeContent";import QuestionnairesCountriesContent from "../pages/Questionnnaires/QuestionnairesCountriesContent";import QuestionnairesOrganizationsContent from "../pages/Questionnnaires/QuestionnairesOrganizationsContent";import QuestionnairesStructuresContent from "../pages/Questionnnaires/QuestionnairesStructuresContent";import QuestionnairesApplicationFormContent from "../pages/Questionnnaires/QuestionnairesApplicationFormContent";import QuestionnairesDocumentWhomContent from "../pages/Questionnnaires/QuestionnairesDocumentWhomContent";import QuestionnairesMarginNoteTextsContent from "../pages/Questionnnaires/QuestionnairesMarginNoteTextsContent";import QuestionnairesBrandsContent from "../pages/Questionnnaires/QuestionnairesBrandsContent";import QuestionnairesChassisTypesContent from "../pages/Questionnnaires/QuestionnairesChassisTypesContent";import QuestionnairesColorsContent from "../pages/Questionnnaires/QuestionnairesColorsContent";import {  QUESTIONNAIRES_TOPIC,
+  QUESTIONNAIRES_TOPIC,
   QUESTIONNAIRES_SUBTOPIC,
   QUESTIONNAIRES_EXECUTION_RULES,
   QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
@@ -122,7 +139,7 @@ import {
   QUESTIONNAIRES_CUSTOMERS,
   QUESTIONNAIRES_INVENTORYBRANDS,
   QUESTIONNAIRES_INVENTORYCATEGORIES,
-  QUESTIONNAIRES_INVENTORYMODELS
+  QUESTIONNAIRES_INVENTORYMODELS,
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -455,87 +472,87 @@ export const questionnairesRoutes = (allowed) => {
           path={QUESTIONNAIRES_OWNERS}
           element={<QuestionnairesOwnersContent />}
         />
-      
-        <Route 
-          path={QUESTIONNAIRES_CONTRACTTOPICS} 
-          element={<QuestionnairesContractTopicsContent />} 
+
+        <Route
+          path={QUESTIONNAIRES_CONTRACTTOPICS}
+          element={<QuestionnairesContractTopicsContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_CONTRACTTYPESSUBTYPES} 
-          element={<QuestionnairesContractTypesSubtypesContent />} 
+        <Route
+          path={QUESTIONNAIRES_CONTRACTTYPESSUBTYPES}
+          element={<QuestionnairesContractTypesSubtypesContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_DEFAULTAGREEMENTPLANS} 
-          element={<QuestionnairesDefaultAgreementPlansContent />} 
+        <Route
+          path={QUESTIONNAIRES_DEFAULTAGREEMENTPLANS}
+          element={<QuestionnairesDefaultAgreementPlansContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_ROUTELOCATIONS} 
-          element={<QuestionnairesRouteLocationsContent />} 
+        <Route
+          path={QUESTIONNAIRES_ROUTELOCATIONS}
+          element={<QuestionnairesRouteLocationsContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_INTERNALSTRUCTURE} 
-          element={<QuestionnairesInternalStructureContent />} 
+        <Route
+          path={QUESTIONNAIRES_INTERNALSTRUCTURE}
+          element={<QuestionnairesInternalStructureContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_FIELD} 
-          element={<QuestionnairesFieldContent />} 
+        <Route
+          path={QUESTIONNAIRES_FIELD}
+          element={<QuestionnairesFieldContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_WELL} 
-          element={<QuestionnairesWellContent />} 
+        <Route
+          path={QUESTIONNAIRES_WELL}
+          element={<QuestionnairesWellContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_BARREL} 
-          element={<QuestionnairesBarrelContent />} 
+        <Route
+          path={QUESTIONNAIRES_BARREL}
+          element={<QuestionnairesBarrelContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_BUDGETCOMPONENTS} 
-          element={<QuestionnairesBudgetComponentsContent />} 
+        <Route
+          path={QUESTIONNAIRES_BUDGETCOMPONENTS}
+          element={<QuestionnairesBudgetComponentsContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_DEPARTMENTS} 
-          element={<QuestionnairesDepartmentsContent />} 
+        <Route
+          path={QUESTIONNAIRES_DEPARTMENTS}
+          element={<QuestionnairesDepartmentsContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_PENTIONS} 
-          element={<QuestionnairesPentionsContent />} 
+        <Route
+          path={QUESTIONNAIRES_PENTIONS}
+          element={<QuestionnairesPentionsContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_PROJECTS} 
-          element={<QuestionnairesProjectsContent />} 
+        <Route
+          path={QUESTIONNAIRES_PROJECTS}
+          element={<QuestionnairesProjectsContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_CUSTOMERS} 
-          element={<QuestionnairesCustomersContent />} 
+        <Route
+          path={QUESTIONNAIRES_CUSTOMERS}
+          element={<QuestionnairesCustomersContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_INVENTORYBRANDS} 
-          element={<QuestionnairesInventoryBrandsContent />} 
+        <Route
+          path={QUESTIONNAIRES_INVENTORYBRANDS}
+          element={<QuestionnairesInventoryBrandsContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_INVENTORYCATEGORIES} 
-          element={<QuestionnairesInventoryCategoriesContent />} 
+        <Route
+          path={QUESTIONNAIRES_INVENTORYCATEGORIES}
+          element={<QuestionnairesInventoryCategoriesContent />}
         />
 
-        <Route 
-          path={QUESTIONNAIRES_INVENTORYMODELS} 
-          element={<QuestionnairesInventoryModelsContent />} 
+        <Route
+          path={QUESTIONNAIRES_INVENTORYMODELS}
+          element={<QuestionnairesInventoryModelsContent />}
         />
-</Route>
+      </Route>
     </>
   );
 };

@@ -18,7 +18,7 @@ const Sidebar = ({ items = [] }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
   const [isDark, setIsDark] = useState(
-    localStorage.getItem("theme") === "dark"
+    localStorage.getItem("theme") === "dark",
   );
 
   const handleCollapse = () => {
@@ -78,8 +78,7 @@ const Sidebar = ({ items = [] }) => {
 
   const selectedKey = useMemo(() => {
     const rawPath = location.pathname || "/";
-    const path = rawPath.replace(/\/+$/, ""); // trim trailing slash
-    const segments = path.split("/").filter(Boolean);
+    const path = rawPath.replace(/\/+$/, "");
 
     const normalize = (s) => (typeof s === "string" ? s.trim() : "");
     const candidates = flatItems
@@ -87,22 +86,27 @@ const Sidebar = ({ items = [] }) => {
       .filter(Boolean);
 
     const isMatch = (key) => {
-      // Case A: key looks like a full path
       if (key.startsWith("/")) {
         const nk = key.replace(/\/+$/, "");
         return path === nk || path.startsWith(nk + "/");
       }
-      // Case B: key is a segment/token (e.g., "chlorine" or "chlorine-percentage")
-      // Match only exact segment equality, not substring
-      return segments.includes(key);
+
+      // Match if:
+      // - exact:   /questionnaires
+      // - child:   /questionnaires/inventoryBrands         (endsWith + more after)
+      // - nested:  /budgets/questionnaires/budget-components
+      return (
+        path === `/${key}` || // exact
+        path.endsWith(`/${key}`) || // ends with key (no children)
+        path.includes(`/${key}/`) // 👈 key appears mid-path (has children)
+      );
     };
 
-    // gather all matches, then prefer the most specific (longest key string)
     const matches = candidates
       .filter(isMatch)
-      .sort((a, b) => b.length - a.length);
+      .sort((a, b) => b.length - a.length); // longest = most specific wins
 
-    return matches[0]; // undefined if none
+    return matches[0];
   }, [location.pathname, flatItems]);
 
   // ✅ choose wrapper element (Link or div)
