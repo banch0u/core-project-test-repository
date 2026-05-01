@@ -24,56 +24,52 @@ import Loading from "../../../components/Loading";
 import Table from "../../../components/Table";
 import Filter from "../../../components/Filter";
 import {
-  addContractcurrencies,
-  deleteContractcurrencies,
-  contractcurrenciesVisibility,
-  editContractcurrencies,
-  getContractcurrencies,
+  addinventoryPackageTypes,
+  deleteinventoryPackageTypes,
+  editinventoryPackageTypes,
+  getinventoryPackageTypes,
+  inventoryPackageTypesVisibility,
 } from "../../../store/slices/questionnaire";
 
 const { Content } = Layout;
 const { Item } = Form;
-const QuestionnairesContractcurrenciesContent = () => {
+const QuestionnairesinventoryPackageTypesContent = () => {
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
   const dispatch = useDispatch();
   const [id, setId] = useState(0);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(
-    Cookies.get("pagination-size-questionnaire-document-type")
-      ? JSON.parse(Cookies.get("pagination-size-questionnaire-document-type"))
-      : 20,
+    Cookies.get("pagination-size-questionnaire-inventorypackagetypes")
+      ? JSON.parse(Cookies.get("pagination-size-questionnaire-inventorypackagetypes"))
+      : 20
   );
   const [query, setQuery] = useState({ name: "" });
+  const { loading, inventoryPackageTypesRender } = useSelector((state) => state.global);
 
-  const { loading, contractcurrenciesRender } = useSelector(
-    (state) => state.global,
+  const inventoryPackageTypes = useSelector(
+    (state) => state.questionnaire.inventoryPackageTypes
   );
-
-  const contractcurrencies = useSelector(
-    (state) => state.questionnaire.contractcurrencies,
-  );
-
   const paginationLength = setPaginationLength(
-    contractcurrencies?.count,
-    contractcurrencies?.size,
+    inventoryPackageTypes?.count,
+    inventoryPackageTypes?.size
   );
+
   const onSubmit = useCallback(
     async (data) => {
-      dispatch(addContractcurrencies({ ...data }));
+      dispatch(addinventoryPackageTypes(data));
     },
-    [dispatch],
+    [dispatch]
   );
   const onEdit = useCallback(
     (id, record) => {
-      console.log(record);
       const data = {
         id: id,
         name: record?.name,
       };
-      dispatch(editContractcurrencies(data));
+      dispatch(editinventoryPackageTypes(data));
     },
-    [dispatch],
+    [dispatch]
   );
   const onStatusChange = useCallback(
     (data, checked) => {
@@ -81,9 +77,9 @@ const QuestionnairesContractcurrenciesContent = () => {
         id: data?.id,
         checked: checked,
       };
-      dispatch(contractcurrenciesVisibility(data_));
+      dispatch(inventoryPackageTypesVisibility(data_));
     },
-    [dispatch],
+    [dispatch]
   );
   const closeOnViewModal = useCallback(() => {
     dispatch(setViewModalVisible(false));
@@ -97,7 +93,6 @@ const QuestionnairesContractcurrenciesContent = () => {
   const onDelete = useCallback((id) => {
     setId(id);
   }, []);
-
   const handleColumnToggle = (checked, dataIndex) => {
     setSelectedColumns((prevSelected) => {
       if (checked) {
@@ -107,14 +102,12 @@ const QuestionnairesContractcurrenciesContent = () => {
       }
     });
   };
+
   let data = [];
-  if (contractcurrencies?.items) {
-    data = contractcurrencies?.items?.map((dataObj, i) => ({
+  if (inventoryPackageTypes?.items) {
+    data = inventoryPackageTypes?.items?.map((dataObj, i) => ({
       num:
-        contractcurrencies?.size * contractcurrencies?.page +
-        i +
-        1 -
-        contractcurrencies?.size,
+        inventoryPackageTypes?.size * inventoryPackageTypes?.page + i + 1 - inventoryPackageTypes?.size,
       id: dataObj?.id,
       name: dataObj?.name,
       isActive: dataObj?.isActive,
@@ -122,21 +115,12 @@ const QuestionnairesContractcurrenciesContent = () => {
     }));
   }
   const columns = useMemo(
-    () =>
-      getStreetColumns(
-        onEditClick,
-        onDelete,
-        onStatusChange,
-
-        dispatch,
-      ),
-    [onEditClick, onDelete, onStatusChange, dispatch],
+    () => getStreetColumns(onEditClick, onDelete, onStatusChange, dispatch),
+    [onEditClick, onDelete, onStatusChange, dispatch]
   );
-
   const [selectedColumns, setSelectedColumns] = useState(
-    columns.map((col) => col.dataIndex),
+    columns.map((col) => col.dataIndex)
   );
-
   useEffect(() => {
     if (window.innerWidth >= 1900) {
       setInnerW(210);
@@ -149,17 +133,17 @@ const QuestionnairesContractcurrenciesContent = () => {
       query: query,
       visibility: "nondeleted",
     };
-    dispatch(getContractcurrencies(data));
-  }, [dispatch, page, contractcurrenciesRender, size, query]);
+    dispatch(getinventoryPackageTypes(data));
+  }, [dispatch, page, inventoryPackageTypesRender, query, size]);
   const updateSize = (newSize) => {
-    setSize(newSize); // Update state
+    setSize(newSize);
     Cookies.set(
-      "pagination-size-questionnaire-document-type",
+      "pagination-size-questionnaire-inventorypackagetypes",
       JSON.stringify(newSize),
       {
         expires: 7,
-      },
-    ); // Save to cookies
+      }
+    );
   };
 
   return (
@@ -169,7 +153,6 @@ const QuestionnairesContractcurrenciesContent = () => {
         <Content className={style.content}>
           <header className={style.header}>
             <Button onClick={onClickModal} color="green">
-              {" "}
               <PlusIcon /> Soraqça əlavə et
             </Button>
             <Filter
@@ -184,7 +167,7 @@ const QuestionnairesContractcurrenciesContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Valyutalar</h2>
+              <h2>Paket tipləri (Mal-meteriallar)</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}
@@ -223,18 +206,20 @@ const QuestionnairesContractcurrenciesContent = () => {
               className={"absolute"}
               centered={false}>
               <Item
-                className={style.label}
-                rules={[{ required: true, message: "" }]}
-                name="name"
-                label="Ad">
-                <Input className={style.modal_input} type={"text"} />
+                rules={[
+                  { required: true, message: "" },
+                  { min: 3, message: "Ən azından 3 simvol olmalıdır" },
+                ]}
+                name={"name"}
+                label={"Ad"}>
+                <Input className={style.modal_input} />
               </Item>
             </FormModal>
             <DeleteModal
               onCancel={() => dispatch(setDeleteModalVisible(false))}
               width={280}>
               <Delete
-                onDelete={() => dispatch(deleteContractcurrencies(id))}
+                onDelete={() => dispatch(deleteinventoryPackageTypes(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
                 value={"Soraqçanı"}
               />
@@ -249,4 +234,4 @@ const QuestionnairesContractcurrenciesContent = () => {
   );
 };
 
-export default QuestionnairesContractcurrenciesContent;
+export default QuestionnairesinventoryPackageTypesContent;

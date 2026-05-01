@@ -59,6 +59,16 @@ const Button = ({
           {children}
         </button>
       ) : null}
+      {color === "red-white" ? (
+        <button
+          data-no-invert
+          disabled={disabled}
+          type={type}
+          className={style.button_red_white}
+          onClick={onClick}>
+          {children}
+        </button>
+      ) : null}
     </>
   );
 };

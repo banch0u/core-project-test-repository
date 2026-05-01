@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import style from "./index.module.scss";
-import { Layout, Menu, Input } from "antd";
 import {
-  QUESTIONNAIRES_ACADEMIC_DEGREES,
+  Link,
+  useLocation } from "react-router-dom";import style from "./index.module.scss";import { Layout,
+  Menu,
+  Input } from "antd";import {  QUESTIONNAIRES_ACADEMIC_DEGREES,
   QUESTIONNAIRES_APPLICATION_FORMS,
   QUESTIONNAIRES_AREAS,
   QUESTIONNAIRES_BRANDS,
@@ -84,6 +84,7 @@ import {
   QUESTIONNAIRES_INVENTORYBRANDS,
   QUESTIONNAIRES_INVENTORYCATEGORIES,
   QUESTIONNAIRES_INVENTORYMODELS,
+  QUESTIONNAIRES_INVENTORYPACKAGETYPES
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -334,7 +335,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
     },
     {
       key: "contract-currencies",
-      label: "Müqavilə valyutaları",
+      label: "Valyutalar",
       link: QUESTIONNAIRES_CONTRACTCURRENCIES,
     },
     {
@@ -370,7 +371,7 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
     },
     {
       key: "measurement-types",
-      label: "Ölçü vahidləri(Avtonəqliyyat)",
+      label: "Ölçü vahidləri",
       link: QUESTIONNAIRES_MEASUREMENT_TYPES,
     },
     {
@@ -533,7 +534,14 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_INVENTORYMODELS,
     },
     // ---- generated sidebar item by questionnaireGenerator: InventoryModels ----
-  ];
+  
+    {
+      key: "inventoryPackageTypes", //delete the "/" at the start of string 
+      label: "Paket tipləri (Mal-meteriallar)", 
+      link: QUESTIONNAIRES_INVENTORYPACKAGETYPES, 
+},
+// ---- generated sidebar item by questionnaireGenerator: inventoryPackageTypes ----
+];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
 

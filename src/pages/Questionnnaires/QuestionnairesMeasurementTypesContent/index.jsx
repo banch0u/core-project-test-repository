@@ -42,29 +42,29 @@ const QuestionnairesMeasurementTypesContent = () => {
   const [size, setSize] = useState(
     Cookies.get("pagination-size-questionnaired-measurement-types")
       ? JSON.parse(
-          Cookies.get("pagination-size-questionnaired-measurement-types")
+          Cookies.get("pagination-size-questionnaired-measurement-types"),
         )
-      : 20
+      : 20,
   );
   const [query, setQuery] = useState({ name: "" });
 
   const { loading, measurementtypesRender } = useSelector(
-    (state) => state.global
+    (state) => state.global,
   );
 
   const measurementtypes = useSelector(
-    (state) => state.questionnaire.measurementtypes
+    (state) => state.questionnaire.measurementtypes,
   );
   const paginationLength = setPaginationLength(
     measurementtypes?.count,
-    measurementtypes?.size
+    measurementtypes?.size,
   );
 
   const onSubmit = useCallback(
     async (data) => {
       dispatch(addMeasurementtypes(data));
     },
-    [dispatch]
+    [dispatch],
   );
   const onEdit = useCallback(
     (id, record) => {
@@ -74,7 +74,7 @@ const QuestionnairesMeasurementTypesContent = () => {
       };
       dispatch(editMeasurementtypes(data));
     },
-    [dispatch]
+    [dispatch],
   );
   const onStatusChange = useCallback(
     (data, checked) => {
@@ -84,7 +84,7 @@ const QuestionnairesMeasurementTypesContent = () => {
       };
       dispatch(measurementtypesVisibility(data_));
     },
-    [dispatch]
+    [dispatch],
   );
   const closeOnViewModal = useCallback(() => {
     dispatch(setViewModalVisible(false));
@@ -129,13 +129,13 @@ const QuestionnairesMeasurementTypesContent = () => {
         onDelete,
         onStatusChange,
 
-        dispatch
+        dispatch,
       ),
-    [onEditClick, onDelete, onStatusChange, dispatch]
+    [onEditClick, onDelete, onStatusChange, dispatch],
   );
 
   const [selectedColumns, setSelectedColumns] = useState(
-    columns.map((col) => col.dataIndex)
+    columns.map((col) => col.dataIndex),
   );
 
   useEffect(() => {
@@ -159,7 +159,7 @@ const QuestionnairesMeasurementTypesContent = () => {
       JSON.stringify(newSize),
       {
         expires: 7,
-      }
+      },
     ); // Save to cookies
   };
 
@@ -185,7 +185,7 @@ const QuestionnairesMeasurementTypesContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Ölçü vahidləri(Avtonəqliyyat)</h2>
+              <h2>Ölçü vahidləri</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}

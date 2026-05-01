@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Services from "./service";
-import { setApplicationFormsRender, setCountryRender, setDeleteModalVisible, setDeliveryMethodRender, setDocumentRecieveMethodsRender, setDocumentTypesRender, setDocumentWhomRender, setExecutionRulesRender, setLoading, setMarginNoteTextRender, setOrganizationRender, setStructureRender, setSubtopicsRender, setTopicsRender, setViewModalVisible, setBrandRender, setChassisTypeRender, setColorRender, setEnginetypeRender, setGearboxtypeRender, setIssuedauthoritieRender, setModelRender, setOwnershiptypeRender, setOrganisationrecordRender, setTransmittertypeRender, setVehicleRender, setVehicletypeRender, setVrcRender, setAcademicdegreesRender, setDisabilitystatusesRender, setHonorarytitlesRender, setMilitarystaffsRender, setMilitarycategoriesRender, setMilitaryranksRender, setMilitarygroupsRender, setGeneralstructurestatusesRender, setWorkschedulesRender, setSpecializationsRender, setWarparticipantsRender, setGeneralstructuretypesRender, setEducationinstitutionsRender, setEducationpaymentsRender, setEducationlevelsRender, setReprimandtypesRender, setSpecialdaysRender, setCategoriesRender, setRegionsRender, setAreasRender, setCompaniesRender, setPositionsRender, setHallsRender, setDrivingcategoriesRender, setEmployeeConfigurationsRender, setContracttypesRender, setContragenttypesRender, setOrdersRender, setContractcurrenciesRender, setWorkModesRender, setVehicleCategoriesRender, setChemicalsRender, setRepairtypesRender, setDetailpartsRender, setMeasurementtypesRender, setRepairmentWorkTypesRender, setPenaltyTypesRender, setCrushReasonsRender, insuranceTypesRender, setOilFieldsRender, setVehicleGroupsRender, setOwnersRender, setContractTopicsRender, setContractTypesSubtypesRender, setDefaultAgreementPlansRender, setRouteLocationsRender, setInternalStructureRender, setFieldRender, setWellRender, setBarrelRender, setBudgetComponentsRender, setDepartmentsRender, setPentionsRender, setProjectsRender, setCustomersRender, setInventoryBrandsRender, setInventoryCategoriesRender, setInventoryModelsRender } from "../global";
+import { setApplicationFormsRender, setCountryRender, setDeleteModalVisible, setDeliveryMethodRender, setDocumentRecieveMethodsRender, setDocumentTypesRender, setDocumentWhomRender, setExecutionRulesRender, setLoading, setMarginNoteTextRender, setOrganizationRender, setStructureRender, setSubtopicsRender, setTopicsRender, setViewModalVisible, setBrandRender, setChassisTypeRender, setColorRender, setEnginetypeRender, setGearboxtypeRender, setIssuedauthoritieRender, setModelRender, setOwnershiptypeRender, setOrganisationrecordRender, setTransmittertypeRender, setVehicleRender, setVehicletypeRender, setVrcRender, setAcademicdegreesRender, setDisabilitystatusesRender, setHonorarytitlesRender, setMilitarystaffsRender, setMilitarycategoriesRender, setMilitaryranksRender, setMilitarygroupsRender, setGeneralstructurestatusesRender, setWorkschedulesRender, setSpecializationsRender, setWarparticipantsRender, setGeneralstructuretypesRender, setEducationinstitutionsRender, setEducationpaymentsRender, setEducationlevelsRender, setReprimandtypesRender, setSpecialdaysRender, setCategoriesRender, setRegionsRender, setAreasRender, setCompaniesRender, setPositionsRender, setHallsRender, setDrivingcategoriesRender, setEmployeeConfigurationsRender, setContracttypesRender, setContragenttypesRender, setOrdersRender, setContractcurrenciesRender, setWorkModesRender, setVehicleCategoriesRender, setChemicalsRender, setRepairtypesRender, setDetailpartsRender, setMeasurementtypesRender, setRepairmentWorkTypesRender, setPenaltyTypesRender, setCrushReasonsRender, insuranceTypesRender, setOilFieldsRender, setVehicleGroupsRender, setOwnersRender, setContractTopicsRender, setContractTypesSubtypesRender, setDefaultAgreementPlansRender, setRouteLocationsRender, setInternalStructureRender, setFieldRender, setWellRender, setBarrelRender, setBudgetComponentsRender, setDepartmentsRender, setPentionsRender, setProjectsRender, setCustomersRender, setInventoryBrandsRender, setInventoryCategoriesRender, setInventoryModelsRender, setinventoryPackageTypesRender } from "../global";
 import { errorMessage } from "../../../utils/message";
 
 const initialState = {
@@ -8330,6 +8330,108 @@ export const inventoryModelsVisibility = createAsyncThunk(
 
 // ---- end generated ----
 
+
+export const getinventoryPackageTypes = createAsyncThunk(
+  "/getinventoryPackageTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getinventoryPackageTypes(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getinventoryPackageTypesAll = createAsyncThunk(
+  "/getinventoryPackageTypesAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getinventoryPackageTypesAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addinventoryPackageTypes = createAsyncThunk(
+  "/addinventoryPackageTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addinventoryPackageTypes(data);
+      dispatch(setLoading(false));
+      dispatch(setinventoryPackageTypesRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editinventoryPackageTypes = createAsyncThunk(
+  "/editinventoryPackageTypes",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editinventoryPackageTypes(data);
+      dispatch(setLoading(false));
+      dispatch(setinventoryPackageTypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteinventoryPackageTypes = createAsyncThunk(
+  "/deleteinventoryPackageTypes",
+  async (id, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteinventoryPackageTypes(id);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setinventoryPackageTypesRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const inventoryPackageTypesVisibility = createAsyncThunk(
+  "inventoryPackageTypesVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.inventoryPackageTypesVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setinventoryPackageTypesRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+// ---- end generated ----
+
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -8945,7 +9047,16 @@ export const questionnaire = createSlice({
       state.inventoryModelsAll = payload;
     });
     // ---- end generated reducers ----
-  },
+  
+    // ---- generated reducers for inventoryPackageTypes ----
+    builder.addCase(getinventoryPackageTypes.fulfilled, (state, { payload }) => {
+      state.inventoryPackageTypes = payload;
+    });
+    builder.addCase(getinventoryPackageTypesAll.fulfilled, (state, { payload }) => {
+      state.inventoryPackageTypesAll = payload;
+    });
+    // ---- end generated reducers ----
+    },
 });
 
 export const { setPage } = questionnaire.actions;

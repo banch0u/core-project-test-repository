@@ -1,3 +1,6 @@
+// ---- generated import by questionnaireGenerator: inventoryPackageTypes ----
+import QuestionnairesinventoryPackageTypesContent from "../pages/Questionnnaires/QuestionnairesinventoryPackageTypesContent";
+
 // ---- generated import by questionnaireGenerator: Pentions ----
 import QuestionnairesPentionsContent from "../pages/Questionnnaires/QuestionnairesPentionsContent";
 
@@ -41,25 +44,8 @@ import QuestionnairesInternalStructureContent from "../pages/Questionnnaires/Que
 import QuestionnairesOwnersContent from "../pages/Questionnnaires/QuestionnairesOwnersContent";
 
 import React from "react";
-import { Route } from "react-router-dom";
-import QuestionnairesLayout from "../layout/QuestionnairesLayout";
-import Questionnnaires from "../pages/Questionnnaires";
-import QuestionnairesTopicContent from "../pages/Questionnnaires/QuestionnairesTopicContent";
-import QuestionnairesSubtopicContent from "../pages/Questionnnaires/QuestionnairesSubtopicContent";
-import QuestionnairesExecutionRulesContent from "../pages/Questionnnaires/QuestionnairesExecutionRulesContent";
-import QuestionnairesDocumentRecieveMethodsContent from "../pages/Questionnnaires/QuestionnairesDocumentRecieveMethodsContent";
-import QuestionnairesDocumentTypeContent from "../pages/Questionnnaires/QuestionnairesDocumentTypeContent";
-import QuestionnairesCountriesContent from "../pages/Questionnnaires/QuestionnairesCountriesContent";
-import QuestionnairesOrganizationsContent from "../pages/Questionnnaires/QuestionnairesOrganizationsContent";
-import QuestionnairesStructuresContent from "../pages/Questionnnaires/QuestionnairesStructuresContent";
-import QuestionnairesApplicationFormContent from "../pages/Questionnnaires/QuestionnairesApplicationFormContent";
-import QuestionnairesDocumentWhomContent from "../pages/Questionnnaires/QuestionnairesDocumentWhomContent";
-import QuestionnairesMarginNoteTextsContent from "../pages/Questionnnaires/QuestionnairesMarginNoteTextsContent";
-import QuestionnairesBrandsContent from "../pages/Questionnnaires/QuestionnairesBrandsContent";
-import QuestionnairesChassisTypesContent from "../pages/Questionnnaires/QuestionnairesChassisTypesContent";
-import QuestionnairesColorsContent from "../pages/Questionnnaires/QuestionnairesColorsContent";
 import {
-  QUESTIONNAIRES_TOPIC,
+  Route } from "react-router-dom";import QuestionnairesLayout from "../layout/QuestionnairesLayout";import Questionnnaires from "../pages/Questionnnaires";import QuestionnairesTopicContent from "../pages/Questionnnaires/QuestionnairesTopicContent";import QuestionnairesSubtopicContent from "../pages/Questionnnaires/QuestionnairesSubtopicContent";import QuestionnairesExecutionRulesContent from "../pages/Questionnnaires/QuestionnairesExecutionRulesContent";import QuestionnairesDocumentRecieveMethodsContent from "../pages/Questionnnaires/QuestionnairesDocumentRecieveMethodsContent";import QuestionnairesDocumentTypeContent from "../pages/Questionnnaires/QuestionnairesDocumentTypeContent";import QuestionnairesCountriesContent from "../pages/Questionnnaires/QuestionnairesCountriesContent";import QuestionnairesOrganizationsContent from "../pages/Questionnnaires/QuestionnairesOrganizationsContent";import QuestionnairesStructuresContent from "../pages/Questionnnaires/QuestionnairesStructuresContent";import QuestionnairesApplicationFormContent from "../pages/Questionnnaires/QuestionnairesApplicationFormContent";import QuestionnairesDocumentWhomContent from "../pages/Questionnnaires/QuestionnairesDocumentWhomContent";import QuestionnairesMarginNoteTextsContent from "../pages/Questionnnaires/QuestionnairesMarginNoteTextsContent";import QuestionnairesBrandsContent from "../pages/Questionnnaires/QuestionnairesBrandsContent";import QuestionnairesChassisTypesContent from "../pages/Questionnnaires/QuestionnairesChassisTypesContent";import QuestionnairesColorsContent from "../pages/Questionnnaires/QuestionnairesColorsContent";import {  QUESTIONNAIRES_TOPIC,
   QUESTIONNAIRES_SUBTOPIC,
   QUESTIONNAIRES_EXECUTION_RULES,
   QUESTIONNAIRES_DOCUMENT_RECIEVE_METHODS,
@@ -140,6 +126,7 @@ import {
   QUESTIONNAIRES_INVENTORYBRANDS,
   QUESTIONNAIRES_INVENTORYCATEGORIES,
   QUESTIONNAIRES_INVENTORYMODELS,
+  QUESTIONNAIRES_INVENTORYPACKAGETYPES
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -552,7 +539,12 @@ export const questionnairesRoutes = (allowed) => {
           path={QUESTIONNAIRES_INVENTORYMODELS}
           element={<QuestionnairesInventoryModelsContent />}
         />
-      </Route>
+      
+        <Route 
+          path={QUESTIONNAIRES_INVENTORYPACKAGETYPES} 
+          element={<QuestionnairesinventoryPackageTypesContent />} 
+        />
+</Route>
     </>
   );
 };
