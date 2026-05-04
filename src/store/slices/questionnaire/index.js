@@ -8251,10 +8251,10 @@ export const getInventoryModels = createAsyncThunk(
 
 export const getInventoryModelsAll = createAsyncThunk(
   "/getInventoryModelsAll",
-  async (visibility, { dispatch }) => {
+  async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getInventoryModelsAll(visibility);
+      const response = await Services.getInventoryModelsAll(data.visibility, data?.brandId);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {
@@ -9047,7 +9047,7 @@ export const questionnaire = createSlice({
       state.inventoryModelsAll = payload;
     });
     // ---- end generated reducers ----
-  
+
     // ---- generated reducers for inventoryPackageTypes ----
     builder.addCase(getinventoryPackageTypes.fulfilled, (state, { payload }) => {
       state.inventoryPackageTypes = payload;
@@ -9056,7 +9056,7 @@ export const questionnaire = createSlice({
       state.inventoryPackageTypesAll = payload;
     });
     // ---- end generated reducers ----
-    },
+  },
 });
 
 export const { setPage } = questionnaire.actions;

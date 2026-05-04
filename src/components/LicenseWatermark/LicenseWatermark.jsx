@@ -22,7 +22,9 @@ const LicenseWatermark = ({ companyInfo, pathname }) => {
     if (path.startsWith("/accounts")) return "accounts-api";
     if (path.startsWith("/archive")) return "archive-api";
     if (path.startsWith("/transport")) return "transport-api";
-    if (path.startsWith("/laboratory")) return "laboratory-api";
+    if (path.startsWith("/lab")) return "laboratory-api";
+    if (path.startsWith("/procurement")) return "procurement-api";
+    if (path.startsWith("/licence")) return "licence-api";
 
     return null;
   }, [pathname]);
@@ -142,7 +144,6 @@ const LicenseWatermark = ({ companyInfo, pathname }) => {
   // render
   // ----------------------------
   if (licenseStatus.status === "valid") return null;
-
   return (
     <>
       {/* WATERMARK */}
