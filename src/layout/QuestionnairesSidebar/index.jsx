@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import style from "./index.module.scss";
+import { Layout, Menu, Input } from "antd";
 import {
-  Link,
-  useLocation } from "react-router-dom";import style from "./index.module.scss";import { Layout,
-  Menu,
-  Input } from "antd";import {  QUESTIONNAIRES_ACADEMIC_DEGREES,
+  QUESTIONNAIRES_ACADEMIC_DEGREES,
   QUESTIONNAIRES_APPLICATION_FORMS,
   QUESTIONNAIRES_AREAS,
   QUESTIONNAIRES_BRANDS,
@@ -84,7 +84,8 @@ import {
   QUESTIONNAIRES_INVENTORYBRANDS,
   QUESTIONNAIRES_INVENTORYCATEGORIES,
   QUESTIONNAIRES_INVENTORYMODELS,
-  QUESTIONNAIRES_INVENTORYPACKAGETYPES
+  QUESTIONNAIRES_INVENTORYPACKAGETYPES,
+  QUESTIONNAIRES_INVENTORYTECHNICALDETAILS,
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -534,14 +535,21 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_INVENTORYMODELS,
     },
     // ---- generated sidebar item by questionnaireGenerator: InventoryModels ----
-  
+
     {
-      key: "inventoryPackageTypes", //delete the "/" at the start of string 
-      label: "Paket tipləri (Mal-meteriallar)", 
-      link: QUESTIONNAIRES_INVENTORYPACKAGETYPES, 
-},
-// ---- generated sidebar item by questionnaireGenerator: inventoryPackageTypes ----
-];
+      key: "inventoryPackageTypes", //delete the "/" at the start of string
+      label: "Paket tipləri (Mal-meteriallar)",
+      link: QUESTIONNAIRES_INVENTORYPACKAGETYPES,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: inventoryPackageTypes ----
+
+    {
+      key: "inventoryTechnicalDetails", //delete the "/" at the start of string
+      label: "Xarakteristikalar",
+      link: QUESTIONNAIRES_INVENTORYTECHNICALDETAILS,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: InventoryTechnicalDetails ----
+  ];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
 

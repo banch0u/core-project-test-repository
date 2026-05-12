@@ -7,6 +7,7 @@ const initialState = {
   viewMoreModalVisible: false,
   deleteModalVisible: false,
   topicsRender: false,
+  InventoryTechnicalDetailsRender: false,
   inventoryPackageTypesRender: false,
   InventoryModelsRender: false,
   InventoryCategoriesRender: false,
@@ -96,6 +97,10 @@ export const global = createSlice({
   name: "global",
   initialState,
   reducers: {
+    setInventoryTechnicalDetailsRender: (state, { payload }) => {
+      state.InventoryTechnicalDetailsRender = payload;
+    },
+
     setinventoryPackageTypesRender: (state, { payload }) => {
       state.inventoryPackageTypesRender = payload;
     },
@@ -387,6 +392,7 @@ export const global = createSlice({
 export const {
   setLoading,
   setNotificationsRender,
+  setInventoryTechnicalDetailsRender,
   setinventoryPackageTypesRender,
   setInventoryModelsRender,
   setInventoryCategoriesRender,

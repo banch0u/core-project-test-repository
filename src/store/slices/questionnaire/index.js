@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Services from "./service";
-import { setApplicationFormsRender, setCountryRender, setDeleteModalVisible, setDeliveryMethodRender, setDocumentRecieveMethodsRender, setDocumentTypesRender, setDocumentWhomRender, setExecutionRulesRender, setLoading, setMarginNoteTextRender, setOrganizationRender, setStructureRender, setSubtopicsRender, setTopicsRender, setViewModalVisible, setBrandRender, setChassisTypeRender, setColorRender, setEnginetypeRender, setGearboxtypeRender, setIssuedauthoritieRender, setModelRender, setOwnershiptypeRender, setOrganisationrecordRender, setTransmittertypeRender, setVehicleRender, setVehicletypeRender, setVrcRender, setAcademicdegreesRender, setDisabilitystatusesRender, setHonorarytitlesRender, setMilitarystaffsRender, setMilitarycategoriesRender, setMilitaryranksRender, setMilitarygroupsRender, setGeneralstructurestatusesRender, setWorkschedulesRender, setSpecializationsRender, setWarparticipantsRender, setGeneralstructuretypesRender, setEducationinstitutionsRender, setEducationpaymentsRender, setEducationlevelsRender, setReprimandtypesRender, setSpecialdaysRender, setCategoriesRender, setRegionsRender, setAreasRender, setCompaniesRender, setPositionsRender, setHallsRender, setDrivingcategoriesRender, setEmployeeConfigurationsRender, setContracttypesRender, setContragenttypesRender, setOrdersRender, setContractcurrenciesRender, setWorkModesRender, setVehicleCategoriesRender, setChemicalsRender, setRepairtypesRender, setDetailpartsRender, setMeasurementtypesRender, setRepairmentWorkTypesRender, setPenaltyTypesRender, setCrushReasonsRender, insuranceTypesRender, setOilFieldsRender, setVehicleGroupsRender, setOwnersRender, setContractTopicsRender, setContractTypesSubtypesRender, setDefaultAgreementPlansRender, setRouteLocationsRender, setInternalStructureRender, setFieldRender, setWellRender, setBarrelRender, setBudgetComponentsRender, setDepartmentsRender, setPentionsRender, setProjectsRender, setCustomersRender, setInventoryBrandsRender, setInventoryCategoriesRender, setInventoryModelsRender, setinventoryPackageTypesRender } from "../global";
+import { setApplicationFormsRender, setCountryRender, setDeleteModalVisible, setDeliveryMethodRender, setDocumentRecieveMethodsRender, setDocumentTypesRender, setDocumentWhomRender, setExecutionRulesRender, setLoading, setMarginNoteTextRender, setOrganizationRender, setStructureRender, setSubtopicsRender, setTopicsRender, setViewModalVisible, setBrandRender, setChassisTypeRender, setColorRender, setEnginetypeRender, setGearboxtypeRender, setIssuedauthoritieRender, setModelRender, setOwnershiptypeRender, setOrganisationrecordRender, setTransmittertypeRender, setVehicleRender, setVehicletypeRender, setVrcRender, setAcademicdegreesRender, setDisabilitystatusesRender, setHonorarytitlesRender, setMilitarystaffsRender, setMilitarycategoriesRender, setMilitaryranksRender, setMilitarygroupsRender, setGeneralstructurestatusesRender, setWorkschedulesRender, setSpecializationsRender, setWarparticipantsRender, setGeneralstructuretypesRender, setEducationinstitutionsRender, setEducationpaymentsRender, setEducationlevelsRender, setReprimandtypesRender, setSpecialdaysRender, setCategoriesRender, setRegionsRender, setAreasRender, setCompaniesRender, setPositionsRender, setHallsRender, setDrivingcategoriesRender, setEmployeeConfigurationsRender, setContracttypesRender, setContragenttypesRender, setOrdersRender, setContractcurrenciesRender, setWorkModesRender, setVehicleCategoriesRender, setChemicalsRender, setRepairtypesRender, setDetailpartsRender, setMeasurementtypesRender, setRepairmentWorkTypesRender, setPenaltyTypesRender, setCrushReasonsRender, insuranceTypesRender, setOilFieldsRender, setVehicleGroupsRender, setOwnersRender, setContractTopicsRender, setContractTypesSubtypesRender, setDefaultAgreementPlansRender, setRouteLocationsRender, setInternalStructureRender, setFieldRender, setWellRender, setBarrelRender, setBudgetComponentsRender, setDepartmentsRender, setPentionsRender, setProjectsRender, setCustomersRender, setInventoryBrandsRender, setInventoryCategoriesRender, setInventoryModelsRender, setinventoryPackageTypesRender, setInventoryTechnicalDetailsRender } from "../global";
 import { errorMessage } from "../../../utils/message";
 
 const initialState = {
@@ -8432,6 +8432,109 @@ export const inventoryPackageTypesVisibility = createAsyncThunk(
 
 // ---- end generated ----
 
+
+export const getInventoryTechnicalDetails = createAsyncThunk(
+  "/getInventoryTechnicalDetails",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getInventoryTechnicalDetails(
+        data.size,
+        data.page,
+        data.query,
+        data.visibility,
+        data?.inventoryCategoryId,
+      );
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const getInventoryTechnicalDetailsAll = createAsyncThunk(
+  "/getInventoryTechnicalDetailsAll",
+  async (visibility, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.getInventoryTechnicalDetailsAll(visibility);
+      dispatch(setLoading(false));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const addInventoryTechnicalDetails = createAsyncThunk(
+  "/addInventoryTechnicalDetails",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.addInventoryTechnicalDetails(data);
+      dispatch(setLoading(false));
+      dispatch(setInventoryTechnicalDetailsRender((prev) => !prev));
+      dispatch(setViewModalVisible(true));
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const editInventoryTechnicalDetails = createAsyncThunk(
+  "/editInventoryTechnicalDetails",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.editInventoryTechnicalDetails(data);
+      dispatch(setLoading(false));
+      dispatch(setInventoryTechnicalDetailsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const deleteInventoryTechnicalDetails = createAsyncThunk(
+  "/deleteInventoryTechnicalDetails",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      await Services.deleteInventoryTechnicalDetails(data.id, data.category);
+      dispatch(setLoading(false));
+      dispatch(setDeleteModalVisible(false));
+      dispatch(setInventoryTechnicalDetailsRender((prev) => !prev));
+    } catch (error) {
+      dispatch(setDeleteModalVisible(false));
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+export const inventoryTechnicalDetailsVisibility = createAsyncThunk(
+  "inventoryTechnicalDetailsVisibility",
+  async (data, { dispatch }) => {
+    try {
+      dispatch(setLoading(true));
+      const response = await Services.inventoryTechnicalDetailsVisibility(data);
+      dispatch(setLoading(false));
+      dispatch(setInventoryTechnicalDetailsRender((prev) => !prev));
+      return response?.data;
+    } catch (error) {
+      errorMessage(error.response?.data?.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+
+// ---- end generated ----
+
 export const questionnaire = createSlice({
   name: "questionnaire",
   initialState,
@@ -9054,6 +9157,15 @@ export const questionnaire = createSlice({
     });
     builder.addCase(getinventoryPackageTypesAll.fulfilled, (state, { payload }) => {
       state.inventoryPackageTypesAll = payload;
+    });
+    // ---- end generated reducers ----
+
+    // ---- generated reducers for InventoryTechnicalDetails ----
+    builder.addCase(getInventoryTechnicalDetails.fulfilled, (state, { payload }) => {
+      state.inventoryTechnicalDetails = payload;
+    });
+    builder.addCase(getInventoryTechnicalDetailsAll.fulfilled, (state, { payload }) => {
+      state.inventoryTechnicalDetailsAll = payload;
     });
     // ---- end generated reducers ----
   },
