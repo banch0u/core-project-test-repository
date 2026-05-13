@@ -8456,10 +8456,10 @@ export const getInventoryTechnicalDetails = createAsyncThunk(
 
 export const getInventoryTechnicalDetailsAll = createAsyncThunk(
   "/getInventoryTechnicalDetailsAll",
-  async (visibility, { dispatch }) => {
+  async (data, { dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await Services.getInventoryTechnicalDetailsAll(visibility);
+      const response = await Services.getInventoryTechnicalDetailsAll(data?.visibility, data?.inventoryCategoryId,);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {

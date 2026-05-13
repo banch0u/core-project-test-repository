@@ -2184,8 +2184,8 @@ class Services {
     const response = await api.get(`/inventoryTechnicalDetails/${size}/page/${page}?visibility=${visibility}&name=${query?.name}&inventoryCategoryId=${inventoryCategoryId}`);
     return response?.data;
   };
-  static getInventoryTechnicalDetailsAll = async (visibility) => {
-    const response = await api.get(`/inventoryTechnicalDetails?visibility=${visibility}`);
+  static getInventoryTechnicalDetailsAll = async (visibility, inventoryCategoryId) => {
+    const response = await api.get(`/inventoryTechnicalDetails?visibility=${visibility}&inventoryCategoryId=${inventoryCategoryId}`);
     return response?.data;
   };
   static addInventoryTechnicalDetails = async (value) => {
