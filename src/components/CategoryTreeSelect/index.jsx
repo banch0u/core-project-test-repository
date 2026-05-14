@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { TreeSelect } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getInventoryCategoriesAll } from "../../store/slices/questionnaire";
+import style from "./index.module.scss";
 
 const mapCategoriesToTree = (nodes = []) =>
   nodes.map((node) => ({
@@ -33,6 +34,7 @@ const CategoryTreeSelect = ({ value, onChange, ...rest }) => {
       treeNodeFilterProp="title"
       placeholder=""
       style={{ width: "100%", height: 42 }}
+      className={style.treeSelect}
       {...rest}
     />
   );

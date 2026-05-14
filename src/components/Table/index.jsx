@@ -14,6 +14,7 @@ const Table = ({
   big = false,
   isArchive = false,
   expanded,
+  ...rest
 }) => {
   const getSavedOrder = (id) => {
     const savedOrder = Cookies.get(`columnOrder_${id}`);
@@ -25,7 +26,7 @@ const Table = ({
     const unorderedCols = cols.filter((col) => !order.includes(col.dataIndex));
     return [
       ...orderedCols.sort(
-        (a, b) => order.indexOf(a.dataIndex) - order.indexOf(b.dataIndex)
+        (a, b) => order.indexOf(a.dataIndex) - order.indexOf(b.dataIndex),
       ),
       ...unorderedCols,
     ];
@@ -35,7 +36,7 @@ const Table = ({
   const savedOrder = disableDrag ? null : getSavedOrder(tableId);
   const initialOrderedColumns = sortColumns(
     columns.filter((col) => !col.fixed),
-    savedOrder
+    savedOrder,
   );
 
   const [orderedColumns, setOrderedColumns] = useState(initialOrderedColumns);
@@ -46,8 +47,8 @@ const Table = ({
       setOrderedColumns(
         sortColumns(
           columns.filter((col) => !col.fixed),
-          savedOrder
-        )
+          savedOrder,
+        ),
       );
     } else {
       setOrderedColumns(columns.filter((col) => !col.fixed));
@@ -66,7 +67,7 @@ const Table = ({
       Cookies.set(
         `columnOrder_${tableId}`,
         reorderedColumns.map((col) => col.dataIndex).join(","),
-        { expires: 7 }
+        { expires: 7 },
       );
     }
   };
@@ -85,14 +86,14 @@ const Table = ({
 
   const filteredColumns = (cols) =>
     cols.filter(
-      (col) => !selectedColumns || selectedColumns.includes(col.dataIndex)
+      (col) => !selectedColumns || selectedColumns.includes(col.dataIndex),
     );
 
   const fixedLeftColumns = filteredColumns(
-    columns.filter((col) => col.fixed === "left")
+    columns.filter((col) => col.fixed === "left"),
   );
   const fixedRightColumns = filteredColumns(
-    columns.filter((col) => col.fixed === "right")
+    columns.filter((col) => col.fixed === "right"),
   );
   const draggableColumns = filteredColumns(orderedColumns);
 
@@ -228,8 +229,8 @@ const Table = ({
                     ? "180px"
                     : "260px"
                   : big === true
-                  ? "200px"
-                  : "280px"
+                    ? "200px"
+                    : "280px"
               })`
             : `calc(88vh - ${
                 window.innerWidth > 1537
@@ -237,10 +238,11 @@ const Table = ({
                     ? "349px"
                     : "280px"
                   : expanded
-                  ? "368px"
-                  : "300px"
+                    ? "368px"
+                    : "300px"
               })`,
         }}
+        {...rest}
       />
     </div>
   );
