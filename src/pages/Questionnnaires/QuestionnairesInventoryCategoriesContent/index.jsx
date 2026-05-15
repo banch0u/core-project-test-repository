@@ -50,12 +50,11 @@ const QuestionnairesInventoryCategoriesContent = () => {
     (state) => state.questionnaire.inventoryCategories,
   );
 
-  // ✅ BUILD TREE WITH LEVEL
   const buildTree = (list) => {
     const map = {};
     const roots = [];
 
-    list.forEach((item, index) => {
+    list.forEach((item) => {
       map[item.id] = {
         key: item.id,
         id: item.id,
@@ -63,7 +62,6 @@ const QuestionnairesInventoryCategoriesContent = () => {
         code: item.code,
         parentId: item.parentId,
         isActive: item.isActive,
-        // num: index + 1,
         children: [],
         level: 0,
         className: "rowClassName1",
@@ -82,9 +80,18 @@ const QuestionnairesInventoryCategoriesContent = () => {
       }
     });
 
-    return roots;
-  };
+    // ✅ Remove empty children so Ant Design hides the +/- icon on leaf nodes
+    const stripEmptyChildren = (nodes) =>
+      nodes.map((node) => {
+        if (node.children.length === 0) {
+          const { children, ...rest } = node;
+          return rest;
+        }
+        return { ...node, children: stripEmptyChildren(node.children) };
+      });
 
+    return stripEmptyChildren(roots);
+  };
   const treeData = useMemo(() => {
     return buildTree(InventoryCategories?.items || []);
   }, [InventoryCategories]);

@@ -7,6 +7,7 @@ import {
   TransportIcon,
   LabIcon,
   UserIcon,
+  ProcurementIcon,
 } from "../../assets/icons";
 import { useLang } from "../../hooks/useLang";
 import text from "../../translations/index.json";
@@ -74,6 +75,13 @@ export function useEntryData() {
         pathname: `${rootUrl}/lab/flasks`,
         icon: <LabIcon />,
         scopes: "lab",
+      },
+      {
+        id: 8,
+        value: text?.[lang]?.pages?.platform?.projects?.procurement ?? "Satınalma",
+        pathname: `${rootUrl}/procurement/budgets`,
+        icon: <ProcurementIcon />,
+        scopes: "procurement",
       },
     ],
     [lang, rootUrl]

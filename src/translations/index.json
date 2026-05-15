@@ -37,6 +37,7 @@
           "archive": "Arxiv",
           "transport": "Nəqliyyat",
           "lab": "Laboratoriya",
+          "procurement": "Satınalma",
           "settings": "Tənzimləmələr"
         }
       },
@@ -159,6 +160,7 @@
           "archive": "Archive",
           "transport": "Transport",
           "lab": "Laboratory",
+          "procurement": "Procurement",
           "settings": "Settings"
         }
       },
@@ -279,6 +281,7 @@
           "archive": "Архив",
           "transport": "Автотранспорт",
           "lab": "Лаборатория",
+          "procurement": "Закупки",
           "settings": "Настройки"
         }
       },
