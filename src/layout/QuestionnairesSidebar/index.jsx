@@ -86,6 +86,7 @@ import {
   QUESTIONNAIRES_INVENTORYMODELS,
   QUESTIONNAIRES_INVENTORYPACKAGETYPES,
   QUESTIONNAIRES_INVENTORYTECHNICALDETAILS,
+  QUESTIONNAIRES_VENDORCATEGORIES,
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -549,6 +550,13 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_INVENTORYTECHNICALDETAILS,
     },
     // ---- generated sidebar item by questionnaireGenerator: InventoryTechnicalDetails ----
+
+    {
+      key: "vendorCategories", //delete the "/" at the start of string
+      label: "Kateqoriyalar (Vendor)",
+      link: QUESTIONNAIRES_VENDORCATEGORIES,
+    },
+    // ---- generated sidebar item by questionnaireGenerator: VendorCategories ----
   ];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
