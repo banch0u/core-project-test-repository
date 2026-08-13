@@ -5,6 +5,7 @@ import { notification } from "./slices/notification";
 import { companyInfo } from "./slices/companyInfo";
 import { questionnaire } from "./slices/questionnaire";
 import { employees } from "./slices/employees";
+import policy from "./slices/policy";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     [auth.name]: auth.reducer,
     [companyInfo.name]: companyInfo.reducer,
     [questionnaire.name]: questionnaire.reducer,
+    policy,
   },
 });
 
