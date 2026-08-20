@@ -1,4 +1,3 @@
-// store/slices/policies.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Services from "./service";
 import { setLoading } from "../global";
@@ -19,41 +18,25 @@ export const checkPolicies = createAsyncThunk(
     try {
       dispatch(setLoading(true));
 
-      // If Services provides a bulk check endpoint you can use it here instead.
-      // Otherwise we call Services.checkPolicy for each policy.
-      const results = {};
+      const response = await Services.checkPolicies(policies);
 
-      // run requests in parallel (faster) but you can change to sequential if
-      // backend requires rate limiting / ordering
-      const promises = policies.map(async (policyName) => {
-        try {
-          const res = await Services.checkPolicy(policyName);
-          // adapt to response shape: if service returns { allowed: true } or boolean
-          // We'll attempt both:
-          if (res && typeof res === "object") {
-            // try common shapes:
-            if ("allowed" in res) return [policyName, !!res.allowed];
-            if ("data" in res && typeof res.data === "object") {
-              // case: { data: true }
-              if (typeof res.data === "boolean") return [policyName, res.data];
-            }
-            // fallback: if object has truthy status field
-            if ("status" in res) return [policyName, res.status === 200 || !!res.status];
-            // if payload directly boolean-ish
-            return [policyName, !!res];
-          }
-          // primitive boolean response
-          return [policyName, !!res];
-        } catch (err) {
-          // treat failures as false, but you may want to rethrow or store error
-          console.error("checkPolicy error for", policyName, err);
-          return [policyName, false];
+      // normalize into the same { [policyName]: boolean } shape the old
+      // per-policy implementation produced
+      const results = {};
+      const items = Array.isArray(response?.data) ? response.data : [];
+
+      items.forEach((item) => {
+        if (item && typeof item.name === "string") {
+          results[item.name] = !!item.hasAccess;
         }
       });
 
-      const settled = await Promise.all(promises);
-      settled.forEach(([name, allowed]) => {
-        results[name] = allowed;
+      // make sure every requested policy is present in the map even if the
+      // backend omitted it, so consumers can rely on the key existing
+      policies.forEach((name) => {
+        if (!(name in results)) {
+          results[name] = false;
+        }
       });
 
       dispatch(setLoading(false));

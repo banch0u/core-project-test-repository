@@ -20,6 +20,15 @@ class Services {
       throw error;
     }
   };
+
+  static checkPolicies = async (policies) => {
+    const response = await api.post(`/profile/policiescheck`, {
+      policies: policies,
+    });
+
+    // expected shape: { data: [{ name, hasAccess }], statusCode, isSuccess }
+    return response?.data;
+  };
 }
 
 export default Services;

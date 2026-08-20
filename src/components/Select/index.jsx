@@ -3,6 +3,7 @@ import style from "./index.module.scss";
 import { Select as AntdSelect, Divider } from "antd";
 import { FormItemInputContext } from "antd/es/form/context";
 import Button from "../Button";
+import DisabledContext from "antd/es/config-provider/DisabledContext";
 
 const Select = ({
   children,
@@ -21,7 +22,10 @@ const Select = ({
   ...rest
 }) => {
   const formItemContext = useContext(FormItemInputContext);
-  const mergedDisabled = customDisabled ?? formItemContext?.disabled ?? false;
+  const configDisabled = useContext(DisabledContext);
+  const mergedDisabled = Boolean(
+    customDisabled || formItemContext?.disabled || configDisabled,
+  );
 
   const getClassName = () => {
     if (className) return className;
