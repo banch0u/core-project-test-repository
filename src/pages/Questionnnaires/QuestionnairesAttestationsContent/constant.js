@@ -19,7 +19,7 @@ export const getStreetColumns = (
       width: 35,
     },
     {
-      title: "Ad",
+      title: "Sertifikat növləri",
       dataIndex: "name",
       width: innerW,
       disabled: true,
@@ -27,13 +27,13 @@ export const getStreetColumns = (
     },
     {
       title: "Tam adı",
-      dataIndex: "fullname",
+      dataIndex: "fullName",
       width: innerW,
       ellipsis: true,
     },
     {
-      title: "Rejim dəyəri (Saat)",
-      dataIndex: "modeValue",
+      title: "Attestasiya növü",
+      dataIndex: "attestationTypeText",
       width: innerW,
       ellipsis: true,
     },

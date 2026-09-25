@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import style from "./index.module.scss";
-import { Layout, Menu, Input } from "antd";
 import {
-  QUESTIONNAIRES_ACADEMIC_DEGREES,
+  Link,
+  useLocation } from "react-router-dom";import style from "./index.module.scss";import { Layout,
+  Menu,
+  Input } from "antd";import {  QUESTIONNAIRES_ACADEMIC_DEGREES,
   QUESTIONNAIRES_APPLICATION_FORMS,
   QUESTIONNAIRES_AREAS,
   QUESTIONNAIRES_BRANDS,
@@ -87,6 +87,7 @@ import {
   QUESTIONNAIRES_INVENTORYPACKAGETYPES,
   QUESTIONNAIRES_INVENTORYTECHNICALDETAILS,
   QUESTIONNAIRES_VENDORCATEGORIES,
+  QUESTIONNAIRES_ATTESTATIONS
 } from "../../utils/path";
 
 import { SearchIcon } from "../../assets/icons";
@@ -557,7 +558,14 @@ const QuestionnairesSidebar = ({ selectedKey, allowed = [] }) => {
       link: QUESTIONNAIRES_VENDORCATEGORIES,
     },
     // ---- generated sidebar item by questionnaireGenerator: VendorCategories ----
-  ];
+  
+    {
+      key: "attestations", //delete the "/" at the start of string 
+      label: "Sertifikat növləri", 
+      link: QUESTIONNAIRES_ATTESTATIONS, 
+},
+// ---- generated sidebar item by questionnaireGenerator: Attestations ----
+];
 
   const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
 

@@ -7,6 +7,9 @@ import QuestionnairesInventoryTechnicalDetailsContent from "../pages/Questionnna
 // ---- generated import by questionnaireGenerator: VendorCategories ----
 import QuestionnairesVendorCategoriesContent from "../pages/Questionnnaires/QuestionnairesVendorCategoriesContent";
 
+// ---- generated import by questionnaireGenerator: Attestations ----
+import QuestionnairesAttestationsContent from "../pages/Questionnnaires/QuestionnairesAttestationsContent";
+
 // ---- generated import by questionnaireGenerator: Pentions ----
 import QuestionnairesPentionsContent from "../pages/Questionnnaires/QuestionnairesPentionsContent";
 
@@ -134,7 +137,8 @@ import {
   QUESTIONNAIRES_INVENTORYMODELS,
   QUESTIONNAIRES_INVENTORYPACKAGETYPES,
   QUESTIONNAIRES_INVENTORYTECHNICALDETAILS,
-  QUESTIONNAIRES_VENDORCATEGORIES
+  QUESTIONNAIRES_VENDORCATEGORIES,
+  QUESTIONNAIRES_ATTESTATIONS
 } from "../utils/path";
 import QuestionnairesEngineTypesContent from "../pages/Questionnnaires/QuestionnairesEngineTypesContent";
 import QuestionnairesGearboxTypesContent from "../pages/Questionnnaires/QuestionnairesGearboxTypesContent";
@@ -561,6 +565,11 @@ export const questionnairesRoutes = (allowed) => {
         <Route 
           path={QUESTIONNAIRES_VENDORCATEGORIES} 
           element={<QuestionnairesVendorCategoriesContent />} 
+        />
+
+        <Route 
+          path={QUESTIONNAIRES_ATTESTATIONS} 
+          element={<QuestionnairesAttestationsContent />} 
         />
 </Route>
     </>

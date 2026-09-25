@@ -2,7 +2,7 @@ import React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Cookies from "js-cookie";
 import style from "../Questionnaires.module.scss";
-import { Form, Layout } from "antd";
+import { Form, Input, Layout, Select as AntdSelect } from "antd";
 import { PlusIcon } from "../../../assets/icons";
 import FormModal from "../../../components/FormModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,53 +24,57 @@ import Loading from "../../../components/Loading";
 import Table from "../../../components/Table";
 import Filter from "../../../components/Filter";
 import {
-  addWorkModes,
-  deleteWorkModes,
-  editWorkModes,
-  getWorkModes,
-  workModesVisibility,
+  addAttestations,
+  deleteAttestations,
+  editAttestations,
+  getAttestations,
+  attestationsVisibility,
 } from "../../../store/slices/questionnaire";
-import Input from "../../../components/Input";
+import Select from "../../../components/Select";
+import { AttestationType } from "../../../helpers/enums";
 
 const { Content } = Layout;
 const { Item } = Form;
-const QuestionnairesWorkModesContent = () => {
+const { Option } = AntdSelect;
+const QuestionnairesAttestationsContent = () => {
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
   const dispatch = useDispatch();
   const [id, setId] = useState(0);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(
-    Cookies.get("pagination-size-questionnaire-work-modes")
-      ? JSON.parse(Cookies.get("pagination-size-questionnaire-work-modes"))
-      : 20,
+    Cookies.get("pagination-size-questionnaire-attestations")
+      ? JSON.parse(Cookies.get("pagination-size-questionnaire-attestations"))
+      : 20
   );
   const [query, setQuery] = useState({ name: "" });
-  const { loading, workModesRender } = useSelector((state) => state.global);
+  const { loading, AttestationsRender } = useSelector((state) => state.global);
 
-  const workModes = useSelector((state) => state.questionnaire.workModes);
+  const Attestations = useSelector(
+    (state) => state.questionnaire.attestations
+  );
   const paginationLength = setPaginationLength(
-    workModes?.count,
-    workModes?.size,
+    Attestations?.count,
+    Attestations?.size
   );
 
   const onSubmit = useCallback(
     async (data) => {
-      dispatch(addWorkModes(data));
+      dispatch(addAttestations(data));
     },
-    [dispatch],
+    [dispatch]
   );
   const onEdit = useCallback(
     (id, record) => {
       const data = {
         id: id,
         name: record?.name,
-        fullname: record?.fullname,
-        modeValue: record?.modeValue,
+        fullName: record?.fullName,
+        attestationType: record?.attestationType,
       };
-      dispatch(editWorkModes(data));
+      dispatch(editAttestations(data));
     },
-    [dispatch],
+    [dispatch]
   );
   const onStatusChange = useCallback(
     (data, checked) => {
@@ -78,9 +82,9 @@ const QuestionnairesWorkModesContent = () => {
         id: data?.id,
         checked: checked,
       };
-      dispatch(workModesVisibility(data_));
+      dispatch(attestationsVisibility(data_));
     },
-    [dispatch],
+    [dispatch]
   );
   const closeOnViewModal = useCallback(() => {
     dispatch(setViewModalVisible(false));
@@ -104,24 +108,33 @@ const QuestionnairesWorkModesContent = () => {
     });
   };
 
+  const idFinder = (id) => {
+    return AttestationType.find((item) => item.id === id)?.text;
+  };
+
   let data = [];
-  if (workModes?.items) {
-    data = workModes?.items?.map((dataObj, i) => ({
-      num: workModes?.size * workModes?.page + i + 1 - workModes?.size,
+  if (Attestations?.items) {
+    data = Attestations?.items?.map((dataObj, i) => ({
+      num:
+        Attestations?.size * Attestations?.page + i + 1 - Attestations?.size,
       id: dataObj?.id,
       name: dataObj?.name,
-      fullname: dataObj?.fullname,
-      modeValue: dataObj?.modeValue,
+      fullName: dataObj?.fullName,
+      attestationType:
+        dataObj?.attestationType?.id ?? dataObj?.attestationType,
+      attestationTypeText: idFinder(
+        dataObj?.attestationType?.id ?? dataObj?.attestationType
+      ),
       isActive: dataObj?.isActive,
       className: "rowClassName1",
     }));
   }
   const columns = useMemo(
     () => getStreetColumns(onEditClick, onDelete, onStatusChange, dispatch),
-    [onEditClick, onDelete, onStatusChange, dispatch],
+    [onEditClick, onDelete, onStatusChange, dispatch]
   );
   const [selectedColumns, setSelectedColumns] = useState(
-    columns.map((col) => col.dataIndex),
+    columns.map((col) => col.dataIndex)
   );
   useEffect(() => {
     if (window.innerWidth >= 1900) {
@@ -135,17 +148,17 @@ const QuestionnairesWorkModesContent = () => {
       query: query,
       visibility: "nondeleted",
     };
-    dispatch(getWorkModes(data));
-  }, [dispatch, page, workModesRender, query, size]);
+    dispatch(getAttestations(data));
+  }, [dispatch, page, AttestationsRender, query, size]);
   const updateSize = (newSize) => {
-    setSize(newSize); // Update state
+    setSize(newSize);
     Cookies.set(
-      "pagination-size-questionnaire-work-modes",
+      "pagination-size-questionnaire-attestations",
       JSON.stringify(newSize),
       {
         expires: 7,
-      },
-    ); // Save to cookies
+      }
+    );
   };
 
   return (
@@ -169,7 +182,7 @@ const QuestionnairesWorkModesContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>İş rejimi</h2>
+              <h2>Sertifikat növləri</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}
@@ -208,32 +221,39 @@ const QuestionnairesWorkModesContent = () => {
               className={"absolute"}
               centered={false}>
               <Item
-                rules={[{ required: true, message: "" }]}
+                rules={[
+                  { required: true, message: "" },
+                  { min: 3, message: "Ən azından 3 simvol olmalıdır" },
+                ]}
                 name={"name"}
                 label={"Ad"}>
-                <Input />
+                <Input className={style.modal_input} />
               </Item>
               <Item
                 rules={[{ required: true, message: "" }]}
-                name={"fullname"}
+                name={"fullName"}
                 label={"Tam adı"}>
-                <Input />
+                <Input className={style.modal_input} />
               </Item>
               <Item
+                className={style.label}
                 rules={[{ required: true, message: "" }]}
-                name={"modeValue"}
-                label={"Rejim dəyəri (Saat)"}>
-                <Input
-                  type="number"
-                  // className={style.modal_input}
-                />
+                name={"attestationType"}
+                label={"Attestasiya növü"}>
+                <Select>
+                  {AttestationType.map((item) => (
+                    <Option key={item.id} value={item.id}>
+                      {item.text}
+                    </Option>
+                  ))}
+                </Select>
               </Item>
             </FormModal>
             <DeleteModal
               onCancel={() => dispatch(setDeleteModalVisible(false))}
               width={280}>
               <Delete
-                onDelete={() => dispatch(deleteWorkModes(id))}
+                onDelete={() => dispatch(deleteAttestations(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
                 value={"Soraqçanı"}
               />
@@ -248,4 +268,4 @@ const QuestionnairesWorkModesContent = () => {
   );
 };
 
-export default QuestionnairesWorkModesContent;
+export default QuestionnairesAttestationsContent;
