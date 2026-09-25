@@ -28,9 +28,9 @@
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
     "@microsoft/signalr": "^8.0.7",
-    "@pdftron/webviewer": "^11.2.0",
+    "@pdftron/webviewer": "^10.10.1",
     "@reduxjs/toolkit": "^2.6.1",
-    "antd": "^5.16.0",
+    "antd": "^5.20.3",
     "antd-5-mask-input": "^1.1.0",
     "axios": "^1.8.4",
     "dayjs": "^1.11.13",
@@ -42,7 +42,7 @@
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0",
-    "react-router-dom": "^6.0.0"
+    "react-router-dom": "^6.26.1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
