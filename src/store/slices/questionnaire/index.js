@@ -8660,10 +8660,14 @@ export const getAttestations = createAsyncThunk(
 
 export const getAttestationsAll = createAsyncThunk(
   "/getAttestationsAll",
-  async (visibility, { dispatch }) => {
+  // Accepts a visibility string, or { visibility, attestationTypes } where
+  // attestationTypes is an AttestationType id (1 = İşçi, 2 = Nəqliyyat vasitəsi)
+  async (data, { dispatch }) => {
+    const { visibility, attestationTypes } =
+      typeof data === "object" && data !== null ? data : { visibility: data };
     try {
       dispatch(setLoading(true));
-      const response = await Services.getAttestationsAll(visibility);
+      const response = await Services.getAttestationsAll(visibility, attestationTypes);
       dispatch(setLoading(false));
       return response?.data;
     } catch (error) {

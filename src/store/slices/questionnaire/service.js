@@ -2242,8 +2242,8 @@ class Services {
     const response = await api.get(`/attestations/${size}/page/${page}?visibility=${visibility}&name=${query?.name}`);
     return response?.data;
   };
-  static getAttestationsAll = async (visibility) => {
-    const response = await api.get(`/attestations?visibility=${visibility}`);
+  static getAttestationsAll = async (visibility, attestationTypes) => {
+    const response = await api.get(`/attestations?visibility=${visibility}${attestationTypes ? `&attestationTypes=${attestationTypes}` : ""}`);
     return response?.data;
   };
   static addAttestations = async (value) => {
