@@ -147,7 +147,8 @@
           "serviceLetter": "Xidməti məktub",
           "outgoingDocument": "Xaric olan sənəd",
           "questionnaire": "Soraqça",
-          "role": "Rolu"
+          "role": "Rolu",
+          "roleGroup": "Rol qrupunu"
         },
         "buttons": {
           "createDocument": "Sənəd yarat",
@@ -180,7 +181,8 @@
           "sign": "İmzala",
           "backToMain": "Əsas səhifəyə geri qayıt",
           "keepAsJointExecutor": "Müştərək icraçı kimi saxla",
-          "citizen": "Vətəndaş"
+          "citizen": "Vətəndaş",
+          "delete": "Sil"
         },
         "fields": {
           "no": "No",
@@ -369,7 +371,10 @@
           "registrationCard": "Qeydiyyat vərəqəsi",
           "deleteConfirm": "{value} silmək istədiyinizdən əminsizinmi?",
           "deleteQuestionnaire": "Soraqçanı sil",
-          "successAdded": "{value} uğurla əlavə edildi"
+          "successAdded": "{value} uğurla əlavə edildi",
+          "roleAdded": "Rol uğurla əlavə edildi",
+          "roleGroupAdded": "Rol qrupu uğurla əlavə edildi",
+          "permissionAdded": "İcazə uğurla əlavə edildi"
         },
         "validation": {
           "required": "Məcburi xanadır",
@@ -741,7 +746,8 @@
           "serviceLetter": "Service letter",
           "outgoingDocument": "Outgoing document",
           "questionnaire": "Reference book",
-          "role": "Role"
+          "role": "Role",
+          "roleGroup": "Role group"
         },
         "buttons": {
           "createDocument": "Create document",
@@ -774,7 +780,8 @@
           "sign": "Sign",
           "backToMain": "Back to main page",
           "keepAsJointExecutor": "Keep as joint executor",
-          "citizen": "Citizen"
+          "citizen": "Citizen",
+          "delete": "Delete"
         },
         "fields": {
           "no": "No",
@@ -963,7 +970,10 @@
           "registrationCard": "Registration card",
           "deleteConfirm": "Are you sure you want to delete {value}?",
           "deleteQuestionnaire": "Delete reference book",
-          "successAdded": "{value} added successfully"
+          "successAdded": "{value} added successfully",
+          "roleAdded": "Role added successfully",
+          "roleGroupAdded": "Role group added successfully",
+          "permissionAdded": "Permission added successfully"
         },
         "validation": {
           "required": "This field is required",
@@ -1335,7 +1345,8 @@
           "serviceLetter": "Служебное письмо",
           "outgoingDocument": "Исходящий документ",
           "questionnaire": "Справочник",
-          "role": "Роль"
+          "role": "Роль",
+          "roleGroup": "Группу ролей"
         },
         "buttons": {
           "createDocument": "Создать документ",
@@ -1368,7 +1379,8 @@
           "sign": "Подписать",
           "backToMain": "Вернуться на главную",
           "keepAsJointExecutor": "Оставить соисполнителем",
-          "citizen": "Гражданин"
+          "citizen": "Гражданин",
+          "delete": "Удалить"
         },
         "fields": {
           "no": "№",
@@ -1557,7 +1569,10 @@
           "registrationCard": "Регистрационная карточка",
           "deleteConfirm": "Вы уверены, что хотите удалить {value}?",
           "deleteQuestionnaire": "Удалить справочник",
-          "successAdded": "{value} успешно добавлен(а)"
+          "successAdded": "{value} успешно добавлен(а)",
+          "roleAdded": "Роль успешно добавлена",
+          "roleGroupAdded": "Группа ролей успешно добавлена",
+          "permissionAdded": "Разрешение успешно добавлено"
         },
         "validation": {
           "required": "Обязательное поле",
