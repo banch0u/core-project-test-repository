@@ -9,7 +9,8 @@ module.exports = {
   parserOptions: {
     requireConfigFile: false, // allow JSX parsing without separate babel config
     babelOptions: {
-      presets: ["@babel/preset-react"],
+      // absolute path so it resolves even when ESLint runs from a parent folder (e.g. VS Code workspace root)
+      presets: [require.resolve("@babel/preset-react")],
     },
     ecmaVersion: 'latest',
     sourceType: 'module',

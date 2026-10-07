@@ -12,6 +12,8 @@ import { FilterIcon } from "../../assets/icons";
 import Select from "../Select";
 import Input from "../Input";
 import Button from "../Button";
+import text from "../../translations/index.json";
+import { useLang } from "../../hooks/useLang";
 
 const { Option } = AntdSelect;
 const { RangePicker } = DatePicker;
@@ -24,6 +26,8 @@ const Filter = ({
   setPage,
   setSelectedTopic,
 }) => {
+  const lang = useLang();
+  const c = text?.[lang]?.pages?.common;
   const [filterForm] = Form.useForm();
   const [visible, setVisible] = useState(false);
 
@@ -207,7 +211,7 @@ const Filter = ({
 
         <div className={style.buttons}>
           <Button onClick={() => filterForm.resetFields()} color="white">
-            Təmizlə
+            {c?.clear}
           </Button>
           <Button
             onClick={() => {
@@ -215,7 +219,7 @@ const Filter = ({
               filterForm.submit();
               setVisible(false);
             }}>
-            Axtar
+            {c?.search}
           </Button>
         </div>
       </div>

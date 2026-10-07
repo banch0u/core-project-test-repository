@@ -34,12 +34,16 @@ import {
 } from "../../../store/slices/questionnaire";
 import { getTransportEmployeesAll } from "../../../store/slices/employees";
 import Select from "../../../components/Select";
+import text from "../../../translations/index.json";
+import { useLang } from "../../../hooks/useLang";
 const { Option } = AntdSelect;
 
 const { Content } = Layout;
 const { Item } = Form;
 
 const QuestionnairesEmployeeConfigurations = () => {
+  const lang = useLang();
+  const t = text?.[lang]?.pages?.questionnaires;
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
   const dispatch = useDispatch();
@@ -307,8 +311,8 @@ const QuestionnairesEmployeeConfigurations = () => {
   }, [generalStructuresAll]);
 
   const columns = useMemo(
-    () => getStreetColumns(onEditClick, dispatch),
-    [onEditClick, onDelete, onStatusChange, dispatch]
+    () => getStreetColumns(t, onEditClick, dispatch),
+    [t, onEditClick, onDelete, onStatusChange, dispatch]
   );
 
   const [selectedColumns, setSelectedColumns] = useState(
@@ -356,7 +360,7 @@ const QuestionnairesEmployeeConfigurations = () => {
           <header className={style.header}>
             {employeeConfigurations?.count === 0 ? (
               <Button onClick={onClickModal} color="green">
-                <PlusIcon /> Soraqça əlavə et
+                <PlusIcon /> {t?.common?.addQuestionnaire}
               </Button>
             ) : (
               <div></div>
@@ -374,7 +378,7 @@ const QuestionnairesEmployeeConfigurations = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Heyyət tənzimləmələri</h2>
+              <h2>{t?.titles?.staffSettings}</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}
@@ -405,10 +409,10 @@ const QuestionnairesEmployeeConfigurations = () => {
             <FormModal
               ref={ref}
               width={454}
-              title={"Yeni soraqça yaratma"}
-              titleEdit={"Soraqça redaktə etmə"}
-              okText={"Yadda saxla"}
-              cancelText={"Bağla"}
+              title={t?.common?.createQuestionnaire}
+              titleEdit={t?.common?.editQuestionnaire}
+              okText={t?.common?.save}
+              cancelText={t?.common?.close}
               onSubmit={onSubmit}
               onEdit={onEdit}
               className={"absolute"}
@@ -417,7 +421,7 @@ const QuestionnairesEmployeeConfigurations = () => {
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"EmployeeIds"}
-                label={"Heyyət üzvü"}>
+                label={t?.fields?.staffMember}>
                 <Select mode="multiple">
                   {transportEmployeesAll?.map((item) => (
                     <Option
@@ -433,7 +437,7 @@ const QuestionnairesEmployeeConfigurations = () => {
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"GeneralStructures"}
-                label={"Struktur vahidi"}>
+                label={t?.fields?.structuralUnit}>
                 <TreeSelect
                   className={style.tree_select}
                   dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
@@ -448,7 +452,7 @@ const QuestionnairesEmployeeConfigurations = () => {
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"Positions"}
-                label={"Vəzifələr"}>
+                label={t?.titles?.positions}>
                 <Select mode={"multiple"}>
                   {positionsAll?.map((item) => (
                     <Option
@@ -464,7 +468,7 @@ const QuestionnairesEmployeeConfigurations = () => {
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"PersonInChargeForFuelIds"}
-                label={"Məsul şəxs"}>
+                label={t?.fields?.responsiblePerson}>
                 <Select mode={"multiple"}>
                   {transportEmployeesAll?.map((item) => (
                     <Option
@@ -480,7 +484,7 @@ const QuestionnairesEmployeeConfigurations = () => {
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"OperatingManagerIds"}
-                label={"İstismar şöbəsinin rəisi"}>
+                label={t?.fields?.operationsHead}>
                 <Select mode={"multiple"}>
                   {transportEmployeesAll?.map((item) => (
                     <Option
@@ -496,7 +500,7 @@ const QuestionnairesEmployeeConfigurations = () => {
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"DriverPositions"}
-                label={"Sürücülər"}>
+                label={t?.fields?.drivers}>
                 <Select mode={"multiple"}>
                   {transportEmployeesAll?.map((item) => (
                     <Option
@@ -512,7 +516,7 @@ const QuestionnairesEmployeeConfigurations = () => {
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"MechanicPositions"}
-                label={"Mexaniklər"}>
+                label={t?.fields?.mechanics}>
                 <Select mode={"multiple"}>
                   {transportEmployeesAll?.map((item) => (
                     <Option
@@ -528,7 +532,7 @@ const QuestionnairesEmployeeConfigurations = () => {
               <Item
                 rules={[{ required: false, message: "" }]}
                 name={"DispatcherPositions"}
-                label={"Dispetçerlər"}>
+                label={t?.fields?.dispatchers}>
                 <Select mode={"multiple"}>
                   {transportEmployeesAll?.map((item) => (
                     <Option
@@ -548,12 +552,12 @@ const QuestionnairesEmployeeConfigurations = () => {
               <Delete
                 onDelete={() => dispatch(deleteEmployeeConfigurations(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
-                value={"Soraqçanı"}
+                value={t?.common?.questionnaireAcc}
               />
             </DeleteModal>
 
             <ViewModal onCancel={closeOnViewModal} width={695}>
-              {<Success onClick={closeOnViewModal} value={"Soraqça"} />}
+              {<Success onClick={closeOnViewModal} value={t?.common?.questionnaire} />}
             </ViewModal>
           </Content>
         </Layout>

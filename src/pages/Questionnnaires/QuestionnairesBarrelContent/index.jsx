@@ -33,11 +33,15 @@ import {
 } from "../../../store/slices/questionnaire";
 import Select from "../../../components/Select";
 import { typeENUM } from "../../../helpers/enums";
+import text from "../../../translations/index.json";
+import { useLang } from "../../../hooks/useLang";
 const { Option } = AntdSelect;
 
 const { Content } = Layout;
 const { Item } = Form;
 const QuestionnairesBarrelContent = () => {
+  const lang = useLang();
+  const t = text?.[lang]?.pages?.questionnaires;
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
   const dispatch = useDispatch();
@@ -123,13 +127,14 @@ const fieldsAll = useSelector((state) => state.questionnaire.fieldAll);
   const columns = useMemo(
     () =>
       getStreetColumns(
+        t,
         onEditClick,
         onDelete,
         onStatusChange,
 
         dispatch,
       ),
-    [onEditClick, onDelete, onStatusChange, dispatch],
+    [t, onEditClick, onDelete, onStatusChange, dispatch],
   );
 
   const [selectedColumns, setSelectedColumns] = useState(
@@ -172,7 +177,7 @@ const fieldsAll = useSelector((state) => state.questionnaire.fieldAll);
           <header className={style.header}>
             <Button onClick={onClickModal} color="green">
               {" "}
-              <PlusIcon /> Soraqça əlavə et
+              <PlusIcon /> {t?.common?.addQuestionnaire}
             </Button>
             <Filter
               columns={columns}
@@ -186,7 +191,7 @@ const fieldsAll = useSelector((state) => state.questionnaire.fieldAll);
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Barel</h2>
+              <h2>{t?.titles?.barrel}</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}
@@ -216,10 +221,10 @@ const fieldsAll = useSelector((state) => state.questionnaire.fieldAll);
             <FormModal
               ref={ref}
               width={454}
-              title={"Yeni soraqça yaratma"}
-              titleEdit={"Soraqça redaktə etmə"}
-              okText={"Yadda saxla"}
-              cancelText={"Bağla"}
+              title={t?.common?.createQuestionnaire}
+              titleEdit={t?.common?.editQuestionnaire}
+              okText={t?.common?.save}
+              cancelText={t?.common?.close}
               onSubmit={onSubmit}
               onEdit={onEdit}
               className={"absolute"}
@@ -229,7 +234,7 @@ const fieldsAll = useSelector((state) => state.questionnaire.fieldAll);
                 className={style.label}
                 rules={[{ required: true, message: "" }]}
                 name="name"
-                label="Ad"
+                label={t?.fields?.name}
               >
                 <Input className={style.modal_input} type={"text"} />
               </Item>
@@ -237,17 +242,17 @@ const fieldsAll = useSelector((state) => state.questionnaire.fieldAll);
                 className={style.label}
                 rules={[{ required: true, message: "" }]}
                 name="type"
-                label="Tip"
+                label={t?.fields?.type}
               >
                 <Select>
-                  <Option value={1}>Mədən</Option>
-                  <Option value={3}>Park</Option>
+                  <Option value={1}>{t?.options?.field}</Option>
+                  <Option value={3}>{t?.options?.park}</Option>
                 </Select>
               </Item>
               <Item className={style.label}
                 rules={[{ required: true, message: "" }]}
                 name="fieldId"
-                label="Sahə">
+                label={t?.fields?.area}>
                   <Select>
                     {fieldsAll?.map((item)=>(
                       <Option value={item.id} key={item.id}>{item.name}</Option>
@@ -262,11 +267,11 @@ const fieldsAll = useSelector((state) => state.questionnaire.fieldAll);
               <Delete
                 onDelete={() => dispatch(deleteBarrel(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
-                value={"Soraqçanı"}
+                value={t?.common?.questionnaireAcc}
               />
             </DeleteModal>
             <ViewModal onCancel={closeOnViewModal} width={695}>
-              {<Success onClick={closeOnViewModal} value={"Soraqça"} />}
+              {<Success onClick={closeOnViewModal} value={t?.common?.questionnaire} />}
             </ViewModal>
           </Content>
         </Layout>

@@ -30,11 +30,15 @@ import {
   getVendorCategories,
   vendorCategoriesVisibility,
 } from "../../../store/slices/questionnaire";
+import text from "../../../translations/index.json";
+import { useLang } from "../../../hooks/useLang";
 
 const { Content } = Layout;
 const { Item } = Form;
 
 const QuestionnairesVendorCategoriesContent = () => {
+  const lang = useLang();
+  const t = text?.[lang]?.pages?.questionnaires;
   const dispatch = useDispatch();
   const ref = useRef();
 
@@ -172,6 +176,7 @@ const QuestionnairesVendorCategoriesContent = () => {
   const columns = useMemo(
     () =>
       getStreetColumns(
+        t,
         onEditClick,
         onDelete,
         onStatusChange,
@@ -179,7 +184,7 @@ const QuestionnairesVendorCategoriesContent = () => {
         innerW,
         dynamicNumWidth,
       ),
-    [onEditClick, onDelete, onStatusChange, dispatch, innerW, dynamicNumWidth],
+    [t, onEditClick, onDelete, onStatusChange, dispatch, innerW, dynamicNumWidth],
   );
 
   // ✅ FETCH
@@ -203,7 +208,7 @@ const QuestionnairesVendorCategoriesContent = () => {
         <Content className={style.content}>
           <header className={style.header}>
             <Button onClick={() => ref.current.open()} color="green">
-              <PlusIcon /> Kateqoriya əlavə et
+              <PlusIcon /> {t?.common?.addCategory}
             </Button>
           </header>
         </Content>
@@ -211,7 +216,7 @@ const QuestionnairesVendorCategoriesContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Kateqoriyalar (Vendor)</h2>
+              <h2>{t?.titles?.vendorCategories}</h2>
             </div>
 
             <div className="bigTable">
@@ -226,24 +231,24 @@ const QuestionnairesVendorCategoriesContent = () => {
             <FormModal
               ref={ref}
               width={454}
-              title={"Yeni soraqça yaratma"}
-              titleEdit={"Soraqça redaktə etmə"}
-              okText={"Yadda saxla"}
-              cancelText={"Bağla"}
+              title={t?.common?.createQuestionnaire}
+              titleEdit={t?.common?.editQuestionnaire}
+              okText={t?.common?.save}
+              cancelText={t?.common?.close}
               onSubmit={onSubmit}
               onEdit={onEdit}
               className={"absolute"}
               centered={false}>
               <Item
                 name="name"
-                label="Ad"
+                label={t?.fields?.name}
                 rules={[
                   { required: true, message: "" },
-                  { min: 3, message: "Ən az 3 simvol" },
+                  { min: 3, message: t?.messages?.minChars3Short },
                 ]}>
                 <Input className={style.modal_input} />
               </Item>
-              <Item name="parentId" label="Üst kateqoriya">
+              <Item name="parentId" label={t?.fields?.parentCategory}>
                 <TreeSelect
                   allowClear
                   treeData={treeSelectData}
@@ -260,7 +265,7 @@ const QuestionnairesVendorCategoriesContent = () => {
               <Delete
                 onDelete={() => dispatch(deleteVendorCategories(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
-                value={"Kateqoriyanı"}
+                value={t?.common?.categoryAcc}
               />
             </DeleteModal>
 
@@ -270,7 +275,7 @@ const QuestionnairesVendorCategoriesContent = () => {
               width={695}>
               <Success
                 onClick={() => dispatch(setViewModalVisible(false))}
-                value={"Kateqoriya"}
+                value={t?.common?.category}
               />
             </ViewModal>
           </Content>

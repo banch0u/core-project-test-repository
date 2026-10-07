@@ -31,11 +31,15 @@ import {
   editDocumentTypes,
   getDocumentTypes,
 } from "../../../store/slices/questionnaire";
+import text from "../../../translations/index.json";
+import { useLang } from "../../../hooks/useLang";
 
 const { Content } = Layout;
 const { Item } = Form;
 const { Option } = AntdSelect;
 const QuestionnairesDocumentTypeContent = () => {
+  const lang = useLang();
+  const t = text?.[lang]?.pages?.questionnaires;
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
   const dispatch = useDispatch();
@@ -130,13 +134,14 @@ const QuestionnairesDocumentTypeContent = () => {
   const columns = useMemo(
     () =>
       getStreetColumns(
+        t,
         onEditClick,
         onDelete,
         onStatusChange,
 
         dispatch
       ),
-    [onEditClick, onDelete, onStatusChange, dispatch]
+    [t, onEditClick, onDelete, onStatusChange, dispatch]
   );
 
   const [selectedColumns, setSelectedColumns] = useState(
@@ -177,7 +182,7 @@ const QuestionnairesDocumentTypeContent = () => {
           <header className={style.header}>
             <Button onClick={onClickModal} color="green">
               {" "}
-              <PlusIcon /> Soraqça əlavə et
+              <PlusIcon /> {t?.common?.addQuestionnaire}
             </Button>
             <Filter
               columns={columns}
@@ -191,7 +196,7 @@ const QuestionnairesDocumentTypeContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Sənəd Növləri</h2>
+              <h2>{t?.titles?.documentTypes}</h2>
               <div className={style.buttons}>
                 <Select
                   size="sm"
@@ -202,8 +207,8 @@ const QuestionnairesDocumentTypeContent = () => {
                   onChange={(value) => {
                     setTypeSelect(value);
                   }}>
-                  <Option value={1}>Daxil olan sənədlər</Option>
-                  <Option value={2}>Xaric olan sənədlər</Option>
+                  <Option value={1}>{t?.options?.incomingDocuments}</Option>
+                  <Option value={2}>{t?.options?.outgoingDocuments}</Option>
                 </Select>
 
                 <ColSort
@@ -234,10 +239,10 @@ const QuestionnairesDocumentTypeContent = () => {
             <FormModal
               ref={ref}
               width={454}
-              title={"Yeni soraqça yaratma"}
-              titleEdit={"Soraqça redaktə etmə"}
-              okText={"Yadda saxla"}
-              cancelText={"Bağla"}
+              title={t?.common?.createQuestionnaire}
+              titleEdit={t?.common?.editQuestionnaire}
+              okText={t?.common?.save}
+              cancelText={t?.common?.close}
               onSubmit={onSubmit}
               onEdit={onEdit}
               className={"absolute"}
@@ -245,10 +250,10 @@ const QuestionnairesDocumentTypeContent = () => {
               <Item
                 rules={[
                   { required: true, message: "" },
-                  { min: 3, message: "Ən azından 3 simvol olmalıdır" },
+                  { min: 3, message: t?.messages?.minChars3 },
                 ]}
                 name={"name"}
-                label={"Ad"}>
+                label={t?.fields?.name}>
                 <Input className={style.modal_input} />
               </Item>
             </FormModal>
@@ -258,11 +263,11 @@ const QuestionnairesDocumentTypeContent = () => {
               <Delete
                 onDelete={() => dispatch(deleteDocumentTypes(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
-                value={"Soraqçanı"}
+                value={t?.common?.questionnaireAcc}
               />
             </DeleteModal>
             <ViewModal onCancel={closeOnViewModal} width={695}>
-              {<Success onClick={closeOnViewModal} value={"Soraqça"} />}
+              {<Success onClick={closeOnViewModal} value={t?.common?.questionnaire} />}
             </ViewModal>
           </Content>
         </Layout>

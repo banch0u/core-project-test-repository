@@ -6,6 +6,7 @@ import { setDeleteModalVisible } from "../../../store/slices/global";
 import { DeleteIconQ, EditIcon } from "../../../assets/icons";
 
 export const getStreetColumns = (
+  t,
   onEditClick,
   onDelete,
   onStatusChange,
@@ -20,48 +21,48 @@ export const getStreetColumns = (
       width: 35,
     },
     {
-      title: "Ad",
+      title: t?.fields?.firstName,
       dataIndex: "name",
       width: 150,
       disabled: true,
       ellipsis: true,
     },
     {
-      title: "Soyad",
+      title: t?.fields?.lastName,
       dataIndex: "surname",
       width: 150,
       disabled: true,
       ellipsis: true,
     },
     {
-      title: "Ata Adı",
+      title: t?.fields?.patronymic,
       dataIndex: "patronymic",
       width: 150,
       disabled: true,
       ellipsis: true,
     },
     {
-      title: "Təşkilat",
+      title: t?.fields?.organization,
       dataIndex: "organisationName",
       width: 150,
       disabled: true,
       ellipsis: true,
     },
     {
-      title: "Vəzifə",
+      title: t?.fields?.position,
       dataIndex: "positionName",
       width: 150,
       disabled: true,
       ellipsis: true,
     },
     {
-      title: "Status",
+      title: t?.fields?.status,
       key: "status",
       disabled: true,
 
       filter: false,
       render: (data) => (
-        <Tooltip placement="top" title="Statusu dəyiş">
+        <Tooltip placement="top" title={t?.common?.changeStatus}>
           <Switch
             size="medium"
             checked={data?.isActive}

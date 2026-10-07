@@ -4,6 +4,7 @@ import style from "../Questionnaires.module.scss";
 import { EditIcon } from "../../../assets/icons";
 
 export const getStreetColumns = (
+  t,
   onEditClick,
   innerW
 ) => [
@@ -15,56 +16,56 @@ export const getStreetColumns = (
       width: 35,
     },
     {
-      title: "Heyyət üzvü",
+      title: t?.fields?.staffMember,
       dataIndex: "EmployeeIds1",
       width: innerW,
       disabled: false,
       ellipsis: true,
     },
     {
-      title: "Struktur vahidi",
+      title: t?.fields?.structuralUnit,
       dataIndex: "GeneralStructures1",
       width: innerW,
       disabled: false,
       ellipsis: true,
     },
     {
-      title: "Vəzifələr",
+      title: t?.titles?.positions,
       dataIndex: "Positions1",
       width: innerW,
       disabled: false,
       ellipsis: true,
     },
     {
-      title: "Məsul şəxs",
+      title: t?.fields?.responsiblePerson,
       dataIndex: "PersonInChargeForFuelIds1",
       width: innerW,
       disabled: false,
       ellipsis: true,
     },
     {
-      title: "İstismar şöbəsinin rəisi",
+      title: t?.fields?.operationsHead,
       dataIndex: "OperatingManagerIds1",
       width: innerW,
       disabled: false,
       ellipsis: true,
     },
     {
-      title: "Sürücülər",
+      title: t?.fields?.drivers,
       dataIndex: "DriverPositions1",
       width: innerW,
       disabled: false,
       ellipsis: true,
     },
     {
-      title: "Mexaniklər",
+      title: t?.fields?.mechanics,
       dataIndex: "MechanicPositions1",
       width: innerW,
       disabled: false,
       ellipsis: true,
     },
     {
-      title: "Dispetçerlər",
+      title: t?.fields?.dispatchers,
       dataIndex: "DispatcherPositions",
       width: innerW,
       disabled: false,

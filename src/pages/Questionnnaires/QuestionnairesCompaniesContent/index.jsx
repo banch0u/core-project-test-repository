@@ -30,10 +30,14 @@ import {
   editCompanies,
   getCompanies,
 } from "../../../store/slices/questionnaire";
+import text from "../../../translations/index.json";
+import { useLang } from "../../../hooks/useLang";
 
 const { Content } = Layout;
 const { Item } = Form;
 const QuestionnairesDocumentTypeContent = () => {
+  const lang = useLang();
+  const t = text?.[lang]?.pages?.questionnaires;
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
   const dispatch = useDispatch();
@@ -127,13 +131,14 @@ const QuestionnairesDocumentTypeContent = () => {
   const columns = useMemo(
     () =>
       getStreetColumns(
+        t,
         onEditClick,
         onDelete,
         onStatusChange,
 
         dispatch
       ),
-    [onEditClick, onDelete, onStatusChange, dispatch]
+    [t, onEditClick, onDelete, onStatusChange, dispatch]
   );
 
   const [selectedColumns, setSelectedColumns] = useState(
@@ -173,7 +178,7 @@ const QuestionnairesDocumentTypeContent = () => {
           <header className={style.header}>
             <Button onClick={onClickModal} color="green">
               {" "}
-              <PlusIcon /> Soraqça əlavə et
+              <PlusIcon /> {t?.common?.addQuestionnaire}
             </Button>
             <Filter
               columns={columns}
@@ -187,7 +192,7 @@ const QuestionnairesDocumentTypeContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Şirkətlər</h2>
+              <h2>{t?.titles?.companies}</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}
@@ -217,10 +222,10 @@ const QuestionnairesDocumentTypeContent = () => {
             <FormModal
               ref={ref}
               width={454}
-              title={"Yeni soraqça yaratma"}
-              titleEdit={"Soraqça redaktə etmə"}
-              okText={"Yadda saxla"}
-              cancelText={"Bağla"}
+              title={t?.common?.createQuestionnaire}
+              titleEdit={t?.common?.editQuestionnaire}
+              okText={t?.common?.save}
+              cancelText={t?.common?.close}
               onSubmit={onSubmit}
               onEdit={onEdit}
               className={"absolute"}
@@ -229,20 +234,20 @@ const QuestionnairesDocumentTypeContent = () => {
                 className={style.label}
                 rules={[{ required: true, message: "" }]}
                 name="name"
-                label="Ad">
+                label={t?.fields?.name}>
                 <Input className={style.modal_input} type={"text"} />
               </Item>
               <Item
                 rules={[{ required: true, message: "" }]}
                 name="fullName"
-                label="Tam ad">
+                label={t?.fields?.fullName}>
                 <Input className={style.modal_input} type={"text"} />
               </Item>
               <Item
                 className={style.label}
                 name="isCurrentCompany"
                 valuePropName="checked">
-                <Checkbox>Cari şirkətdir</Checkbox>
+                <Checkbox>{t?.options?.currentCompany}</Checkbox>
               </Item>
             </FormModal>
             <DeleteModal
@@ -251,11 +256,11 @@ const QuestionnairesDocumentTypeContent = () => {
               <Delete
                 onDelete={() => dispatch(deleteCompanies(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
-                value={"Soraqçanı"}
+                value={t?.common?.questionnaireAcc}
               />
             </DeleteModal>
             <ViewModal onCancel={closeOnViewModal} width={695}>
-              {<Success onClick={closeOnViewModal} value={"Soraqça"} />}
+              {<Success onClick={closeOnViewModal} value={t?.common?.questionnaire} />}
             </ViewModal>
           </Content>
         </Layout>

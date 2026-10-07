@@ -34,6 +34,8 @@ import {
 import { getContractUsersAll } from "../../../store/slices/employees";
 import Select from "../../../components/Select";
 import Input from "../../../components/Input";
+import text from "../../../translations/index.json";
+import { useLang } from "../../../hooks/useLang";
 
 const { Content } = Layout;
 const { Item } = Form;
@@ -120,12 +122,14 @@ const resolveRankFromValues = (values) => {
 };
 
 // ✅ for priority labels (only 0/1 unique now; 2 can be multiple)
-const PRIORITY_LABEL = {
-  0: "Sənəd yaradan",
-  1: "Birinci baxan",
+const PRIORITY_LABEL_KEY = {
+  0: "documentCreator",
+  1: "firstReviewer",
 };
 
 const QuestionnairesDefaultAgreementPlansContent = () => {
+  const lang = useLang();
+  const t = text?.[lang]?.pages?.questionnaires;
   const [innerW, setInnerW] = useState(null);
 
   // ✅ modal ref
@@ -298,7 +302,7 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
 
   // ✅ throw helper: duplicate same person in same structure
   const throwDuplicateError = useCallback(() => {
-    const errMsg = "Bu məsul şəxs bu struktur üçün artıq təyin olunub!";
+    const errMsg = t?.messages?.responsibleAssigned;
 
     if (modalFormRef.current) {
       modalFormRef.current.setFields([
@@ -307,12 +311,14 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
     }
 
     throw new Error(errMsg);
-  }, []);
+  }, [t]);
 
   // ✅ throw helper: priority already taken in this internalStructure (ONLY for 0/1 now)
   const throwPriorityTakenError = useCallback((priority01) => {
-    const label = PRIORITY_LABEL?.[priority01] || `Prioritet ${priority01}`;
-    const errMsg = `Bu strukturda artıq "${label}" prioriteti təyin olunub!`;
+    const label =
+      t?.options?.[PRIORITY_LABEL_KEY?.[priority01]] ||
+      `${t?.messages?.priority} ${priority01}`;
+    const errMsg = t?.messages?.priorityAssigned?.replace("{label}", label);
 
     if (modalFormRef.current) {
       modalFormRef.current.setFields([
@@ -321,7 +327,7 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
     }
 
     throw new Error(errMsg);
-  }, []);
+  }, [t]);
 
   // ✅ validation 1: same person cannot be in same structure twice
   const hasDuplicatePersonInStructure = useCallback(
@@ -501,8 +507,8 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
   }, []);
 
   const columns = useMemo(
-    () => getStreetColumns(onEditClick, onDelete, dispatch),
-    [onEditClick, onDelete, dispatch],
+    () => getStreetColumns(t, onEditClick, onDelete, dispatch),
+    [t, onEditClick, onDelete, dispatch],
   );
 
   const [selectedColumns, setSelectedColumns] = useState(
@@ -532,7 +538,7 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
         <Content className={style.content}>
           <header className={style.header}>
             <Button onClick={onClickModal} color="green">
-              <PlusIcon /> Soraqça əlavə et
+              <PlusIcon /> {t?.common?.addQuestionnaire}
             </Button>
             <Filter
               columns={columns}
@@ -547,7 +553,7 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Şablon razılaşma sxemi</h2>
+              <h2>{t?.titles?.defaultAgreementPlans}</h2>
               <div className={style.buttons}>
                 <Select
                   width={250}
@@ -595,17 +601,17 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
                 modalFormRef.current = f;
               }}
               width={454}
-              title={"Yeni soraqça yaratma"}
-              titleEdit={"Soraqça redaktə etmə"}
-              okText={"Yadda saxla"}
-              cancelText={"Bağla"}
+              title={t?.common?.createQuestionnaire}
+              titleEdit={t?.common?.editQuestionnaire}
+              okText={t?.common?.save}
+              cancelText={t?.common?.close}
               onSubmit={onSubmit}
               onEdit={onEdit}
               className={"absolute"}
               centered={false}>
               <Item
                 name={"responsiblePersonId"}
-                label={"Məsul şəxs"}
+                label={t?.fields?.responsiblePerson}
                 rules={[{ required: true, message: "" }]}>
                 <Select size="md">
                   {contractUsersAll?.map((item) => (
@@ -618,13 +624,13 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
 
               <Item
                 name="flowPriority"
-                label="Dövriyyə prioriteti"
+                label={t?.fields?.flowPriority}
                 rules={[{ required: true, message: "" }]}>
                 <Select size="md">
-                  <Option value={0}>Sənəd yaradan</Option>
-                  <Option value={1}>Birinci baxan</Option>
-                  <Option value={2}>İkinci baxan</Option>
-                  <Option value={3}>Digər baxanlar</Option>
+                  <Option value={0}>{t?.options?.documentCreator}</Option>
+                  <Option value={1}>{t?.options?.firstReviewer}</Option>
+                  <Option value={2}>{t?.options?.secondReviewer}</Option>
+                  <Option value={3}>{t?.options?.otherReviewers}</Option>
                 </Select>
               </Item>
 
@@ -642,7 +648,7 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
                     <Item
                       preserve={false}
                       name="rank"
-                      label="Qrup №"
+                      label={t?.fields?.groupNo}
                       rules={[
                         { required: true, message: "" },
                         {
@@ -658,7 +664,7 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
                             if (Number.isNaN(numericValue)) throw new Error("");
 
                             if (numericValue < 3) {
-                              throw new Error("Qrup № 3-dən kiçik ola bilməz!");
+                              throw new Error(t?.messages?.groupNoMin);
                             }
 
                             return true;
@@ -680,12 +686,12 @@ const QuestionnairesDefaultAgreementPlansContent = () => {
               <Delete
                 onDelete={() => dispatch(deleteDefaultAgreementPlans(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
-                value={"Soraqçanı"}
+                value={t?.common?.questionnaireAcc}
               />
             </DeleteModal>
 
             <ViewModal onCancel={closeOnViewModal} width={695}>
-              {<Success onClick={closeOnViewModal} value={"Soraqça"} />}
+              {<Success onClick={closeOnViewModal} value={t?.common?.questionnaire} />}
             </ViewModal>
           </Content>
         </Layout>

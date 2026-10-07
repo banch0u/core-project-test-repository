@@ -4,6 +4,7 @@ import { setDeleteModalVisible } from "../../../store/slices/global";
 import { DeleteIconQ, EditIcon } from "../../../assets/icons";
 
 export const getStreetColumns = (
+  t,
   onEditClick,
   onDelete,
   dispatch,
@@ -17,14 +18,14 @@ export const getStreetColumns = (
       width: 35,
     },
     {
-      title: "Məsul şəxs",
+      title: t?.fields?.responsiblePerson,
       dataIndex: "responsiblePerson",
       width: innerW,
       disabled: true,
       ellipsis: true,
     },
     {
-      title: "Qrup №",
+      title: t?.fields?.groupNo,
       dataIndex: "rank",
       width: innerW,
       disabled: false,

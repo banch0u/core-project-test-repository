@@ -5,34 +5,45 @@ const DEFAULT_LANG = "az";
 
 const getLang = () => localStorage.getItem(LANG_KEY) || DEFAULT_LANG;
 
+// localStorage is patched once and every useLang instance subscribes to it.
+// Patching per instance broke when components unmounted out of order: an unmounting
+// child restored a setItem that predated its parent's patch, so the parent stopped updating.
+const listeners = new Set();
+let patched = false;
+
+const notify = (value) => listeners.forEach((listener) => listener(value || DEFAULT_LANG));
+
+const patchStorage = () => {
+  if (patched) return;
+  patched = true;
+
+  const origSetItem = localStorage.setItem.bind(localStorage);
+  const origRemoveItem = localStorage.removeItem.bind(localStorage);
+
+  localStorage.setItem = (key, value) => {
+    origSetItem(key, value);
+    if (key === LANG_KEY) notify(value);
+  };
+
+  localStorage.removeItem = (key) => {
+    origRemoveItem(key);
+    if (key === LANG_KEY) notify(DEFAULT_LANG);
+  };
+
+  window.addEventListener("storage", (e) => {
+    if (e.key === LANG_KEY) notify(e.newValue);
+  });
+};
+
 export function useLang() {
   const [lang, setLang] = useState(getLang);
 
   useEffect(() => {
+    patchStorage();
     setLang(getLang());
-
-    const onStorage = (e) => {
-      if (e.key === LANG_KEY) setLang(e.newValue || DEFAULT_LANG);
-    };
-    window.addEventListener("storage", onStorage);
-
-    const origSetItem = localStorage.setItem.bind(localStorage);
-    const origRemoveItem = localStorage.removeItem.bind(localStorage);
-
-    localStorage.setItem = (key, value) => {
-      origSetItem(key, value);
-      if (key === LANG_KEY) setLang(value || DEFAULT_LANG);
-    };
-
-    localStorage.removeItem = (key) => {
-      origRemoveItem(key);
-      if (key === LANG_KEY) setLang(DEFAULT_LANG);
-    };
-
+    listeners.add(setLang);
     return () => {
-      window.removeEventListener("storage", onStorage);
-      localStorage.setItem = origSetItem;
-      localStorage.removeItem = origRemoveItem;
+      listeners.delete(setLang);
     };
   }, []);
 

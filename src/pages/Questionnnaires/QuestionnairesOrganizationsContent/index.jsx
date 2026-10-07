@@ -32,9 +32,13 @@ import {
   organizationVisibility,
 } from "../../../store/slices/questionnaire";
 import { MaskedInput } from "antd-5-mask-input";
+import text from "../../../translations/index.json";
+import { useLang } from "../../../hooks/useLang";
 const { Content } = Layout;
 const { Item } = Form;
 const QuestionnairesOrganizationsContent = () => {
+  const lang = useLang();
+  const t = text?.[lang]?.pages?.questionnaires;
   const [innerW, setInnerW] = useState(210);
   const ref = useRef();
   const dispatch = useDispatch();
@@ -127,8 +131,8 @@ const QuestionnairesOrganizationsContent = () => {
     }));
   }
   const columns = useMemo(
-    () => getStreetColumns(onEditClick, onDelete, onStatusChange, dispatch),
-    [onEditClick, onDelete, onStatusChange, dispatch]
+    () => getStreetColumns(t, onEditClick, onDelete, onStatusChange, dispatch),
+    [t, onEditClick, onDelete, onStatusChange, dispatch]
   );
 
   const [selectedColumns, setSelectedColumns] = useState(
@@ -168,7 +172,7 @@ const QuestionnairesOrganizationsContent = () => {
           <header className={style.header}>
             <Button onClick={onClickModal} color="green">
               {" "}
-              <PlusIcon /> Soraqça əlavə et
+              <PlusIcon /> {t?.common?.addQuestionnaire}
             </Button>
             <Filter
               columns={columns}
@@ -182,11 +186,11 @@ const QuestionnairesOrganizationsContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Təşkilatlar</h2>
+              <h2>{t?.titles?.organizations}</h2>
               <div className={style.buttons}>
                 {/* <Input
                   // onKeyDown={(e) => handleKeyDown(e)}
-                  placeholder="Axtar"
+                  placeholder={t?.common?.search}
                   className={style.search}
                   suffix={
                     <div className={style.search_icon}>
@@ -222,10 +226,10 @@ const QuestionnairesOrganizationsContent = () => {
             <FormModal
               ref={ref}
               width={454}
-              title={"Yeni soraqça yaratma"}
-              titleEdit={"Soraqça redaktə etmə"}
-              okText={"Yadda saxla"}
-              cancelText={"Bağla"}
+              title={t?.common?.createQuestionnaire}
+              titleEdit={t?.common?.editQuestionnaire}
+              okText={t?.common?.save}
+              cancelText={t?.common?.close}
               onSubmit={onSubmit}
               onEdit={onEdit}
               className={"absolute"}
@@ -233,51 +237,51 @@ const QuestionnairesOrganizationsContent = () => {
               <Item
                 rules={[
                   { required: true, message: "" },
-                  { min: 3, message: "Ən azından 3 simvol olmalıdır" },
+                  { min: 3, message: t?.messages?.minChars3 },
                 ]}
                 name={"name"}
-                label={"Ad"}>
+                label={t?.fields?.name}>
                 <Input className={style.modal_input} />
               </Item>
               <Item
                 rules={[
                   { required: true, message: "" },
-                  { min: 3, message: "Ən azından 3 simvol olmalıdır" },
+                  { min: 3, message: t?.messages?.minChars3 },
                 ]}
                 name={"shortName"}
-                label={"Qısa ad"}>
+                label={t?.fields?.shortName}>
                 <Input className={style.modal_input} />
               </Item>
               <Item
                 rules={[
                   { required: false, message: "" },
-                  { min: 3, message: "Ən azından 3 simvol olmalıdır" },
+                  { min: 3, message: t?.messages?.minChars3 },
                 ]}
                 name={"address"}
-                label={"Ünvan"}>
+                label={t?.fields?.address}>
                 <Input className={style.modal_input} />
               </Item>
               <Item
                 rules={[
                   { required: false, message: "" },
-                  { min: 3, message: "Ən azından 3 simvol olmalıdır" },
+                  { min: 3, message: t?.messages?.minChars3 },
                 ]}
                 name={"voen"}
-                label={"VÖEN"}>
+                label={t?.fields?.voen}>
                 <Input type={"number"} className={style.modal_input} />
               </Item>
               <Item
                 rules={[
                   { required: false, message: "" },
-                  { min: 3, message: "Ən azından 3 simvol olmalıdır" },
+                  { min: 3, message: t?.messages?.minChars3 },
                 ]}
                 name={"email"}
-                label={"Elektron poçt ünvanı"}>
+                label={t?.fields?.emailAddress}>
                 <Input type={"email"} className={style.modal_input} />
               </Item>
               <Item
                 name={"phone"}
-                label={"Əlaqə nömrəsi"}
+                label={t?.fields?.contactNumber}
                 rules={[
                   {
                     required: false,
@@ -298,11 +302,11 @@ const QuestionnairesOrganizationsContent = () => {
               <Delete
                 onDelete={() => dispatch(deleteOrganization(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
-                value={"Soraqçanı"}
+                value={t?.common?.questionnaireAcc}
               />
             </DeleteModal>
             <ViewModal onCancel={closeOnViewModal} width={695}>
-              {<Success onClick={closeOnViewModal} value={"Soraqça"} />}
+              {<Success onClick={closeOnViewModal} value={t?.common?.questionnaire} />}
             </ViewModal>
           </Content>
         </Layout>

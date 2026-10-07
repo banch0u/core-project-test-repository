@@ -30,10 +30,14 @@ import {
   getCustomers,
   customersVisibility,
 } from "../../../store/slices/questionnaire";
+import text from "../../../translations/index.json";
+import { useLang } from "../../../hooks/useLang";
 
 const { Content } = Layout;
 const { Item } = Form;
 const QuestionnairesCustomersContent = () => {
+  const lang = useLang();
+  const t = text?.[lang]?.pages?.questionnaires;
   const [innerW, setInnerW] = useState(null);
   const ref = useRef();
   const dispatch = useDispatch();
@@ -116,8 +120,8 @@ const QuestionnairesCustomersContent = () => {
     }));
   }
   const columns = useMemo(
-    () => getStreetColumns(onEditClick, onDelete, onStatusChange, dispatch),
-    [onEditClick, onDelete, onStatusChange, dispatch],
+    () => getStreetColumns(t, onEditClick, onDelete, onStatusChange, dispatch),
+    [t, onEditClick, onDelete, onStatusChange, dispatch],
   );
   const [selectedColumns, setSelectedColumns] = useState(
     columns.map((col) => col.dataIndex),
@@ -154,7 +158,7 @@ const QuestionnairesCustomersContent = () => {
         <Content className={style.content}>
           <header className={style.header}>
             <Button onClick={onClickModal} color="green">
-              <PlusIcon /> Soraqça əlavə et
+              <PlusIcon /> {t?.common?.addQuestionnaire}
             </Button>
             <Filter
               columns={columns}
@@ -168,7 +172,7 @@ const QuestionnairesCustomersContent = () => {
         <Layout className={style.layout1}>
           <Content className={style.content}>
             <div className={style.table_header}>
-              <h2>Müştərilər</h2>
+              <h2>{t?.titles?.customers}</h2>
               <div className={style.buttons}>
                 <ColSort
                   columns={columns}
@@ -198,10 +202,10 @@ const QuestionnairesCustomersContent = () => {
             <FormModal
               ref={ref}
               width={454}
-              title={"Yeni soraqça yaratma"}
-              titleEdit={"Soraqça redaktə etmə"}
-              okText={"Yadda saxla"}
-              cancelText={"Bağla"}
+              title={t?.common?.createQuestionnaire}
+              titleEdit={t?.common?.editQuestionnaire}
+              okText={t?.common?.save}
+              cancelText={t?.common?.close}
               onSubmit={onSubmit}
               onEdit={onEdit}
               className={"absolute"}
@@ -209,20 +213,20 @@ const QuestionnairesCustomersContent = () => {
               <Item
                 rules={[
                   { required: true, message: "" },
-                  { min: 3, message: "Ən azından 3 simvol olmalıdır" },
+                  { min: 3, message: t?.messages?.minChars3 },
                 ]}
                 name={"name"}
-                label={"Ad"}>
+                label={t?.fields?.name}>
                 <Input className={style.modal_input} />
               </Item>
               <Item
                 name={"tin"}
-                label={"VÖEN"}
+                label={t?.fields?.voen}
                 rules={[
-                  { required: true, message: "VÖEN tələb olunur" },
+                  { required: true, message: t?.messages?.voenRequired },
                   {
                     pattern: /^\d{10}$/,
-                    message: "VÖEN yalnız 10 rəqəmdən ibarət olmalıdır",
+                    message: t?.messages?.voenDigits,
                   },
                 ]}>
                 <Input
@@ -243,11 +247,11 @@ const QuestionnairesCustomersContent = () => {
               <Delete
                 onDelete={() => dispatch(deleteCustomers(id))}
                 onCancel={() => dispatch(setDeleteModalVisible(false))}
-                value={"Soraqçanı"}
+                value={t?.common?.questionnaireAcc}
               />
             </DeleteModal>
             <ViewModal onCancel={closeOnViewModal} width={695}>
-              {<Success onClick={closeOnViewModal} value={"Soraqça"} />}
+              {<Success onClick={closeOnViewModal} value={t?.common?.questionnaire} />}
             </ViewModal>
           </Content>
         </Layout>
