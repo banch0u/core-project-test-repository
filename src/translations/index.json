@@ -595,6 +595,172 @@
           "currentCompany": "Cari şirkətdir",
           "hasGrade": "Dərəcəsi var"
         }
+      },
+      "contracts": {
+        "pages": {
+          "myFolder": "Mənim qovluğum",
+          "contracts": "Müqavilələr",
+          "reports": "Hesabatlar",
+          "questionnaires": "Soraqçalar"
+        },
+        "buttons": {
+          "createContract": "Müqavilə yarat",
+          "export": "Eksport",
+          "filterMenu": "Filter menyu",
+          "clear": "Təmizlə",
+          "search": "Axtar",
+          "back": "Geri",
+          "next": "Növbəti",
+          "save": "Yadda saxla",
+          "add": "Əlavə et",
+          "cancel": "İmtina",
+          "reject": "İmtina",
+          "confirm": "Təsdiq",
+          "sign": "İmzala",
+          "print": "Çap et",
+          "yes": "Bəli",
+          "no": "Yox",
+          "backToMain": "Əsas səhifəyə geri qayıt",
+          "home": "Ana səhifə"
+        },
+        "actions": {
+          "send": "Göndər",
+          "marginNotePreparation": "Dərkənar layihəsi hazırlanması",
+          "marginNoteConfirmation": "Dərkənar layihəsinin təsdiqi",
+          "marginNote": "Dərkənar",
+          "edit": "Redaktə et",
+          "returnBack": "Geri qaytar",
+          "replyWithRelated": "Əlaqəli sənədlə cavabla",
+          "replyWithResponse": "Cavab sənədi ilə cavabla",
+          "sendForInfo": "Məlumat üçün göndər",
+          "acknowledged": "Tanış oldum",
+          "sign": "İmzala",
+          "marginNoteDraftEdit": "Dərkənar layihəsinin redaktəsi",
+          "confirm": "Təsdiqlə",
+          "print": "Çap et",
+          "post": "Poçt et",
+          "replyWithRelatedService": "Əlaqəli xidməti sənədlə cavabla",
+          "replyWithService": "Xidməti sənədlə cavabla",
+          "addAttachment": "Qoşma əlavə et",
+          "visa": "Viza",
+          "signed": "İmzalanıb"
+        },
+        "fields": {
+          "no": "No",
+          "registrationNumber": "Qeydiyyat nömrəsi",
+          "contractNumber": "Müqavilə nömrəsi",
+          "contractDate": "Müqavilə tarixi",
+          "contractDateFull": "Müqavilənin tarixi",
+          "tin": "VÖEN",
+          "contractParty": "Müqavilənin tərəfi",
+          "contractType": "Müqavilə növü",
+          "contractSubject": "Müqavilənin predmeti",
+          "topic": "Mövzu",
+          "internalStructure": "Daxili struktur",
+          "orderType": "Sifariş növü",
+          "paymentType": "Ödəniş növü",
+          "orderNumber": "Sifariş №",
+          "orderDate": "Sifariş tarixi",
+          "contractPeriod": "Müqavilə müddəti",
+          "period": "Müddət",
+          "contractPrice": "Müqavilənin qiyməti",
+          "advance": "Avans",
+          "signatory": "İmzalayan şəxs",
+          "relatedDocument": "Əlaqəli sənəd",
+          "legalBasis": "Hüquqi əsas",
+          "companyNumber": "Şirkət nömrəsi",
+          "shortContent": "Qısa məzmun",
+          "status": "Status",
+          "operationType": "Əməliyyat növü",
+          "sentFrom": "Kimdən gəlib",
+          "fileName": "Faylın adı",
+          "date": "Tarix",
+          "mainDocument": "Əsas sənəd",
+          "responsiblePerson": "Məsul şəxs",
+          "selectResponsiblePerson": "Məsul şəxsi seçin",
+          "groupNumber": "Qrup №",
+          "note": "Qeyd",
+          "from": "Kimdən",
+          "to": "Kimə",
+          "operationKind": "Əməliyyatın növü",
+          "operationStatus": "Əməliyyatın statusu",
+          "operationDate": "Əməliyyatın tarixi",
+          "documentNumber": "Sənədin nömrəsi",
+          "documentDate": "Sənədin tarixi",
+          "documentContent": "Sənədin məzmunu",
+          "min": "Min",
+          "max": "Max"
+        },
+        "paymentTypes": {
+          "advance": "Avans",
+          "postPayment": "Sonradan ödəniş",
+          "installments": "Hissə - hissə"
+        },
+        "periodTypes": {
+          "unlimited": "Müddətsiz",
+          "limited": "Müddətli"
+        },
+        "units": {
+          "month": "ay",
+          "months": "{value} ay"
+        },
+        "statuses": {
+          "newContract": "Yeni müqavilə",
+          "inVisa": "Vizadadır",
+          "inEdit": "Redaktədədir",
+          "inSigning": "İmzadadır",
+          "signed": "İmzalandı"
+        },
+        "addContract": {
+          "information": "Məlumatlar",
+          "attachments": "Qoşma sənədlər",
+          "selectFile": "Faylı seçin",
+          "agreementScheme": "Razılaşma sxemi",
+          "addedFiles": "Əlavə edilmiş fayllar",
+          "addAttachment": "Qoşma əlavə et",
+          "deleteMainWarning": "Diqqət! Bu sənədi silməklə siz əsas sənədinizi silirsiniz."
+        },
+        "qv": {
+          "contract": "Müqavilə",
+          "registrationInfo": "Qeydiyyat məlumatları",
+          "shortContent": "Sənədin qısa məzmunu",
+          "attachedDocument": "Qoşma sənəd",
+          "relatedDocument": "Əlaqəli sənəd",
+          "operationHistory": "Əməliyyat tarixçəsi"
+        },
+        "modals": {
+          "createContract": "Müqavilə yaratma",
+          "editContract": "Müqavilə redaktə et",
+          "contract": "Müqavilə",
+          "successAdded": "{value} uğurla əlavə edildi",
+          "successEdited": "{value} uğurla redaktə oldu",
+          "electronicDocuments": "Elektron sənədlər",
+          "registrationCard": "Qeydiyyat vərəqəsi",
+          "noActivities": "Əməliyyat tapılmadı",
+          "confirmVisa": "Vizanı təsdiq edirsinizmi?",
+          "confirmSign": "Sənədi imzalayırsınızmı?",
+          "confirmDocument": "Sənədi təsdiq edirsinizmi?"
+        },
+        "reports": {
+          "title": "Hesabatlar",
+          "byStatus": "Statusa görə",
+          "byContractType": "Müqavilə növünə görə",
+          "inVisa": "Vizada",
+          "inSign": "İmzada",
+          "signed": "İmzalanıb"
+        },
+        "validation": {
+          "atLeastOneFile": "Ən azından bir fayl olmalıdır",
+          "atLeastOnePerson": "Ən azı bir məsul şəxs əlavə edilməlidir."
+        },
+        "messages": {
+          "serverError": "Serverdə problem baş verdi",
+          "success": "Uğurla tamamlandı",
+          "newNotification": "Yeni bildiriş",
+          "notification": "Bildiriş",
+          "noData": "Məlumat yoxdur",
+          "pageNotFound": "Səhifə tapılmadı"
+        }
       }
     }
   },
@@ -729,7 +895,7 @@
           "citizenAppeals": "Citizen appeals",
           "outgoingDocuments": "Outgoing documents",
           "serviceDocuments": "Service letters",
-          "questionnaires": "Reference books",
+          "questionnaires": "Questionnaires",
           "companyInfos": "Company information",
           "permissions": "Permissions",
           "users": "Users",
@@ -1021,7 +1187,7 @@
           "priority": "Priority"
         },
         "titles": {
-          "questionnaires": "Reference books",
+          "questionnaires": "Questionnaires",
           "topics": "Topics",
           "subtopics": "Subtopics",
           "executionRules": "Execution procedures",
@@ -1193,6 +1359,172 @@
           "person": "Person",
           "currentCompany": "Current company",
           "hasGrade": "Has grade"
+        }
+      },
+      "contracts": {
+        "pages": {
+          "myFolder": "My folder",
+          "contracts": "Contracts",
+          "reports": "Reports",
+          "questionnaires": "Questionnaires"
+        },
+        "buttons": {
+          "createContract": "Create contract",
+          "export": "Export",
+          "filterMenu": "Filter menu",
+          "clear": "Clear",
+          "search": "Search",
+          "back": "Back",
+          "next": "Next",
+          "save": "Save",
+          "add": "Add",
+          "cancel": "Cancel",
+          "reject": "Decline",
+          "confirm": "Confirm",
+          "sign": "Sign",
+          "print": "Print",
+          "yes": "Yes",
+          "no": "No",
+          "backToMain": "Back to main page",
+          "home": "Home page"
+        },
+        "actions": {
+          "send": "Send",
+          "marginNotePreparation": "Preparation of draft resolution",
+          "marginNoteConfirmation": "Approval of draft resolution",
+          "marginNote": "Resolution",
+          "edit": "Edit",
+          "returnBack": "Return",
+          "replyWithRelated": "Reply with related document",
+          "replyWithResponse": "Reply with response document",
+          "sendForInfo": "Send for information",
+          "acknowledged": "Acknowledged",
+          "sign": "Sign",
+          "marginNoteDraftEdit": "Editing of draft resolution",
+          "confirm": "Confirm",
+          "print": "Print",
+          "post": "Mail",
+          "replyWithRelatedService": "Reply with related service document",
+          "replyWithService": "Reply with service document",
+          "addAttachment": "Add attachment",
+          "visa": "Visa",
+          "signed": "Signed"
+        },
+        "fields": {
+          "no": "No",
+          "registrationNumber": "Registration number",
+          "contractNumber": "Contract number",
+          "contractDate": "Contract date",
+          "contractDateFull": "Contract date",
+          "tin": "TIN",
+          "contractParty": "Contract party",
+          "contractType": "Contract type",
+          "contractSubject": "Contract subject",
+          "topic": "Topic",
+          "internalStructure": "Internal structure",
+          "orderType": "Order type",
+          "paymentType": "Payment type",
+          "orderNumber": "Order №",
+          "orderDate": "Order date",
+          "contractPeriod": "Contract term",
+          "period": "Term",
+          "contractPrice": "Contract price",
+          "advance": "Advance",
+          "signatory": "Signatory",
+          "relatedDocument": "Related document",
+          "legalBasis": "Legal basis",
+          "companyNumber": "Company number",
+          "shortContent": "Summary",
+          "status": "Status",
+          "operationType": "Operation type",
+          "sentFrom": "Received from",
+          "fileName": "File name",
+          "date": "Date",
+          "mainDocument": "Main document",
+          "responsiblePerson": "Responsible person",
+          "selectResponsiblePerson": "Select responsible person",
+          "groupNumber": "Group №",
+          "note": "Note",
+          "from": "From",
+          "to": "To",
+          "operationKind": "Operation type",
+          "operationStatus": "Operation status",
+          "operationDate": "Operation date",
+          "documentNumber": "Document number",
+          "documentDate": "Document date",
+          "documentContent": "Document content",
+          "min": "Min",
+          "max": "Max"
+        },
+        "paymentTypes": {
+          "advance": "Advance",
+          "postPayment": "Post-payment",
+          "installments": "Installments"
+        },
+        "periodTypes": {
+          "unlimited": "Indefinite",
+          "limited": "Fixed-term"
+        },
+        "units": {
+          "month": "months",
+          "months": "{value} months"
+        },
+        "statuses": {
+          "newContract": "New contract",
+          "inVisa": "On visa",
+          "inEdit": "Being edited",
+          "inSigning": "On signing",
+          "signed": "Signed"
+        },
+        "addContract": {
+          "information": "Information",
+          "attachments": "Attached documents",
+          "selectFile": "Select file",
+          "agreementScheme": "Approval scheme",
+          "addedFiles": "Added files",
+          "addAttachment": "Add attachment",
+          "deleteMainWarning": "Attention! By deleting this document you are deleting your main document."
+        },
+        "qv": {
+          "contract": "Contract",
+          "registrationInfo": "Registration information",
+          "shortContent": "Document summary",
+          "attachedDocument": "Attached document",
+          "relatedDocument": "Related document",
+          "operationHistory": "Operation history"
+        },
+        "modals": {
+          "createContract": "Create contract",
+          "editContract": "Edit contract",
+          "contract": "Contract",
+          "successAdded": "{value} was added successfully",
+          "successEdited": "{value} was edited successfully",
+          "electronicDocuments": "Electronic documents",
+          "registrationCard": "Registration card",
+          "noActivities": "No activities found",
+          "confirmVisa": "Do you confirm the visa?",
+          "confirmSign": "Do you sign the document?",
+          "confirmDocument": "Do you confirm the document?"
+        },
+        "reports": {
+          "title": "Reports",
+          "byStatus": "By status",
+          "byContractType": "By contract type",
+          "inVisa": "On visa",
+          "inSign": "On signing",
+          "signed": "Signed"
+        },
+        "validation": {
+          "atLeastOneFile": "There must be at least one file",
+          "atLeastOnePerson": "At least one responsible person must be added."
+        },
+        "messages": {
+          "serverError": "A server error occurred",
+          "success": "Completed successfully",
+          "newNotification": "New notification",
+          "notification": "Notification",
+          "noData": "No data",
+          "pageNotFound": "Page not found"
         }
       }
     }
@@ -1792,6 +2124,172 @@
           "person": "Лицо",
           "currentCompany": "Текущая компания",
           "hasGrade": "Есть разряд"
+        }
+      },
+      "contracts": {
+        "pages": {
+          "myFolder": "Моя папка",
+          "contracts": "Договоры",
+          "reports": "Отчёты",
+          "questionnaires": "Справочники"
+        },
+        "buttons": {
+          "createContract": "Создать договор",
+          "export": "Экспорт",
+          "filterMenu": "Меню фильтров",
+          "clear": "Очистить",
+          "search": "Поиск",
+          "back": "Назад",
+          "next": "Далее",
+          "save": "Сохранить",
+          "add": "Добавить",
+          "cancel": "Отмена",
+          "reject": "Отказ",
+          "confirm": "Подтвердить",
+          "sign": "Подписать",
+          "print": "Печать",
+          "yes": "Да",
+          "no": "Нет",
+          "backToMain": "Вернуться на главную страницу",
+          "home": "Главная страница"
+        },
+        "actions": {
+          "send": "Отправить",
+          "marginNotePreparation": "Подготовка проекта резолюции",
+          "marginNoteConfirmation": "Утверждение проекта резолюции",
+          "marginNote": "Резолюция",
+          "edit": "Редактировать",
+          "returnBack": "Вернуть",
+          "replyWithRelated": "Ответить связанным документом",
+          "replyWithResponse": "Ответить ответным документом",
+          "sendForInfo": "Отправить для сведения",
+          "acknowledged": "Ознакомлен",
+          "sign": "Подписать",
+          "marginNoteDraftEdit": "Редактирование проекта резолюции",
+          "confirm": "Подтвердить",
+          "print": "Печать",
+          "post": "Отправить почтой",
+          "replyWithRelatedService": "Ответить связанным служебным документом",
+          "replyWithService": "Ответить служебным документом",
+          "addAttachment": "Добавить вложение",
+          "visa": "Виза",
+          "signed": "Подписан"
+        },
+        "fields": {
+          "no": "№",
+          "registrationNumber": "Регистрационный номер",
+          "contractNumber": "Номер договора",
+          "contractDate": "Дата договора",
+          "contractDateFull": "Дата договора",
+          "tin": "ИНН",
+          "contractParty": "Сторона договора",
+          "contractType": "Тип договора",
+          "contractSubject": "Предмет договора",
+          "topic": "Тема",
+          "internalStructure": "Внутренняя структура",
+          "orderType": "Тип заказа",
+          "paymentType": "Тип оплаты",
+          "orderNumber": "Заказ №",
+          "orderDate": "Дата заказа",
+          "contractPeriod": "Срок договора",
+          "period": "Срок",
+          "contractPrice": "Стоимость договора",
+          "advance": "Аванс",
+          "signatory": "Подписывающее лицо",
+          "relatedDocument": "Связанный документ",
+          "legalBasis": "Правовое основание",
+          "companyNumber": "Номер компании",
+          "shortContent": "Краткое содержание",
+          "status": "Статус",
+          "operationType": "Тип операции",
+          "sentFrom": "От кого поступил",
+          "fileName": "Имя файла",
+          "date": "Дата",
+          "mainDocument": "Основной документ",
+          "responsiblePerson": "Ответственное лицо",
+          "selectResponsiblePerson": "Выберите ответственное лицо",
+          "groupNumber": "Группа №",
+          "note": "Примечание",
+          "from": "От кого",
+          "to": "Кому",
+          "operationKind": "Тип операции",
+          "operationStatus": "Статус операции",
+          "operationDate": "Дата операции",
+          "documentNumber": "Номер документа",
+          "documentDate": "Дата документа",
+          "documentContent": "Содержание документа",
+          "min": "Мин",
+          "max": "Макс"
+        },
+        "paymentTypes": {
+          "advance": "Аванс",
+          "postPayment": "Постоплата",
+          "installments": "Частями"
+        },
+        "periodTypes": {
+          "unlimited": "Бессрочный",
+          "limited": "Срочный"
+        },
+        "units": {
+          "month": "мес.",
+          "months": "{value} мес."
+        },
+        "statuses": {
+          "newContract": "Новый договор",
+          "inVisa": "На визировании",
+          "inEdit": "На редактировании",
+          "inSigning": "На подписании",
+          "signed": "Подписан"
+        },
+        "addContract": {
+          "information": "Информация",
+          "attachments": "Приложенные документы",
+          "selectFile": "Выберите файл",
+          "agreementScheme": "Схема согласования",
+          "addedFiles": "Добавленные файлы",
+          "addAttachment": "Добавить вложение",
+          "deleteMainWarning": "Внимание! Удаляя этот документ, вы удаляете основной документ."
+        },
+        "qv": {
+          "contract": "Договор",
+          "registrationInfo": "Регистрационные данные",
+          "shortContent": "Краткое содержание документа",
+          "attachedDocument": "Приложенный документ",
+          "relatedDocument": "Связанный документ",
+          "operationHistory": "История операций"
+        },
+        "modals": {
+          "createContract": "Создание договора",
+          "editContract": "Редактирование договора",
+          "contract": "Договор",
+          "successAdded": "{value} успешно добавлен",
+          "successEdited": "{value} успешно отредактирован",
+          "electronicDocuments": "Электронные документы",
+          "registrationCard": "Регистрационная карточка",
+          "noActivities": "Операции не найдены",
+          "confirmVisa": "Подтверждаете визу?",
+          "confirmSign": "Подписываете документ?",
+          "confirmDocument": "Подтверждаете документ?"
+        },
+        "reports": {
+          "title": "Отчёты",
+          "byStatus": "По статусу",
+          "byContractType": "По типу договора",
+          "inVisa": "На визировании",
+          "inSign": "На подписании",
+          "signed": "Подписан"
+        },
+        "validation": {
+          "atLeastOneFile": "Должен быть хотя бы один файл",
+          "atLeastOnePerson": "Необходимо добавить хотя бы одно ответственное лицо."
+        },
+        "messages": {
+          "serverError": "На сервере произошла ошибка",
+          "success": "Успешно выполнено",
+          "newNotification": "Новое уведомление",
+          "notification": "Уведомление",
+          "noData": "Нет данных",
+          "pageNotFound": "Страница не найдена"
         }
       }
     }
