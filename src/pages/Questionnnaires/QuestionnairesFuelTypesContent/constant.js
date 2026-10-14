@@ -27,6 +27,13 @@ export const getStreetColumns = (
       ellipsis: true,
     },
     {
+      title: t?.fields?.fuelCategory,
+      dataIndex: "fuelCategoryText",
+      width: innerW,
+      ellipsis: true,
+      filter: false,
+    },
+    {
       title: t?.fields?.status,
       key: "status",
       disabled: true,

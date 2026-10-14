@@ -64,15 +64,35 @@ const QuestionnairesVehicleTypesContent = () => {
     },
     [dispatch]
   );
+  // Flags toggled since the last fetch, so a quick second toggle doesn't
+  // send the other flag's stale value from the row.
+  const pendingFlags = useRef({});
+  useEffect(() => {
+    pendingFlags.current = {};
+  }, [vehicletype]);
+
+  const getFlags = useCallback(
+    (id) => {
+      const row = vehicletype?.items?.find((item) => item?.id === id);
+      return {
+        isTrailer: row?.isTrailer,
+        isPassenger: row?.isPassenger,
+        ...pendingFlags.current[id],
+      };
+    },
+    [vehicletype]
+  );
+
   const onEdit = useCallback(
     (id, record) => {
       const data = {
         id: id,
         name: record?.name,
+        ...getFlags(id),
       };
       dispatch(editVehicletype(data));
     },
-    [dispatch]
+    [dispatch, getFlags]
   );
   const onStatusChange = useCallback(
     (data, checked) => {
@@ -85,16 +105,18 @@ const QuestionnairesVehicleTypesContent = () => {
     [dispatch]
   );
 
-  const onTrailerChange = useCallback(
-    (data, checked) => {
+  const onFlagChange = useCallback(
+    (data, field, checked) => {
+      const flags = { ...getFlags(data?.id), [field]: checked };
+      pendingFlags.current[data?.id] = flags;
       const data_ = {
         id: data?.id,
         name: data?.name,
-        isTrailer: checked,
+        ...flags,
       };
       dispatch(editVehicletype(data_));
     },
-    [dispatch]
+    [dispatch, getFlags]
   );
 
   const closeOnViewModal = useCallback(() => {
@@ -127,6 +149,7 @@ const QuestionnairesVehicleTypesContent = () => {
       name: dataObj?.name,
       isActive: dataObj?.isActive,
       isTrailer: dataObj?.isTrailer,
+      isPassenger: dataObj?.isPassenger,
 
       className: "rowClassName1",
     }));
@@ -139,9 +162,9 @@ const QuestionnairesVehicleTypesContent = () => {
         onDelete,
         onStatusChange,
         dispatch,
-        onTrailerChange
+        onFlagChange
       ),
-    [t, onEditClick, onDelete, onStatusChange, dispatch, onTrailerChange]
+    [t, onEditClick, onDelete, onStatusChange, dispatch, onFlagChange]
   );
   const [selectedColumns, setSelectedColumns] = useState(
     columns.map((col) => col.dataIndex)
@@ -184,7 +207,7 @@ const QuestionnairesVehicleTypesContent = () => {
               columns={columns}
               selectedColumns={selectedColumns}
               setQuery={setQuery}
-              disabledElementCount={3}
+              disabledElementCount={5}
               setPage={setPage}
             />
           </header>

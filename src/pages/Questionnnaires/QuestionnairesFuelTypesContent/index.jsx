@@ -2,7 +2,7 @@ import React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Cookies from "js-cookie";
 import style from "../Questionnaires.module.scss";
-import { Form, Input, Layout } from "antd";
+import { Form, Input, Layout, Select as AntdSelect } from "antd";
 import { PlusIcon } from "../../../assets/icons";
 import FormModal from "../../../components/FormModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,10 +30,13 @@ import {
   getFuelTypes,
   fuelTypesVisibility,
 } from "../../../store/slices/questionnaire";
+import Select from "../../../components/Select";
+import { FuelCategory, enumText } from "../../../helpers/enums";
 import text from "../../../translations/index.json";
 import { useLang } from "../../../hooks/useLang";
 const { Content } = Layout;
 const { Item } = Form;
+const { Option } = AntdSelect;
 const QuestionnairesFuelTypesContent = () => {
   const lang = useLang();
   const t = text?.[lang]?.pages?.questionnaires;
@@ -45,7 +48,7 @@ const QuestionnairesFuelTypesContent = () => {
   const [size, setSize] = useState(
     Cookies.get("pagination-size-questionnaire-fuel-types")
       ? JSON.parse(Cookies.get("pagination-size-questionnaire-fuel-types"))
-      : 20
+      : 20,
   );
   const [query, setQuery] = useState({ name: "" });
   const { loading, penaltyTypesRender } = useSelector((state) => state.global);
@@ -53,24 +56,25 @@ const QuestionnairesFuelTypesContent = () => {
   const fuelTypes = useSelector((state) => state.questionnaire.fuelTypes);
   const paginationLength = setPaginationLength(
     fuelTypes?.count,
-    fuelTypes?.size
+    fuelTypes?.size,
   );
 
   const onSubmit = useCallback(
     async (data) => {
       dispatch(addFuelTypes(data));
     },
-    [dispatch]
+    [dispatch],
   );
   const onEdit = useCallback(
     (id, record) => {
       const data = {
         id: id,
         name: record?.name,
+        fuelCategory: record?.fuelCategory,
       };
       dispatch(editFuelTypes(data));
     },
-    [dispatch]
+    [dispatch],
   );
   const onStatusChange = useCallback(
     (data, checked) => {
@@ -80,7 +84,7 @@ const QuestionnairesFuelTypesContent = () => {
       };
       dispatch(fuelTypesVisibility(data_));
     },
-    [dispatch]
+    [dispatch],
   );
   const closeOnViewModal = useCallback(() => {
     dispatch(setViewModalVisible(false));
@@ -110,16 +114,21 @@ const QuestionnairesFuelTypesContent = () => {
       num: fuelTypes?.size * fuelTypes?.page + i + 1 - fuelTypes?.size,
       id: dataObj?.id,
       name: dataObj?.name,
+      fuelCategory: dataObj?.fuelCategory?.id ?? dataObj?.fuelCategory,
+      fuelCategoryText: enumText(
+        FuelCategory,
+        dataObj?.fuelCategory?.id ?? dataObj?.fuelCategory,
+      ),
       isActive: dataObj?.isActive,
       className: "rowClassName1",
     }));
   }
   const columns = useMemo(
     () => getStreetColumns(t, onEditClick, onDelete, onStatusChange, dispatch),
-    [t, onEditClick, onDelete, onStatusChange, dispatch]
+    [t, onEditClick, onDelete, onStatusChange, dispatch],
   );
   const [selectedColumns, setSelectedColumns] = useState(
-    columns.map((col) => col.dataIndex)
+    columns.map((col) => col.dataIndex),
   );
   useEffect(() => {
     if (window.innerWidth >= 1900) {
@@ -142,7 +151,7 @@ const QuestionnairesFuelTypesContent = () => {
       JSON.stringify(newSize),
       {
         expires: 7,
-      }
+      },
     ); // Save to cookies
   };
 
@@ -159,7 +168,7 @@ const QuestionnairesFuelTypesContent = () => {
               columns={columns}
               selectedColumns={selectedColumns}
               setQuery={setQuery}
-              disabledElementCount={3}
+              disabledElementCount={4}
               setPage={setPage}
             />
           </header>
@@ -211,6 +220,19 @@ const QuestionnairesFuelTypesContent = () => {
                 label={t?.fields?.name}>
                 <Input className={style.modal_input} />
               </Item>
+              <Item
+                className={style.label}
+                rules={[{ required: true, message: "" }]}
+                name={"fuelCategory"}
+                label={t?.fields?.fuelCategory}>
+                <Select>
+                  {FuelCategory.map((item) => (
+                    <Option key={item.id} value={item.id}>
+                      {item.text}
+                    </Option>
+                  ))}
+                </Select>
+              </Item>
             </FormModal>
             <DeleteModal
               onCancel={() => dispatch(setDeleteModalVisible(false))}
@@ -222,7 +244,12 @@ const QuestionnairesFuelTypesContent = () => {
               />
             </DeleteModal>
             <ViewModal onCancel={closeOnViewModal} width={695}>
-              {<Success onClick={closeOnViewModal} value={t?.common?.questionnaire} />}
+              {
+                <Success
+                  onClick={closeOnViewModal}
+                  value={t?.common?.questionnaire}
+                />
+              }
             </ViewModal>
           </Content>
         </Layout>

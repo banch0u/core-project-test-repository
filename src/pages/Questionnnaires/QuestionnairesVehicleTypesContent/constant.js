@@ -10,7 +10,7 @@ export const getStreetColumns = (
   onDelete,
   onStatusChange,
   dispatch,
-  onTrailerChange
+  onFlagChange
 ) => [
     {
       title: "№",
@@ -28,15 +28,33 @@ export const getStreetColumns = (
     {
       title: t?.fields?.trailer,
       key: "Qoşqu",
+      dataIndex: "isTrailer",
       disabled: false,
 
-      filter: true,
-      render: (data) => (
+      filter: false,
+      render: (_, data) => (
         <Tooltip placement="top" title={t?.fields?.trailer}>
           <Switch
             size="medium"
             checked={data?.isTrailer}
-            onChange={(checked) => onTrailerChange(data, checked, dispatch)}
+            onChange={(checked) => onFlagChange(data, "isTrailer", checked)}
+          />
+        </Tooltip>
+      ),
+    },
+    {
+      title: t?.fields?.passenger,
+      key: "Sərnişin",
+      dataIndex: "isPassenger",
+      disabled: false,
+
+      filter: false,
+      render: (_, data) => (
+        <Tooltip placement="top" title={t?.fields?.passenger}>
+          <Switch
+            size="medium"
+            checked={data?.isPassenger}
+            onChange={(checked) => onFlagChange(data, "isPassenger", checked)}
           />
         </Tooltip>
       ),

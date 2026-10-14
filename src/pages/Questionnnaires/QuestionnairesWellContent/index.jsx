@@ -32,7 +32,6 @@ import {
   wellVisibility,
 
 } from "../../../store/slices/questionnaire";
-import { typeENUM } from "../../../helpers/enums";
 import Select from "../../../components/Select";
 import text from "../../../translations/index.json";
 import { useLang } from "../../../hooks/useLang";
@@ -114,9 +113,6 @@ const QuestionnairesWellContent = () => {
         return prevSelected.filter((col) => col !== dataIndex);
       }
     });
-  };
-  const idFinder = (id) => {
-    return typeENUM.find(item => item.id === id)?.text;
   };
   let data = [];
   if (well?.items) {

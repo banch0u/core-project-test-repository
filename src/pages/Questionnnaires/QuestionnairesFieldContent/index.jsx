@@ -31,7 +31,7 @@ import {
   getField,
 } from "../../../store/slices/questionnaire";
 import Select from "../../../components/Select";
-import { typeENUM } from "../../../helpers/enums";
+import { typeENUM, enumText } from "../../../helpers/enums";
 import text from "../../../translations/index.json";
 import { useLang } from "../../../hooks/useLang";
 const { Content } = Layout;
@@ -106,10 +106,6 @@ console.log("field",fields)
       }
     });
   };
-  const idFinder = (id) => {
-    return typeENUM.find((item) => item.id === id)?.text;
-  };
-
   let data = [];
   if (fields?.items) {
     data = fields?.items?.map((dataObj, i) => ({
@@ -118,7 +114,7 @@ console.log("field",fields)
       name: dataObj?.name,
       isActive: dataObj?.isActive,
       className: "rowClassName1",
-      typeText: idFinder(dataObj.type.id),
+      typeText: enumText(typeENUM, dataObj.type.id),
       type: dataObj.type.id,
     }));
   }

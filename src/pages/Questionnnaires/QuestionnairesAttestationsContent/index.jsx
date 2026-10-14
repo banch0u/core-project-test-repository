@@ -31,7 +31,7 @@ import {
   attestationsVisibility,
 } from "../../../store/slices/questionnaire";
 import Select from "../../../components/Select";
-import { AttestationType } from "../../../helpers/enums";
+import { AttestationType, enumText } from "../../../helpers/enums";
 import text from "../../../translations/index.json";
 import { useLang } from "../../../hooks/useLang";
 
@@ -112,10 +112,6 @@ const QuestionnairesAttestationsContent = () => {
     });
   };
 
-  const idFinder = (id) => {
-    return AttestationType.find((item) => item.id === id)?.text;
-  };
-
   let data = [];
   if (Attestations?.items) {
     data = Attestations?.items?.map((dataObj, i) => ({
@@ -126,7 +122,8 @@ const QuestionnairesAttestationsContent = () => {
       fullName: dataObj?.fullName,
       attestationType:
         dataObj?.attestationType?.id ?? dataObj?.attestationType,
-      attestationTypeText: idFinder(
+      attestationTypeText: enumText(
+        AttestationType,
         dataObj?.attestationType?.id ?? dataObj?.attestationType
       ),
       isActive: dataObj?.isActive,
