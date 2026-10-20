@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Dropdown,
   Menu,
@@ -100,7 +100,24 @@ const Filter = ({
 
   // ✅ dependent selects: a column with `dependsOn: "<parent field name>"`
   // stays disabled until the parent has a value, and is cleared when it changes
-  const formValues = Form.useWatch([], filterForm) || {};
+  const watchedValues = Form.useWatch([], filterForm);
+  const formValues = watchedValues || {};
+
+  // ✅ `onFilterChange(value)` fires whenever a column's form value changes,
+  // whether by user input, Clear (resetFields) or setFieldsValue
+  const prevValuesRef = useRef({});
+  useEffect(() => {
+    const values = watchedValues || {};
+    columns.forEach((col) => {
+      if (!col.onFilterChange) return;
+      const name = getFieldName(col);
+      if (values[name] !== prevValuesRef.current[name]) {
+        col.onFilterChange(values[name]);
+      }
+    });
+    prevValuesRef.current = values;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [watchedValues]);
 
   const isEmptyValue = (v) =>
     v === undefined ||
@@ -167,7 +184,6 @@ const Filter = ({
                         setSelectedTopic(value);
                       }
                       clearDependents(getFieldName(col));
-                      col.onFilterChange?.(value);
                     }}
                     mode={col.selectType === "multiple" ? "multiple" : "single"}
                     optionFilterProp="label">
@@ -237,12 +253,7 @@ const Filter = ({
         </Form>
 
         <div className={style.buttons}>
-          <Button
-            onClick={() => {
-              filterForm.resetFields();
-              columns.forEach((col) => col.onFilterChange?.(undefined));
-            }}
-            color="white">
+          <Button onClick={() => filterForm.resetFields()} color="white">
             {c?.clear}
           </Button>
           <Button
