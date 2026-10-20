@@ -96,6 +96,28 @@ const Filter = ({
       col.dataIndex === "filterOnly"
   );
 
+  const getFieldName = (col) => (col.queryName ? col.queryName : col.dataIndex);
+
+  // ✅ dependent selects: a column with `dependsOn: "<parent field name>"`
+  // stays disabled until the parent has a value, and is cleared when it changes
+  const formValues = Form.useWatch([], filterForm) || {};
+
+  const isEmptyValue = (v) =>
+    v === undefined ||
+    v === null ||
+    v === "" ||
+    (Array.isArray(v) && v.length === 0);
+
+  const clearDependents = (parentName) => {
+    columns
+      .filter((dep) => dep.dependsOn === parentName)
+      .forEach((dep) => {
+        const depName = getFieldName(dep);
+        filterForm.setFieldValue(depName, undefined);
+        clearDependents(depName);
+      });
+  };
+
   const getGrid = () => {
     const elementCount = selectedColumns.length - disabledElementCount;
     if (elementCount >= 5) return style.grid5;
@@ -128,11 +150,14 @@ const Filter = ({
                 <Form.Item
                   key={col.dataIndex}
                   label={col.title}
-                  name={col.queryName ? col.queryName : col.dataIndex}
+                  name={getFieldName(col)}
                   className={gridSpanClass}>
                   <Select
                     size="sm"
                     style={{ height: "32px" }}
+                    disabled={
+                      !!col.dependsOn && isEmptyValue(formValues[col.dependsOn])
+                    }
                     onChange={(value) => {
                       if (
                         col.dataIndex === "topic" ||
@@ -141,6 +166,8 @@ const Filter = ({
                       ) {
                         setSelectedTopic(value);
                       }
+                      clearDependents(getFieldName(col));
+                      col.onFilterChange?.(value);
                     }}
                     mode={col.selectType === "multiple" ? "multiple" : "single"}
                     optionFilterProp="label">
@@ -210,7 +237,12 @@ const Filter = ({
         </Form>
 
         <div className={style.buttons}>
-          <Button onClick={() => filterForm.resetFields()} color="white">
+          <Button
+            onClick={() => {
+              filterForm.resetFields();
+              columns.forEach((col) => col.onFilterChange?.(undefined));
+            }}
+            color="white">
             {c?.clear}
           </Button>
           <Button
